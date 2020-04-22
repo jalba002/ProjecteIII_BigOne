@@ -110,13 +110,13 @@ namespace Player
                 {
                     if (simpleActivator.Activate(cameraController.attachedCamera))
                     {
-                        cameraController.enabled = false;
+                        cameraController.angleLocked = true;
                     }
                 }
                 else
                 {
                     simpleActivator.Deactivate();
-                    cameraController.enabled = true;
+                    cameraController.angleLocked = false;
                 }
             }
 

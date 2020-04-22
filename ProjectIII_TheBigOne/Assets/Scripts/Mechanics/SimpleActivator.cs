@@ -10,9 +10,6 @@ public class SimpleActivator : MonoBehaviour
 
     public float forceScale = 5f;
 
-    [Header("Debug")] [Tooltip("Object that will me moved on collision to the hit point.")]
-    public GameObject hitDebug;
-
     [Header("Private Variables")] [Tooltip("Door variables")]
     private RaycastHit _selectedDoor;
 
@@ -73,7 +70,7 @@ public class SimpleActivator : MonoBehaviour
         {
             Debug.Log("Hit this: " + hit.transform.gameObject.name);
         }
-        Debug.DrawRay(cameraRay.origin, cameraRay.direction * hit.distance, Color.red, 2f);
+        //Debug.DrawRay(cameraRay.origin, cameraRay.direction * hit.distance, Color.red, 2f);
 
         return hit;
     }
@@ -87,7 +84,6 @@ public class SimpleActivator : MonoBehaviour
         }
 
         rigidbody.AddForceAtPosition(force, hitPoint, ForceMode.Force);
-        hitDebug.transform.position = hitPoint;
         return true;
     }
 }

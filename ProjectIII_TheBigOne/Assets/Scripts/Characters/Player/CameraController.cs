@@ -53,6 +53,7 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
+        if (!this.isActiveAndEnabled) return;
         if (!angleLocked)
             Aiming();
 #if UNITY_EDITOR

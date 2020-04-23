@@ -19,8 +19,7 @@ public static class Utils
         Ray cameraRay = camera.ViewportPointToRay(new Vector3(.5f, .5f, .5f));
         if (Physics.Raycast(cameraRay, out raycastHit, raycastDistance))
         {
-            Debug.Log("Hit something");
-            Debug.Log(raycastHit.transform.gameObject.name);
+            Debug.Log("Hit this: " + raycastHit.transform.gameObject.name);
             success = true;
         }
 

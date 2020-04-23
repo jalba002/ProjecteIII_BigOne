@@ -16,6 +16,7 @@ namespace Player
 
         // public bool enableAirControl { get; set; }
         public Collider attachedCollider;
+        public ObjectInspector objectInspector;
 
         /*[Header("Sound settings")]
         public AudioClip[] m_FootstepSounds;
@@ -40,7 +41,7 @@ namespace Player
             }
 
             currentBrain = defaultBrain;
-            
+
             if (defaultState == null)
                 defaultState = GetComponent<State>();
             if (stateMachine == null)
@@ -96,6 +97,25 @@ namespace Player
                 stateMachine.UpdateTick(Time.deltaTime);
             }
 
+            if (currentBrain.Interact)
+            {
+                if (objectInspector)
+                {
+                    if (objectInspector.Activate(cameraController.attachedCamera))
+                    {
+                        // Disable camera and allow the object inspector the use of mouse input.
+                        bool enableStuff = objectInspector.GetEnabled();
+                        cameraController.angleLocked = enableStuff;
+                        if (enableStuff)
+                        {
+                            stateMachine.SwitchState<State_Player_Inspecting>();
+                        }
+                        else
+                            stateMachine.SwitchState<State_Player_Walking>();
+                    }
+                }
+            }
+
             /*if (currentBrain.Direction.magnitude > .1f && isPlayerGrounded && m_StepTime <= Time.time && !GameController.Instance.m_PlayerDied && GameController.Instance.m_IntroFinished)
             {
                 weaponAnimator.SetBool("Walking", true);
@@ -112,7 +132,7 @@ namespace Player
             // TODO Reenable stop functionality with GameController.
             // Access with events and disable StateMachine.
             // DO NOT REFERENCE GAMEMANAGER FROM HERE.
-            if (stateMachine.isActiveAndEnabled) 
+            if (stateMachine.isActiveAndEnabled)
                 stateMachine.FixedUpdateTick(Time.fixedDeltaTime);
         }
 

@@ -62,7 +62,7 @@ public class CameraController : MonoBehaviour
 
     void Aiming()
     {
-        Vector2 deltaMouse = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+        Vector2 deltaMouse = character.currentBrain.MouseInput;
         
         // Return to allow outside control.
         //if (deltaMouse.magnitude < 0.1f) return;

@@ -18,12 +18,6 @@ namespace Characters.Generic
         private void Awake()
         {
             characterController = GetComponent<CharacterController>();
-            SwitchState<State_Player_Walking>();
-        }
-
-        private void Start()
-        {
-            
         }
 
         public void UpdateTick(float deltaTime)

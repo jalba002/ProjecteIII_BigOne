@@ -70,6 +70,7 @@ namespace Player
         private void Start()
         {
             // enableAirControl = true;
+            stateMachine.SwitchState<State_Player_Walking>();
         }
 
         void Update()

@@ -13,7 +13,9 @@ public class InventoryItem
     public bool isUnique = false;             
          
     public bool isStackable = false;          
-    public bool destroyOnUse = false;         
+    public bool destroyOnUse = false;
+
+    private int actualQuantity = 0;
     
     public InventoryItem(InventoryItem item)
     {
@@ -28,5 +30,16 @@ public class InventoryItem
         isStackable = item.isStackable;
         destroyOnUse = item.destroyOnUse;
         //encumbranceValue = item.encumbranceValue;
+
+        actualQuantity = 1;
+    }
+
+    public int GetActualQuantity()
+    {
+        return actualQuantity;
+    }
+    public void SetActualQuantity(int sum)
+    {
+        actualQuantity = sum;
     }
 }

@@ -9,16 +9,17 @@ public class InventorySlot : MonoBehaviour
 
     [SerializeField]
     public Image background;
-    private Image spriteImage;            
+    public Image spriteImage;            
     public InventoryItem item;            
-    private Text itemNameText;            
+    public Text itemNameText;
+    public GameObject quantity;
+    public Text quantityText;
     private InventoryDisplay inventoryDisplayRef;
 
     void Awake()                                                                            
     {
         spriteImage = GetComponent<Image>();                                                
         Setup(null);                                                                        
-        itemNameText = GetComponentInChildren<Text>();
         inventoryDisplayRef = GameObject.FindGameObjectWithTag("InventoryDisplay").GetComponent<InventoryDisplay>();
     }
 
@@ -29,7 +30,11 @@ public class InventorySlot : MonoBehaviour
         if (this.item != null)                          
         {
             spriteImage.color = Color.white;            
-            spriteImage.sprite = this.item.itemIcon;    
+            spriteImage.sprite = this.item.itemIcon;
+            if (this.item.isStackable)
+            {
+                quantity.SetActive(true);
+            }
 
             if (itemNameText != null)                    
             {
@@ -38,7 +43,8 @@ public class InventorySlot : MonoBehaviour
         }
         else                                                
         {
-            spriteImage.color = Color.clear;            
+            spriteImage.color = Color.clear;
+            quantity.SetActive(false);
             if (itemNameText != null)
             {
                 itemNameText.text = null;
@@ -55,7 +61,13 @@ public class InventorySlot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (item != null)
+        {
+            if (item.isStackable)
+            {
+                quantityText.text = item.GetActualQuantity().ToString();
+            }
+        }
     }
 
     

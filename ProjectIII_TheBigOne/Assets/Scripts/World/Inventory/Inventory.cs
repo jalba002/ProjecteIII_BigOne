@@ -31,10 +31,29 @@ public class Inventory : MonoBehaviour
     public void AddItem(string itemName)
     {
         InventoryItem itemToAdd = database.GetItem(itemName);   //get reference to our listed item
-        characterItems.Add(itemToAdd);                                   //add reference to our local items list
-        inventoryDisplay.AddNewItem(itemToAdd);
-        //     InventoryEvents.OnItemAddedToInventory(itemToAdd);      //call event using our referenced item, the event will tell the display to show it.
-        //   Debug.Log("Item addded: " + itemToAdd.itemName);
+        
+        if (itemToAdd.isStackable)
+        {
+            InventoryItem itemSearched = CheckThisItem(itemName);
+            if (itemSearched != null)
+            {   
+                itemSearched.SetActualQuantity(itemSearched.GetActualQuantity() + 1);    
+            }
+            else
+            {
+                itemToAdd.SetActualQuantity(1);
+                characterItems.Add(itemToAdd);                                   //add reference to our local items list
+                inventoryDisplay.AddNewItem(itemToAdd);
+            }
+        }
+        
+        else
+        {
+            characterItems.Add(itemToAdd);                                   
+            inventoryDisplay.AddNewItem(itemToAdd);
+        }
+        
+        
     }
     public InventoryItem CheckThisItem(string itemName)
     {

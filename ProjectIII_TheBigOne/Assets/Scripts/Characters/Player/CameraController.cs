@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour
     public KeyCode debugLockAngleKeyCode = KeyCode.I;
     public KeyCode debugLockKeyCode = KeyCode.O;
     public bool angleLocked = true;
-    
+        
     private bool _cursorLock;
 
     public bool cursorLock
@@ -46,7 +46,6 @@ public class CameraController : MonoBehaviour
 
     void Awake()
     {
-        angleLocked = false;
         character = GetComponentInParent<PlayerController>();
         attachedCamera = GetComponent<Camera>();
     }
@@ -55,6 +54,9 @@ public class CameraController : MonoBehaviour
     {
         if (!angleLocked)
             Aiming();
+
+        ApplyRotation();
+
 #if UNITY_EDITOR
         LockCameraAndMouse();
 #endif
@@ -62,10 +64,12 @@ public class CameraController : MonoBehaviour
 
     void Aiming()
     {
-        Vector2 deltaMouse = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+        Vector2 deltaMouse = character.currentBrain.MouseInput;
         
         // Return to allow outside control.
         //if (deltaMouse.magnitude < 0.1f) return;
+
+        deltaMouse.y = deltaMouse.y * (invertMouse ? 1f : -1f);
         
         deltaMouse = Vector2.Scale(deltaMouse,
             new Vector2(m_Sensitivity * m_Smoothing, m_Sensitivity * m_Smoothing));
@@ -76,12 +80,15 @@ public class CameraController : MonoBehaviour
         m_MouseLook += m_SmoothVector;
 
         m_MouseLook.y = Mathf.Clamp(m_MouseLook.y, m_MinPitch, m_MaxPitch);
+    }
 
-        m_PitchControllerTransform.localRotation = Quaternion.AngleAxis((invertMouse ? -1f : 1f) * -m_MouseLook.y, Vector3.right);
+    public void ApplyRotation()
+    {
+        m_PitchControllerTransform.localRotation = Quaternion.AngleAxis(-1f * -m_MouseLook.y, Vector3.right);
         character.transform.localRotation = Quaternion.AngleAxis(m_MouseLook.x, character.transform.up);
     }
 
-    public void ApplyRotation(Quaternion rotation)
+    public void ApplyExternalRotation(Quaternion rotation)
     {
         character.transform.rotation = rotation;
     }

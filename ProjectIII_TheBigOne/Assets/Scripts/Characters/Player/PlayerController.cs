@@ -17,6 +17,8 @@ namespace Player
         // public bool enableAirControl { get; set; }
         public Collider attachedCollider;
 
+        public SimpleActivator simpleActivator;
+        
         /*[Header("Sound settings")]
         public AudioClip[] m_FootstepSounds;
         public AudioClip m_JumpSound;
@@ -43,20 +45,26 @@ namespace Player
             
             if (defaultState == null)
                 defaultState = GetComponent<State>();
+            
             if (stateMachine == null)
                 stateMachine = GetComponent<StateMachine>();
+            
             if (rigidbody == null)
                 rigidbody = GetComponent<Rigidbody>();
+            
             if (cameraController == null)
                 cameraController = GetComponent<CameraController>();
+            
+            if (simpleActivator == null)
+                simpleActivator = GetComponent<SimpleActivator>();
 
-            if (characterProperties == null)
+            if (characterProperties != null)
             {
-                characterProperties = ScriptableObject.CreateInstance<CharacterProperties>();
+                characterProperties = Instantiate(characterProperties);
             }
             else
             {
-                characterProperties = Instantiate(characterProperties);
+                Debug.LogWarning("Character properties not set!");
             }
 
             if (!attachedCollider)
@@ -95,6 +103,22 @@ namespace Player
             if (stateMachine.isActiveAndEnabled)
             {
                 stateMachine.UpdateTick(Time.deltaTime);
+            }
+
+            if (simpleActivator != null && simpleActivator.isActiveAndEnabled)
+            {
+                if (currentBrain.Interact)
+                {
+                    if (simpleActivator.Activate(cameraController.attachedCamera))
+                    {
+                        cameraController.angleLocked = true;
+                    }
+                }
+                else
+                {
+                    simpleActivator.Deactivate();
+                    cameraController.angleLocked = false;
+                }
             }
 
             /*if (currentBrain.Direction.magnitude > .1f && isPlayerGrounded && m_StepTime <= Time.time && !GameController.Instance.m_PlayerDied && GameController.Instance.m_IntroFinished)

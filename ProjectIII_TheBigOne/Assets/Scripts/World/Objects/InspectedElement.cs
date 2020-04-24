@@ -22,22 +22,22 @@ public class InspectedElement : MonoBehaviour
     void SetDefaults()
     {
         var objectTransform = transform;
-        defaultRotation = objectTransform.rotation;
-        defaultPosition = objectTransform.position;
+        defaultRotation = objectTransform.localRotation;
+        defaultPosition = objectTransform.localPosition;
     }
 
     void LoadDefaults()
     {
         var objectTransform = transform;
-        objectTransform.rotation = defaultRotation;
-        objectTransform.position = defaultPosition;
+        objectTransform.localPosition = defaultPosition;
     }
 
     // Called when being rendered by ObjectInspector.
-    public void SetComponents(Mesh mesh, Material[] materials)
+    public void SetComponents(Mesh mesh, Material[] materials, Quaternion rotation)
     {
         MeshFilter.mesh = mesh;
         MeshRenderer.materials = materials;
+        transform.rotation = rotation;
         this.gameObject.SetActive(true);
     }
 

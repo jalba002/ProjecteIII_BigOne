@@ -8,6 +8,7 @@ namespace Game.Inputs
     public class Inputs : ScriptableObject
     {
         public InputNames interact;
+        public InputNames mouseInteract;
         public InputNames running;
         public InputNames horizontal;
         public InputNames forward;

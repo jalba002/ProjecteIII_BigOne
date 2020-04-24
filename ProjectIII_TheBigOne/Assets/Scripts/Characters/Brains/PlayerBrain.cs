@@ -11,10 +11,12 @@ namespace Characters.Brains
         {
             // All inputs.
             Interact = GetInputValue(inputList.interact);
+            MouseInteract = GetInputValue(inputList.mouseInteract);
             Running = GetInputValue(inputList.running);
 
             // On Release
             InteractRelease = Input.GetButtonUp(inputList.interact.name);
+            MouseInteractRelease = Input.GetButtonUp(inputList.mouseInteract.name);
 
             // Raw mouse input.
             MouseWheel = Input.mouseScrollDelta.y;

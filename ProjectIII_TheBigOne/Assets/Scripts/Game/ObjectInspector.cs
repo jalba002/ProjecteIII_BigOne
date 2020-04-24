@@ -48,8 +48,8 @@ public class ObjectInspector : MonoBehaviour
         float xRot = playerController.currentBrain.MouseInput.x * rotationSpeed.x * Mathf.Deg2Rad;
         float yRot = playerController.currentBrain.MouseInput.y * rotationSpeed.y * Mathf.Deg2Rad;
             
-        rendererTransform.RotateAround(Vector3.up, -xRot);
-        rendererTransform.RotateAround(Vector3.right, yRot);
+        rendererTransform.RotateAround(playerController.cameraController.attachedCamera.transform.up, -xRot);
+        rendererTransform.RotateAround(playerController.cameraController.attachedCamera.transform.right, yRot);
     }
 
     public bool Activate(Camera camera)
@@ -84,7 +84,7 @@ public class ObjectInspector : MonoBehaviour
         try
         {
             var info = inspectable.Inspect();
-            objectRenderer.SetComponents(info.objectMesh, info.objectTexture);
+            objectRenderer.SetComponents(info.objectMesh, info.objectTexture, info.objectRotation);
             return true;
         }
         catch (Exception e)

@@ -3,7 +3,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(MeshRenderer))]
 [RequireComponent(typeof(MeshFilter))]
-public class InspectableCube : MonoBehaviour, IInspectable
+public class InspectableObject : MonoBehaviour, IInspectable
 {
     private MeshRenderer _meshRenderer;
     private MeshFilter _meshFilter;
@@ -29,7 +29,7 @@ public class InspectableCube : MonoBehaviour, IInspectable
         {
             _meshFilter = GetComponent<MeshFilter>();
             _meshRenderer = GetComponent<MeshRenderer>();
-            InspectInfo = new InspectableInfo(_meshFilter.mesh, _meshRenderer.materials);
+            InspectInfo = new InspectableInfo(_meshFilter.mesh, _meshRenderer.materials, transform.rotation);
         }
     }
     

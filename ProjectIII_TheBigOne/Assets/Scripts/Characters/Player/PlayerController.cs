@@ -110,14 +110,11 @@ namespace Player
             InteractDoors();
         }
 
-void InspectObjects()
-{
-
-
-        
-            if (currentBrain.Interact)
+        void InspectObjects()
+        {
+            if (objectInspector != null && objectInspector.isActiveAndEnabled)
             {
-                if (objectInspector)
+                if (currentBrain.Interact)
                 {
                     if (objectInspector.Activate(cameraController.attachedCamera))
                     {
@@ -133,19 +130,18 @@ void InspectObjects()
                     }
                 }
             }
-
         }
 
-           void InteractDoors()
+        void InteractDoors()
         {
             if (simpleActivator != null && simpleActivator.isActiveAndEnabled)
             {
-                if (currentBrain.Interact)
+                if (currentBrain.MouseInteract)
                 {
                     if (simpleActivator.Activate(cameraController.attachedCamera))
                         cameraController.angleLocked = true;
                 }
-                else if (currentBrain.InteractRelease)
+                else if (currentBrain.MouseInteractRelease)
                 {
                     if (simpleActivator.Deactivate())
                         cameraController.angleLocked = false;

@@ -13,6 +13,9 @@ namespace Characters.Brains
             Interact = GetInputValue(inputList.interact);
             Running = GetInputValue(inputList.running);
 
+            // On Release
+            InteractRelease = Input.GetButtonUp(inputList.interact.name);
+
             // Raw mouse input.
             MouseWheel = Input.mouseScrollDelta.y;
             MouseInput = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));

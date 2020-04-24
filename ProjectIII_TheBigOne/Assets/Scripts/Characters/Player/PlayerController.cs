@@ -104,21 +104,23 @@ namespace Player
             {
                 stateMachine.UpdateTick(Time.deltaTime);
             }
-            
+
             InteractDoors();
         }
 
         void InteractDoors()
         {
-            if (simpleActivator != null && simpleActivator.isActiveAndEnabled && currentBrain.Interact)
+            if (simpleActivator != null && simpleActivator.isActiveAndEnabled)
             {
-                if (simpleActivator.Activate(cameraController.attachedCamera))
+                if (currentBrain.Interact)
                 {
-                    cameraController.angleLocked = true;
+                    if (simpleActivator.Activate(cameraController.attachedCamera))
+                        cameraController.angleLocked = true;
                 }
-                else if (simpleActivator.Deactivate())
+                else if (currentBrain.InteractRelease)
                 {
-                    cameraController.angleLocked = false;
+                    if (simpleActivator.Deactivate())
+                        cameraController.angleLocked = false;
                 }
             }
         }

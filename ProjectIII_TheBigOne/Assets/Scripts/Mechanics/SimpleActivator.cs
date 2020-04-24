@@ -21,25 +21,24 @@ public class SimpleActivator : MonoBehaviour
             _selectedDoor = SimpleRaycast(camera);
             return false;
         }
-        else
-        {
-            ApplyForceOnPoint(_selectedDoor.rigidbody, _selectedDoor.point,
-                CalculateForce(_selectedDoor.normal * -1, forceScale));
-            return true;
-        }
+
+        ApplyForceOnPoint(_selectedDoor.rigidbody, _selectedDoor.point,
+            CalculateForce(_selectedDoor.normal * -1, forceScale));
+        return true;
     }
 
     public bool Deactivate()
     {
         if (_selectedDoor.rigidbody == null) return false;
-        Debug.Log("Deactivating door.");
+
         _selectedDoor = new RaycastHit()
         {
             rigidbody =
             {
-
             }
         };
+
+        Debug.Log("Deactivated door.");
         return true;
     }
 

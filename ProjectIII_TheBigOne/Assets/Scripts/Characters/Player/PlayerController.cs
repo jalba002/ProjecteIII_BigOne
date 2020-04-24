@@ -18,7 +18,7 @@ namespace Player
         public Collider attachedCollider;
 
         public SimpleActivator simpleActivator;
-        
+
         /*[Header("Sound settings")]
         public AudioClip[] m_FootstepSounds;
         public AudioClip m_JumpSound;
@@ -42,19 +42,19 @@ namespace Player
             }
 
             currentBrain = defaultBrain;
-            
+
             if (defaultState == null)
                 defaultState = GetComponent<State>();
-            
+
             if (stateMachine == null)
                 stateMachine = GetComponent<StateMachine>();
-            
+
             if (rigidbody == null)
                 rigidbody = GetComponent<Rigidbody>();
-            
+
             if (cameraController == null)
                 cameraController = GetComponent<CameraController>();
-            
+
             if (simpleActivator == null)
                 simpleActivator = GetComponent<SimpleActivator>();
 
@@ -78,6 +78,7 @@ namespace Player
         private void Start()
         {
             // enableAirControl = true;
+            stateMachine.SwitchState<State_Player_Walking>();
         }
 
         void Update()
@@ -103,32 +104,23 @@ namespace Player
             {
                 stateMachine.UpdateTick(Time.deltaTime);
             }
+            
+            InteractDoors();
+        }
 
-            if (simpleActivator != null && simpleActivator.isActiveAndEnabled)
+        void InteractDoors()
+        {
+            if (simpleActivator != null && simpleActivator.isActiveAndEnabled && currentBrain.Interact)
             {
-                if (currentBrain.Interact)
+                if (simpleActivator.Activate(cameraController.attachedCamera))
                 {
-                    if (simpleActivator.Activate(cameraController.attachedCamera))
-                    {
-                        cameraController.angleLocked = true;
-                    }
+                    cameraController.angleLocked = true;
                 }
-                else
+                else if (simpleActivator.Deactivate())
                 {
-                    simpleActivator.Deactivate();
                     cameraController.angleLocked = false;
                 }
             }
-
-            /*if (currentBrain.Direction.magnitude > .1f && isPlayerGrounded && m_StepTime <= Time.time && !GameController.Instance.m_PlayerDied && GameController.Instance.m_IntroFinished)
-            {
-                weaponAnimator.SetBool("Walking", true);
-                PlayFootStepAudio();
-                m_StepTime = Time.time + m_StepTimeRange;
-            }
-
-            if (currentBrain.Direction.magnitude < .1f)
-                weaponAnimator.SetBool("Walking", false);*/
         }
 
         private void FixedUpdate()
@@ -136,8 +128,10 @@ namespace Player
             // TODO Reenable stop functionality with GameController.
             // Access with events and disable StateMachine.
             // DO NOT REFERENCE GAMEMANAGER FROM HERE.
-            if (stateMachine.isActiveAndEnabled) 
+            if (stateMachine.isActiveAndEnabled)
+            {
                 stateMachine.FixedUpdateTick(Time.fixedDeltaTime);
+            }
         }
 
         /* private bool CheckOnGround()
@@ -165,7 +159,7 @@ namespace Player
         {
             if (!IsGrounded())
                 return;
-
+    
             int i = Random.Range(1, m_FootstepSounds.Length);
             m_AudioSource.clip = m_FootstepSounds[i];
             m_AudioSource.PlayOneShot(m_AudioSource.clip);

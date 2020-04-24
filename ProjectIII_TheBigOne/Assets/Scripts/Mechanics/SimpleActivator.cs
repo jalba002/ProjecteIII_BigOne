@@ -29,9 +29,9 @@ public class SimpleActivator : MonoBehaviour
         }
     }
 
-    public void Deactivate()
+    public bool Deactivate()
     {
-        if (_selectedDoor.rigidbody == null) return;
+        if (_selectedDoor.rigidbody == null) return false;
         Debug.Log("Deactivating door.");
         _selectedDoor = new RaycastHit()
         {
@@ -40,6 +40,7 @@ public class SimpleActivator : MonoBehaviour
 
             }
         };
+        return true;
     }
 
 

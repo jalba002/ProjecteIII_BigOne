@@ -16,6 +16,7 @@ namespace Player
 
         // public bool enableAirControl { get; set; }
         public Collider attachedCollider;
+        public ObjectInspector objectInspector;
 
         public SimpleActivator simpleActivator;
 
@@ -105,10 +106,37 @@ namespace Player
                 stateMachine.UpdateTick(Time.deltaTime);
             }
 
+            InspectObjects();
             InteractDoors();
         }
 
-        void InteractDoors()
+void InspectObjects()
+{
+
+
+        
+            if (currentBrain.Interact)
+            {
+                if (objectInspector)
+                {
+                    if (objectInspector.Activate(cameraController.attachedCamera))
+                    {
+                        // Disable camera and allow the object inspector the use of mouse input.
+                        bool enableStuff = objectInspector.GetEnabled();
+                        cameraController.angleLocked = enableStuff;
+                        if (enableStuff)
+                        {
+                            stateMachine.SwitchState<State_Player_Inspecting>();
+                        }
+                        else
+                            stateMachine.SwitchState<State_Player_Walking>();
+                    }
+                }
+            }
+
+        }
+
+           void InteractDoors()
         {
             if (simpleActivator != null && simpleActivator.isActiveAndEnabled)
             {

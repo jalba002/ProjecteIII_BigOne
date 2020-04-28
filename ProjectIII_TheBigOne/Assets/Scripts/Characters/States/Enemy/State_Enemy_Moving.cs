@@ -8,23 +8,27 @@ namespace Enemy
     {
         private EnemyController _attachedController;
         private float _movementSpeed;
-        private Rigidbody _attachedRigidbody;
-        private PlayerController _playerController;
 
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
+            _attachedController = (EnemyController) Machine.characterController;
         }
 
         public override void OnStateTick(float deltaTime)
         {
             base.OnStateTick(deltaTime);
-
+            
+            // Calculate transform to avoid enemy pitch rotation.
+            Vector3 lookingPosition = _attachedController.targetPositionDummy.transform.position;
+            lookingPosition.y = Machine.characterController.transform.position.y;
+            
+            Machine.characterController.transform.LookAt(lookingPosition);
 
             // Movement code.
             /*MovementManager.SetVelocity(_attachedRigidbody, Machine.characterController.currentBrain.Direction,
                 _movementSpeed);*/
-            _attachedController.currentBrain._NavMeshAgent.SetDestination(_playerController.transform.position);
+            _attachedController.currentBrain._NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
         }
 
         public override void OnStateFixedTick(float fixedTime)
@@ -47,16 +51,9 @@ namespace Enemy
         protected override void OnStateEnter()
         {
             base.OnStateEnter();
-            _attachedController = (EnemyController) Machine.characterController;
-            
-            if (_attachedController == null)
-                _attachedRigidbody = Machine.characterController.rigidbody;
             
             _movementSpeed = Machine.characterController.characterProperties.WalkSpeed;
-            
-            if (_playerController == null)
-                _playerController = FindObjectOfType<PlayerController>();
-            
+            _attachedController.currentBrain._NavMeshAgent.updateRotation = false;
             _attachedController.currentBrain._NavMeshAgent.isStopped = false;
         }
 

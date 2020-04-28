@@ -16,6 +16,8 @@ namespace Enemy
         public Collider attachedCollider;
 
         public new EnemyBrain currentBrain;
+
+        public GameObject targetPositionDummy;
         
         public void Awake()
         {

@@ -7,21 +7,18 @@ namespace Enemy
     public class State_Enemy_Idle : State
     {
         private EnemyController _attachedController;
-        private float _movementSpeed;
-        private Rigidbody _attachedRigidbody;
 
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
+            _attachedController = (EnemyController) Machine.characterController;
         }
 
         public override void OnStateTick(float deltaTime)
         {
             base.OnStateTick(deltaTime);
 
-            // Movement code.
-            /*MovementManager.SetVelocity(_attachedRigidbody, Machine.characterController.currentBrain.Direction,
-                _movementSpeed);*/
+           
         }
 
         public override void OnStateFixedTick(float fixedTime)
@@ -32,6 +29,7 @@ namespace Enemy
         public override void OnStateCheckTransition()
         {
             base.OnStateCheckTransition();
+
             // TODO Add sensing utils to evaluate player distance.
             if (!_attachedController.currentBrain.IsVisible)
             {
@@ -43,9 +41,9 @@ namespace Enemy
         protected override void OnStateEnter()
         {
             base.OnStateEnter();
-            _attachedController = (EnemyController)Machine.characterController;
-            _attachedRigidbody = Machine.characterController.rigidbody;
-            _movementSpeed = Machine.characterController.characterProperties.WalkSpeed;
+            
+            // Updates the rotation based on the brain decisions.
+            _attachedController.currentBrain._NavMeshAgent.updateRotation = false;
             _attachedController.currentBrain._NavMeshAgent.isStopped = true;
         }
 

@@ -11,6 +11,8 @@ public class EnemyBrain : Brain
 
     public bool IsVisible { get; set; }
 
+    public bool UpdateRotation = true;
+
     private void Awake()
     {
         _NavMeshAgent = this.gameObject.GetComponent<NavMeshAgent>();

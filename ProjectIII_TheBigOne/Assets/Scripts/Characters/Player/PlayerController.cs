@@ -32,6 +32,8 @@ namespace Player
         public LayerMask walkableLayers;
         public bool isPlayerGrounded { get; private set; }*/
 
+        public FlashlightController attachedFlashlight;
+
         public void Awake()
         {
             if (defaultBrain == null)
@@ -65,6 +67,9 @@ namespace Player
             // audioSource = GetComponent<AudioSource>();
             /*m_StepTime = Time.time + m_StepTimeRange;
             m_StepTimeRange = m_StepTimeWaking;*/
+
+            if (attachedFlashlight == null)
+                attachedFlashlight = GetComponent<FlashlightController>();
         }
 
         private void Start()
@@ -97,6 +102,7 @@ namespace Player
                 stateMachine.UpdateTick(Time.deltaTime);
             }
 
+           
             /*if (currentBrain.Direction.magnitude > .1f && isPlayerGrounded && m_StepTime <= Time.time && !GameController.Instance.m_PlayerDied && GameController.Instance.m_IntroFinished)
             {
                 weaponAnimator.SetBool("Walking", true);
@@ -106,6 +112,15 @@ namespace Player
 
             if (currentBrain.Direction.magnitude < .1f)
                 weaponAnimator.SetBool("Walking", false);*/
+        }
+
+        private void UseFlashlight()
+        {
+            // TODO Remap controls for flashlight.
+            if (currentBrain.Interact)
+            {
+                attachedFlashlight.ToggleFlashlight();
+            }
         }
 
         private void FixedUpdate()

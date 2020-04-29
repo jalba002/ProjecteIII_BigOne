@@ -11,7 +11,16 @@ namespace Characters.Brains
         {
             // All inputs.
             Interact = GetInputValue(inputList.interact);
+            MouseInteract = GetInputValue(inputList.mouseInteract);
             Running = GetInputValue(inputList.running);
+
+            // On Release
+            InteractRelease = Input.GetButtonUp(inputList.interact.name);
+            MouseInteractRelease = Input.GetButtonUp(inputList.mouseInteract.name);
+
+            // Raw mouse input.
+            MouseWheel = Input.mouseScrollDelta.y;
+            MouseInput = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
             // Directional input control.
             Direction = new Vector3(
@@ -23,9 +32,9 @@ namespace Characters.Brains
 
         private bool GetInputValue(InputNames input)
         {
-            return input.holdButton 
+            return input.holdButton
                 ? Input.GetButton(input.name)
-                : Input.GetButtonDown(input.name); 
+                : Input.GetButtonDown(input.name);
         }
     }
 }

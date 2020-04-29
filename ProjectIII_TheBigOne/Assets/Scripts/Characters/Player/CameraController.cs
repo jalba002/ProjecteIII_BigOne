@@ -11,14 +11,13 @@ public class CameraController : MonoBehaviour
     [Range(-100.0f, 100.0f)] public float m_MinPitch = -80f;
     [Range(-100.0f, 100.0f)] public float m_MaxPitch = 70f;
     public Transform m_PitchControllerTransform;
-    
-    [Space(10)]
-    [Header("Editor Debug")]
-    public KeyCode debugLockAngleKeyCode = KeyCode.I;
+
+    [Space(10)] [Header("Editor Debug")] public KeyCode debugLockAngleKeyCode = KeyCode.I;
     public KeyCode debugLockKeyCode = KeyCode.O;
     public bool angleLocked = true;
-    
+        
     private bool _cursorLock;
+    public bool applyRotation { get; set; }
 
     public bool cursorLock
     {
@@ -36,36 +35,40 @@ public class CameraController : MonoBehaviour
 
             _cursorLock = value;
         }
-        
     }
-    
-    [Header("Private variables")]
-    Vector2 m_MouseLook;
+
+    [Header("Private variables")] Vector2 m_MouseLook;
     Vector2 m_SmoothVector;
     PlayerController character;
 
     void Awake()
     {
-        angleLocked = false;
         character = GetComponentInParent<PlayerController>();
         attachedCamera = GetComponent<Camera>();
     }
 
     void Update()
     {
+        //if (!this.isActiveAndEnabled) return;
         if (!angleLocked)
-            Aiming();
+        {
+            CalculateRotation();
+        }
+        if (!applyRotation)
+            ApplyRotation();
 #if UNITY_EDITOR
         LockCameraAndMouse();
 #endif
     }
 
-    void Aiming()
+    void CalculateRotation()
     {
-        Vector2 deltaMouse = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+        Vector2 deltaMouse = character.currentBrain.MouseInput;
         
         // Return to allow outside control.
         //if (deltaMouse.magnitude < 0.1f) return;
+
+        deltaMouse.y = deltaMouse.y * (invertMouse ? 1f : -1f);
         
         deltaMouse = Vector2.Scale(deltaMouse,
             new Vector2(m_Sensitivity * m_Smoothing, m_Sensitivity * m_Smoothing));
@@ -76,12 +79,15 @@ public class CameraController : MonoBehaviour
         m_MouseLook += m_SmoothVector;
 
         m_MouseLook.y = Mathf.Clamp(m_MouseLook.y, m_MinPitch, m_MaxPitch);
+    }
 
-        m_PitchControllerTransform.localRotation = Quaternion.AngleAxis((invertMouse ? -1f : 1f) * -m_MouseLook.y, Vector3.right);
+    public void ApplyRotation()
+    {
+        m_PitchControllerTransform.localRotation = Quaternion.AngleAxis(-1f * -m_MouseLook.y, Vector3.right);
         character.transform.localRotation = Quaternion.AngleAxis(m_MouseLook.x, character.transform.up);
     }
 
-    public void ApplyRotation(Quaternion rotation)
+    public void ApplyExternalRotation(Quaternion rotation)
     {
         character.transform.rotation = rotation;
     }

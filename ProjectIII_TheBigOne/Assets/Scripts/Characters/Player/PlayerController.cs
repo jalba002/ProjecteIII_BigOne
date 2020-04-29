@@ -16,6 +16,9 @@ namespace Player
 
         // public bool enableAirControl { get; set; }
         public Collider attachedCollider;
+        public ObjectInspector objectInspector;
+
+        public SimpleActivator simpleActivator;
 
         /*[Header("Sound settings")]
         public AudioClip[] m_FootstepSounds;
@@ -40,23 +43,29 @@ namespace Player
             }
 
             currentBrain = defaultBrain;
-            
+
             if (defaultState == null)
                 defaultState = GetComponent<State>();
+
             if (stateMachine == null)
                 stateMachine = GetComponent<StateMachine>();
+
             if (rigidbody == null)
                 rigidbody = GetComponent<Rigidbody>();
+
             if (cameraController == null)
                 cameraController = GetComponent<CameraController>();
 
-            if (characterProperties == null)
+            if (simpleActivator == null)
+                simpleActivator = GetComponent<SimpleActivator>();
+
+            if (characterProperties != null)
             {
-                characterProperties = ScriptableObject.CreateInstance<CharacterProperties>();
+                characterProperties = Instantiate(characterProperties);
             }
             else
             {
-                characterProperties = Instantiate(characterProperties);
+                Debug.LogWarning("Character properties not set!");
             }
 
             if (!attachedCollider)
@@ -97,15 +106,47 @@ namespace Player
                 stateMachine.UpdateTick(Time.deltaTime);
             }
 
-            /*if (currentBrain.Direction.magnitude > .1f && isPlayerGrounded && m_StepTime <= Time.time && !GameController.Instance.m_PlayerDied && GameController.Instance.m_IntroFinished)
-            {
-                weaponAnimator.SetBool("Walking", true);
-                PlayFootStepAudio();
-                m_StepTime = Time.time + m_StepTimeRange;
-            }
+            InspectObjects();
+            InteractDoors();
+        }
 
-            if (currentBrain.Direction.magnitude < .1f)
-                weaponAnimator.SetBool("Walking", false);*/
+        void InspectObjects()
+        {
+            if (objectInspector != null && objectInspector.isActiveAndEnabled)
+            {
+                if (currentBrain.Interact)
+                {
+                    if (objectInspector.Activate(cameraController.attachedCamera))
+                    {
+                        // Disable camera and allow the object inspector the use of mouse input.
+                        bool enableStuff = objectInspector.GetEnabled();
+                        cameraController.angleLocked = enableStuff;
+                        if (enableStuff)
+                        {
+                            stateMachine.SwitchState<State_Player_Inspecting>();
+                        }
+                        else
+                            stateMachine.SwitchState<State_Player_Walking>();
+                    }
+                }
+            }
+        }
+
+        void InteractDoors()
+        {
+            if (simpleActivator != null && simpleActivator.isActiveAndEnabled)
+            {
+                if (currentBrain.MouseInteract)
+                {
+                    if (simpleActivator.Activate(cameraController.attachedCamera))
+                        cameraController.angleLocked = true;
+                }
+                else if (currentBrain.MouseInteractRelease)
+                {
+                    if (simpleActivator.Deactivate())
+                        cameraController.angleLocked = false;
+                }
+            }
         }
 
         private void FixedUpdate()
@@ -113,8 +154,10 @@ namespace Player
             // TODO Reenable stop functionality with GameController.
             // Access with events and disable StateMachine.
             // DO NOT REFERENCE GAMEMANAGER FROM HERE.
-            if (stateMachine.isActiveAndEnabled) 
+            if (stateMachine.isActiveAndEnabled)
+            {
                 stateMachine.FixedUpdateTick(Time.fixedDeltaTime);
+            }
         }
 
         /* private bool CheckOnGround()
@@ -142,7 +185,7 @@ namespace Player
         {
             if (!IsGrounded())
                 return;
-
+    
             int i = Random.Range(1, m_FootstepSounds.Length);
             m_AudioSource.clip = m_FootstepSounds[i];
             m_AudioSource.PlayOneShot(m_AudioSource.clip);

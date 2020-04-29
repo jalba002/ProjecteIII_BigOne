@@ -9,7 +9,11 @@ public class EnemyBrain : Brain
 {
     public NavMeshAgent _NavMeshAgent { get; protected set; }
 
-    public bool IsVisible { get; set; }
+    public bool IsVisible = false;
+
+    public bool PlayerNearLight = false;
+
+    public bool IsChasing = false;
 
     public bool UpdateRotation = true;
 
@@ -19,6 +23,8 @@ public class EnemyBrain : Brain
         IsVisible = false;
     }
 
+    // This method is updated every frame. 
+    // It is mostly used to debug functions with shortcuts.
     public override void GetActions()
     {
         if (Input.GetKeyDown(KeyCode.Space))

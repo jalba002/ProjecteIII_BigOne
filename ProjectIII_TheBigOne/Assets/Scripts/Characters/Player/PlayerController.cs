@@ -37,6 +37,8 @@ namespace Player
         public LayerMask walkableLayers;
         public bool isPlayerGrounded { get; private set; }*/
 
+        public FlashlightController attachedFlashlight;
+
         public void Awake()
         {
             if (defaultBrain == null)
@@ -76,6 +78,9 @@ namespace Player
             // audioSource = GetComponent<AudioSource>();
             /*m_StepTime = Time.time + m_StepTimeRange;
             m_StepTimeRange = m_StepTimeWaking;*/
+
+            if (attachedFlashlight == null)
+                attachedFlashlight = GetComponent<FlashlightController>();
         }
 
         private void Start()
@@ -148,6 +153,15 @@ namespace Player
                     if (simpleActivator.Deactivate())
                         cameraController.angleLocked = false;
                 }
+            }
+        }
+
+        private void UseFlashlight()
+        {
+            // TODO Remap controls for flashlight.
+            if (currentBrain.Interact)
+            {
+                attachedFlashlight.ToggleFlashlight();
             }
         }
 

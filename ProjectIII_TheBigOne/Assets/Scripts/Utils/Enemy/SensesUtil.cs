@@ -4,10 +4,10 @@ using CharacterController = Characters.Generic.CharacterController;
 public static class SensesUtil
 {
     public static bool IsInSight(CharacterController instigator, GameObject target, float maxRange, LayerMask layerMask,
-        bool debug = true)
+        bool debug = false)
     {
         bool HitTarget = false;
-        Ray detectionRay = new Ray(instigator.transform.position, target.transform.position);
+        Ray detectionRay = new Ray(instigator.transform.position, (target.transform.position - instigator.transform.position).normalized);
         RaycastHit raycastHitInfo;
         if (Physics.Raycast(detectionRay, out raycastHitInfo, maxRange, layerMask))
         {

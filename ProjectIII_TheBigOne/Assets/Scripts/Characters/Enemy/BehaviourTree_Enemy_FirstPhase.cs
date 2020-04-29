@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Enemy;
-using Player;
+﻿using Enemy;
 using UnityEngine;
 using CharacterController = Characters.Generic.CharacterController;
 

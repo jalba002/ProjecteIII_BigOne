@@ -108,5 +108,12 @@ namespace Enemy
             // TODO Add kill functionality?
             return false;
         }
+
+        /// ENEMY SENSES ///
+
+        public bool HasPlayerLight()
+        {
+            return true;
+        }
     }
 }

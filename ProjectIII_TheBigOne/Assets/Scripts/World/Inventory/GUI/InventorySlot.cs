@@ -111,15 +111,18 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
             inventoryDisplayRef.selectedItemInfo.gameObject.SetActive(true);
         }
 
-    }   
+    } 
+    
+    public void ResetSlot()
+    {
+        Setup(null);
+    }
 
     public void OnPointerDown(PointerEventData eventData) 
     {
-        Debug.Log("OnPointerDown");
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("OnBeginDrag");
         SelectThisSlot();
         canvasGroup.blocksRaycasts = false;
 
@@ -128,7 +131,6 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("OnEndDrag");
         canvasGroup.blocksRaycasts = true;
         this.gameObject.transform.SetParent(slot.transform);
 
@@ -136,10 +138,12 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     }
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("OnDrag");
-        
-        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
-        
+        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;   
+    }
+
+    public void AddItemToCombine()
+    {
+        Setup(inventoryDisplayRef.selectedItem);
     }
     
 }

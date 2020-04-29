@@ -15,6 +15,8 @@ public class InventoryItem
     public bool isStackable = false;          
     public bool destroyOnUse = false;
 
+    public List<string> combinedItems;
+
     private int actualQuantity = 0;
     
     public InventoryItem(InventoryItem item)
@@ -31,7 +33,10 @@ public class InventoryItem
         destroyOnUse = item.destroyOnUse;
         //encumbranceValue = item.encumbranceValue;
 
-        actualQuantity = 1;
+        if (actualQuantity == 0)
+        {
+            actualQuantity = 1;
+        }
     }
 
     public int GetActualQuantity()

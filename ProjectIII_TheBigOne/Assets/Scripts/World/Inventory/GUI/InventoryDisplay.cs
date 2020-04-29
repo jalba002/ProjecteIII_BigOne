@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class InventoryDisplay : MonoBehaviour
 {
+    [HideInInspector]public Inventory inventoryRef;
 
     [SerializeField]
 
@@ -13,6 +14,14 @@ public class InventoryDisplay : MonoBehaviour
     public GameObject slotPrefab;
     public Transform slotGrid;
     public int numberOfSlots = 12;
+
+    public GameObject inventoryWindow;
+    public GameObject combineWindow;
+
+    public InventorySlot combineSlot_1;
+    public InventorySlot combineSlot_2;
+    
+
     public InventoryItem selectedItem;
     public InventorySlot selectedSlot;
     public Text selectedItemName;
@@ -26,6 +35,7 @@ public class InventoryDisplay : MonoBehaviour
             instance.transform.SetParent(slotGrid);            
             inventorySlotList.Add(instance.GetComponentInChildren<InventorySlot>());
         }
+        inventoryRef = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
     }
 
     // Start is called before the first frame update
@@ -37,6 +47,11 @@ public class InventoryDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (inventoryRef == null)
+        {
+            inventoryRef = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        }
+
         
     }
 
@@ -47,6 +62,12 @@ public class InventoryDisplay : MonoBehaviour
         inventorySlotList[slot].Setup(item);
     }
 
+    public void CopySlot(InventorySlot origin, InventorySlot copy)
+    {
+        copy.Setup(origin.item);
+        origin.Setup(null);
+    }
+
     public void AddNewItem(InventoryItem item)
     {
         SetupSlot(inventorySlotList.FindIndex(i => i.item == null), item);
@@ -54,7 +75,57 @@ public class InventoryDisplay : MonoBehaviour
 
     public void RemoveItem(InventoryItem item)
     {
-        SetupSlot(inventorySlotList.FindIndex(i => i.item == item), null);
+        if (!item.isStackable)
+        {
+            SetupSlot(inventorySlotList.FindIndex(i => i.item == item), null);
+        }
+        else
+        {
+            int a = item.GetActualQuantity();
+            if (a == 1)
+            {
+                SetupSlot(inventorySlotList.FindIndex(i => i.item == item), null);
+            }
+            else
+            {
+                // quantity is changed on the Inventory.cs, it's useless do it here.
+            }
+        }
+
     }
+
+    public void RemoveButton()
+    {
+        if (selectedItem != null && inventoryRef != null)
+        {
+            RemoveItem(selectedItem);
+            inventoryRef.RemoveItem(selectedItem.itemName);
+
+            selectedItem = null;
+            selectedItemInfo.text = " ";
+            selectedItemName.text = " ";
+            selectedSlot.background.color = Color.white;
+            selectedSlot = null;
+            
+        }
+    }
+
+    public void SwitchWindow(string window)
+    {
+        switch (window)
+        {
+            case "Inventory":
+                inventoryWindow.SetActive(true);
+                combineWindow.SetActive(false);
+                break;
+            case "Combine":
+                inventoryWindow.SetActive(false);
+                combineWindow.SetActive(true);
+                break;
+            default:
+                break;
+        }
+    }
+
     
 }

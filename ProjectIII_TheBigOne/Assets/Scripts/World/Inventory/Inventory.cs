@@ -66,9 +66,30 @@ public class Inventory : MonoBehaviour
         InventoryItem item = CheckThisItem(itemName);
         if (item != null)
         {
-            characterItems.Remove(item);
-            Debug.Log("Item removed: " + item.itemName);
+            if (!item.isStackable)
+            {
+                characterItems.Remove(item);
+                Debug.Log("Item removed: " + item.itemName);
+            }
+            else
+            {
+                int a = item.GetActualQuantity();
+                Debug.Log(a);
+                if (a == 1)
+                {
+                    characterItems.Remove(item);
+                    Debug.Log("Item removed: " + item.itemName);
+                }
+                else
+                {
+                    item.SetActualQuantity(a - 1);
+                    Debug.Log("Item removed: " + item.itemName);
+                }
+            }
+            
         }
     }
+
+    
 
 }

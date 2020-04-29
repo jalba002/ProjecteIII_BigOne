@@ -1,4 +1,5 @@
-﻿using Characters.Brains;
+﻿using System;
+using Characters.Brains;
 using Player;
 using UnityEngine;
 
@@ -12,8 +13,15 @@ namespace Characters.Generic
         public State defaultState { get; protected set; }
         public StateMachine stateMachine { get; protected set; }
         public Rigidbody rigidbody;
+        
+        public bool IsDead { get; protected set; }
 
         [Space(5)] [Header("Properties")]
         public CharacterProperties characterProperties;
+
+        public virtual bool Kill()
+        {
+            return false;
+        }
     }
 }

@@ -20,15 +20,15 @@ namespace Enemy
             base.OnStateTick(deltaTime);
             
             // Calculate transform to avoid enemy pitch rotation.
-            Vector3 lookingPosition = _attachedController.targetPositionDummy.transform.position;
+            /*Vector3 lookingPosition = _attachedController.targetPositionDummy.transform.position;
             lookingPosition.y = Machine.characterController.transform.position.y;
             
             Machine.characterController.transform.LookAt(lookingPosition);
-
+*/
             // Movement code.
             /*MovementManager.SetVelocity(_attachedRigidbody, Machine.characterController.currentBrain.Direction,
                 _movementSpeed);*/
-            _attachedController.currentBrain._NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
+            // _attachedController.currentBrain._NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
         }
 
         public override void OnStateFixedTick(float fixedTime)
@@ -39,13 +39,6 @@ namespace Enemy
         public override void OnStateCheckTransition()
         {
             base.OnStateCheckTransition();
-            
-            // TODO Add sensing utils to evaluate player distance.
-            if (_attachedController.currentBrain.IsVisible)
-            {
-                Machine.SwitchState<State_Enemy_Idle>();
-                return;
-            }
         }
 
         protected override void OnStateEnter()
@@ -53,7 +46,8 @@ namespace Enemy
             base.OnStateEnter();
             
             _movementSpeed = Machine.characterController.characterProperties.WalkSpeed;
-            _attachedController.currentBrain._NavMeshAgent.updateRotation = false;
+            //_attachedController.currentBrain._NavMeshAgent.updateRotation = false;
+            _attachedController.currentBrain._NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
             _attachedController.currentBrain._NavMeshAgent.isStopped = false;
         }
 

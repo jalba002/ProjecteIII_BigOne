@@ -8,7 +8,7 @@ using CharacterController = Characters.Generic.CharacterController;
 
 namespace Enemy
 {
-    [RequireComponent(typeof(Brain))]
+    [RequireComponent(typeof(EnemyBrain))]
     [RequireComponent(typeof(State))]
     [RequireComponent(typeof(StateMachine))]
     public class EnemyController : CharacterController
@@ -16,25 +16,36 @@ namespace Enemy
         public Collider attachedCollider;
 
         public new EnemyBrain currentBrain;
+        public BehaviourTree currentBehaviourTree;
 
         public GameObject targetPositionDummy;
-        
+
         public void Awake()
         {
             if (defaultBrain == null)
                 defaultBrain = GetComponent<EnemyBrain>();
 
-            currentBrain = (EnemyBrain)defaultBrain;
+            if (defaultBrain == null)
+            {
+                Debug.LogWarning("Default brain in EnemyController is null.");
+                this.currentBrain = gameObject.AddComponent<EnemyBrain>();
+            }
+            else
+            {
+                this.currentBrain = (EnemyBrain) defaultBrain;
+            }
 
             if (defaultState == null)
                 defaultState = GetComponent<State>();
-            
+
+            currentBehaviourTree = new BehaviourTree_Enemy_FirstPhase(this);
+
             if (stateMachine == null)
                 stateMachine = GetComponent<StateMachine>();
-            
+
             if (rigidbody == null)
                 rigidbody = GetComponent<Rigidbody>();
-            
+
             if (characterProperties == null)
             {
                 characterProperties = ScriptableObject.CreateInstance<CharacterProperties>();
@@ -46,24 +57,27 @@ namespace Enemy
 
             if (!attachedCollider)
                 attachedCollider = GetComponent<Collider>();
-
-            // audioSource = GetComponent<AudioSource>();
-            /*m_StepTime = Time.time + m_StepTimeRange;
-            m_StepTimeRange = m_StepTimeWaking;*/
         }
 
         private void Start()
         {
-            // enableAirControl = true;
-            currentBrain._NavMeshAgent.speed = characterProperties.WalkSpeed;
-            
             stateMachine.SwitchState<State_Enemy_Idle>();
+            currentBrain._NavMeshAgent.speed = characterProperties.WalkSpeed;
         }
 
         void Update()
         {
             if (currentBrain.isActiveAndEnabled)
                 currentBrain.GetActions();
+
+            if (currentBehaviourTree != null)
+            {
+                currentBehaviourTree.CalculateNextState(false);
+            }
+            else
+            {
+                Debug.LogError("Enemy has no behaviour tree.");
+            }
 
             // TODO Disable state machine when game pauses. 
             // Access with events and disable StateMachine.
@@ -91,13 +105,19 @@ namespace Enemy
         private void OnBecameInvisible()
         {
             //IsVisible = false;
-            Debug.LogWarning("I see you.");
+            Debug.LogWarning("I am hidden.");
         }
 
         private void OnBecameVisible()
         {
             //IsVisible = true;
-            Debug.LogWarning("I can not move.");
+            Debug.LogWarning("I am visible.");
+        }
+
+        public override bool Kill()
+        {
+            // TODO Add kill functionality?
+            return false;
         }
     }
 }

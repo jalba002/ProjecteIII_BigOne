@@ -1,17 +1,15 @@
-﻿using Characters.Generic;
-using Player;
+﻿using System.Diagnostics;
+using Characters.Generic;
 using UnityEngine;
+using CharacterController = UnityEngine.CharacterController;
 
-namespace Enemy
+namespace Player
 {
-    public class State_Enemy_Idle : State
+    public class State_Generic_Dead : State
     {
-        private EnemyController _attachedController;
-
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
-            _attachedController = (EnemyController) Machine.characterController;
         }
 
         public override void OnStateTick(float deltaTime)
@@ -32,10 +30,7 @@ namespace Enemy
         protected override void OnStateEnter()
         {
             base.OnStateEnter();
-            
-            // Updates the rotation based on the brain decisions.
-            //_attachedController.currentBrain._NavMeshAgent.updateRotation = false;
-            _attachedController.currentBrain._NavMeshAgent.isStopped = true;
+            Machine.characterController.Kill();
         }
 
         protected override void OnStateExit()

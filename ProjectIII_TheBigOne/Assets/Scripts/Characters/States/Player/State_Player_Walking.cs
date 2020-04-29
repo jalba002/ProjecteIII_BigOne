@@ -8,13 +8,14 @@ namespace Player
     public class State_Player_Walking : State
     {
         private float _currentStamina;
+        private PlayerController _attachedController;
 
         public float currentStamina
         {
             get { return _currentStamina; }
             set
             {
-                _currentStamina = Mathf.Clamp(value, 0f, Machine.characterController.characterProperties.maximumStamina);
+                _currentStamina = Mathf.Clamp(value, 0f, _attachedController.characterProperties.maximumStamina);
             }
         }
 
@@ -25,7 +26,7 @@ namespace Player
             get { return _currentDelay; }
             set
             {
-                _currentDelay = Mathf.Clamp(value, 0f, Machine.characterController.characterProperties.rechargeDelay);
+                _currentDelay = Mathf.Clamp(value, 0f, _attachedController.characterProperties.rechargeDelay);
             }
         }
         /*private float _staminaRechargeDelay;
@@ -38,6 +39,7 @@ namespace Player
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
+            _attachedController = ((PlayerController)Machine.characterController);
         }
 
         public override void OnStateTick(float deltaTime)
@@ -49,23 +51,23 @@ namespace Player
             {
                 currentDelay -= deltaTime;
             }
-            else if (currentStamina < Machine.characterController.characterProperties.maximumStamina)
+            else if (currentStamina < _attachedController.characterProperties.maximumStamina)
             {
-                currentStamina += Machine.characterController.characterProperties.staminaRechargePerSecond * deltaTime;
+                currentStamina += _attachedController.characterProperties.staminaRechargePerSecond * deltaTime;
             }
 
             // If character is moving, has stamina and is running, deplete stamina and run.
-            if ((Machine.characterController.currentBrain.Running && Machine.characterController.currentBrain.Direction != Vector3.zero) && currentStamina > 0f)
+            if ((_attachedController.currentBrain.Running && _attachedController.currentBrain.Direction != Vector3.zero) && currentStamina > 0f)
             {
-                _movementSpeed = Machine.characterController.characterProperties.RunSpeed;
+                _movementSpeed = _attachedController.characterProperties.RunSpeed;
                 currentStamina -= deltaTime;
-                currentDelay = Machine.characterController.characterProperties.rechargeDelay;
+                currentDelay = _attachedController.characterProperties.rechargeDelay;
             }
             else
-                _movementSpeed = Machine.characterController.characterProperties.WalkSpeed;
+                _movementSpeed = _attachedController.characterProperties.WalkSpeed;
 
             // Movement code.
-            MovementManager.SetVelocity(_attachedRigidbody, Machine.characterController.currentBrain.Direction,
+            MovementManager.SetVelocity(_attachedRigidbody, _attachedController.currentBrain.Direction,
                 _movementSpeed);
         }
 
@@ -82,17 +84,18 @@ namespace Player
         protected override void OnStateEnter()
         {
             base.OnStateEnter();
-            _attachedRigidbody = Machine.characterController.rigidbody;
+            
+            _attachedRigidbody = _attachedController.rigidbody;
 
-            _movementSpeed = Machine.characterController.characterProperties.WalkSpeed;
-            currentStamina = Machine.characterController.characterProperties.maximumStamina;
-            currentDelay = Machine.characterController.characterProperties.rechargeDelay;
+            _movementSpeed = _attachedController.characterProperties.WalkSpeed;
+            currentStamina = _attachedController.characterProperties.maximumStamina;
+            currentDelay = _attachedController.characterProperties.rechargeDelay;
             
             // TODO Profile if variables are better than constant variable accesses.
             /*
-            _maxStamina = Machine.characterController.characterProperties.maximumStamina;
-            _staminaRechargeDelay = Machine.characterController.characterProperties.rechargeDelay;
-            _staminaRechargePerSecond = Machine.characterController.characterProperties.rechargeDelay;
+            _maxStamina = _attachedController.characterProperties.maximumStamina;
+            _staminaRechargeDelay = _attachedController.characterProperties.rechargeDelay;
+            _staminaRechargePerSecond = _attachedController.characterProperties.rechargeDelay;
             */
         }
 

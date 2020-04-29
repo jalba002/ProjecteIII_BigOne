@@ -2,6 +2,7 @@
 using Characters.Brains;
 using Characters.Generic;
 using Player;
+using Properties;
 using UnityEngine;
 using UnityEngine.AI;
 using CharacterController = Characters.Generic.CharacterController;
@@ -17,6 +18,8 @@ namespace Enemy
 
         public new EnemyBrain currentBrain;
         public BehaviourTree currentBehaviourTree;
+
+        public new EnemyProperties characterProperties;
 
         public GameObject targetPositionDummy;
 
@@ -48,7 +51,7 @@ namespace Enemy
 
             if (characterProperties == null)
             {
-                characterProperties = ScriptableObject.CreateInstance<CharacterProperties>();
+                characterProperties = ScriptableObject.CreateInstance<EnemyProperties>();
             }
             else
             {

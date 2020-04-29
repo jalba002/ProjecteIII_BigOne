@@ -1,5 +1,6 @@
 ﻿using Characters.Brains;
 using Characters.Generic;
+using Properties;
 using TMPro.Examples;
 using UnityEngine;
 using CharacterController = Characters.Generic.CharacterController;
@@ -19,6 +20,8 @@ namespace Player
         public ObjectInspector objectInspector;
 
         public SimpleActivator simpleActivator;
+
+        public PlayerProperties characterProperties;
 
         /*[Header("Sound settings")]
         public AudioClip[] m_FootstepSounds;

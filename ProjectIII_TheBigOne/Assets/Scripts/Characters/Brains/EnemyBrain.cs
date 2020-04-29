@@ -1,5 +1,6 @@
 ﻿using System;
 using Characters.Brains;
+using Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,12 +9,15 @@ using UnityEngine.AI;
 public class EnemyBrain : Brain
 {
     public NavMeshAgent _NavMeshAgent { get; protected set; }
+    public PlayerController archnemesis { get; protected set; }
 
     public bool IsVisible = false;
 
-    public bool PlayerNearLight = false;
+    public bool IsPlayerInSight = false;
 
-    public bool IsChasing = false;
+    public bool IsPlayerNearLight = false;
+
+    public bool IsChasingPlayer = false;
 
     public bool UpdateRotation = true;
 
@@ -21,6 +25,7 @@ public class EnemyBrain : Brain
     {
         _NavMeshAgent = this.gameObject.GetComponent<NavMeshAgent>();
         IsVisible = false;
+        archnemesis = FindObjectOfType<PlayerController>();
     }
 
     // This method is updated every frame. 

@@ -1,6 +1,6 @@
-﻿using System;
-using Characters.Brains;
+﻿using Characters.Brains;
 using Player;
+using Properties;
 using UnityEngine;
 
 namespace Characters.Generic
@@ -16,7 +16,7 @@ namespace Characters.Generic
         
         public bool IsDead { get; protected set; }
 
-        [Space(5)] [Header("Properties")]
+        [System.NonSerialized]
         public CharacterProperties characterProperties;
 
         public virtual bool Kill()

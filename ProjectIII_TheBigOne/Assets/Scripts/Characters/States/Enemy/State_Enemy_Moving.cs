@@ -45,7 +45,7 @@ namespace Enemy
         {
             base.OnStateEnter();
             
-            _movementSpeed = Machine.characterController.characterProperties.WalkSpeed;
+            _movementSpeed = _attachedController.characterProperties.WalkSpeed;
             //_attachedController.currentBrain._NavMeshAgent.updateRotation = false;
             _attachedController.currentBrain._NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
             _attachedController.currentBrain._NavMeshAgent.isStopped = false;

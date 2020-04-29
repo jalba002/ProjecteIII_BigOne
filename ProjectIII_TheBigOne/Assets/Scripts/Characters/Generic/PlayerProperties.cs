@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Properties;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Properties
 {

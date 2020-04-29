@@ -1,7 +1,6 @@
 ﻿using Characters.Brains;
 using Characters.Generic;
 using Properties;
-using TMPro.Examples;
 using UnityEngine;
 using CharacterController = Characters.Generic.CharacterController;
 

@@ -21,7 +21,7 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
 
 
     /// All states for Enemy first phase listed below. ///
-    ///
+    
     private bool CheckEnterDisable()
     {
         // TODO Add Conditions.
@@ -36,8 +36,9 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         // If player is looking at the enemy.
         // If player has the light turned off.
         
-        Debug.Log("EnterIdle Check");
-        if (attachedCharacter.currentBrain.IsVisible)
+        //Debug.Log("EnterIdle Check");
+        if (attachedCharacter.currentBrain.IsVisible &&
+            attachedCharacter.currentBrain.IsPlayerNearLight)
         {
             attachedCharacter.stateMachine.SwitchState<State_Enemy_Idle>();
             return true;
@@ -51,7 +52,7 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         // TODO Add conditions.
         // If player is not in safe zone.
         // If lost the player in the chase.
-        Debug.Log("EnterPatrol Check");
+        // Debug.Log("EnterPatrol Check");
         
         if (true)
         {

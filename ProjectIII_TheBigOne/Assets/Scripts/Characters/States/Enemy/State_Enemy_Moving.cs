@@ -29,6 +29,8 @@ namespace Enemy
             /*MovementManager.SetVelocity(_attachedRigidbody, Machine.characterController.currentBrain.Direction,
                 _movementSpeed);*/
             // _attachedController.currentBrain._NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
+            
+            
         }
 
         public override void OnStateFixedTick(float fixedTime)

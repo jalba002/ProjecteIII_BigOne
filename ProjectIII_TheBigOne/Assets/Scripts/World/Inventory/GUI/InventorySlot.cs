@@ -4,10 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class InventorySlot : MonoBehaviour
+public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler    
 {
 
     [SerializeField]
+    private Canvas canvas;
+    private RectTransform rectTransform;
+    private CanvasGroup canvasGroup;
+
+    public GameObject slot;
     public Image background;
     public Image spriteImage;            
     public InventoryItem item;            
@@ -16,12 +21,24 @@ public class InventorySlot : MonoBehaviour
     public Text quantityText;
     private InventoryDisplay inventoryDisplayRef;
 
+    [HideInInspector] public GameObject selectedSlot;
+    [HideInInspector] public InventoryItem selectedItem;
+    [HideInInspector] public bool changeSlot = false;
+
+
+
     void Awake()                                                                            
     {
+        canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
+        rectTransform = gameObject.GetComponent<RectTransform>();
+        canvasGroup = gameObject.GetComponent<CanvasGroup>();
+
+        slot.GetComponent<RectTransform>().localScale *= canvas.scaleFactor;
         spriteImage = GetComponent<Image>();                                                
         Setup(null);                                                                        
         inventoryDisplayRef = GameObject.FindGameObjectWithTag("InventoryDisplay").GetComponent<InventoryDisplay>();
     }
+    
 
     public void Setup(InventoryItem item)               
     {
@@ -55,18 +72,24 @@ public class InventorySlot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (item != null)
         {
             if (item.isStackable)
             {
                 quantityText.text = item.GetActualQuantity().ToString();
             }
+        }
+
+        if (changeSlot)
+        {
+            
         }
     }
 
@@ -88,5 +111,35 @@ public class InventorySlot : MonoBehaviour
             inventoryDisplayRef.selectedItemInfo.gameObject.SetActive(true);
         }
 
+    }   
+
+    public void OnPointerDown(PointerEventData eventData) 
+    {
+        Debug.Log("OnPointerDown");
     }
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        Debug.Log("OnBeginDrag");
+        SelectThisSlot();
+        canvasGroup.blocksRaycasts = false;
+
+        this.gameObject.transform.parent = null;
+        this.gameObject.transform.SetParent(canvas.transform);
+    }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        Debug.Log("OnEndDrag");
+        canvasGroup.blocksRaycasts = true;
+        this.gameObject.transform.SetParent(slot.transform);
+
+        rectTransform.anchoredPosition = new Vector3(0, 0, 0);
+    }
+    public void OnDrag(PointerEventData eventData)
+    {
+        Debug.Log("OnDrag");
+        
+        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        
+    }
+    
 }

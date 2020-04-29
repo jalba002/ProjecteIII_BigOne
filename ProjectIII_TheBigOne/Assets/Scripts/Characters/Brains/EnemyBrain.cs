@@ -1,30 +1,32 @@
 ﻿using System;
 using Characters.Brains;
+using Enemy;
 using Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
-// This could be the AI brain that makes decisions based on events and stuff.
 public class EnemyBrain : Brain
 {
+    public EnemyController selfCharacter { get; protected set; }
     public NavMeshAgent _NavMeshAgent { get; protected set; }
     public PlayerController archnemesis { get; protected set; }
 
-    public bool IsVisible = false;
+    public bool IsVisible { get; private set; }
 
-    public bool IsPlayerInSight = false;
+    public bool IsPlayerInSight { get; private set; }
 
-    public bool IsPlayerNearLight = false;
+    public bool IsPlayerNearLight { get; private set; }
 
-    public bool IsChasingPlayer = false;
+    public bool IsChasingPlayer { get; private set; }
 
-    public bool UpdateRotation = true;
+    public bool UpdateRotation { get; private set; }
 
     private void Awake()
     {
+        IsVisible = true;
         _NavMeshAgent = this.gameObject.GetComponent<NavMeshAgent>();
-        IsVisible = false;
+        selfCharacter = this.gameObject.GetComponent<EnemyController>();
         archnemesis = FindObjectOfType<PlayerController>();
     }
 
@@ -32,7 +34,19 @@ public class EnemyBrain : Brain
     // It is mostly used to debug functions with shortcuts.
     public override void GetActions()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            IsVisible = !IsVisible;
+        IsPlayerNearLight = SensesUtil.HasFlashlightEnabled(archnemesis);
+
+        IsPlayerInSight = SensesUtil.IsInSight(selfCharacter.gameObject, archnemesis.gameObject,
+            selfCharacter.characterProperties.maxDetectionRange, selfCharacter.characterProperties.watchableLayers);
+    }
+
+    private void OnBecameInvisible()
+    {
+        IsVisible = false;
+    }
+
+    private void OnBecameVisible()
+    {
+        IsVisible = true;
     }
 }

@@ -12,7 +12,7 @@ public class FlashlightController : MonoBehaviour
         get { return _currentCharge; }
         set { _currentCharge = Mathf.Clamp(value, 0f, maxCharge); }
     }
-    private bool _Enabled { get; set; }
+    public bool IsFlashlightEnabled { get; private set; }
 
     public Light attachedLight;
     public GameObject feedbackVisual;
@@ -24,7 +24,7 @@ public class FlashlightController : MonoBehaviour
 
     private void Update()
     {
-        if (_Enabled) currentCharge -= Time.deltaTime;
+        if (IsFlashlightEnabled) currentCharge -= Time.deltaTime;
     }
 
     public bool ToggleFlashlight()
@@ -35,9 +35,9 @@ public class FlashlightController : MonoBehaviour
             return false;
         }
 
-        _Enabled = !_Enabled;
+        IsFlashlightEnabled = !IsFlashlightEnabled;
         //attachedLight.enabled = _Enabled;
-        feedbackVisual.SetActive(_Enabled);
+        feedbackVisual.SetActive(IsFlashlightEnabled);
         return true;
     }
 

@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using Player;
+using UnityEngine;
 using CharacterController = Characters.Generic.CharacterController;
 
 public static class SensesUtil
 {
-    public static bool IsInSight(CharacterController instigator, GameObject target, float maxRange, LayerMask layerMask,
+    public static bool IsInSight(GameObject instigator, GameObject target, float maxRange, LayerMask layerMask,
         bool debug = false)
     {
         bool HitTarget = false;
@@ -32,5 +33,10 @@ public static class SensesUtil
         }
 
         return HitTarget;
+    }
+
+    public static bool HasFlashlightEnabled(PlayerController playerController)
+    {
+        return playerController.attachedFlashlight.IsFlashlightEnabled;
     }
 }

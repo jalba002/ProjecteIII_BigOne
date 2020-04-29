@@ -7,7 +7,6 @@ namespace Player
 {
     public class State_Player_Inspecting : State
     {
-        private float _movementSpeed;
         private Rigidbody _attachedRigidbody;
 
         protected override void OnStateInitialize(StateMachine machine)
@@ -18,9 +17,8 @@ namespace Player
         public override void OnStateTick(float deltaTime)
         {
             base.OnStateTick(deltaTime);
-           // Movement code.
-            MovementManager.SetVelocity(_attachedRigidbody, Machine.characterController.currentBrain.Direction,
-                _movementSpeed);
+            // Movement code.
+            MovementManager.SetVelocity(_attachedRigidbody, Vector3.zero, 0f);
         }
 
         public override void OnStateFixedTick(float fixedTime)
@@ -37,7 +35,6 @@ namespace Player
         {
             base.OnStateEnter();
             _attachedRigidbody = Machine.characterController.rigidbody;
-            _movementSpeed = 0f;
         }
 
         protected override void OnStateExit()

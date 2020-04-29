@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 5884106053356163116}
   - component: {fileID: 5884106053911711457}
   - component: {fileID: 5884106053911711465}
+  - component: {fileID: 3578727220032164448}
   m_Layer: 0
   m_Name: PREFAB_Player_Prototype
   m_TagString: Untagged
@@ -202,12 +203,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 5884106053356163114}
-  characterProperties: {fileID: 11400000, guid: a70639ec9262e984686ea07ea0be506a,
-    type: 2}
   cameraController: {fileID: 5884106054433016665}
   attachedCollider: {fileID: 0}
   objectInspector: {fileID: 5884106053911711465}
   simpleActivator: {fileID: 5884106053911711457}
+  characterProperties: {fileID: 0}
+  attachedFlashlight: {fileID: 0}
 --- !u!114 &5884106053356163116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +252,21 @@ MonoBehaviour:
   range: 20
   distances: {x: 1.5, y: 2}
   rotationSpeed: {x: 0.5, y: 0.5}
+--- !u!114 &3578727220032164448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5884106053356163121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7741257326dd4fc4fa691ee53615ebd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxCharge: 120
+  attachedLight: {fileID: 5884106054459158193}
+  feedbackVisual: {fileID: 0}
 --- !u!1 &5884106053394991121
 GameObject:
   m_ObjectHideFlags: 0

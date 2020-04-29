@@ -16,7 +16,7 @@ namespace Enemy
     {
         public Collider attachedCollider;
 
-        public new EnemyBrain currentBrain;
+        public new EnemyBrain currentBrain { get; private set; }
         public BehaviourTree currentBehaviourTree;
 
         public new EnemyProperties characterProperties;
@@ -25,21 +25,7 @@ namespace Enemy
 
         public void Awake()
         {
-            if (defaultBrain == null)
-                defaultBrain = GetComponent<EnemyBrain>();
-
-            if (defaultBrain == null)
-            {
-                Debug.LogWarning("Default brain in EnemyController is null.");
-                this.currentBrain = gameObject.AddComponent<EnemyBrain>();
-            }
-            else
-            {
-                this.currentBrain = (EnemyBrain) defaultBrain;
-            }
-
-            if (defaultState == null)
-                defaultState = GetComponent<State>();
+            currentBrain = GetComponent<EnemyBrain>();
 
             currentBehaviourTree = new BehaviourTree_Enemy_FirstPhase(this);
 

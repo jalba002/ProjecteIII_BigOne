@@ -22,6 +22,8 @@ namespace Player
 
         public PlayerProperties characterProperties;
 
+        public new PlayerBrain currentBrain { get; private set; }
+
         /*[Header("Sound settings")]
         public AudioClip[] m_FootstepSounds;
         public AudioClip m_JumpSound;
@@ -41,15 +43,7 @@ namespace Player
 
         public void Awake()
         {
-            if (defaultBrain == null)
-            {
-                defaultBrain = GetComponent<Brain>();
-            }
-
-            currentBrain = defaultBrain;
-
-            if (defaultState == null)
-                defaultState = GetComponent<State>();
+            currentBrain = GetComponent<PlayerBrain>();
 
             if (stateMachine == null)
                 stateMachine = GetComponent<StateMachine>();
@@ -115,6 +109,7 @@ namespace Player
 
             InspectObjects();
             InteractDoors();
+            UseFlashlight();
         }
 
         void InspectObjects()
@@ -159,7 +154,7 @@ namespace Player
         private void UseFlashlight()
         {
             // TODO Remap controls for flashlight.
-            if (currentBrain.Interact)
+            if (currentBrain.FlashlightToggle)
             {
                 attachedFlashlight.ToggleFlashlight();
             }

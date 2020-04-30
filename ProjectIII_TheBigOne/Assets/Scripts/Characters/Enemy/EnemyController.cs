@@ -23,6 +23,10 @@ namespace Enemy
 
         public GameObject targetPositionDummy;
 
+        public Renderer meshRenderer;
+
+        [Header("Components from Thirds")] private FlashlightController playerFlashlight;
+
         public void Awake()
         {
             currentBrain = GetComponent<EnemyBrain>();
@@ -46,12 +50,18 @@ namespace Enemy
 
             if (!attachedCollider)
                 attachedCollider = GetComponent<Collider>();
+
+            if (meshRenderer == null)
+            {
+                Debug.LogError("Attach a mesh renderer.", this.gameObject);
+            }
         }
 
         private void Start()
         {
             stateMachine.SwitchState<State_Enemy_Idle>();
             currentBrain._NavMeshAgent.speed = characterProperties.WalkSpeed;
+            playerFlashlight = FindObjectOfType<FlashlightController>();
         }
 
         void Update()
@@ -90,30 +100,11 @@ namespace Enemy
         {
             return this.gameObject.transform;
         }
-
-        private void OnBecameInvisible()
-        {
-            //IsVisible = false;
-            Debug.LogWarning("I am hidden.");
-        }
-
-        private void OnBecameVisible()
-        {
-            //IsVisible = true;
-            Debug.LogWarning("I am visible.");
-        }
-
+        
         public override bool Kill()
         {
             // TODO Add kill functionality?
             return false;
-        }
-
-        /// ENEMY SENSES ///
-
-        public bool HasPlayerLight()
-        {
-            return true;
         }
     }
 }

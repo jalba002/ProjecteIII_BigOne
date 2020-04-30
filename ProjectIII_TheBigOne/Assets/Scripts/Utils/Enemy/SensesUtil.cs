@@ -1,20 +1,24 @@
-﻿using UnityEngine;
+﻿using Player;
+using UnityEngine;
 using CharacterController = Characters.Generic.CharacterController;
 
 public static class SensesUtil
 {
-    public static bool IsInSight(CharacterController instigator, GameObject target, float maxRange, LayerMask layerMask,
+    public static bool IsInSight(GameObject instigator, GameObject target, float maxRange, LayerMask layerMask,
         bool debug = false)
     {
         bool HitTarget = false;
-        Ray detectionRay = new Ray(instigator.transform.position, (target.transform.position - instigator.transform.position).normalized);
+        Ray detectionRay = new Ray(instigator.transform.position,
+            (target.transform.position - instigator.transform.position).normalized);
         RaycastHit raycastHitInfo;
         if (Physics.Raycast(detectionRay, out raycastHitInfo, maxRange, layerMask))
         {
-            Debug.Log("Casted a laser!");
+            if (debug)
+                Debug.Log("Casted a laser!");
             if (raycastHitInfo.collider.gameObject.GetHashCode().Equals(target.gameObject.GetHashCode()))
             {
-                Debug.Log($"Hit my target ··> {raycastHitInfo.collider.gameObject.name}");
+                if (debug)
+                    Debug.Log($"Hit my target ··> {raycastHitInfo.collider.gameObject.name}");
                 HitTarget = true;
             }
         }
@@ -32,5 +36,10 @@ public static class SensesUtil
         }
 
         return HitTarget;
+    }
+
+    public static bool HasFlashlightEnabled(PlayerController playerController)
+    {
+        return playerController.attachedFlashlight.IsFlashlightEnabled;
     }
 }

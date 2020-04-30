@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class SimpleActivator : MonoBehaviour
 {
-    [Header("Configuration")] [Range(1f, 500f)]
+    [Header("Configuration")]
+    [Range(1f, 500f)]
     public float raycastDistance = 500f;
+    public LayerMask interact;
 
     public float forceScale = 5f;
 
-    [Header("Private Variables")] [Tooltip("Door variables")]
+    [Header("Private Variables")]
+    [Tooltip("Door variables")]
     private RaycastHit _selectedDoor;
 
 
@@ -66,7 +69,7 @@ public class SimpleActivator : MonoBehaviour
     {
         RaycastHit hit;
         Ray cameraRay = camera.ViewportPointToRay(new Vector3(.5f, .5f, .5f));
-        if (Physics.Raycast(cameraRay, out hit, raycastDistance))
+        if (Physics.Raycast(cameraRay, out hit, raycastDistance, interact))
         {
             Debug.Log("Hit this: " + hit.transform.gameObject.name);
         }

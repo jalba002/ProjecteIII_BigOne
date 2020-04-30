@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.Contracts;
-using UnityEditor.UI;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FlashlightController : MonoBehaviour
 {
@@ -17,9 +15,15 @@ public class FlashlightController : MonoBehaviour
 
     public Light attachedLight;
     public GameObject feedbackVisual;
+    private bool _isfeedbackVisualNotNull;
+    private bool _isattachedLightNull;
 
     public void Start()
     {
+        _isattachedLightNull = attachedLight == null;
+        if (_isattachedLightNull)
+            Debug.LogWarning("No light attached to the flashlight component in " + this.gameObject.name);
+        _isfeedbackVisualNotNull = feedbackVisual != null;
         currentCharge = maxCharge;
     }
 
@@ -37,15 +41,13 @@ public class FlashlightController : MonoBehaviour
 
     public bool ToggleFlashlight()
     {
-        if (attachedLight == null)
+        if (_isattachedLightNull)
         {
-            Debug.LogWarning("No light attached to the flashlight component in " + this.gameObject.name);
             return false;
         }
 
         if (currentCharge <= 0)
         {
-            Debug.LogWarning("No flashlight battery left.");
             return false;
         }
 
@@ -56,7 +58,8 @@ public class FlashlightController : MonoBehaviour
     private void SetFlashlight(bool enable)
     {
         IsFlashlightEnabled = enable;
-        feedbackVisual.SetActive(enable);
+        if (_isfeedbackVisualNotNull)
+            feedbackVisual.SetActive(enable);
     }
 
     private void DisableFlashlight()

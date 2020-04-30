@@ -10,6 +10,8 @@ namespace Player
     [RequireComponent(typeof(State))]
     [RequireComponent(typeof(StateMachine))]
     [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(SimpleActivator))]
+    [RequireComponent(typeof(ObjectInspector))]
     public class PlayerController : CharacterController
     {
         public CameraController cameraController;
@@ -54,8 +56,9 @@ namespace Player
             if (cameraController == null)
                 cameraController = GetComponent<CameraController>();
 
-            if (simpleActivator == null)
-                simpleActivator = GetComponent<SimpleActivator>();
+            simpleActivator = this.gameObject.GetComponent<SimpleActivator>();
+
+            objectInspector = this.gameObject.GetComponent<ObjectInspector>();
 
             if (characterProperties != null)
             {

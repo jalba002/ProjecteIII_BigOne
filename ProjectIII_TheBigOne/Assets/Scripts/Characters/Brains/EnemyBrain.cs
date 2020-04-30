@@ -34,19 +34,13 @@ public class EnemyBrain : Brain
     // It is mostly used to debug functions with shortcuts.
     public override void GetActions()
     {
+        IsVisible = selfCharacter.meshRenderer.isVisible;
+        
         IsPlayerNearLight = SensesUtil.HasFlashlightEnabled(archnemesis);
 
         IsPlayerInSight = SensesUtil.IsInSight(selfCharacter.gameObject, archnemesis.gameObject,
-            selfCharacter.characterProperties.maxDetectionRange, selfCharacter.characterProperties.watchableLayers);
+            selfCharacter.characterProperties.maxDetectionRange, selfCharacter.characterProperties.watchableLayers, false);
     }
-
-    private void OnBecameInvisible()
-    {
-        IsVisible = false;
-    }
-
-    private void OnBecameVisible()
-    {
-        IsVisible = true;
-    }
+    
+    
 }

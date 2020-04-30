@@ -8,14 +8,17 @@ public static class SensesUtil
         bool debug = false)
     {
         bool HitTarget = false;
-        Ray detectionRay = new Ray(instigator.transform.position, (target.transform.position - instigator.transform.position).normalized);
+        Ray detectionRay = new Ray(instigator.transform.position,
+            (target.transform.position - instigator.transform.position).normalized);
         RaycastHit raycastHitInfo;
         if (Physics.Raycast(detectionRay, out raycastHitInfo, maxRange, layerMask))
         {
-            Debug.Log("Casted a laser!");
+            if (debug)
+                Debug.Log("Casted a laser!");
             if (raycastHitInfo.collider.gameObject.GetHashCode().Equals(target.gameObject.GetHashCode()))
             {
-                Debug.Log($"Hit my target ··> {raycastHitInfo.collider.gameObject.name}");
+                if (debug)
+                    Debug.Log($"Hit my target ··> {raycastHitInfo.collider.gameObject.name}");
                 HitTarget = true;
             }
         }

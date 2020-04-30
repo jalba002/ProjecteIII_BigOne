@@ -23,6 +23,8 @@ namespace Enemy
 
         public GameObject targetPositionDummy;
 
+        public Renderer meshRenderer;
+
         [Header("Components from Thirds")] private FlashlightController playerFlashlight;
 
         public void Awake()
@@ -48,6 +50,11 @@ namespace Enemy
 
             if (!attachedCollider)
                 attachedCollider = GetComponent<Collider>();
+
+            if (meshRenderer == null)
+            {
+                Debug.LogError("Attach a mesh renderer.", this.gameObject);
+            }
         }
 
         private void Start()

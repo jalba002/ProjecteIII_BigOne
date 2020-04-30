@@ -148,8 +148,6 @@ public class UIFade : MonoBehaviour
 
     void Update()
     {
-
-        Debug.Log("UIFADE");
         if (colorFade)
         {
             m_fadeColor.a = m_Alpha;

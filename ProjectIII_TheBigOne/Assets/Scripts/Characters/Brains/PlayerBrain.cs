@@ -6,6 +6,15 @@ namespace Characters.Brains
     public class PlayerBrain : Brain
     {
         public Inputs inputList;
+        public bool InteractRelease { get; protected set; }
+        public bool MouseInteract { get; protected set; }
+        
+        public bool FlashlightToggle { get; protected set; }
+
+        public bool MouseInteractRelease { get; protected set; }
+
+        public Vector2 MouseInput { get; protected set; }
+        public float MouseWheel { get; protected set; }
 
         public override void GetActions()
         {
@@ -13,6 +22,7 @@ namespace Characters.Brains
             Interact = GetInputValue(inputList.interact);
             MouseInteract = GetInputValue(inputList.mouseInteract);
             Running = GetInputValue(inputList.running);
+            FlashlightToggle = GetInputValue(inputList.flashlight);
 
             // On Release
             InteractRelease = Input.GetButtonUp(inputList.interact.name);

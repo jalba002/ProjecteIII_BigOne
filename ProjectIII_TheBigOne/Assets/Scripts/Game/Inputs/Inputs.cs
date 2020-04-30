@@ -9,6 +9,7 @@ namespace Game.Inputs
     {
         public InputNames interact;
         public InputNames mouseInteract;
+        public InputNames flashlight;
         public InputNames running;
         public InputNames horizontal;
         public InputNames forward;

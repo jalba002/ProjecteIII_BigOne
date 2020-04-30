@@ -1,6 +1,6 @@
 ﻿using Characters.Brains;
 using Characters.Generic;
-using TMPro.Examples;
+using Properties;
 using UnityEngine;
 using CharacterController = Characters.Generic.CharacterController;
 
@@ -10,6 +10,8 @@ namespace Player
     [RequireComponent(typeof(State))]
     [RequireComponent(typeof(StateMachine))]
     [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(SimpleActivator))]
+    [RequireComponent(typeof(ObjectInspector))]
     public class PlayerController : CharacterController
     {
         public CameraController cameraController;
@@ -19,6 +21,10 @@ namespace Player
         public ObjectInspector objectInspector;
 
         public SimpleActivator simpleActivator;
+
+        public PlayerProperties characterProperties;
+
+        public new PlayerBrain currentBrain { get; private set; }
 
         /*[Header("Sound settings")]
         public AudioClip[] m_FootstepSounds;
@@ -35,17 +41,11 @@ namespace Player
         public LayerMask walkableLayers;
         public bool isPlayerGrounded { get; private set; }*/
 
+        public FlashlightController attachedFlashlight;
+
         public void Awake()
         {
-            if (defaultBrain == null)
-            {
-                defaultBrain = GetComponent<Brain>();
-            }
-
-            currentBrain = defaultBrain;
-
-            if (defaultState == null)
-                defaultState = GetComponent<State>();
+            currentBrain = GetComponent<PlayerBrain>();
 
             if (stateMachine == null)
                 stateMachine = GetComponent<StateMachine>();
@@ -56,8 +56,9 @@ namespace Player
             if (cameraController == null)
                 cameraController = GetComponent<CameraController>();
 
-            if (simpleActivator == null)
-                simpleActivator = GetComponent<SimpleActivator>();
+            simpleActivator = this.gameObject.GetComponent<SimpleActivator>();
+
+            objectInspector = this.gameObject.GetComponent<ObjectInspector>();
 
             if (characterProperties != null)
             {
@@ -74,6 +75,9 @@ namespace Player
             // audioSource = GetComponent<AudioSource>();
             /*m_StepTime = Time.time + m_StepTimeRange;
             m_StepTimeRange = m_StepTimeWaking;*/
+
+            if (attachedFlashlight == null)
+                attachedFlashlight = GetComponent<FlashlightController>();
         }
 
         private void Start()
@@ -108,6 +112,7 @@ namespace Player
 
             InspectObjects();
             InteractDoors();
+            UseFlashlight();
         }
 
         void InspectObjects()
@@ -146,6 +151,15 @@ namespace Player
                     if (simpleActivator.Deactivate())
                         cameraController.angleLocked = false;
                 }
+            }
+        }
+
+        private void UseFlashlight()
+        {
+            // TODO Remap controls for flashlight.
+            if (currentBrain.FlashlightToggle)
+            {
+                attachedFlashlight.ToggleFlashlight();
             }
         }
 

@@ -11,6 +11,7 @@ public class CombinedSlot : MonoBehaviour
     public InventorySlot combinedSlot;
     public InventoryItemList database;
 
+    
     private void Start()
     {
         database = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().database;    

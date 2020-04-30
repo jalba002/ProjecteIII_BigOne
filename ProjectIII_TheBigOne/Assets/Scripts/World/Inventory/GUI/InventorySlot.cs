@@ -25,7 +25,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     [HideInInspector] public InventoryItem selectedItem;
     [HideInInspector] public bool changeSlot = false;
 
-
+    public bool isThisSlotToCombine = false;
 
     void Awake()                                                                            
     {
@@ -33,7 +33,11 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         rectTransform = gameObject.GetComponent<RectTransform>();
         canvasGroup = gameObject.GetComponent<CanvasGroup>();
 
-        slot.GetComponent<RectTransform>().localScale *= canvas.scaleFactor;
+        if (isThisSlotToCombine == false)
+        {
+            slot.GetComponent<RectTransform>().localScale *= canvas.scaleFactor;
+        }
+
         spriteImage = GetComponent<Image>();                                                
         Setup(null);                                                                        
         inventoryDisplayRef = GameObject.FindGameObjectWithTag("InventoryDisplay").GetComponent<InventoryDisplay>();

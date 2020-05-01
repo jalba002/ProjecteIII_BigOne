@@ -138,6 +138,7 @@ namespace World.Objects
         public void Start()
         {
             IgnoreColliders();
+            SetJointsLimit(objectType);
         }
 
         private bool GenerateIgnoredColliders(Collider selfCollider)
@@ -195,6 +196,11 @@ namespace World.Objects
             var useForce = HandlePosition.transform.forward * force;
             Rigidbody.AddForceAtPosition(useForce, HandlePosition.transform.position, ForceMode.Force);
             return true;
+        }
+
+        public bool ForceClose()
+        {
+            throw new NotImplementedException();
         }
 
         public bool Unlock()

@@ -1,84 +1,86 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Interfaces;
 using UnityEngine;
 
 public class SimpleActivator : MonoBehaviour
 {
-    [Header("Configuration")]
-    [Range(1f, 500f)]
+    [Header("Configuration")] [Range(1f, 500f)]
     public float raycastDistance = 500f;
+
     public LayerMask interact;
 
     public float forceScale = 5f;
 
-    [Header("Private Variables")]
-    [Tooltip("Door variables")]
-    private RaycastHit _selectedDoor;
-
+    public IMovable DetectedMovable;
 
     public bool Activate(Camera camera)
     {
-        if (_selectedDoor.rigidbody == null)
+        if (DetectedMovable == null)
         {
-            _selectedDoor = SimpleRaycast(camera);
+            var returnedObject = SimpleRaycast(camera);
+            if (returnedObject != null)
+                DetectedMovable = returnedObject;
             return false;
         }
-
-        ApplyForceOnPoint(_selectedDoor.rigidbody, _selectedDoor.point,
-            CalculateForce(_selectedDoor.normal * -1, forceScale));
+        else
+        {
+            DetectedMovable.Use(CalculateForce(forceScale));
+        }
         return true;
     }
 
     public bool Deactivate()
     {
-        if (_selectedDoor.rigidbody == null) return false;
+        if (DetectedMovable == null) return false;
 
-        _selectedDoor = new RaycastHit()
-        {
-            rigidbody =
-            {
-            }
-        };
+        DetectedMovable = null;
 
-        Debug.Log("Deactivated door.");
+        Debug.Log("Deactivated Movable.");
         return true;
     }
 
-
-    private Vector3 CalculateForce(Vector3 direction, float force = 1f)
+    private float CalculateForce(float force = 1f)
     {
-        Vector3 calculatedForce = Vector3.zero;
+        var calculatedForce = 0f;
         float mouseY = Input.GetAxis("Mouse Y");
-        //Debug.Log("The mouse movement is " + mouseY);
-        calculatedForce = direction * (force * mouseY);
+        calculatedForce = (force * mouseY);
 
         return calculatedForce;
     }
 
-    public bool MoveTheRigidbodies(Camera camera)
-    {
-        bool worked = false;
-        var rayResults = SimpleRaycast(camera);
-        worked = ApplyForceOnPoint(rayResults.rigidbody, rayResults.point,
-            CalculateForce(rayResults.normal * -1, forceScale));
-        return worked;
-    }
+    /* public bool MoveTheRigidbodies(Camera camera)
+     {
+         bool worked = false;
+         var rayResults = SimpleRaycast(camera);
+         worked = ApplyForceOnPoint(rayResults.rigidbody, rayResults.point,
+             CalculateForce(rayResults.normal * -1, forceScale));
+         return worked;
+     }*/
 
-    RaycastHit SimpleRaycast(Camera camera)
+    IMovable SimpleRaycast(Camera camera)
     {
         RaycastHit hit;
         Ray cameraRay = camera.ViewportPointToRay(new Vector3(.5f, .5f, .5f));
         if (Physics.Raycast(cameraRay, out hit, raycastDistance, interact))
         {
             Debug.Log("Hit this: " + hit.transform.gameObject.name);
+            try
+            {
+                IMovable objectCatched = hit.collider.gameObject.GetComponent<IMovable>();
+                if (objectCatched != null) return objectCatched;
+            }
+            catch (NullReferenceException)
+            {
+            }
         }
         //Debug.DrawRay(cameraRay.origin, cameraRay.direction * hit.distance, Color.red, 2f);
 
-        return hit;
+        return null;
     }
 
-    bool ApplyForceOnPoint(Rigidbody rigidbody, Vector3 hitPoint, Vector3 force)
+    /*bool ApplyForceOnPoint(Rigidbody rigidbody, Vector3 hitPoint, Vector3 force)
     {
         if (rigidbody == null)
         {
@@ -88,5 +90,5 @@ public class SimpleActivator : MonoBehaviour
 
         rigidbody.AddForceAtPosition(force, hitPoint, ForceMode.Force);
         return true;
-    }
+    }*/
 }

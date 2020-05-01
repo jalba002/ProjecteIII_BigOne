@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Interfaces;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering.HighDefinition;
 
 namespace World.Objects
 {
@@ -15,13 +16,14 @@ namespace World.Objects
             public float minimumAngle;
             [Range(1f, 10f)] public float friction;
         }
-        
+
         [System.Serializable]
         public struct DrawerHingeConfiguration
         {
             public float maximumDistance;
             [Range(1f, 9999f)] public float friction;
         }
+
         // Object type.
         // Changes the hinge used.
         public enum ObjectType
@@ -43,13 +45,15 @@ namespace World.Objects
             Closed,
             Opened
         }
+
         [Header("Main Configuration", order = 0)]
         public ObjectType objectType;
+
         public LockedMode lockedMode;
         public OpenState openState { get; set; }
 
-        [Header("Hinge Settings", order = 1)] 
-        public GameObject HandlePosition;
+        [Header("Hinge Settings", order = 1)] public GameObject HandlePosition;
+
         public HingeConfiguration DoorJointConfiguration = new HingeConfiguration()
         {
             friction = 1f,
@@ -62,9 +66,8 @@ namespace World.Objects
             friction = 9999f,
             maximumDistance = 0.25f
         };
-        
-        [Header("Other Settings")]
-        private HingeJoint HingeJoint;
+
+        [Header("Other Settings")] private HingeJoint HingeJoint;
         private ConfigurableJoint ConfgJoint;
 
         public List<Collider> ignoredColliders;
@@ -94,13 +97,32 @@ namespace World.Objects
             {
                 case ObjectType.Door:
                     HingeJoint = gameObject.GetComponent<HingeJoint>();
+                    if (HingeJoint == null)
+                    {
+                        HingeJoint = gameObject.AddComponent<HingeJoint>();
+                    }
+
                     break;
                 case ObjectType.Drawer:
                     ConfgJoint = gameObject.GetComponent<ConfigurableJoint>();
+                    if (ConfgJoint == null)
+                    {
+                        ConfgJoint = gameObject.AddComponent<ConfigurableJoint>();
+                    }
+
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(objectType), objectType, null);
             }
+        }
+
+        private ConfigurableJoint GetDrawerJoint()
+        {
+            ConfigurableJoint joint = new ConfigurableJoint()
+            {
+                
+            };
+            return joint;
         }
 
         private void SetJointsLimit(ObjectType objectType)
@@ -120,7 +142,7 @@ namespace World.Objects
                     };
                     break;
                 case ObjectType.Drawer:
-                    if(ConfgJoint == null) return;
+                    if (ConfgJoint == null) return;
                     ConfgJoint.linearLimit = new SoftJointLimit()
                     {
                         limit = DrawerJointConfiguration.maximumDistance

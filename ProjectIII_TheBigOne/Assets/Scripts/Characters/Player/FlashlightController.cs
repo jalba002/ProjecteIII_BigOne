@@ -66,11 +66,9 @@ public class FlashlightController : MonoBehaviour
         if (_isfeedbackVisualNotNull)
         {
             feedbackVisual.SetActive(enable);
-        }
-        if(enable)
-            attachedLight.intensity = _initLightIntensity;
-        else
-            attachedLight.intensity = 0;
+        }        
+
+        attachedLight.intensity = enable ? _initLightIntensity : 0;
         //TODO: Play sound of a torch interruptor
     }
 

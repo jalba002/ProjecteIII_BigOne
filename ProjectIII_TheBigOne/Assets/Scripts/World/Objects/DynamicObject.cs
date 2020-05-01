@@ -72,14 +72,15 @@ namespace World.Objects
 
         public List<Collider> ignoredColliders;
         private Collider selfCollider;
-
+        
         [Header("Events")] public UnityEvent OnUnlock;
 
         public Rigidbody Rigidbody { get; protected set; }
 
         public void Awake()
         {
-            Rigidbody = GetComponent<Rigidbody>();
+            GetRigidbody();
+
             selfCollider = gameObject.GetComponent<Collider>();
 
             GetJoints(objectType);
@@ -100,6 +101,7 @@ namespace World.Objects
                     if (HingeJoint == null)
                     {
                         HingeJoint = gameObject.AddComponent<HingeJoint>();
+                        ConfigureNewJoint(HingeJoint);
                     }
 
                     break;
@@ -117,6 +119,19 @@ namespace World.Objects
             }
         }
 
+        private void GetRigidbody()
+        {
+            Rigidbody = GetComponent<Rigidbody>();
+            if (Rigidbody == null)
+            {
+                Rigidbody = gameObject.AddComponent<Rigidbody>();
+            }
+
+            Rigidbody.useGravity = false;
+            Rigidbody.angularDrag = 0f;
+            return;
+        }
+
         private void ConfigurateNewJoint(ConfigurableJoint joint)
         {
             joint.xMotion = ConfigurableJointMotion.Locked;
@@ -129,8 +144,13 @@ namespace World.Objects
 
         private void ConfigureNewJoint(HingeJoint joint)
         {
-            
-        } 
+            joint.anchor = new Vector3(.5f, .5f, .5f);
+            joint.axis = new Vector3(0f, 1f, 0f);
+            joint.useLimits = true;
+            joint.useSpring = true;
+            joint.autoConfigureConnectedAnchor = true;
+            //joint.anchor = new Vector3(0f, -0.5f, 0f);
+        }
 
         private void SetJointsLimit(ObjectType objectType)
         {

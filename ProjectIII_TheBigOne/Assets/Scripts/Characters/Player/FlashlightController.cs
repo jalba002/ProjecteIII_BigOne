@@ -18,6 +18,9 @@ public class FlashlightController : MonoBehaviour
     private bool _isfeedbackVisualNotNull;
     private bool _isattachedLightNull;
 
+
+    private float _initLightIntensity;
+
     public void Start()
     {
         _isattachedLightNull = attachedLight == null;
@@ -25,6 +28,8 @@ public class FlashlightController : MonoBehaviour
             Debug.LogWarning("No light attached to the flashlight component in " + this.gameObject.name);
         _isfeedbackVisualNotNull = feedbackVisual != null;
         currentCharge = maxCharge;
+        _initLightIntensity = attachedLight.intensity;
+        IsFlashlightEnabled = true;
     }
 
     private void Update()
@@ -59,7 +64,12 @@ public class FlashlightController : MonoBehaviour
     {
         IsFlashlightEnabled = enable;
         if (_isfeedbackVisualNotNull)
+        {
             feedbackVisual.SetActive(enable);
+        }        
+
+        attachedLight.intensity = enable ? _initLightIntensity : 0;
+        //TODO: Play sound of a torch interruptor
     }
 
     private void DisableFlashlight()

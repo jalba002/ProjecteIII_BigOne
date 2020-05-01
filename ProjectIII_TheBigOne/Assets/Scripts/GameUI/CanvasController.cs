@@ -12,6 +12,7 @@ public class CanvasController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.J))
         {
             AddPickupMessage("key");
+            Debug.Log("Hellow");
         }
     }
 

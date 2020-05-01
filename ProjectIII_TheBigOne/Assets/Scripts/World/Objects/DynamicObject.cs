@@ -108,6 +108,7 @@ namespace World.Objects
                     if (ConfgJoint == null)
                     {
                         ConfgJoint = gameObject.AddComponent<ConfigurableJoint>();
+                        ConfigurateNewJoint(ConfgJoint);
                     }
 
                     break;
@@ -116,14 +117,20 @@ namespace World.Objects
             }
         }
 
-        private ConfigurableJoint GetDrawerJoint()
+        private void ConfigurateNewJoint(ConfigurableJoint joint)
         {
-            ConfigurableJoint joint = new ConfigurableJoint()
-            {
-                
-            };
-            return joint;
+            joint.xMotion = ConfigurableJointMotion.Locked;
+            joint.yMotion = ConfigurableJointMotion.Locked;
+            joint.zMotion = ConfigurableJointMotion.Limited;
+            joint.angularXMotion = ConfigurableJointMotion.Locked;
+            joint.angularYMotion = ConfigurableJointMotion.Locked;
+            joint.angularZMotion = ConfigurableJointMotion.Locked;
         }
+
+        private void ConfigureNewJoint(HingeJoint joint)
+        {
+            
+        } 
 
         private void SetJointsLimit(ObjectType objectType)
         {

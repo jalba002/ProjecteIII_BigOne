@@ -14,7 +14,7 @@ namespace Characters.Generic
 
         public CharacterController characterController;
         [Header("Debug Options")] public bool enableDebug = false;
-        
+
         private void Awake()
         {
             characterController = GetComponent<CharacterController>();
@@ -108,6 +108,11 @@ namespace Characters.Generic
         public State GetCurrentState
         {
             get { return currentState; }
+        }
+
+        public State GetState<StateType>() where StateType : State
+        {
+            return statesList.Find(x => x.GetType() is StateType);
         }
     }
 }

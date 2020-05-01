@@ -21,7 +21,9 @@ MonoBehaviour:
     isUnique: 0
     isStackable: 0
     destroyOnUse: 0
+    canUseAlways: 0
     combinedItems: []
+    myEffect: 2
   - itemName: Battery
     itemDescription: It seems you can use it to charge your lantern
     MaxStackQuantity: 5
@@ -30,7 +32,9 @@ MonoBehaviour:
     isUnique: 0
     isStackable: 1
     destroyOnUse: 1
+    canUseAlways: 1
     combinedItems: []
+    myEffect: 0
   - itemName: Stick
     itemDescription: It seems you can combine it with steel to make something.
     MaxStackQuantity: 1
@@ -38,8 +42,10 @@ MonoBehaviour:
     itemObject: {fileID: 0}
     isUnique: 0
     isStackable: 0
-    destroyOnUse: 1
+    destroyOnUse: 0
+    canUseAlways: 1
     combinedItems: []
+    myEffect: 2
   - itemName: Steel
     itemDescription: It seems you can combine it with some stick to make something.
     MaxStackQuantity: 5
@@ -47,8 +53,10 @@ MonoBehaviour:
     itemObject: {fileID: 0}
     isUnique: 0
     isStackable: 1
-    destroyOnUse: 1
+    destroyOnUse: 0
+    canUseAlways: 1
     combinedItems: []
+    myEffect: 2
   - itemName: Axe
     itemDescription: It's useless, this is to make a test
     MaxStackQuantity: 1
@@ -57,6 +65,8 @@ MonoBehaviour:
     isUnique: 0
     isStackable: 0
     destroyOnUse: 1
+    canUseAlways: 1
     combinedItems:
     - Stick
     - Steel
+    myEffect: 1

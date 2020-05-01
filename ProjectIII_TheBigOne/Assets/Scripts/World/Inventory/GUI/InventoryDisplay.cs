@@ -64,8 +64,12 @@ public class InventoryDisplay : MonoBehaviour
 
     public void CopySlot(InventorySlot origin, InventorySlot copy)
     {
+        InventoryItem i = copy.item;
+        
         copy.Setup(origin.item);
-        origin.Setup(null);
+        copy.SelectThisSlot();
+        origin.Setup(i);
+        
     }
 
     public void AddNewItem(InventoryItem item)
@@ -110,6 +114,19 @@ public class InventoryDisplay : MonoBehaviour
         }
     }
 
+    public void UseButton()
+    {
+        if (selectedItem != null && inventoryRef != null)
+        {
+            selectedItem.UseItem(inventoryRef.effectsManager);
+            if (selectedItem.destroyOnUse)
+            {
+                RemoveItem(selectedItem);
+                inventoryRef.RemoveItem(selectedItem.itemName);
+            }           
+        }
+    }
+
     public void SwitchWindow(string window)
     {
         switch (window)
@@ -126,6 +143,11 @@ public class InventoryDisplay : MonoBehaviour
                 break;
         }
     }
+
+
+    
+
+    
 
     
 }

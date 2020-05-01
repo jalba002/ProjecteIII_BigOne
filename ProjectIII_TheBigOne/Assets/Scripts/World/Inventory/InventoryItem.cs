@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]                         
+[System.Serializable]
+[RequireComponent(typeof(ItemEffectsManager))]
 public class InventoryItem
 {
     public string itemName = "New Item";      
@@ -14,10 +15,20 @@ public class InventoryItem
          
     public bool isStackable = false;          
     public bool destroyOnUse = false;
+    public bool canUseAlways = false;
 
     public List<string> combinedItems;
 
     private int actualQuantity = 0;
+
+
+    public enum Effect
+    {
+        BATTERY_EFFECT, AXE_EFFECT, OTHER_EFFECT
+    }
+    public Effect myEffect;
+
+    private ItemEffectsManager effectManager = new ItemEffectsManager();
     
     public InventoryItem(InventoryItem item)
     {
@@ -46,5 +57,21 @@ public class InventoryItem
     public void SetActualQuantity(int sum)
     {
         actualQuantity = sum;
+    }
+
+    //USE
+    public void UseItem(ItemEffectsManager manager)
+    {
+        switch (myEffect)
+        {
+            case Effect.BATTERY_EFFECT: manager.ReloadLantern();
+                break;
+            case Effect.AXE_EFFECT: manager.PickWithAxe();
+                break;
+            case Effect.OTHER_EFFECT: //...
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -20,8 +20,7 @@ public class SimpleActivator : MonoBehaviour
         {
             _selectedDoor = SimpleRaycast(camera);
             return false;
-        }
-
+        }    
         ApplyForceOnPoint(_selectedDoor.rigidbody, _selectedDoor.point,
             CalculateForce(_selectedDoor.normal * -1, forceScale));
         return true;

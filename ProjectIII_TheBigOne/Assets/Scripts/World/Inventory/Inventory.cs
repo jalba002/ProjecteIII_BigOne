@@ -7,17 +7,21 @@ public class Inventory : MonoBehaviour
     public List<InventoryItem> characterItems = new List<InventoryItem>();  //create a new list called items                                                                             
     public InventoryItemList database;                                      //pick the list we want to get info from
     public InventoryDisplay inventoryDisplay;
+    [HideInInspector]public ItemEffectsManager effectsManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        effectsManager = GetComponent<ItemEffectsManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (effectsManager == null)
+        {
+            effectsManager = GetComponent<ItemEffectsManager>();
+        }
     }
 
     public void GiveItem(string itemName)
@@ -88,8 +92,5 @@ public class Inventory : MonoBehaviour
             }
             
         }
-    }
-
-    
-
+    }   
 }

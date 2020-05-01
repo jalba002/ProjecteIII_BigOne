@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 35.9, y: -32.8}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1106357689797971960
@@ -71,8 +71,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 12.7, y: -14.1}
-  m_SizeDelta: {x: 30, y: 30}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3143680878417789529
 CanvasRenderer:
@@ -102,10 +102,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 3
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -154,7 +154,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4389611348445205301
 CanvasRenderer:
@@ -217,6 +217,9 @@ MonoBehaviour:
     isUnique: 0
     isStackable: 0
     destroyOnUse: 0
+    canUseAlways: 0
+    combinedItems: []
+    myEffect: 0
   itemNameText: {fileID: 7529277940258175831}
   quantity: {fileID: 923029597039330550}
   quantityText: {fileID: 5521233786125953372}
@@ -230,7 +233,11 @@ MonoBehaviour:
     isUnique: 0
     isStackable: 0
     destroyOnUse: 0
+    canUseAlways: 0
+    combinedItems: []
+    myEffect: 0
   changeSlot: 0
+  isThisSlotToCombine: 0
 --- !u!225 &5687060361983157084
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -277,7 +284,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -18.2}
+  m_AnchoredPosition: {x: 0, y: -35.1}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8589093917087631416
@@ -355,7 +362,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &368563950288416353
 CanvasRenderer:
@@ -444,8 +451,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b002eed1ff7a6ec4eb60ef7b36240a94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actualPos: {x: 0, y: 0, z: 0}
-  hasChangedPos: 0
 --- !u!61 &7670033970935374429
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -634,8 +639,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 12.7, y: -14}
-  m_SizeDelta: {x: 25, y: 25}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3859641890734807367
 CanvasRenderer:

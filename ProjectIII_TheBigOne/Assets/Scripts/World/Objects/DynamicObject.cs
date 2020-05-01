@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Interfaces;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace World.Objects
 {
@@ -42,15 +43,12 @@ namespace World.Objects
             Closed,
             Opened
         }
-        [Header("Main Configuration")]
+        [Header("Main Configuration", order = 0)]
         public ObjectType objectType;
         public LockedMode lockedMode;
         public OpenState openState { get; set; }
-        [Space(5)]
-        
 
-        [Header("Hinge Settings")] 
-        [Space(1)]
+        [Header("Hinge Settings", order = 1)] 
         public GameObject HandlePosition;
         public HingeConfiguration DoorJointConfiguration = new HingeConfiguration()
         {
@@ -71,6 +69,8 @@ namespace World.Objects
 
         public List<Collider> ignoredColliders;
         private Collider selfCollider;
+
+        [Header("Events")] public UnityEvent OnUnlock;
 
         public Rigidbody Rigidbody { get; protected set; }
 

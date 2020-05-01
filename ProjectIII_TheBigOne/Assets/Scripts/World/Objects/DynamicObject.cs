@@ -170,6 +170,7 @@ namespace World.Objects
             }
         }
 
+        //Update hinge variables when inspector is modified.
         private void OnValidate()
         {
             SetJointsLimit(objectType);

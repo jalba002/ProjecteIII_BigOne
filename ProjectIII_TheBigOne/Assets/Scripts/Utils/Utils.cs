@@ -12,10 +12,11 @@ public static class Utils
     /// <param name="raycastHit"></param>
     /// <param name="debug"></param>
     /// <returns></returns>
-    public static bool SimpleRaycast(Camera camera, float raycastDistance, out RaycastHit raycastHit, bool debug = false)
+    public static bool SimpleRaycast(Camera camera, float raycastDistance, out RaycastHit raycastHit,
+        bool debug = false)
     {
         bool success = false;
-        
+
         Ray cameraRay = camera.ViewportPointToRay(new Vector3(.5f, .5f, .5f));
         if (Physics.Raycast(cameraRay, out raycastHit, raycastDistance))
         {
@@ -25,7 +26,25 @@ public static class Utils
 
         if (debug)
             Debug.DrawRay(cameraRay.origin, cameraRay.direction * raycastHit.distance, Color.blue, 2f);
-        
+
+        return success;
+    }
+
+    public static bool LayeredRaycast(Camera camera, float raycastDistance, out RaycastHit raycastHit,
+        LayerMask layerMask, bool debug = false)
+    {
+        bool success = false;
+
+        Ray cameraRay = camera.ViewportPointToRay(new Vector3(.5f, .5f, .5f));
+        if (Physics.Raycast(cameraRay, out raycastHit, raycastDistance, layerMask))
+        {
+            Debug.Log("Hit this: " + raycastHit.transform.gameObject.name);
+            success = true;
+        }
+
+        if (debug)
+            Debug.DrawRay(cameraRay.origin, cameraRay.direction * raycastHit.distance, Color.blue, 2f);
+
         return success;
     }
 }

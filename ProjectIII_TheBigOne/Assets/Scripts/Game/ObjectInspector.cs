@@ -10,6 +10,7 @@ public class ObjectInspector : MonoBehaviour
     [Header("Render output")] public InspectedElement objectRenderer;
 
     [Header("Settings")] public float range = 20f;
+    public LayerMask LayerMask;
 
     [Header("Render Settings")] public Vector2 distances = new Vector2(1.5f, 2f);
     // And more parameters to come.
@@ -59,9 +60,9 @@ public class ObjectInspector : MonoBehaviour
             currentInspectedObject = null;
             return true;
         }
-
+        
         RaycastHit raycastHit;
-        if (Utils.SimpleRaycast(camera, range, out raycastHit))
+        if (Utils.LayeredRaycast(camera, range, out raycastHit, LayerMask))
         {
             try
             {

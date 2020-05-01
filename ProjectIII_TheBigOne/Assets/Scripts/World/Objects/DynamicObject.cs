@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Interfaces;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.PlayerLoop;
 using UnityEngine.Rendering.HighDefinition;
 
 namespace World.Objects
@@ -14,14 +15,15 @@ namespace World.Objects
         {
             public float maximumAngle;
             public float minimumAngle;
-            [Range(1f, 10f)] public float friction;
+            [Range(0f, 100f)] public float friction;
         }
 
         [System.Serializable]
         public struct DrawerHingeConfiguration
         {
             public float maximumDistance;
-            [Range(1f, 9999f)] public float friction;
+            [Range(0f, 100f)] public float friction;
+            public float maximumForce;
         }
 
         // Object type.
@@ -63,8 +65,9 @@ namespace World.Objects
 
         public DrawerHingeConfiguration DrawerJointConfiguration = new DrawerHingeConfiguration()
         {
-            friction = 9999f,
-            maximumDistance = 0.25f
+            friction = 10f,
+            maximumDistance = 0.25f,
+            maximumForce = 5f
         };
 
         [Header("Other Settings")] private HingeJoint HingeJoint;
@@ -89,6 +92,30 @@ namespace World.Objects
             if (HandlePosition == null)
             {
                 throw new NullReferenceException($"Missing Handle in {this.gameObject.name}");
+            }
+        }
+        
+        public void Start()
+        {
+            IgnoreColliders();
+            SetJointsLimit(objectType);
+            SetInitialPositions();
+        }
+
+        private void SetInitialPositions()
+        {
+            switch(objectType)
+            {
+                case ObjectType.Door:
+                    
+                    break;
+                case ObjectType.Drawer:
+                    Vector3 newStartingPosition = this.gameObject.transform.position;
+                    newStartingPosition.z -= DrawerJointConfiguration.maximumDistance;
+                    this.gameObject.transform.localPosition = newStartingPosition;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -129,6 +156,9 @@ namespace World.Objects
 
             Rigidbody.useGravity = false;
             Rigidbody.angularDrag = 0f;
+            Rigidbody.drag = objectType == ObjectType.Door
+                ? DoorJointConfiguration.friction
+                : DrawerJointConfiguration.friction;
             return;
         }
 
@@ -140,6 +170,7 @@ namespace World.Objects
             joint.angularXMotion = ConfigurableJointMotion.Locked;
             joint.angularYMotion = ConfigurableJointMotion.Locked;
             joint.angularZMotion = ConfigurableJointMotion.Locked;
+            
         }
 
         private void ConfigureNewJoint(HingeJoint joint)
@@ -163,20 +194,26 @@ namespace World.Objects
                         max = DoorJointConfiguration.maximumAngle,
                         min = DoorJointConfiguration.minimumAngle
                     };
-                    HingeJoint.spring = new JointSpring()
+                    /*HingeJoint.spring = new JointSpring()
                     {
                         damper = DoorJointConfiguration.friction
-                    };
+                    };*/
                     break;
                 case ObjectType.Drawer:
                     if (ConfgJoint == null) return;
                     ConfgJoint.linearLimit = new SoftJointLimit()
                     {
-                        limit = DrawerJointConfiguration.maximumDistance
+                        limit = DrawerJointConfiguration.maximumDistance,
+                        contactDistance = 1000f
                     };
-                    ConfgJoint.linearLimitSpring = new SoftJointLimitSpring()
+                    /*ConfgJoint.linearLimitSpring = new SoftJointLimitSpring()
                     {
                         damper = DrawerJointConfiguration.friction
+                    };*/
+                    ConfgJoint.zDrive = new JointDrive()
+                    {
+                        maximumForce = DrawerJointConfiguration.maximumForce,
+                        //positionDamper = DrawerJointConfiguration.friction
                     };
                     break;
                 default:
@@ -184,11 +221,7 @@ namespace World.Objects
             }
         }
 
-        public void Start()
-        {
-            IgnoreColliders();
-            SetJointsLimit(objectType);
-        }
+      
 
         private bool GenerateIgnoredColliders(Collider selfCollider)
         {

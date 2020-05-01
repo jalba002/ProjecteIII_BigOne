@@ -166,6 +166,7 @@ namespace World.Objects
         {
             foreach (Collider currentCollider in ignoredColliders)
             {
+                if (currentCollider == null) break;
                 Physics.IgnoreCollision(currentCollider, selfCollider, true);
             }
         }

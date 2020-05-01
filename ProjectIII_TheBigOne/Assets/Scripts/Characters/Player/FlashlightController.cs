@@ -2,6 +2,9 @@
 
 public class FlashlightController : MonoBehaviour
 {
+    [Header("Cheats")]
+    public bool infiniteCharge = false;
+    [Header("Configuration")]
     public float maxCharge = 120f;
     private float _currentCharge;
 
@@ -13,13 +16,17 @@ public class FlashlightController : MonoBehaviour
 
     public bool IsFlashlightEnabled { get; private set; }
 
+    [Header("Visual Feedback")]
     public Light attachedLight;
     public GameObject feedbackVisual;
     private bool _isfeedbackVisualNotNull;
     private bool _isattachedLightNull;
 
-
+    [Range(0f, 1f)] public float lightFlickerThreshold = 0.2f;
+    [Range(0f, 1f)] public float minimumIntensity = 0.33f;
     private float _initLightIntensity;
+    private float _currentLightIntensity;
+    private float _initLightRange;
 
     public void Start()
     {
@@ -28,13 +35,16 @@ public class FlashlightController : MonoBehaviour
             Debug.LogWarning("No light attached to the flashlight component in " + this.gameObject.name);
         _isfeedbackVisualNotNull = feedbackVisual != null;
         currentCharge = maxCharge;
+        _initLightRange = attachedLight.range;
         _initLightIntensity = attachedLight.intensity;
-        IsFlashlightEnabled = true;
+        _currentLightIntensity = _initLightIntensity;
+        IsFlashlightEnabled = false;
     }
 
     private void Update()
     {
-        ReduceCharge(1f, Time.deltaTime);
+        ReduceCharge(infiniteCharge ? 0f : 1f, Time.deltaTime);
+        ReduceIntensity(maxCharge * lightFlickerThreshold);
     }
 
     private void ReduceCharge(float amount, float deltaTime)
@@ -66,9 +76,10 @@ public class FlashlightController : MonoBehaviour
         if (_isfeedbackVisualNotNull)
         {
             feedbackVisual.SetActive(enable);
-        }        
+        }
 
-        attachedLight.intensity = enable ? _initLightIntensity : 0;
+        attachedLight.enabled = enable;
+        attachedLight.intensity = enable ? _currentLightIntensity : 0;
         //TODO: Play sound of a torch interruptor
     }
 
@@ -85,6 +96,20 @@ public class FlashlightController : MonoBehaviour
             return true;
         }
 
+        attachedLight.range = _initLightRange;
+        _currentLightIntensity = _initLightIntensity;
         return false;
+    }
+
+    private void ReduceIntensity(float threshold)
+    {
+        if (currentCharge <= threshold)
+        {
+            var amount = currentCharge / threshold;
+            _currentLightIntensity = Mathf.Lerp(minimumIntensity * _initLightIntensity, _initLightIntensity, amount);
+            attachedLight.range = Mathf.Lerp(0f, _initLightRange, amount);
+        }
+
+        attachedLight.intensity = _currentLightIntensity;
     }
 }

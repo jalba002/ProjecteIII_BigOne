@@ -110,7 +110,7 @@ namespace World.Objects
                     
                     break;
                 case ObjectType.Drawer:
-                    Vector3 newStartingPosition = this.gameObject.transform.position;
+                    Vector3 newStartingPosition = this.gameObject.transform.localPosition;
                     newStartingPosition.z -= DrawerJointConfiguration.maximumDistance;
                     this.gameObject.transform.localPosition = newStartingPosition;
                     break;

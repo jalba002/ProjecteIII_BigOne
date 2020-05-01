@@ -2,10 +2,8 @@
 
 public class FlashlightController : MonoBehaviour
 {
-    [Header("Cheats")]
-    public bool infiniteCharge = false;
-    [Header("Configuration")]
-    public float maxCharge = 120f;
+    [Header("Cheats")] public bool infiniteCharge = false;
+    [Header("Configuration")] public float maxCharge = 120f;
     private float _currentCharge;
 
     public float currentCharge
@@ -16,8 +14,7 @@ public class FlashlightController : MonoBehaviour
 
     public bool IsFlashlightEnabled { get; private set; }
 
-    [Header("Visual Feedback")]
-    public Light attachedLight;
+    [Header("Visual Feedback")] public Light attachedLight;
     public GameObject feedbackVisual;
     private bool _isfeedbackVisualNotNull;
     private bool _isattachedLightNull;
@@ -27,6 +24,7 @@ public class FlashlightController : MonoBehaviour
     private float _initLightIntensity;
     private float _currentLightIntensity;
     private float _initLightRange;
+    private float _currentLightRange;
 
     public void Start()
     {
@@ -35,10 +33,13 @@ public class FlashlightController : MonoBehaviour
             Debug.LogWarning("No light attached to the flashlight component in " + this.gameObject.name);
         _isfeedbackVisualNotNull = feedbackVisual != null;
         currentCharge = maxCharge;
+
         _initLightRange = attachedLight.range;
+        _currentLightRange = _initLightRange;
         _initLightIntensity = attachedLight.intensity;
         _currentLightIntensity = _initLightIntensity;
-        IsFlashlightEnabled = false;
+
+        SetFlashlight(false);
     }
 
     private void Update()
@@ -93,23 +94,25 @@ public class FlashlightController : MonoBehaviour
         if (currentCharge < maxCharge)
         {
             currentCharge += amount;
+            _currentLightRange = _initLightRange;
+            _currentLightIntensity = _initLightIntensity;
             return true;
         }
 
-        attachedLight.range = _initLightRange;
-        _currentLightIntensity = _initLightIntensity;
         return false;
     }
 
     private void ReduceIntensity(float threshold)
     {
+        if (!IsFlashlightEnabled) return;
         if (currentCharge <= threshold)
         {
-            var amount = currentCharge / threshold;
+            var amount = (currentCharge / threshold);
             _currentLightIntensity = Mathf.Lerp(minimumIntensity * _initLightIntensity, _initLightIntensity, amount);
-            attachedLight.range = Mathf.Lerp(0f, _initLightRange, amount);
+            _currentLightRange = Mathf.Lerp(minimumIntensity * _initLightRange, _initLightRange, amount);
         }
 
+        attachedLight.range = _currentLightRange;
         attachedLight.intensity = _currentLightIntensity;
     }
 }

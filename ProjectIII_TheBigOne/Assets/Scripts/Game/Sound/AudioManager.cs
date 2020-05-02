@@ -91,17 +91,4 @@ public class AudioManager : MonoBehaviour
 
         StartCoroutine(Utils.DestroyAfterTime(sound, s.clip.length));
     }
-
-
-
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            PlaySoundAtLocation("Sound/scare2", transform.position);
-        }
-    }
-
-
 }

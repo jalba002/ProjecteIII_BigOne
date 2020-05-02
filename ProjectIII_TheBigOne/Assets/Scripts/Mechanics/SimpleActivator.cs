@@ -21,7 +21,11 @@ public class SimpleActivator : MonoBehaviour
         {
             var returnedObject = SimpleRaycast(camera);
             if (returnedObject != null)
+            {
                 DetectedMovable = returnedObject;
+                DetectedMovable.OnStartInteract();
+            }
+                
             return false;
         }
         else
@@ -68,6 +72,7 @@ public class SimpleActivator : MonoBehaviour
             Debug.Log("Hit this: " + hit.transform.gameObject.name);
             try
             {
+                
                 IMovable objectCatched = hit.collider.gameObject.GetComponent<IMovable>();
                 if (objectCatched != null) return objectCatched;
             }

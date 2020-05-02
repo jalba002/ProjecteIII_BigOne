@@ -2,6 +2,7 @@
 
 public class Destructible_Walls : MonoBehaviour
 {
+    // TODO Load from resources at runtime or prefab.
     public GameObject destroyedVersion;
     public bool cheatMode = false;
 

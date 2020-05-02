@@ -27,6 +27,8 @@ public class InventoryDisplay : MonoBehaviour
     public Text selectedItemName;
     public Text selectedItemInfo;
 
+    public GameObject contextMenu;
+
     void Awake()
     {
         for (int i = 0; i < numberOfSlots; i++)
@@ -52,7 +54,19 @@ public class InventoryDisplay : MonoBehaviour
             inventoryRef = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         }
 
-        
+        if (selectedSlot != null)
+        {
+            contextMenu.SetActive(true);
+            contextMenu.transform.SetParent(selectedSlot.transform);
+            contextMenu.GetComponent<RectTransform>().anchoredPosition = new Vector3(0 - selectedSlot.gameObject.GetComponent<RectTransform>().rect.size.x,0,0);
+            
+        }
+        else
+        {
+            contextMenu.SetActive(false);
+            
+        }
+
     }
 
     

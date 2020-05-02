@@ -90,33 +90,53 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
                 quantityText.text = item.GetActualQuantity().ToString();
             }
         }
-
-        if (changeSlot)
+        else
         {
-            
+            background.color = Color.grey;
         }
+
     }
 
     
     public void SelectThisSlot()
     {
-        if (item != null)
+        if (inventoryDisplayRef.selectedSlot == this)
         {
-            if (inventoryDisplayRef.selectedSlot != null)
-            {
-                inventoryDisplayRef.selectedSlot.background.color = Color.white;
-            }
-            background.color = Color.red;
-            inventoryDisplayRef.selectedSlot = this;
-            inventoryDisplayRef.selectedItem = item;
-            inventoryDisplayRef.selectedItemName.text = item.itemName;
-            inventoryDisplayRef.selectedItemName.gameObject.SetActive(true);
-            inventoryDisplayRef.selectedItemInfo.text = item.itemDescription;
-            inventoryDisplayRef.selectedItemInfo.gameObject.SetActive(true);
+            UnselectThisSlot();
         }
+        else
+        {
+            if (item != null)
+            {
+                if (inventoryDisplayRef.selectedSlot != null)
+                {
+                    inventoryDisplayRef.selectedSlot.background.color = Color.grey;
+                }
+                background.color = Color.white;
+                inventoryDisplayRef.selectedSlot = this;
+                inventoryDisplayRef.selectedItem = item;
+                inventoryDisplayRef.selectedItemName.text = item.itemName;
+                inventoryDisplayRef.selectedItemName.gameObject.SetActive(true);
+                inventoryDisplayRef.selectedItemInfo.text = item.itemDescription;
+                inventoryDisplayRef.selectedItemInfo.gameObject.SetActive(true);
+            }
+        }
+        
 
-    } 
-    
+    }
+    public void UnselectThisSlot()
+    {
+            inventoryDisplayRef.selectedSlot.background.color = Color.grey;
+            
+            background.color = Color.grey;
+            inventoryDisplayRef.selectedSlot = null;
+            inventoryDisplayRef.selectedItem = null;
+            inventoryDisplayRef.selectedItemName.text = " ";
+            inventoryDisplayRef.selectedItemName.gameObject.SetActive(false);
+            inventoryDisplayRef.selectedItemInfo.text = " ";
+            inventoryDisplayRef.selectedItemInfo.gameObject.SetActive(false);
+    }
+
     public void ResetSlot()
     {
         Setup(null);
@@ -127,7 +147,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        SelectThisSlot();
+        
         canvasGroup.blocksRaycasts = false;
 
         this.gameObject.transform.parent = null;

@@ -6,8 +6,6 @@ public class AudioManager : MonoBehaviour
 {
     private static AudioManager _instance = null;
 
-    public GameObject sound;
-
     public static AudioManager Instance
     {
         get
@@ -27,16 +25,16 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public void PlaySoundAtLocation(string route, Vector3 position, float volume = 1, float minRange = 1, float maxRange = 150)
+    public void PlaySoundAtLocation(string route, Vector3 position, float volume = 1, float minRange = 1, float maxRange = 10)
     {
-        sound = new GameObject();
+        GameObject sound = new GameObject();
         AudioSource s = sound.AddComponent<AudioSource>();
 
         //Sound properties
         sound.transform.position = position;
         s.spatialBlend = 1;
         s.clip = Resources.Load<AudioClip>(route);
-
+        
         if(s.clip == null)
         {
             Debug.LogWarning("Invalid path for audio clip");
@@ -45,7 +43,10 @@ public class AudioManager : MonoBehaviour
         s.volume = volume;
         s.minDistance = minRange;
         s.maxDistance = maxRange;
+        s.rolloffMode = AudioRolloffMode.Linear;
 
+
+        sound.transform.parent = GameObject.Find("Sound").transform;
         sound.name = s.clip.name;
         //Play
         s.Play();
@@ -55,7 +56,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayLoopingSound(string route, float volume)
     {
-        sound = new GameObject();
+        GameObject sound = new GameObject();
         AudioSource s = sound.AddComponent<AudioSource>();
 
         //Sound properties
@@ -68,6 +69,7 @@ public class AudioManager : MonoBehaviour
 
         s.volume = volume;
 
+        sound.transform.parent = GameObject.Find("Sound").transform;
         sound.name = s.clip.name;
         //Play
         s.Play();
@@ -77,13 +79,14 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySound2D(string route)
     {
-        sound = new GameObject();
+        GameObject sound = new GameObject();
         AudioSource s = sound.AddComponent<AudioSource>();
         s.spatialBlend = 0;
         s.clip = Resources.Load<AudioClip>(route);
         Debug.Log(s.clip);
         s.Play();
 
+        sound.transform.parent = GameObject.Find("Sound").transform;
         sound.name = s.clip.name;
 
         StartCoroutine(Utils.DestroyAfterTime(sound, s.clip.length));

@@ -4,10 +4,9 @@ using UnityEngine;
 
 namespace Enemy
 {
-    public class State_Enemy_Idle : State
+    public class State_Enemy_Halt : State
     {
         private EnemyController _attachedController;
-        public LayerMask LayerMask;
 
         protected override void OnStateInitialize(StateMachine machine)
         {
@@ -18,12 +17,6 @@ namespace Enemy
         public override void OnStateTick(float deltaTime)
         {
             base.OnStateTick(deltaTime);
-            _attachedController.currentBrain.IsPlayerNearLight =
-                SensesUtil.HasFlashlightEnabled(_attachedController.currentBrain.archnemesis);
-            _attachedController.currentBrain.IsVisible =
-                SensesUtil.IsPlayerSeeingEnemy(_attachedController.currentBrain.archnemesis, _attachedController,
-                    GameManager.instance.GameSettings.DetectionLayers, GameManager.instance.GameSettings.PlayerViewAngle);
-            Debug.Log(_attachedController.currentBrain.IsVisible);
         }
 
         public override void OnStateFixedTick(float fixedTime)
@@ -39,10 +32,9 @@ namespace Enemy
         protected override void OnStateEnter()
         {
             base.OnStateEnter();
-
-            // Updates the rotation based on the brain decisions.
-            //_attachedController.currentBrain._NavMeshAgent.updateRotation = false;
+            
             _attachedController.NavMeshAgent.isStopped = true;
+            _attachedController.currentBrain.SetBrainDead();
         }
 
         protected override void OnStateExit()

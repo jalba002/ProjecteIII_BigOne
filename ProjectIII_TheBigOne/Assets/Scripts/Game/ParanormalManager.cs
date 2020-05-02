@@ -8,22 +8,40 @@ using Random = System.Random;
 // Also known as the cunt that always tries to scare you.
 public class ParanormalManager : MonoBehaviour
 {
-    private EnemyController Dimitry;
+    public EnemyTargetDummy enemyTargetDummy;
 
-    public float accumulatedTime = 0f;
+    public Transform firstSpawnPoint;
+    public Transform secondSpawnPoint;
+    
+    private EnemyController Dimitry;
 
     private static Random alea = new Random();
 
-    public void Start()
+    public void Awake()
     {
-        accumulatedTime = 0f;
         Dimitry = FindObjectOfType<EnemyController>();
+        
+        if (enemyTargetDummy == null)
+        {
+            enemyTargetDummy = FindObjectOfType<EnemyTargetDummy>();
+            if (enemyTargetDummy == null)
+            {
+                var newDummy = new GameObject("EnemyTargetDummy");
+                enemyTargetDummy = newDummy.AddComponent<EnemyTargetDummy>();
+            }
+        }
     }
 
     void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.Space))
-            UseDoor(ObjectTracker.doorList[0], -450f);*/
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            StartFirstPhase();
+        }
+        else if (Input.GetKeyDown(KeyCode.N))
+        {
+            StartSecondPhase();
+        }
     }
 
     public static void UseRandomDoor()
@@ -37,8 +55,49 @@ public class ParanormalManager : MonoBehaviour
         //door.Use();
     }
 
-    public float CalculateRandomForce(float scale = 1f)
+    /*public float CalculateRandomForce(float scale = 1f)
     {
         return Mathf.Sin(accumulatedTime) * scale;
+    }*/
+
+    public void StartFirstPhase()
+    {
+        // TODO Play spooky sound.
+        // Move dimitry away.
+        // Set new behaviour.
+        Debug.Log("Starting Dimitry First Phase");
+        SetDummyParent(Dimitry.currentBrain.archnemesis.transform);
+        SetEnemyPosition(firstSpawnPoint);
+        Dimitry.currentBehaviourTree = new BehaviourTree_Enemy_FirstPhase(Dimitry);
+    }
+
+    public void StartSecondPhase()
+    {
+        // TODO Play spooky sound.
+        // Move dimitry away.
+        // Set new behaviour.
+        Debug.Log("Starting Dimitry Second Phase");
+        SetEnemyPosition(secondSpawnPoint);
+        Dimitry.currentBehaviourTree = new BehaviourTree_Enemy_SecondPhase(Dimitry);
+    }
+
+    private void SetEnemyPosition(Transform newPosition)
+    {
+        if (newPosition == null)
+        {
+            Debug.LogWarning("Not moving Dimitry. Position is null.");
+            return;
+        }
+        Dimitry.transform.position = newPosition.position;
+    }
+
+    public void SetDummyPosition(Vector3 newPosition)
+    {
+        enemyTargetDummy.transform.position = newPosition;
+    }
+
+    public void SetDummyParent(Transform newParent)
+    {
+        enemyTargetDummy.transform.parent = newParent;
     }
 }

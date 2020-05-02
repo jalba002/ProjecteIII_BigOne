@@ -1,4 +1,5 @@
-﻿using Player;
+﻿using Enemy;
+using Player;
 using UnityEngine;
 using CharacterController = Characters.Generic.CharacterController;
 
@@ -41,5 +42,22 @@ public static class SensesUtil
     public static bool HasFlashlightEnabled(PlayerController playerController)
     {
         return playerController.attachedFlashlight.IsFlashlightEnabled;
+    }
+
+    public static bool IsPlayerSeeingEnemy(PlayerController player, EnemyController enemy,
+        LayerMask layerMask, float coneAngle = 94f)
+    {
+        Vector3 l_Direction = enemy.transform.position - player.transform.position;
+        Ray l_Ray = new Ray(player.cameraController.transform.position, l_Direction);
+
+        float l_Distance = l_Direction.magnitude;
+        l_Direction /= l_Distance;
+
+        bool l_Collides = Physics.Raycast(l_Ray, l_Distance, layerMask);
+        float l_DotAngle = Vector3.Dot(l_Direction, player.cameraController.transform.forward);
+
+        Debug.DrawRay(l_Ray.origin, l_Ray.direction * l_Distance, l_Collides ? Color.red : Color.green);
+
+        return !l_Collides && l_DotAngle > Mathf.Cos(coneAngle * 0.5f * Mathf.Deg2Rad);
     }
 }

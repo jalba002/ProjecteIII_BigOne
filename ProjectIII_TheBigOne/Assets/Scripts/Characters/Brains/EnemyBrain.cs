@@ -9,23 +9,25 @@ using UnityEngine.AI;
 public class EnemyBrain : Brain
 {
     public EnemyController selfCharacter { get; protected set; }
-    public NavMeshAgent _NavMeshAgent { get; protected set; }
     public PlayerController archnemesis { get; protected set; }
 
-    public bool IsVisible { get; private set; }
+    // All sensing variables should be changed from the states.
+    // So every moment they can be overwritten by whatever we want.
+    public bool IsVisible { get; set; }
+    
+    public bool IsBeingRendered { get; set; }
 
-    public bool IsPlayerInSight { get; private set; }
+    public bool IsPlayerInSight { get; set; }
 
-    public bool IsPlayerNearLight { get; private set; }
+    public bool IsPlayerNearLight { get; set; }
 
-    public bool IsChasingPlayer { get; private set; }
+    public bool IsChasingPlayer { get; set; }
 
-    public bool UpdateRotation { get; private set; }
+    public bool UpdateRotation { get; set; }
 
     private void Awake()
     {
         IsVisible = true;
-        _NavMeshAgent = this.gameObject.GetComponent<NavMeshAgent>();
         selfCharacter = this.gameObject.GetComponent<EnemyController>();
         archnemesis = FindObjectOfType<PlayerController>();
     }
@@ -34,13 +36,19 @@ public class EnemyBrain : Brain
     // It is mostly used to debug functions with shortcuts.
     public override void GetActions()
     {
-        IsVisible = selfCharacter.meshRenderer.isVisible;
+        /*IsVisible = selfCharacter.meshRenderer.isVisible;
         
         IsPlayerNearLight = SensesUtil.HasFlashlightEnabled(archnemesis);
 
         IsPlayerInSight = SensesUtil.IsInSight(selfCharacter.gameObject, archnemesis.gameObject,
-            selfCharacter.characterProperties.maxDetectionRange, selfCharacter.characterProperties.watchableLayers, false);
+            selfCharacter.characterProperties.maxDetectionRange, selfCharacter.characterProperties.watchableLayers, false);*/
     }
-    
-    
+
+    public void SetBrainDead()
+    {
+        IsVisible = true;
+        IsPlayerNearLight = false;
+        IsPlayerInSight = false;
+        IsChasingPlayer = false;
+    }
 }

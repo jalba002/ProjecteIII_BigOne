@@ -17,13 +17,16 @@ namespace Enemy
         public Collider attachedCollider;
 
         public new EnemyBrain currentBrain { get; private set; }
+        
         public BehaviourTree currentBehaviourTree;
 
         public new EnemyProperties characterProperties;
 
-        public GameObject targetPositionDummy;
+        public EnemyTargetDummy targetPositionDummy;
 
         public Renderer meshRenderer;
+
+        public NavMeshAgent NavMeshAgent;
 
         [Header("Components from Thirds")] private FlashlightController playerFlashlight;
 
@@ -31,7 +34,9 @@ namespace Enemy
         {
             currentBrain = GetComponent<EnemyBrain>();
 
-            currentBehaviourTree = new BehaviourTree_Enemy_FirstPhase(this);
+            NavMeshAgent = GetComponent<NavMeshAgent>();
+
+            currentBehaviourTree = new BehaviourTree_Enemy_Halted(this);
 
             if (stateMachine == null)
                 stateMachine = GetComponent<StateMachine>();
@@ -60,8 +65,12 @@ namespace Enemy
         private void Start()
         {
             stateMachine.SwitchState<State_Enemy_Idle>();
-            currentBrain._NavMeshAgent.speed = characterProperties.WalkSpeed;
+            
+            NavMeshAgent.speed = characterProperties.WalkSpeed;
+            
             playerFlashlight = FindObjectOfType<FlashlightController>();
+            
+            targetPositionDummy = FindObjectOfType<EnemyTargetDummy>();
         }
 
         void Update()
@@ -75,7 +84,7 @@ namespace Enemy
             }
             else
             {
-                Debug.LogError("Enemy has no behaviour tree.");
+                Debug.LogWarning("Enemy has no behaviour tree.");
             }
 
             // TODO Disable state machine when game pauses. 
@@ -105,6 +114,16 @@ namespace Enemy
         {
             // TODO Add kill functionality?
             return false;
+        }
+
+        private void OnBecameInvisible()
+        {
+            currentBrain.IsBeingRendered = false;
+        }
+
+        private void OnBecameVisible()
+        {
+            currentBrain.IsBeingRendered = true;
         }
     }
 }

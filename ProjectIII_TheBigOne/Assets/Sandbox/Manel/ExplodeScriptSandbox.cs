@@ -9,6 +9,8 @@ public class ExplodeScriptSandbox : MonoBehaviour
     public float maxForce;
     public float radius;
 
+    public Vector3 explosionDirection = Vector3.right;
+
     void Start()
     {
         Explode();
@@ -18,14 +20,13 @@ public class ExplodeScriptSandbox : MonoBehaviour
     {
         foreach (Transform t in transform)
         {
-            var rb = t.GetComponent<Rigidbody>();
+            Rigidbody rb = t.GetComponent<Rigidbody>();
 
             if(rb != null)
             {
-                rb.AddExplosionForce(Random.Range(minForce, maxForce), transform.position - t.right * 2, radius);
+                rb.AddExplosionForce(Random.Range(minForce, maxForce), transform.position - explosionDirection, radius);
             }            
-        }
-        
+        }        
     }
 
 

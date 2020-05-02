@@ -1,24 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Destructible_Walls : MonoBehaviour
 {
     public GameObject destroyedVersion;
-
-    public float explosionForce;
-    public Vector3 positionToSpawnExplosion;
-    public float radius;
+    public bool cheatMode = false;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            
-            Instantiate(destroyedVersion, transform.position, transform.rotation);
-            Destroy(gameObject);           
-           
-        }
+        #if UNITY_EDITOR
+        
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                ChangeTheWall();
+            }
+        
+        #endif
+    }
+
+
+    public void ChangeTheWall()
+    {
+        Instantiate(destroyedVersion, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
 
 }

@@ -15,6 +15,9 @@ public class ParanormalManager : MonoBehaviour
     
     private EnemyController Dimitry;
 
+    public AudioClip killerLaugh;
+    public AudioSource ParanormalSoundEmitter;
+
     private static Random alea = new Random();
 
     public void Awake()
@@ -28,6 +31,7 @@ public class ParanormalManager : MonoBehaviour
             {
                 var newDummy = new GameObject("EnemyTargetDummy");
                 enemyTargetDummy = newDummy.AddComponent<EnemyTargetDummy>();
+                SetDummyPosition(Vector3.zero);
             }
         }
     }
@@ -67,6 +71,7 @@ public class ParanormalManager : MonoBehaviour
         // Set new behaviour.
         Debug.Log("Starting Dimitry First Phase");
         SetDummyParent(Dimitry.currentBrain.archnemesis.transform);
+        //SetDummyLocalPosition(Vector3.zero);
         SetEnemyPosition(firstSpawnPoint);
         Dimitry.currentBehaviourTree = new BehaviourTree_Enemy_FirstPhase(Dimitry);
     }
@@ -76,7 +81,10 @@ public class ParanormalManager : MonoBehaviour
         // TODO Play spooky sound.
         // Move dimitry away.
         // Set new behaviour.
+        ParanormalSoundEmitter.Play();
         Debug.Log("Starting Dimitry Second Phase");
+        SetDummyParent(Dimitry.currentBrain.archnemesis.transform);
+        //SetDummyLocalPosition(Vector3.zero);
         SetEnemyPosition(secondSpawnPoint);
         Dimitry.currentBehaviourTree = new BehaviourTree_Enemy_SecondPhase(Dimitry);
     }
@@ -96,8 +104,14 @@ public class ParanormalManager : MonoBehaviour
         enemyTargetDummy.transform.position = newPosition;
     }
 
+    public void SetDummyLocalPosition(Vector3 newPosition)
+    {
+        enemyTargetDummy.transform.localPosition = newPosition;
+    }
+
     public void SetDummyParent(Transform newParent)
     {
         enemyTargetDummy.transform.parent = newParent;
+        SetDummyLocalPosition(Vector3.zero);
     }
 }

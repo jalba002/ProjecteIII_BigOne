@@ -30,6 +30,7 @@ namespace Enemy
                 _movementSpeed);*/
             _attachedController.currentBrain.IsPlayerNearLight =
                 SensesUtil.HasFlashlightEnabled(_attachedController.currentBrain.archnemesis);
+            
             _attachedController.currentBrain.IsVisible =
                 SensesUtil.IsPlayerSeeingEnemy(_attachedController.currentBrain.archnemesis, _attachedController,
                     GameManager.instance.GameSettings.DetectionLayers, GameManager.instance.GameSettings.PlayerViewAngle);
@@ -50,7 +51,6 @@ namespace Enemy
         protected override void OnStateEnter()
         {
             base.OnStateEnter();
-
             _movementSpeed = _attachedController.characterProperties.WalkSpeed;
             //_attachedController.currentBrain._NavMeshAgent.updateRotation = false;
             _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);

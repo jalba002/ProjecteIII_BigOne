@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42c91d8a3377f42b58bc9b28fcd47c, type: 3}
+  m_Name: ItemList_Prova
+  m_EditorClassIdentifier: 
+  itemList:
+  - itemName: Key
+    itemDescription: You can use it to open a door
+    MaxStackQuantity: 1
+    itemIcon: {fileID: 21300000, guid: 32db06a7ccb74be418790be9fa4d16b8, type: 3}
+    itemObject: {fileID: 0}
+    isUnique: 0
+    isStackable: 0
+    destroyOnUse: 0
+    canUseAlways: 0
+    combinedItems: []
+    myEffect: 2
+  - itemName: Battery
+    itemDescription: It seems you can use it to charge your lantern
+    MaxStackQuantity: 5
+    itemIcon: {fileID: 21300000, guid: 011ee9e7f9fb7d341a84bcc8cc8a67fe, type: 3}
+    itemObject: {fileID: 0}
+    isUnique: 0
+    isStackable: 1
+    destroyOnUse: 1
+    canUseAlways: 1
+    combinedItems: []
+    myEffect: 0
+  - itemName: Stick
+    itemDescription: It seems you can combine it with steel to make something.
+    MaxStackQuantity: 1
+    itemIcon: {fileID: 21300000, guid: a8d267992f0194f4a8d45a4971158ea7, type: 3}
+    itemObject: {fileID: 0}
+    isUnique: 0
+    isStackable: 0
+    destroyOnUse: 0
+    canUseAlways: 1
+    combinedItems: []
+    myEffect: 2
+  - itemName: Steel
+    itemDescription: It seems you can combine it with some stick to make something.
+    MaxStackQuantity: 5
+    itemIcon: {fileID: 21300000, guid: dd872b8fed895324480723e3315c7765, type: 3}
+    itemObject: {fileID: 0}
+    isUnique: 0
+    isStackable: 1
+    destroyOnUse: 0
+    canUseAlways: 1
+    combinedItems: []
+    myEffect: 2
+  - itemName: Axe
+    itemDescription: It's useless, this is to make a test
+    MaxStackQuantity: 1
+    itemIcon: {fileID: 21300000, guid: eafd9b731ef80ce419f4f3d3f35b0dbc, type: 3}
+    itemObject: {fileID: 0}
+    isUnique: 0
+    isStackable: 0
+    destroyOnUse: 1
+    canUseAlways: 1
+    combinedItems:
+    - Stick
+    - Steel
+    myEffect: 1

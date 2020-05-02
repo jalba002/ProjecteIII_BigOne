@@ -46,5 +46,11 @@ public static class Utils
             Debug.DrawRay(cameraRay.origin, cameraRay.direction * raycastHit.distance, Color.blue, 2f);
 
         return success;
+    }    
+
+    public static IEnumerator DestroyAfterTime(GameObject go, float time)
+    {
+        yield return new WaitForSeconds(time);
+        GameObject.Destroy(go);
     }
 }

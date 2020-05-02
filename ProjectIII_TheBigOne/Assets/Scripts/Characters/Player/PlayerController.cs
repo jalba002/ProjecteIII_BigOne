@@ -113,6 +113,20 @@ namespace Player
             InspectObjects();
             InteractDoors();
             UseFlashlight();
+
+            //Cheat to test sounds
+            /*
+#if UNITY_EDITOR
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                PlayerStartsBeingChased();
+            }
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                PlayerStopsBeingChased();
+            }
+#endif
+*/
         }
 
         void InspectObjects()
@@ -152,6 +166,15 @@ namespace Player
                         cameraController.angleLocked = false;
                 }
             }
+        }
+
+        public void PlayerStartsBeingChased()
+        {
+            AudioManager.Instance.PlaySound2D("Sound/Ambience/ManBreathScared");
+        }
+        public void PlayerStopsBeingChased()
+        {
+            GameObject.Destroy(GameObject.Find("ManBreathScared"));
         }
 
         private void UseFlashlight()

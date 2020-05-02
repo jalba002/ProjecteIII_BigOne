@@ -83,7 +83,11 @@ public class AudioManager : MonoBehaviour
         AudioSource s = sound.AddComponent<AudioSource>();
         s.spatialBlend = 0;
         s.clip = Resources.Load<AudioClip>(route);
-        Debug.Log(s.clip);
+        if (s.clip == null)
+        {
+            Debug.LogWarning("Invalid path for audio clip");
+        }
+       
         s.Play();
 
         sound.transform.parent = GameObject.Find("Sound").transform;

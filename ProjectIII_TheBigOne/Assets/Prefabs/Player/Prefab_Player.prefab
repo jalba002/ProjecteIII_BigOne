@@ -341,6 +341,7 @@ GameObject:
   - component: {fileID: 4287271705462774198}
   - component: {fileID: 6592646240077006143}
   - component: {fileID: 6828844133159262755}
+  - component: {fileID: 2031410052690668047}
   m_Layer: 0
   m_Name: Prefab_Player
   m_TagString: Untagged
@@ -440,6 +441,11 @@ MonoBehaviour:
   simpleActivator: {fileID: 6828844133159262755}
   characterProperties: {fileID: 11400000, guid: 7e571a240adc2994192319d07f6fd24d,
     type: 2}
+  footstepSounds:
+  - {fileID: 8300000, guid: 43f8400c80a3a1342bb4e2804640066d, type: 3}
+  - {fileID: 8300000, guid: e6147dbf1f309dc419cb2171721dacd2, type: 3}
+  - {fileID: 8300000, guid: 31b935b80b229ee4fb119d5371993bbf, type: 3}
+  - {fileID: 8300000, guid: fbfe71d7b29121a478f10df9b9096706, type: 3}
   attachedFlashlight: {fileID: 6592646240077006143}
 --- !u!114 &4287271706014648179
 MonoBehaviour:
@@ -454,6 +460,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Machine: {fileID: 0}
+  stepTimeWalking: 0.6
+  stepTimeRunning: 0.4
 --- !u!114 &4287271705462774206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,6 +493,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectRenderer: {fileID: 7698896559584102530}
   range: 10
+  LayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   distances: {x: 1.5, y: 2}
   rotationSpeed: {x: 0.5, y: 0.5}
 --- !u!114 &6592646240077006143
@@ -499,9 +510,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7741257326dd4fc4fa691ee53615ebd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCharge: 200000
+  infiniteCharge: 0
+  maxCharge: 20
   attachedLight: {fileID: 4463343755746808869}
   feedbackVisual: {fileID: 0}
+  lightFlickerThreshold: 0.2
+  minimumIntensity: 0.33
 --- !u!114 &6828844133159262755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,6 +533,102 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   forceScale: 15
+--- !u!82 &2031410052690668047
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287271706014648174}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 10
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7698896559584102532
 GameObject:
   m_ObjectHideFlags: 0

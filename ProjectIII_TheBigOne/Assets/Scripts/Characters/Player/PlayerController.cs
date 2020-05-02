@@ -26,15 +26,9 @@ namespace Player
 
         public new PlayerBrain currentBrain { get; private set; }
 
-        /*[Header("Sound settings")]
-        public AudioClip[] m_FootstepSounds;
-        public AudioClip m_JumpSound;
-        public AudioClip m_LandSound;*/
-
-        /*[Range(0.1f, 2.0f)] public float m_StepTimeWaking;
-        private float m_StepTimeRange;
-        private float m_StepTime = 0.0f;
-        private AudioSource m_AudioSource;*/
+        [Header("Sound settings")]
+        public AudioClip[] footstepSounds;
+        private AudioSource audioSource;
 
         /*[Header("Ground Detection")] public Transform groundPosition;
         [Range(0.01f, 1f)] public float castRadius = 1f;
@@ -72,9 +66,7 @@ namespace Player
             if (!attachedCollider)
                 attachedCollider = GetComponent<Collider>();
 
-            // audioSource = GetComponent<AudioSource>();
-            /*m_StepTime = Time.time + m_StepTimeRange;
-            m_StepTimeRange = m_StepTimeWaking;*/
+            audioSource = GetComponent<AudioSource>();
 
             if (attachedFlashlight == null)
                 attachedFlashlight = GetComponent<FlashlightController>();
@@ -113,6 +105,20 @@ namespace Player
             InspectObjects();
             InteractDoors();
             UseFlashlight();
+
+            //Cheat to test sounds
+            /*
+#if UNITY_EDITOR
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                PlayerStartsBeingChased();
+            }
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                PlayerStopsBeingChased();
+            }
+#endif
+*/
         }
 
         void InspectObjects()
@@ -154,6 +160,24 @@ namespace Player
             }
         }
 
+        public void PlayerStartsBeingChased()
+        {
+            AudioManager.Instance.PlaySound2D("Sound/Ambience/ManBreathScared");
+        }
+        public void PlayerStopsBeingChased()
+        {
+            GameObject.Destroy(GameObject.Find("ManBreathScared"));
+        }
+
+        public void PlayFootStepAudio()
+        {
+            int i = Random.Range(1, footstepSounds.Length);
+            audioSource.clip = footstepSounds[i];
+            audioSource.PlayOneShot(audioSource.clip);
+            footstepSounds[i] = footstepSounds[0];
+            footstepSounds[0] = audioSource.clip;
+        }
+
         private void UseFlashlight()
         {
             // TODO Remap controls for flashlight.
@@ -173,44 +197,6 @@ namespace Player
                 stateMachine.FixedUpdateTick(Time.fixedDeltaTime);
             }
         }
-
-        /* private bool CheckOnGround()
-         {
-             bool foundGround;
-             var list = Physics.OverlapSphere(groundPosition.position, castRadius, walkableLayers);
-             return list.Length > 0;
-         }*/
-
-        // public bool IsGrounded() => isPlayerGrounded;
-
-        /*public void ChangeMaterialFriction(bool grounded)
-        {
-            if (grounded)
-            {
-                attachedCollider.material = onGroundMaterial;
-            }
-            else
-            {
-                attachedCollider.material = onAirMaterial;
-            }
-        }*/
-
-        /*private void PlayFootStepAudio()
-        {
-            if (!IsGrounded())
-                return;
-    
-            int i = Random.Range(1, m_FootstepSounds.Length);
-            m_AudioSource.clip = m_FootstepSounds[i];
-            m_AudioSource.PlayOneShot(m_AudioSource.clip);
-            m_FootstepSounds[i] = m_FootstepSounds[0];
-            m_FootstepSounds[0] = m_AudioSource.clip;
-        }*/
-
-        /*public void LandSound()
-        {
-            m_AudioSource.PlayOneShot(m_LandSound);
-        }*/
 
         public Transform ReturnSelf()
         {

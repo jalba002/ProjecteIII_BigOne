@@ -10,6 +10,12 @@ namespace Player
         private float _currentStamina;
         private PlayerController _attachedController;
 
+        [Header("Sound setting")]
+        public float stepTimeWalking;
+        public float stepTimeRunning;
+        private float stepTimeRange;
+        private float stepTime = 0.0f;
+
         public float currentStamina
         {
             get { return _currentStamina; }
@@ -45,7 +51,7 @@ namespace Player
         public override void OnStateTick(float deltaTime)
         {
             base.OnStateTick(deltaTime);
-            
+
             // Start recharging stamina if enough time has passed. 
             if (currentDelay > 0f)
             {
@@ -62,13 +68,24 @@ namespace Player
                 _movementSpeed = _attachedController.characterProperties.RunSpeed;
                 currentStamina -= deltaTime;
                 currentDelay = _attachedController.characterProperties.rechargeDelay;
+                stepTimeRange = stepTimeRunning;
             }
             else
+            {
                 _movementSpeed = _attachedController.characterProperties.WalkSpeed;
+                stepTimeRange = stepTimeWalking;
+            }
 
             // Movement code.
             MovementManager.SetVelocity(_attachedRigidbody, _attachedController.currentBrain.Direction,
                 _movementSpeed);
+
+
+            if (_attachedController.currentBrain.Direction.magnitude > .1f && stepTime <= Time.time)
+            {
+                _attachedController.PlayFootStepAudio();
+                stepTime = Time.time + stepTimeRange;
+            }
         }
 
         public override void OnStateFixedTick(float fixedTime)
@@ -84,13 +101,16 @@ namespace Player
         protected override void OnStateEnter()
         {
             base.OnStateEnter();
-            
+
             _attachedRigidbody = _attachedController.rigidbody;
 
             _movementSpeed = _attachedController.characterProperties.WalkSpeed;
             currentStamina = _attachedController.characterProperties.maximumStamina;
             currentDelay = _attachedController.characterProperties.rechargeDelay;
-            
+
+            stepTime = Time.time + stepTimeRange;
+            stepTimeRange = stepTimeWalking;
+
             // TODO Profile if variables are better than constant variable accesses.
             /*
             _maxStamina = _attachedController.characterProperties.maximumStamina;

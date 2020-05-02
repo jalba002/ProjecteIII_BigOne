@@ -12,11 +12,12 @@ public class ParanormalManager : MonoBehaviour
 
     public Transform firstSpawnPoint;
     public Transform secondSpawnPoint;
-    
-    private EnemyController Dimitry;
+    public Transform relocationSpawnPoint;
 
     public AudioClip killerLaugh;
     public AudioSource ParanormalSoundEmitter;
+
+    private EnemyController Dimitry;
 
     private static Random alea = new Random();
 
@@ -113,5 +114,10 @@ public class ParanormalManager : MonoBehaviour
     {
         enemyTargetDummy.transform.parent = newParent;
         SetDummyLocalPosition(Vector3.zero);
+    }
+
+    public void TeleportAway(Transform newPosition)
+    {
+        SetEnemyPosition(newPosition);
     }
 }

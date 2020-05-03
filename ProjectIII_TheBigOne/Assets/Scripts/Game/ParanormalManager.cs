@@ -17,7 +17,7 @@ public class ParanormalManager : MonoBehaviour
     public AudioClip killerLaugh;
     public AudioSource ParanormalSoundEmitter;
 
-    private EnemyController Dimitry;
+    public EnemyController Dimitry;
 
     private static Random alea = new Random();
 
@@ -35,6 +35,11 @@ public class ParanormalManager : MonoBehaviour
                 SetDummyPosition(Vector3.zero);
             }
         }
+    }
+
+    public void Start()
+    {
+        
     }
 
     void Update()
@@ -75,7 +80,7 @@ public class ParanormalManager : MonoBehaviour
             Debug.LogWarning("Dimitry is disabled in this scene.");
             return;
         }
-        
+        Dimitry.gameObject.SetActive(true);
         Debug.Log("Starting Dimitry First Phase");
         SetDummyParent(Dimitry.currentBrain.archnemesis.transform);
         //SetDummyLocalPosition(Vector3.zero);
@@ -95,6 +100,7 @@ public class ParanormalManager : MonoBehaviour
         }
         
         ParanormalSoundEmitter.Play();
+        Dimitry.gameObject.SetActive(true);
         Debug.Log("Starting Dimitry Second Phase");
         SetDummyParent(Dimitry.currentBrain.archnemesis.transform);
         //SetDummyLocalPosition(Vector3.zero);

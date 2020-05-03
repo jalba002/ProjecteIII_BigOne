@@ -102,7 +102,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     public void SelectThisSlot()
     {
         Debug.Log("Selecting Slot");
-        if (inventoryDisplayRef.selectedSlot == this)
+        if (InventoryDisplay.selectedSlot == this)
         {
             UnselectThisSlot();
         }
@@ -110,12 +110,12 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         {
             if (item != null)
             {
-                if (inventoryDisplayRef.selectedSlot != null)
+                if (InventoryDisplay.selectedSlot != null)
                 {
-                    inventoryDisplayRef.selectedSlot.background.color = Color.grey;
+                    InventoryDisplay.selectedSlot.background.color = Color.grey;
                 }
                 background.color = Color.white;
-                inventoryDisplayRef.selectedSlot = this;
+                InventoryDisplay.selectedSlot = this;
                 inventoryDisplayRef.selectedItem = item;
                 inventoryDisplayRef.selectedItemName.text = item.itemName;
                 inventoryDisplayRef.selectedItemName.gameObject.SetActive(true);
@@ -129,10 +129,10 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     public void UnselectThisSlot()
     {
         Debug.Log("Unselecting");
-            inventoryDisplayRef.selectedSlot.background.color = Color.grey;
+        InventoryDisplay.selectedSlot.background.color = Color.grey;
             
             background.color = Color.grey;
-            inventoryDisplayRef.selectedSlot = null;
+            InventoryDisplay.selectedSlot = null;
             inventoryDisplayRef.selectedItem = null;
             inventoryDisplayRef.selectedItemName.text = " ";
             inventoryDisplayRef.selectedItemName.gameObject.SetActive(false);

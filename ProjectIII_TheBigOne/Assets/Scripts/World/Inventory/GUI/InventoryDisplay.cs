@@ -7,7 +7,11 @@ using UnityEngine.EventSystems;
 
 public class InventoryDisplay : MonoBehaviour
 {
+    [Header("Gameobjects")]
     public Inventory inventoryRef;
+
+    public GameObject inventoryParent;
+    [Header("Settings")]
 
     [SerializeField] public List<InventorySlot> inventorySlotList = new List<InventorySlot>();
     public GameObject slotPrefab;
@@ -17,14 +21,15 @@ public class InventoryDisplay : MonoBehaviour
     public GameObject inventoryWindow;
     public GameObject combineWindow;
 
+    [Header("Combine Slots")]
     public InventorySlot combineSlot_1;
     public InventorySlot combineSlot_2;
 
 
     public InventoryItem selectedItem;
-    private InventorySlot _selectedSlot;
+    private static InventorySlot _selectedSlot;
 
-    public InventorySlot selectedSlot
+    public static InventorySlot selectedSlot
     {
         get { return _selectedSlot; }
         set
@@ -37,7 +42,7 @@ public class InventoryDisplay : MonoBehaviour
     public Text selectedItemName;
     public Text selectedItemInfo;
 
-    public UnityEvent OnSlotSelected;
+    public static UnityEvent OnSlotSelected = new UnityEvent();
 
     public GameObject contextMenu;
 
@@ -50,16 +55,10 @@ public class InventoryDisplay : MonoBehaviour
             inventorySlotList.Add(instance.GetComponentInChildren<InventorySlot>());
         }
 
-        //inventoryRef = GameObject.FindObjectOfType<Inventory>();
-        //OnSlotSelected.AddListener(ConfigureContextMenu);
+        inventoryRef = GameObject.FindObjectOfType<Inventory>();
+        OnSlotSelected.AddListener(ConfigureContextMenu);
     }
-
-    void Update()
-    {
-        if (selectedSlot != null)
-            Debug.LogWarning(selectedSlot.item.itemDescription);
-    }
-
+    
     private void ConfigureContextMenu()
     {
         if (selectedSlot == null)
@@ -116,11 +115,11 @@ public class InventoryDisplay : MonoBehaviour
     public void RemoveButton()
     {
         Debug.Log("Removing button.");
-        if (selectedItem != null && inventoryRef != null)
+        if (selectedSlot != null)
         {
             Debug.Log("Removing item is not null.");
-            RemoveItem(selectedItem);
-            inventoryRef.RemoveItem(selectedItem.itemName);
+            RemoveItem(selectedSlot.item);
+            inventoryRef.RemoveItem(selectedSlot.item.itemName);
 
             selectedItem = null;
             selectedItemInfo.text = " ";
@@ -133,16 +132,18 @@ public class InventoryDisplay : MonoBehaviour
     public void UseButton()
     {
         Debug.Log("Using button.");
-        if (selectedSlot != null) //&& inventoryRef != null)
+        if (selectedSlot != null)
         {
             Debug.Log("Use item is not null.");
             selectedSlot.item.UseItem();
-            /*if (selectedItem.destroyOnUse)
+            if (selectedSlot.item.destroyOnUse)
             {
                 Debug.Log("Destroying item.");
-                RemoveItem(selectedItem);
-                inventoryRef.RemoveItem(selectedItem.itemName);
-            }*/
+                RemoveItem(selectedSlot.item);
+                Debug.Log("Second Destroying.");
+                inventoryRef.RemoveItem(selectedSlot.item.itemName);
+                Debug.Log("Third Destroying.");
+            }
         }
     }
 
@@ -166,7 +167,7 @@ public class InventoryDisplay : MonoBehaviour
     public bool ToggleInventoryUI()
     {
         contextMenu.SetActive(false);
-        this.gameObject.SetActive(!this.gameObject.activeSelf);
-        return this.gameObject.activeSelf;
+        inventoryParent.SetActive(!inventoryParent.activeSelf);
+        return inventoryParent.activeSelf;
     }
 }

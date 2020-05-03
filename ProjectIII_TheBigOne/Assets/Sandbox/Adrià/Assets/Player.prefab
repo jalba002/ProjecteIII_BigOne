@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 320738232313747217}
   - component: {fileID: 320738233972787676}
   - component: {fileID: 320738233972787668}
-  - component: {fileID: 9043589096235767381}
+  - component: {fileID: 6668804476355032870}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -117,6 +117,8 @@ MonoBehaviour:
   simpleActivator: {fileID: 320738233972787676}
   characterProperties: {fileID: 11400000, guid: 7e571a240adc2994192319d07f6fd24d,
     type: 2}
+  footstepSounds: []
+  attachedFlashlight: {fileID: 0}
 --- !u!114 &320738232313747217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,6 +132,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Machine: {fileID: 0}
+  stepTimeWalking: 0
+  stepTimeRunning: 0
 --- !u!114 &320738233972787676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,7 +147,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   raycastDistance: 20
+  interact:
+    serializedVersion: 2
+    m_Bits: 0
   forceScale: 5
+  OnObjectActivate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnObjectDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &320738233972787668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,9 +171,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectRenderer: {fileID: 6186810086625138912}
   range: 20
+  LayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   distances: {x: 1.5, y: 2}
   rotationSpeed: {x: 0.5, y: 0.5}
---- !u!114 &9043589096235767381
+--- !u!114 &6668804476355032870
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,9 +185,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 320738232313747212}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3719a1ed2a8757e408251d4c62880cbc, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b433d2a4f82cc84890d2c7113227f2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterItems: []
+  database: {fileID: 11400000, guid: 830643a5e8ee3e44b904e40a709dce92, type: 2}
+  inventoryDisplay: {fileID: 0}
 --- !u!1 &320738232342023980
 GameObject:
   m_ObjectHideFlags: 0

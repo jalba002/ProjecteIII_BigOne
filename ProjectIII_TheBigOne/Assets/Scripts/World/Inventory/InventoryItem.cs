@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 [System.Serializable]
@@ -26,10 +27,9 @@ public class InventoryItem
     {
         BATTERY_EFFECT, AXE_EFFECT, OTHER_EFFECT
     }
-    public Effect myEffect;
 
-    private ItemEffectsManager effectManager = new ItemEffectsManager();
-    
+    public Effect myEffect = Effect.OTHER_EFFECT;
+
     public InventoryItem(InventoryItem item)
     {
         itemName = item.itemName;
@@ -60,15 +60,18 @@ public class InventoryItem
     }
 
     //USE
-    public void UseItem(ItemEffectsManager manager)
+    public void UseItem()
     {
+        Debug.Log("USING ITEM");
         switch (myEffect)
         {
-            case Effect.BATTERY_EFFECT: manager.ReloadLantern();
+            case Effect.BATTERY_EFFECT:
+                Debug.Log("BATTERY RELOAD");
+                ItemEffectsManager.ReloadLantern();
                 break;
-            case Effect.AXE_EFFECT: manager.PickWithAxe();
+            case Effect.AXE_EFFECT: ItemEffectsManager.PickWithAxe();
                 break;
-            case Effect.OTHER_EFFECT: //...
+            case Effect.OTHER_EFFECT: ItemEffectsManager.PrintDebug();
                 break;
             default:
                 break;

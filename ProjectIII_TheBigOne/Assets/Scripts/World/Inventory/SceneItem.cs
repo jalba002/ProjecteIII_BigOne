@@ -1,30 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Security.Cryptography;
+using Player;
 using UnityEngine;
 
-public class SceneItem : MonoBehaviour
+public class SceneItem : MonoBehaviour, IInteractable
 {
-    public string itemName;  
+    public string itemName;
+    private bool alreadyUsed = false;
 
-    // Start is called before the first frame update
-    void Start()
+    public bool Interact()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        if (alreadyUsed) return false;
+        if (FindObjectOfType<PlayerController>().playerInventory.AddItem(itemName))
         {
-          
-                other.GetComponent<Inventory>().AddItem(itemName);
-                Destroy(gameObject);
-                
+            this.gameObject.SetActive(false);
+            alreadyUsed = true;
         }
+        return false;
+    }
+
+    public void OnStartInteract()
+    {
+        //throw new System.NotImplementedException();
+    }
+
+    public void OnInteracting()
+    {
+        //throw new System.NotImplementedException();
+    }
+
+    public void OnEndInteract()
+    {
+        //throw new System.NotImplementedException();
     }
 }

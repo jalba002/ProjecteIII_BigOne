@@ -340,6 +340,7 @@ GameObject:
   - component: {fileID: 4287271705462774206}
   - component: {fileID: 4287271705462774198}
   - component: {fileID: 6592646240077006143}
+  - component: {fileID: 4041253382631071211}
   - component: {fileID: 2031410052690668047}
   m_Layer: 0
   m_Name: Prefab_Player
@@ -435,9 +436,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 4287271706014648181}
   cameraController: {fileID: 4287271704942058502}
-  attachedCollider: {fileID: 0}
   objectInspector: {fileID: 4287271705462774198}
-  simpleActivator: {fileID: 0}
+  simpleActivator: {fileID: 4287271705462774206}
+  attachedFlashlight: {fileID: 6592646240077006143}
+  playerInventory: {fileID: 4041253382631071211}
   characterProperties: {fileID: 11400000, guid: 7e571a240adc2994192319d07f6fd24d,
     type: 2}
   footstepSounds:
@@ -445,7 +447,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e6147dbf1f309dc419cb2171721dacd2, type: 3}
   - {fileID: 8300000, guid: 31b935b80b229ee4fb119d5371993bbf, type: 3}
   - {fileID: 8300000, guid: fbfe71d7b29121a478f10df9b9096706, type: 3}
-  attachedFlashlight: {fileID: 6592646240077006143}
 --- !u!114 &4287271706014648179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,6 +522,21 @@ MonoBehaviour:
   feedbackVisual: {fileID: 0}
   lightFlickerThreshold: 0.2
   minimumIntensity: 0.33
+--- !u!114 &4041253382631071211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287271706014648174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b433d2a4f82cc84890d2c7113227f2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterItems: []
+  database: {fileID: 11400000, guid: 830643a5e8ee3e44b904e40a709dce92, type: 2}
+  inventoryDisplay: {fileID: 0}
 --- !u!82 &2031410052690668047
 AudioSource:
   m_ObjectHideFlags: 0

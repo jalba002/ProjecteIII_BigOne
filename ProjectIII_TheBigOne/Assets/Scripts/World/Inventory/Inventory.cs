@@ -1,26 +1,24 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public List<InventoryItem> characterItems = new List<InventoryItem>();  //create a new list called items                                                                             
-    public InventoryItemList database;                                      //pick the list we want to get info from
+    public List<InventoryItem>
+        characterItems =
+            new List<InventoryItem>(); //create a new list called items                                                                             
+
+    public InventoryItemList database; //pick the list we want to get info from
     public InventoryDisplay inventoryDisplay;
-    [HideInInspector]public ItemEffectsManager effectsManager;
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        effectsManager = GetComponent<ItemEffectsManager>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (effectsManager == null)
+        inventoryDisplay = FindObjectOfType<InventoryDisplay>();
+        if (inventoryDisplay == null)
         {
-            effectsManager = GetComponent<ItemEffectsManager>();
+            Debug.LogWarning("No inventory canvas exists.");
         }
     }
 
@@ -29,36 +27,37 @@ public class Inventory : MonoBehaviour
         InventoryItem itemToAdd = database.GetItem(itemName);
         characterItems.Add(itemToAdd);
         //  Debug.Log("gave item:" + itemToAdd.itemName);
-        inventoryDisplay.AddNewItem(itemToAdd);         //add the item to the inventory display
-
+        inventoryDisplay.AddNewItem(itemToAdd); //add the item to the inventory display
     }
-    public void AddItem(string itemName)
+
+    public bool AddItem(string itemName)
     {
-        InventoryItem itemToAdd = database.GetItem(itemName);   //get reference to our listed item
-        
+        InventoryItem itemToAdd = database.GetItem(itemName); //get reference to our listed item
+
         if (itemToAdd.isStackable)
         {
             InventoryItem itemSearched = CheckThisItem(itemName);
             if (itemSearched != null)
-            {   
-                itemSearched.SetActualQuantity(itemSearched.GetActualQuantity() + 1);    
+            {
+                itemSearched.SetActualQuantity(itemSearched.GetActualQuantity() + 1);
             }
             else
             {
                 itemToAdd.SetActualQuantity(1);
-                characterItems.Add(itemToAdd);                                   //add reference to our local items list
+                characterItems.Add(itemToAdd); //add reference to our local items list
                 inventoryDisplay.AddNewItem(itemToAdd);
             }
         }
-        
+
         else
         {
-            characterItems.Add(itemToAdd);                                   
+            characterItems.Add(itemToAdd);
             inventoryDisplay.AddNewItem(itemToAdd);
         }
-        
-        
+
+        return true;
     }
+
     public InventoryItem CheckThisItem(string itemName)
     {
         return characterItems.Find(InventoryItem => InventoryItem.itemName == itemName);
@@ -90,7 +89,11 @@ public class Inventory : MonoBehaviour
                     Debug.Log("Item removed: " + item.itemName);
                 }
             }
-            
         }
-    }   
+    }
+
+    public bool ToggleInventory()
+    {
+        return inventoryDisplay.ToggleInventoryUI();
+    }
 }

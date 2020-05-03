@@ -13,5 +13,6 @@ namespace Game.Inputs
         public InputNames running;
         public InputNames horizontal;
         public InputNames forward;
+        public InputNames inventory;
     }
 }

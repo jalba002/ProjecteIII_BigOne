@@ -29,7 +29,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     void Awake()                                                                            
     {
-        canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
+        canvas = GameObject.FindObjectOfType<Canvas>();
         rectTransform = gameObject.GetComponent<RectTransform>();
         canvasGroup = gameObject.GetComponent<CanvasGroup>();
 
@@ -40,12 +40,13 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
         spriteImage = GetComponent<Image>();                                                
         Setup(null);                                                                        
-        inventoryDisplayRef = GameObject.FindGameObjectWithTag("InventoryDisplay").GetComponent<InventoryDisplay>();
+        inventoryDisplayRef = GameObject.FindObjectOfType<InventoryDisplay>();
     }
     
 
     public void Setup(InventoryItem item)               
     {
+        Debug.Log("Setup");
         this.item = item;                              
 
         if (this.item != null)                          
@@ -100,6 +101,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     
     public void SelectThisSlot()
     {
+        Debug.Log("Selecting Slot");
         if (inventoryDisplayRef.selectedSlot == this)
         {
             UnselectThisSlot();
@@ -126,6 +128,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     }
     public void UnselectThisSlot()
     {
+        Debug.Log("Unselecting");
             inventoryDisplayRef.selectedSlot.background.color = Color.grey;
             
             background.color = Color.grey;
@@ -139,6 +142,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     public void ResetSlot()
     {
+        Debug.Log("Reset slot.");
         Setup(null);
     }
 

@@ -14,28 +14,29 @@ namespace Player
     [RequireComponent(typeof(ObjectInspector))]
     public class PlayerController : CharacterController
     {
-        public CameraController cameraController;
+        public Collider attachedCollider { get; set; }
+        [Header("Components")] public CameraController cameraController;
 
-        // public bool enableAirControl { get; set; }
-        public Collider attachedCollider;
         public ObjectInspector objectInspector;
 
         public SimpleActivator simpleActivator;
 
-        public PlayerProperties characterProperties;
+        public FlashlightController attachedFlashlight;
 
+        public Inventory playerInventory;
+        [Header("Config")] public PlayerProperties characterProperties;
         public new PlayerBrain currentBrain { get; private set; }
 
-        [Header("Sound settings")]
-        public AudioClip[] footstepSounds;
+
+        [Header("Sound settings")] public AudioClip[] footstepSounds;
         private AudioSource audioSource;
+
 
         /*[Header("Ground Detection")] public Transform groundPosition;
         [Range(0.01f, 1f)] public float castRadius = 1f;
         public LayerMask walkableLayers;
         public bool isPlayerGrounded { get; private set; }*/
 
-        public FlashlightController attachedFlashlight;
 
         public void Awake()
         {
@@ -70,6 +71,11 @@ namespace Player
 
             if (attachedFlashlight == null)
                 attachedFlashlight = GetComponent<FlashlightController>();
+
+            if (playerInventory == null)
+            {
+                playerInventory = GetComponent<Inventory>();
+            }
         }
 
         private void Start()
@@ -105,6 +111,7 @@ namespace Player
             InspectObjects();
             InteractDoors();
             UseFlashlight();
+            ToggleInventory();
 
             //Cheat to test sounds
             /*
@@ -160,10 +167,30 @@ namespace Player
             }
         }
 
+        public void ToggleInventory()
+        {
+            if (playerInventory != null && playerInventory.isActiveAndEnabled)
+            {
+                if (currentBrain.ShowInventory)
+                {
+                    var enabled = playerInventory.ToggleInventory();
+                    cameraController.angleLocked = enabled;
+                    cameraController.cursorLock = !enabled;
+                    simpleActivator.enabled = !enabled;
+                }
+            }
+            else
+            {
+                Debug.LogError("No player inventory in Player!");
+                return;
+            }
+        }
+
         public void PlayerStartsBeingChased()
         {
             AudioManager.PlaySound2D("Sound/Ambience/ManBreathScared");
         }
+
         public void PlayerStopsBeingChased()
         {
             GameObject.Destroy(GameObject.Find("ManBreathScared"));

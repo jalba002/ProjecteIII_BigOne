@@ -9,6 +9,8 @@ namespace Characters.Brains
         public bool InteractRelease { get; protected set; }
         public bool MouseInteract { get; protected set; }
         
+        public bool ShowInventory { get; protected set; }
+        
         public bool FlashlightToggle { get; protected set; }
 
         public bool MouseInteractRelease { get; protected set; }
@@ -23,6 +25,7 @@ namespace Characters.Brains
             MouseInteract = GetInputValue(inputList.mouseInteract);
             Running = GetInputValue(inputList.running);
             FlashlightToggle = GetInputValue(inputList.flashlight);
+            ShowInventory = GetInputValue(inputList.inventory);
 
             // On Release
             InteractRelease = Input.GetButtonUp(inputList.interact.name);

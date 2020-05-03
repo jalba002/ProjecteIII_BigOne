@@ -8,7 +8,7 @@ using UnityEngine.Rendering.HighDefinition;
 
 namespace World.Objects
 {
-    public class DynamicObject : MonoBehaviour, IMovable
+    public class DynamicObject : MonoBehaviour, IInteractable
     {
         [System.Serializable]
         public struct HingeConfiguration
@@ -262,7 +262,7 @@ namespace World.Objects
 
         // Interface Implementation //
 
-        public bool Use(float force)
+        public bool Interact()
         {
             if (Rigidbody == null)
             {
@@ -275,7 +275,7 @@ namespace World.Objects
                 }
             }
 
-            var useForce = HandlePosition.transform.forward * force;
+            var useForce = HandlePosition.transform.forward * CalculateForce();
             Rigidbody.AddForceAtPosition(useForce, HandlePosition.transform.position, ForceMode.Force);
             return true;
         }
@@ -304,7 +304,7 @@ namespace World.Objects
         {
             throw new NotImplementedException();
         }
-
+        
         public void OnStartInteract()
         {
             switch (objectType)
@@ -318,6 +318,25 @@ namespace World.Objects
                     //Play drawer sound
                     break;
             }
+        }
+
+        public void OnInteracting()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnEndInteract()
+        {
+            throw new NotImplementedException();
+        }
+
+        private float CalculateForce(float force = 1f)
+        {
+            var calculatedForce = 0f;
+            float mouseY = Input.GetAxis("Mouse Y");
+            calculatedForce = (force * mouseY);
+
+            return calculatedForce;
         }
     }
 }

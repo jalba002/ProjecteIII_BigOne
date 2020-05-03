@@ -14,50 +14,40 @@ public class SimpleActivator : MonoBehaviour
 
     public float forceScale = 5f;
 
-    public IMovable DetectedMovable;
+    public IInteractable detectedInteractable;
 
     public UnityEvent OnObjectActivate;
     public UnityEvent OnObjectDeactivate;
 
     public bool Activate(Camera camera)
     {
-        if (DetectedMovable == null)
+        if (detectedInteractable == null)
         {
             var returnedObject = SimpleRaycast(camera);
             if (returnedObject != null)
             {
-                DetectedMovable = returnedObject;
-                DetectedMovable.OnStartInteract();
+                detectedInteractable = returnedObject;
+                detectedInteractable.OnStartInteract();
             }
-                
             return false;
         }
         else
         {
-            DetectedMovable.Use(CalculateForce(forceScale));
+            detectedInteractable.Interact();
             OnObjectActivate.Invoke();
+            return true;
         }
-        return true;
     }
 
     public bool Deactivate()
     {
-        if (DetectedMovable == null) return false;
+        if (detectedInteractable == null) return false;
 
-        DetectedMovable = null;
+        detectedInteractable = null;
         OnObjectDeactivate.Invoke();
-        // Debug.Log("Deactivated Movable.");
         return true;
     }
 
-    private float CalculateForce(float force = 1f)
-    {
-        var calculatedForce = 0f;
-        float mouseY = Input.GetAxis("Mouse Y");
-        calculatedForce = (force * mouseY);
-
-        return calculatedForce;
-    }
 
     /* public bool MoveTheRigidbodies(Camera camera)
      {
@@ -68,7 +58,7 @@ public class SimpleActivator : MonoBehaviour
          return worked;
      }*/
 
-    IMovable SimpleRaycast(Camera camera)
+    IInteractable SimpleRaycast(Camera camera)
     {
         RaycastHit hit;
         Ray cameraRay = camera.ViewportPointToRay(new Vector3(.5f, .5f, .5f));
@@ -77,8 +67,7 @@ public class SimpleActivator : MonoBehaviour
             Debug.Log("Hit this: " + hit.transform.gameObject.name);
             try
             {
-                
-                IMovable objectCatched = hit.collider.gameObject.GetComponent<IMovable>();
+                IInteractable objectCatched = hit.collider.gameObject.GetComponent<IInteractable>();
                 if (objectCatched != null) return objectCatched;
             }
             catch (NullReferenceException)

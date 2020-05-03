@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Cheats
 {
+#if UNITY_EDITOR
     public static class EditorCheats
     {
         [MenuItem("Cheats/Player/Recharge Battery #R")]
@@ -18,4 +19,5 @@ namespace Cheats
             }
         }
     }
+#endif
 }

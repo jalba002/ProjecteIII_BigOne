@@ -28,7 +28,7 @@ public class InventoryDisplay : MonoBehaviour
     public InventoryItem selectedItem;
     private static InventorySlot _selectedSlot;
 
-    private CanvasController canvas;
+    public CanvasController canvas { get; protected set; }
 
     public static InventorySlot selectedSlot
     {
@@ -111,7 +111,6 @@ public class InventoryDisplay : MonoBehaviour
         Debug.Log(index);
         SetupSlot(index, item);
 
-        canvas.AddPickupMessage(item.itemName);
     }
 
     public void RemoveItem(InventoryItem item)
@@ -125,17 +124,25 @@ public class InventoryDisplay : MonoBehaviour
         else
         {
             int a = item.GetActualQuantity();
-            if (a <= 1)
+            if (a == 1)
             {
-                Debug.Log(inventorySlotList.Count);
+                /*Debug.Log(inventorySlotList.Count);
                 var index = inventorySlotList.FindIndex(i => i.item == item);
-                SetupSlot(index, null);
+                SetupSlot(index, null);*/
+                // Only works on Inventory. BRUH.
             }
             else
             {
                 // quantity is changed on the Inventory.cs, it's useless do it here.
             }
         }
+    }
+
+    public void ClearFromInventory(InventoryItem item)
+    {
+        var index = inventorySlotList.FindIndex(i => i.item == item);
+        SetupSlot(index, null);
+        selectedSlot = null;
     }
 
     public void RemoveButton()

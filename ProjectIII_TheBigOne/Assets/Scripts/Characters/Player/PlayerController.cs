@@ -76,6 +76,8 @@ namespace Player
             {
                 playerInventory = GetComponent<Inventory>();
             }
+
+            Cursor.visible = false;
         }
 
         private void Start()
@@ -177,6 +179,7 @@ namespace Player
                     cameraController.angleLocked = enabled;
                     cameraController.cursorLock = !enabled;
                     simpleActivator.enabled = !enabled;
+                    Cursor.visible = enabled;
                 }
             }
             else

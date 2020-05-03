@@ -54,7 +54,7 @@ public class Inventory : MonoBehaviour
             characterItems.Add(itemToAdd);
             inventoryDisplay.AddNewItem(itemToAdd);
         }
-
+        inventoryDisplay.canvas.AddPickupMessage(itemName);
         return true;
     }
 
@@ -77,16 +77,16 @@ public class Inventory : MonoBehaviour
             else
             {
                 int a = item.GetActualQuantity();
-                Debug.Log(a);
                 if (a == 1)
                 {
                     characterItems.Remove(item);
+                    inventoryDisplay.ClearFromInventory(item);
                     Debug.Log("Item removed: " + item.itemName);
                 }
                 else
                 {
                     item.SetActualQuantity(a - 1);
-                    Debug.Log("Item removed: " + item.itemName);
+                    Debug.Log("Removed 1 unit of " + item.itemName + ", now " + item.GetActualQuantity() + " remaining.");
                 }
             }
         }

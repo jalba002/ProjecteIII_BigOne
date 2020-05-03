@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 8543597528817713045}
   - component: {fileID: 8543597528817713046}
   - component: {fileID: 8089218479784260222}
+  - component: {fileID: 4180473886768691340}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -143,20 +144,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectType: 0
+  doorConfiguration:
+    maximumAngle: 90
+    minimumAngle: 0
+    friction: 1
+    openForce: 5
+  drawerConfiguration:
+    maximumDistance: 0.25
+    friction: 10
+    maximumForce: 5
   lockedMode: 1
   HandlePosition: {fileID: 5455790974353344899}
-  DoorJointConfiguration:
-    maximumAngle: 0
-    minimumAngle: 90
-    friction: 10
-  DrawerJointConfiguration:
-    maximumDistance: 0.25
-    friction: 0
-    maximumForce: 5
   ignoredColliders: []
   OnUnlock:
     m_PersistentCalls:
       m_Calls: []
+  OnStartInteracting:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!208 &4180473886768691340
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8543597528817713067}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.15, y: 0.5, z: 0.05}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8543597529727350380
 GameObject:
   m_ObjectHideFlags: 0

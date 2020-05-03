@@ -10,8 +10,9 @@ namespace World.Objects
 {
     public class DynamicObject : MonoBehaviour, IInteractable
     {
+        #region Declarations
         [System.Serializable]
-        public struct HingeConfiguration
+        public struct DoorHingeConfiguration
         {
             public float maximumAngle;
             public float minimumAngle;
@@ -51,13 +52,7 @@ namespace World.Objects
 
         [Header("Main Configuration", order = 0)]
         public ObjectType objectType;
-
-        public LockedMode lockedMode;
-        public OpenState openState { get; set; }
-
-        [Header("Hinge Settings", order = 1)] public GameObject HandlePosition;
-
-        public HingeConfiguration DoorJointConfiguration = new HingeConfiguration()
+        public DoorHingeConfiguration doorConfiguration = new DoorHingeConfiguration()
         {
             friction = 1f,
             maximumAngle = 90f,
@@ -65,12 +60,19 @@ namespace World.Objects
             openForce = 5f
         };
 
-        public DrawerHingeConfiguration DrawerJointConfiguration = new DrawerHingeConfiguration()
+        public DrawerHingeConfiguration drawerConfiguration = new DrawerHingeConfiguration()
         {
             friction = 10f,
             maximumDistance = 0.25f,
             maximumForce = 5f
         };
+        
+        #endregion
+        
+        public LockedMode lockedMode;
+        public OpenState openState { get; set; }
+
+        [Header("Hinge Settings", order = 1)] public GameObject HandlePosition;
 
         [Header("Other Settings")] private HingeJoint HingeJoint;
         private ConfigurableJoint ConfgJoint;
@@ -78,7 +80,8 @@ namespace World.Objects
         public List<Collider> ignoredColliders;
         private Collider selfCollider;
         
-        [Header("Events")] public UnityEvent OnUnlock;
+        [Header("Events")] public UnityEvent OnUnlock = new UnityEvent();
+        public UnityEvent OnStartInteracting = new UnityEvent();
 
         public Rigidbody Rigidbody { get; protected set; }
 
@@ -96,24 +99,24 @@ namespace World.Objects
                 throw new NullReferenceException($"Missing Handle in {this.gameObject.name}");
             }
         }
-        
+
         public void Start()
         {
             IgnoreColliders();
-            SetJointsLimit(objectType);
+            SetJointsLimit(lockedMode);
             SetInitialPositions();
         }
 
         private void SetInitialPositions()
         {
-            switch(objectType)
+            switch (objectType)
             {
                 case ObjectType.Door:
-                    
+
                     break;
                 case ObjectType.Drawer:
                     Vector3 newStartingPosition = this.gameObject.transform.localPosition;
-                    newStartingPosition.z -= DrawerJointConfiguration.maximumDistance;
+                    newStartingPosition.z -= (drawerConfiguration.maximumDistance * 0.9f);
                     this.gameObject.transform.localPosition = newStartingPosition;
                     break;
                 default:
@@ -159,8 +162,8 @@ namespace World.Objects
             Rigidbody.useGravity = false;
             Rigidbody.angularDrag = 0f;
             Rigidbody.drag = objectType == ObjectType.Door
-                ? DoorJointConfiguration.friction
-                : DrawerJointConfiguration.friction;
+                ? doorConfiguration.friction
+                : drawerConfiguration.friction;
             return;
         }
 
@@ -172,7 +175,6 @@ namespace World.Objects
             joint.angularXMotion = ConfigurableJointMotion.Locked;
             joint.angularYMotion = ConfigurableJointMotion.Locked;
             joint.angularZMotion = ConfigurableJointMotion.Locked;
-            
         }
 
         private void ConfigureNewJoint(HingeJoint joint)
@@ -185,45 +187,73 @@ namespace World.Objects
             //joint.anchor = new Vector3(0f, -0.5f, 0f);
         }
 
-        private void SetJointsLimit(ObjectType objectType)
+        private void SetJointsLimit(LockedMode lockMode)
         {
-            switch (objectType)
+            switch (lockMode)
             {
-                case ObjectType.Door:
-                    if (HingeJoint == null) return;
-                    HingeJoint.limits = new JointLimits()
+                case LockedMode.Locked:
+                    switch (objectType)
                     {
-                        max = DoorJointConfiguration.maximumAngle,
-                        min = DoorJointConfiguration.minimumAngle
-                    };
-                    /*HingeJoint.spring = new JointSpring()
-                    {
-                        damper = DoorJointConfiguration.friction
-                    };*/
+                        case ObjectType.Door:
+                            if (HingeJoint == null) return;
+                            HingeJoint.limits = new JointLimits()
+                            {
+                                max = 2f,
+                                min = -2f
+                            };
+                            break;
+                        case ObjectType.Drawer:
+                            
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException(nameof(objectType), objectType, null);
+                    }
+
                     break;
-                case ObjectType.Drawer:
-                    if (ConfgJoint == null) return;
-                    ConfgJoint.linearLimit = new SoftJointLimit()
+                case LockedMode.Unlocked:
+                    switch (objectType)
                     {
-                        limit = DrawerJointConfiguration.maximumDistance,
-                        contactDistance = 1000f
-                    };
-                    /*ConfgJoint.linearLimitSpring = new SoftJointLimitSpring()
-                    {
-                        damper = DrawerJointConfiguration.friction
-                    };*/
-                    ConfgJoint.zDrive = new JointDrive()
-                    {
-                        maximumForce = DrawerJointConfiguration.maximumForce,
-                        //positionDamper = DrawerJointConfiguration.friction
-                    };
+                        case ObjectType.Door:
+                            if (HingeJoint == null) return;
+                            HingeJoint.limits = new JointLimits()
+                            {
+                                max = doorConfiguration.maximumAngle,
+                                min = doorConfiguration.minimumAngle
+                            };
+                            /*HingeJoint.spring = new JointSpring()
+                            {
+                                damper = DoorJointConfiguration.friction
+                            };*/
+                            break;
+                        case ObjectType.Drawer:
+                            if (ConfgJoint == null) return;
+                            ConfgJoint.linearLimit = new SoftJointLimit()
+                            {
+                                limit = drawerConfiguration.maximumDistance,
+                                contactDistance = 1000f
+                            };
+                            /*ConfgJoint.linearLimitSpring = new SoftJointLimitSpring()
+                            {
+                                damper = DrawerJointConfiguration.friction
+                            };*/
+                            ConfgJoint.zDrive = new JointDrive()
+                            {
+                                maximumForce = drawerConfiguration.maximumForce,
+                                //positionDamper = DrawerJointConfiguration.friction
+                            };
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException(nameof(objectType), objectType, null);
+                    }
+
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(objectType), objectType, null);
+                    throw new ArgumentOutOfRangeException();
             }
+
+            lockedMode = lockMode;
         }
 
-      
 
         private bool GenerateIgnoredColliders(Collider selfCollider)
         {
@@ -259,7 +289,7 @@ namespace World.Objects
         //Update hinge variables when inspector is modified.
         private void OnValidate()
         {
-            SetJointsLimit(objectType);
+            SetJointsLimit(lockedMode);
         }
 
         // Interface Implementation //
@@ -277,7 +307,7 @@ namespace World.Objects
                 }
             }
 
-            var useForce = HandlePosition.transform.forward * CalculateForce(DoorJointConfiguration.openForce);
+            var useForce = HandlePosition.transform.forward * CalculateForce(doorConfiguration.openForce);
             Rigidbody.AddForceAtPosition(useForce, HandlePosition.transform.position, ForceMode.Force);
             return true;
         }
@@ -289,7 +319,9 @@ namespace World.Objects
 
         public bool Unlock()
         {
-            throw new NotImplementedException();
+            SetJointsLimit(LockedMode.Unlocked);
+            OnUnlock.Invoke();
+            return true;
         }
 
         public bool Lock()
@@ -306,15 +338,17 @@ namespace World.Objects
         {
             throw new NotImplementedException();
         }
-        
+
         public void OnStartInteract()
         {
+            OnStartInteracting.Invoke();
+            
             switch (objectType)
             {
                 case ObjectType.Door:
                     //Play door sound
                     AudioManager.PlaySoundAtLocation("Sound/Door/DoorOpen_07", transform.position);
-                    
+
                     break;
                 case ObjectType.Drawer:
                     //Play drawer sound

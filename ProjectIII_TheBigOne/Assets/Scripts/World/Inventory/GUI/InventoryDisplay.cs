@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -68,6 +69,11 @@ public class InventoryDisplay : MonoBehaviour
         OnSlotSelected.AddListener(ConfigureContextMenu);
 
         canvas = FindObjectOfType<CanvasController>();
+    }
+
+    private void Start()
+    {
+        ToggleInventoryUI();
     }
 
     private void ConfigureContextMenu()

@@ -46,7 +46,6 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     public void Setup(InventoryItem item)               
     {
-        Debug.Log("Setup");
         this.item = item;                              
 
         if (this.item != null)                          
@@ -101,7 +100,6 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     
     public void SelectThisSlot()
     {
-        Debug.Log("Selecting Slot");
         if (InventoryDisplay.selectedSlot == this)
         {
             UnselectThisSlot();

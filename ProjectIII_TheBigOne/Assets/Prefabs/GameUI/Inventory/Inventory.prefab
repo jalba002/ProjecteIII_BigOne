@@ -118,7 +118,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3929013230641019412}
+      - m_Target: {fileID: 4395613313273026640}
         m_MethodName: SwitchWindow
         m_Mode: 5
         m_Arguments:
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3929013230641019412}
+      - m_Target: {fileID: 4395613313273026640}
         m_MethodName: SwitchWindow
         m_Mode: 5
         m_Arguments:
@@ -376,7 +376,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3929013230641019412}
+      - m_Target: {fileID: 4395613313273026640}
         m_MethodName: RemoveButton
         m_Mode: 1
         m_Arguments:
@@ -386,7 +386,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!1 &3929013229052079599
 GameObject:
   m_ObjectHideFlags: 0
@@ -1476,7 +1476,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3929013230641019412}
+      - m_Target: {fileID: 0}
         m_MethodName: RemoveButton
         m_Mode: 1
         m_Arguments:
@@ -1756,7 +1756,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3929013230641019412}
+      - m_Target: {fileID: 0}
         m_MethodName: 
         m_Mode: 1
         m_Arguments:
@@ -1972,7 +1972,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3929013230641019413}
   - component: {fileID: 3929013230641019415}
-  - component: {fileID: 3929013230641019412}
+  - component: {fileID: 4395613313273026640}
   m_Layer: 5
   m_Name: InventoryDisplay
   m_TagString: InventoryDisplay
@@ -2024,7 +2024,7 @@ MonoBehaviour:
   m_Spacing: {x: 5, y: 5}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!114 &3929013230641019412
+--- !u!114 &4395613313273026640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2036,8 +2036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47286b27f34b97e4d9fa664b9ece487b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryRef: {fileID: 0}
-  inventorySlotList: []
+  inventoryParent: {fileID: 3929013230573158020}
   slotPrefab: {fileID: 6891064097225815124, guid: f50751038a8922c469c3bdf5ce253992,
     type: 3}
   slotGrid: {fileID: 3929013230641019413}
@@ -2058,7 +2057,6 @@ MonoBehaviour:
     canUseAlways: 0
     combinedItems: []
     myEffect: 0
-  selectedSlot: {fileID: 0}
   selectedItemName: {fileID: 3929013229715751008}
   selectedItemInfo: {fileID: 3929013230022785128}
   contextMenu: {fileID: 3929013229919733413}
@@ -2181,7 +2179,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3929013230641019412}
+      - m_Target: {fileID: 0}
         m_MethodName: UseButton
         m_Mode: 1
         m_Arguments:
@@ -2464,7 +2462,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3929013230641019412}
+      - m_Target: {fileID: 4395613313273026640}
         m_MethodName: UseButton
         m_Mode: 1
         m_Arguments:
@@ -2474,7 +2472,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!1001 &2798560184212051197
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2888,7 +2886,7 @@ PrefabInstance:
         type: 3}
       propertyPath: inventoryDisplayRef
       value: 
-      objectReference: {fileID: 3929013230641019412}
+      objectReference: {fileID: 0}
     - target: {fileID: 7227516217228035607, guid: 4a545d203ab169b449b55143ad2b3c6e,
         type: 3}
       propertyPath: firstSlot

@@ -59,11 +59,11 @@ public class CombinedSlot : MonoBehaviour
             GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().AddItem(combinedSlot.item.itemName);
 
             inventoryDisplayRef.RemoveItem(firstSlot.item);
-            inventoryDisplayRef.inventoryRef.RemoveItem(firstSlot.item.itemName);
+            InventoryDisplay.inventoryRef.RemoveItem(firstSlot.item.itemName);
             firstSlot.Setup(ResetSlot());
 
             inventoryDisplayRef.RemoveItem(secondSlot.item);
-            inventoryDisplayRef.inventoryRef.RemoveItem(secondSlot.item.itemName);
+            InventoryDisplay.inventoryRef.RemoveItem(secondSlot.item.itemName);
             secondSlot.Setup(ResetSlot());
 
             combinedSlot.Setup(ResetSlot());

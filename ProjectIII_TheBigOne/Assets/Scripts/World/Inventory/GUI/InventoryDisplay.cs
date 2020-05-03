@@ -7,13 +7,12 @@ using UnityEngine.EventSystems;
 
 public class InventoryDisplay : MonoBehaviour
 {
-    [Header("Gameobjects")]
-    public Inventory inventoryRef;
+    public static InventoryDisplay Instance;
+    
+    [Header("Gameobjects")] public static Inventory inventoryRef;
 
     public GameObject inventoryParent;
-    [Header("Settings")]
-
-    [SerializeField] public List<InventorySlot> inventorySlotList = new List<InventorySlot>();
+    [Header("Settings")] public static List<InventorySlot> inventorySlotList = new List<InventorySlot>();
     public GameObject slotPrefab;
     public Transform slotGrid;
     public int numberOfSlots = 12;
@@ -21,8 +20,7 @@ public class InventoryDisplay : MonoBehaviour
     public GameObject inventoryWindow;
     public GameObject combineWindow;
 
-    [Header("Combine Slots")]
-    public InventorySlot combineSlot_1;
+    [Header("Combine Slots")] public InventorySlot combineSlot_1;
     public InventorySlot combineSlot_2;
 
 
@@ -48,6 +46,15 @@ public class InventoryDisplay : MonoBehaviour
 
     void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+        
         for (int i = 0; i < numberOfSlots; i++)
         {
             GameObject instance = Instantiate(slotPrefab);
@@ -58,7 +65,7 @@ public class InventoryDisplay : MonoBehaviour
         inventoryRef = GameObject.FindObjectOfType<Inventory>();
         OnSlotSelected.AddListener(ConfigureContextMenu);
     }
-    
+
     private void ConfigureContextMenu()
     {
         if (selectedSlot == null)
@@ -75,9 +82,10 @@ public class InventoryDisplay : MonoBehaviour
 
     public void SetupSlot(int slot, InventoryItem item)
     {
+        Debug.Log("Slot is " + slot);
         inventorySlotList[slot].Setup(item);
     }
-
+    
     public void CopySlot(InventorySlot origin, InventorySlot copy)
     {
         InventoryItem i = copy.item;
@@ -89,21 +97,27 @@ public class InventoryDisplay : MonoBehaviour
 
     public void AddNewItem(InventoryItem item)
     {
-        SetupSlot(inventorySlotList.FindIndex(i => i.item == null), item);
+        var index = inventorySlotList.FindIndex(i => i.item == null);
+        Debug.Log(index);
+        SetupSlot(index, item);
     }
 
     public void RemoveItem(InventoryItem item)
     {
+        Debug.Log("Removing item");
         if (!item.isStackable)
         {
-            SetupSlot(inventorySlotList.FindIndex(i => i.item == item), null);
+            var index = inventorySlotList.FindIndex(i => i.item == item);
+            SetupSlot(index, null);
         }
         else
         {
             int a = item.GetActualQuantity();
-            if (a == 1)
+            if (a <= 1)
             {
-                SetupSlot(inventorySlotList.FindIndex(i => i.item == item), null);
+                Debug.Log(inventorySlotList.Count);
+                var index = inventorySlotList.FindIndex(i => i.item == item);
+                SetupSlot(index, null);
             }
             else
             {
@@ -125,7 +139,7 @@ public class InventoryDisplay : MonoBehaviour
             selectedItemInfo.text = " ";
             selectedItemName.text = " ";
             selectedSlot.background.color = Color.white;
-            //selectedSlot = null;
+            selectedSlot = null;
         }
     }
 
@@ -138,11 +152,8 @@ public class InventoryDisplay : MonoBehaviour
             selectedSlot.item.UseItem();
             if (selectedSlot.item.destroyOnUse)
             {
-                Debug.Log("Destroying item.");
-                RemoveItem(selectedSlot.item);
-                Debug.Log("Second Destroying.");
                 inventoryRef.RemoveItem(selectedSlot.item.itemName);
-                Debug.Log("Third Destroying.");
+                RemoveItem(selectedSlot.item);
             }
         }
     }

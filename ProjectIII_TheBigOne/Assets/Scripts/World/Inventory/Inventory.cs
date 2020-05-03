@@ -66,9 +66,12 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItem(string itemName)
     {
+        Debug.Log("Removing item 1");
         InventoryItem item = CheckThisItem(itemName);
+        Debug.Log("Removing item 2");
         if (item != null)
         {
+            Debug.Log("Removing item 3");
             if (!item.isStackable)
             {
                 characterItems.Remove(item);
@@ -76,6 +79,7 @@ public class Inventory : MonoBehaviour
             }
             else
             {
+                Debug.Log("Removing item 4");
                 int a = item.GetActualQuantity();
                 Debug.Log(a);
                 if (a == 1)

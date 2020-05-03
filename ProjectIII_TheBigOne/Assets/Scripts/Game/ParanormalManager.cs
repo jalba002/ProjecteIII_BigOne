@@ -70,6 +70,12 @@ public class ParanormalManager : MonoBehaviour
         // TODO Play spooky sound.
         // Move dimitry away.
         // Set new behaviour.
+        if (!Dimitry.gameObject.activeSelf)
+        {
+            Debug.LogWarning("Dimitry is disabled in this scene.");
+            return;
+        }
+        
         Debug.Log("Starting Dimitry First Phase");
         SetDummyParent(Dimitry.currentBrain.archnemesis.transform);
         //SetDummyLocalPosition(Vector3.zero);
@@ -82,6 +88,12 @@ public class ParanormalManager : MonoBehaviour
         // TODO Play spooky sound.
         // Move dimitry away.
         // Set new behaviour.
+        if (!Dimitry.gameObject.activeSelf)
+        {
+            Debug.LogWarning("Dimitry is disabled in this scene.");
+            return;
+        }
+        
         ParanormalSoundEmitter.Play();
         Debug.Log("Starting Dimitry Second Phase");
         SetDummyParent(Dimitry.currentBrain.archnemesis.transform);

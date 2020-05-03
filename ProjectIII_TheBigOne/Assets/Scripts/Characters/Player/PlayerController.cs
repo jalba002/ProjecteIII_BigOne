@@ -162,7 +162,7 @@ namespace Player
 
         public void PlayerStartsBeingChased()
         {
-            AudioManager.Instance.PlaySound2D("Sound/Ambience/ManBreathScared");
+            AudioManager.PlaySound2D("Sound/Ambience/ManBreathScared");
         }
         public void PlayerStopsBeingChased()
         {

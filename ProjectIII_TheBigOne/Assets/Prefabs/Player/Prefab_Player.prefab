@@ -340,7 +340,6 @@ GameObject:
   - component: {fileID: 4287271705462774206}
   - component: {fileID: 4287271705462774198}
   - component: {fileID: 6592646240077006143}
-  - component: {fileID: 6828844133159262755}
   - component: {fileID: 2031410052690668047}
   m_Layer: 0
   m_Name: Prefab_Player
@@ -438,7 +437,7 @@ MonoBehaviour:
   cameraController: {fileID: 4287271704942058502}
   attachedCollider: {fileID: 0}
   objectInspector: {fileID: 4287271705462774198}
-  simpleActivator: {fileID: 6828844133159262755}
+  simpleActivator: {fileID: 0}
   characterProperties: {fileID: 11400000, guid: 7e571a240adc2994192319d07f6fd24d,
     type: 2}
   footstepSounds:
@@ -477,8 +476,14 @@ MonoBehaviour:
   raycastDistance: 2
   interact:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 513
   forceScale: 15
+  OnObjectActivate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnObjectDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4287271705462774198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,7 +500,7 @@ MonoBehaviour:
   range: 10
   LayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 513
   distances: {x: 1.5, y: 2}
   rotationSpeed: {x: 0.5, y: 0.5}
 --- !u!114 &6592646240077006143
@@ -516,23 +521,6 @@ MonoBehaviour:
   feedbackVisual: {fileID: 0}
   lightFlickerThreshold: 0.2
   minimumIntensity: 0.33
---- !u!114 &6828844133159262755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4287271706014648174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87668cddd42f759458e4d9768a4d5b62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  raycastDistance: 20
-  interact:
-    serializedVersion: 2
-    m_Bits: 512
-  forceScale: 15
 --- !u!82 &2031410052690668047
 AudioSource:
   m_ObjectHideFlags: 0

@@ -7,20 +7,30 @@ using UnityEngine.UI;
 
 public class CanvasController : MonoBehaviour
 {
-    public GameObject NotificationPrefab;
+    [Header("Inventory")] public GameObject NotificationPrefab;
     public GameObject NotificationPanel;
-    public Slider lightingSlider;
+
+    [Header("Sliders")] public Slider lightingSlider;
     public Slider runningSlider;
-    private FlashlightController flashligh;
+
+    [Header("Crosshair")] public Sprite defaultCrosshair;
+    public Sprite grabCrosshair;
+
+    [Header("Components")] public Image UICrosshair;
+
+    private FlashlightController flashlight;
     private PlayerController playerController;
     private State_Player_Walking playerWalking;
 
 
     private void Start()
     {
-        flashligh = FindObjectOfType<FlashlightController>();
+        flashlight = FindObjectOfType<FlashlightController>();
         playerController = FindObjectOfType<PlayerController>();
         playerWalking = FindObjectOfType<State_Player_Walking>();
+
+        playerController.simpleActivator.OnObjectActivate.AddListener(ChangeCursorToGrab);
+        playerController.simpleActivator.OnObjectDeactivate.AddListener(ChangeCursorToDefault);
     }
 
     void Update()
@@ -49,11 +59,23 @@ public class CanvasController : MonoBehaviour
 
     public void playerLightingUpdate()
     {
-        lightingSlider.value = flashligh.currentCharge / flashligh.maxCharge;
+        lightingSlider.value = flashlight.currentCharge / flashlight.maxCharge;
     }
 
     public void playerRunningUpdate()
     {
         runningSlider.value = playerWalking.currentStamina / playerController.characterProperties.maximumStamina;
+    }
+
+    public void ChangeCursorToDefault()
+    {
+        UICrosshair.sprite = defaultCrosshair;
+        UICrosshair.rectTransform.localScale = new Vector3(.1f, .1f, 1f);
+    }
+
+    public void ChangeCursorToGrab()
+    {
+        UICrosshair.sprite = grabCrosshair;
+        UICrosshair.rectTransform.localScale = new Vector3(.6f, .6f, 1f);
     }
 }

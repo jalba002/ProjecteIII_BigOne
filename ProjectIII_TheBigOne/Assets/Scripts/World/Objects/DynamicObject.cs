@@ -311,8 +311,8 @@ namespace World.Objects
             {
                 case ObjectType.Door:
                     //Play door sound
-                    AudioManager.Instance.PlaySoundAtLocation("Sound/Door/DoorOpen_07", transform.position);
-
+                    AudioManager.PlaySoundAtLocation("Sound/Door/DoorOpen_07", transform.position);
+                    
                     break;
                 case ObjectType.Drawer:
                     //Play drawer sound

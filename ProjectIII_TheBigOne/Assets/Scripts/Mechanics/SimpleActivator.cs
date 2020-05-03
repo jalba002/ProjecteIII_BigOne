@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Interfaces;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SimpleActivator : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class SimpleActivator : MonoBehaviour
     public float forceScale = 5f;
 
     public IMovable DetectedMovable;
+
+    public UnityEvent OnObjectActivate;
+    public UnityEvent OnObjectDeactivate;
 
     public bool Activate(Camera camera)
     {
@@ -31,6 +35,7 @@ public class SimpleActivator : MonoBehaviour
         else
         {
             DetectedMovable.Use(CalculateForce(forceScale));
+            OnObjectActivate.Invoke();
         }
         return true;
     }
@@ -40,8 +45,8 @@ public class SimpleActivator : MonoBehaviour
         if (DetectedMovable == null) return false;
 
         DetectedMovable = null;
-
-        Debug.Log("Deactivated Movable.");
+        OnObjectDeactivate.Invoke();
+        // Debug.Log("Deactivated Movable.");
         return true;
     }
 

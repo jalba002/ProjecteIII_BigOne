@@ -272,7 +272,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3583927845842263565}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 64.200005, y: 22.928574, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3583927847017235115}
@@ -296,6 +296,9 @@ MonoBehaviour:
   NotificationPanel: {fileID: 3583927846728444274}
   lightingSlider: {fileID: 7925743988125326644}
   runningSlider: {fileID: 8612239219126784368}
+  defaultCrosshair: {fileID: 21300000, guid: fe304aac3faa37a498ff97c135557c42, type: 3}
+  grabCrosshair: {fileID: 21300000, guid: 96efc1977c2ea4547bb329bd246f7839, type: 3}
+  UICrosshair: {fileID: 3583927847247261724}
 --- !u!1 &3583927846728444274
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,7 +510,7 @@ RectTransform:
   m_GameObject: {fileID: 3583927847247261714}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -2.3000002}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 3583927845810692380}
   m_RootOrder: 1
@@ -515,7 +518,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 5, y: 5}
+  m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3583927847247261727
 CanvasRenderer:
@@ -899,12 +902,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5553589398178120264, guid: 38f3231779740e14bad00349b6a837a8,
         type: 3}
-      propertyPath: m_SizeDelta.y
+      propertyPath: m_SizeDelta.x
       value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 5553589398178120264, guid: 38f3231779740e14bad00349b6a837a8,
         type: 3}
-      propertyPath: m_SizeDelta.x
+      propertyPath: m_SizeDelta.y
       value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 7423346892349460212, guid: 38f3231779740e14bad00349b6a837a8,
@@ -915,16 +918,6 @@ PrefabInstance:
     - target: {fileID: 7423346892349460212, guid: 38f3231779740e14bad00349b6a837a8,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7925743987959848140, guid: 38f3231779740e14bad00349b6a837a8,
-        type: 3}
-      propertyPath: m_Value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7925743987959848140, guid: 38f3231779740e14bad00349b6a837a8,
-        type: 3}
-      propertyPath: m_WholeNumbers
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8576396965015218665, guid: 38f3231779740e14bad00349b6a837a8,

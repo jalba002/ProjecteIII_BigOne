@@ -27,6 +27,8 @@ public class InventoryDisplay : MonoBehaviour
     public InventoryItem selectedItem;
     private static InventorySlot _selectedSlot;
 
+    private CanvasController canvas;
+
     public static InventorySlot selectedSlot
     {
         get { return _selectedSlot; }
@@ -64,6 +66,8 @@ public class InventoryDisplay : MonoBehaviour
 
         inventoryRef = GameObject.FindObjectOfType<Inventory>();
         OnSlotSelected.AddListener(ConfigureContextMenu);
+
+        canvas = FindObjectOfType<CanvasController>();
     }
 
     private void ConfigureContextMenu()
@@ -100,6 +104,8 @@ public class InventoryDisplay : MonoBehaviour
         var index = inventorySlotList.FindIndex(i => i.item == null);
         Debug.Log(index);
         SetupSlot(index, item);
+
+        canvas.AddPickupMessage(item.itemName);
     }
 
     public void RemoveItem(InventoryItem item)

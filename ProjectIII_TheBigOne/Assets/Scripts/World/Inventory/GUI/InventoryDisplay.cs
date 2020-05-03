@@ -154,6 +154,7 @@ public class InventoryDisplay : MonoBehaviour
             {
                 inventoryRef.RemoveItem(selectedSlot.item.itemName);
                 RemoveItem(selectedSlot.item);
+                selectedSlot = null;
             }
         }
     }

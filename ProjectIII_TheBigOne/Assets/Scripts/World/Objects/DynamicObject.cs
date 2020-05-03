@@ -16,6 +16,7 @@ namespace World.Objects
             public float maximumAngle;
             public float minimumAngle;
             [Range(0f, 100f)] public float friction;
+            [Header("Forces")] public float openForce;
         }
 
         [System.Serializable]
@@ -60,7 +61,8 @@ namespace World.Objects
         {
             friction = 1f,
             maximumAngle = 90f,
-            minimumAngle = 0f
+            minimumAngle = 0f,
+            openForce = 5f
         };
 
         public DrawerHingeConfiguration DrawerJointConfiguration = new DrawerHingeConfiguration()
@@ -275,7 +277,7 @@ namespace World.Objects
                 }
             }
 
-            var useForce = HandlePosition.transform.forward * CalculateForce();
+            var useForce = HandlePosition.transform.forward * CalculateForce(DoorJointConfiguration.openForce);
             Rigidbody.AddForceAtPosition(useForce, HandlePosition.transform.position, ForceMode.Force);
             return true;
         }

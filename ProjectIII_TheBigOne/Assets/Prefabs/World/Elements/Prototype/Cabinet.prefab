@@ -77,20 +77,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectType: 1
-  lockedMode: 1
-  HandlePosition: {fileID: 1430451019333397453}
-  DoorJointConfiguration:
+  doorConfiguration:
     maximumAngle: 90
     minimumAngle: 0
     friction: 1
-  DrawerJointConfiguration:
+    openForce: 5
+  drawerConfiguration:
     maximumDistance: 0.25
     friction: 10
-    maximumForce: 3
+    maximumForce: 5
+  lockedMode: 1
+  HandlePosition: {fileID: 1430451019333397453}
   ignoredColliders:
   - {fileID: 239505150}
-  - {fileID: 0}
-  OnUnlock:
+  OnUnlockEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStartInteracting:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1853469400
@@ -498,20 +501,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectType: 1
-  lockedMode: 1
-  HandlePosition: {fileID: 5790013986470231721}
-  DoorJointConfiguration:
+  doorConfiguration:
     maximumAngle: 90
     minimumAngle: 0
     friction: 1
-  DrawerJointConfiguration:
+    openForce: 5
+  drawerConfiguration:
     maximumDistance: 0.25
-    friction: 5
-    maximumForce: 1
+    friction: 10
+    maximumForce: 5
+  lockedMode: 1
+  HandlePosition: {fileID: 5790013986470231721}
   ignoredColliders:
   - {fileID: 787927437}
   - {fileID: 239505150}
-  OnUnlock:
+  OnUnlockEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStartInteracting:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &113848444
@@ -574,20 +581,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectType: 1
-  lockedMode: 1
-  HandlePosition: {fileID: 7321392043437353577}
-  DoorJointConfiguration:
+  doorConfiguration:
     maximumAngle: 90
     minimumAngle: 0
     friction: 1
-  DrawerJointConfiguration:
+    openForce: 5
+  drawerConfiguration:
     maximumDistance: 0.25
-    friction: 5
-    maximumForce: 2
+    friction: 10
+    maximumForce: 5
+  lockedMode: 1
+  HandlePosition: {fileID: 7321392043437353577}
   ignoredColliders:
   - {fileID: 1853469400}
   - {fileID: 239505150}
-  OnUnlock:
+  OnUnlockEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStartInteracting:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &787927437

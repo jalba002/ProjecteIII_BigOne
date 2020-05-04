@@ -109,6 +109,8 @@ namespace Player
             {
                 stateMachine.UpdateTick(Time.deltaTime);
             }
+            
+            CorrectRigidbody();
 
             InspectObjects();
             InteractDoors();
@@ -186,6 +188,14 @@ namespace Player
             {
                 Debug.LogError("No player inventory in Player!");
                 return;
+            }
+        }
+
+        public void CorrectRigidbody()
+        {
+            if (rigidbody.angularVelocity != Vector3.zero)
+            {
+                rigidbody.angularVelocity = Vector3.zero;
             }
         }
 

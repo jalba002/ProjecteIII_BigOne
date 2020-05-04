@@ -25,8 +25,8 @@ public class CanvasController : MonoBehaviour
 
     private void Start()
     {
-        flashlight = FindObjectOfType<FlashlightController>();
         playerController = FindObjectOfType<PlayerController>();
+        flashlight = playerController.attachedFlashlight;
         playerWalking = FindObjectOfType<State_Player_Walking>();
 
         playerController.simpleActivator.OnObjectActivate.AddListener(ChangeCursorToGrab);

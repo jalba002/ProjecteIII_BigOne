@@ -46,6 +46,8 @@ namespace Player
         {
             base.OnStateInitialize(machine);
             _attachedController = ((PlayerController)Machine.characterController);
+            currentStamina = _attachedController.characterProperties.maximumStamina;
+
         }
 
         public override void OnStateTick(float deltaTime)
@@ -105,7 +107,6 @@ namespace Player
             _attachedRigidbody = _attachedController.rigidbody;
 
             _movementSpeed = _attachedController.characterProperties.WalkSpeed;
-            currentStamina = _attachedController.characterProperties.maximumStamina;
             currentDelay = _attachedController.characterProperties.rechargeDelay;
 
             stepTime = Time.time + stepTimeRange;

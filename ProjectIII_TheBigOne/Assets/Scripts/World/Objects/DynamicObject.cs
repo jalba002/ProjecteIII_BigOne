@@ -324,6 +324,12 @@ namespace World.Objects
             return true;
         }
 
+        public void SetUnlock()
+        {
+            Unlock();
+        }
+
+
         public bool Lock()
         {
             throw new NotImplementedException();

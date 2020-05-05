@@ -80,7 +80,7 @@ namespace World.Objects
         public List<Collider> ignoredColliders;
         private Collider selfCollider;
         
-        [Header("Events")] public UnityEvent OnUnlock = new UnityEvent();
+        [Header("Events")] public UnityEvent OnUnlockEvent = new UnityEvent();
         public UnityEvent OnStartInteracting = new UnityEvent();
 
         public Rigidbody Rigidbody { get; protected set; }
@@ -105,6 +105,7 @@ namespace World.Objects
             IgnoreColliders();
             SetJointsLimit(lockedMode);
             SetInitialPositions();
+            OnUnlockEvent.AddListener(OnUnlock);
         }
 
         private void SetInitialPositions()
@@ -320,8 +321,18 @@ namespace World.Objects
         public bool Unlock()
         {
             SetJointsLimit(LockedMode.Unlocked);
-            OnUnlock.Invoke();
+            OnUnlockEvent.Invoke();
             return true;
+        }
+
+        public void SetUnlock()
+        {
+            Unlock();
+        }
+
+        private void OnUnlock()
+        {
+            AudioManager.PlaySound2D("Sound/Door/Unlock01");
         }
 
         public bool Lock()

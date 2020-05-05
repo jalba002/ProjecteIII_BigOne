@@ -53,7 +53,14 @@ public static class SensesUtil
         float l_Distance = l_Direction.magnitude;
         l_Direction /= l_Distance;
 
-        bool l_Collides = Physics.Raycast(l_Ray, l_Distance, layerMask);
+        RaycastHit hitInfo;
+        
+        bool l_Collides = Physics.Raycast(l_Ray, out hitInfo ,l_Distance, layerMask);
+        if (l_Collides && hitInfo.collider.gameObject == enemy.gameObject)
+        {
+            l_Collides = false;
+        }
+
         float l_DotAngle = Vector3.Dot(l_Direction, player.cameraController.transform.forward);
 
         Debug.DrawRay(l_Ray.origin, l_Ray.direction * l_Distance, l_Collides ? Color.red : Color.green);

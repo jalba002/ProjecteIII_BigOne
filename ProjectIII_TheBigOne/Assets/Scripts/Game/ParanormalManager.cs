@@ -80,12 +80,13 @@ public class ParanormalManager : MonoBehaviour
             Debug.LogWarning("Dimitry is disabled in this scene.");
             return;
         }
-        Dimitry.gameObject.SetActive(true);
         Debug.Log("Starting Dimitry First Phase");
+        Dimitry.gameObject.SetActive(false);
+        SetEnemyPosition(firstSpawnPoint);
         SetDummyParent(Dimitry.currentBrain.archnemesis.transform);
         //SetDummyLocalPosition(Vector3.zero);
-        SetEnemyPosition(firstSpawnPoint);
         Dimitry.currentBehaviourTree = new BehaviourTree_Enemy_FirstPhase(Dimitry);
+        Dimitry.gameObject.SetActive(true);
     }
 
     public void StartSecondPhase()

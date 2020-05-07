@@ -41,12 +41,15 @@ public static class SensesUtil
 
     public static bool HasFlashlightEnabled(PlayerController playerController)
     {
+        if (playerController == null) return false;
         return playerController.attachedFlashlight.IsFlashlightEnabled;
     }
 
     public static bool IsPlayerSeeingEnemy(PlayerController player, EnemyController enemy,
         LayerMask layerMask, float coneAngle = 94f)
     {
+        if (player == null || enemy == null) return false;
+
         Vector3 l_Direction = enemy.transform.position - player.transform.position;
         Ray l_Ray = new Ray(player.cameraController.transform.position, l_Direction);
 
@@ -54,8 +57,8 @@ public static class SensesUtil
         l_Direction /= l_Distance;
 
         RaycastHit hitInfo;
-        
-        bool l_Collides = Physics.Raycast(l_Ray, out hitInfo ,l_Distance, layerMask);
+
+        bool l_Collides = Physics.Raycast(l_Ray, out hitInfo, l_Distance, layerMask);
         if (l_Collides && hitInfo.collider.gameObject == enemy.gameObject)
         {
             l_Collides = false;

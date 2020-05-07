@@ -1,5 +1,10 @@
-﻿public interface IInteractable
+﻿using UnityEngine;
+
+public interface IInteractable
 {
+    string DisplayName { get; set; }
+    GameObject attachedGameobject { get; } 
+
     bool Interact();
 
     void OnStartInteract();

@@ -1,11 +1,25 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.Configuration;
+using System.Security.Cryptography;
 using Player;
+using UnityEditor;
 using UnityEngine;
 
-public class SceneItem : MonoBehaviour, IInteractable
+public class SceneItem : MonoBehaviour, IInteractable, IPickable
 {
     public string itemName;
     private bool alreadyUsed = false;
+
+    public string DisplayName { get; set; }
+    public GameObject attachedGameobject
+    {
+        get { return gameObject; }
+    }
+
+    private void Start()
+    {
+        DisplayName = itemName;
+    }
 
     public bool Interact()
     {

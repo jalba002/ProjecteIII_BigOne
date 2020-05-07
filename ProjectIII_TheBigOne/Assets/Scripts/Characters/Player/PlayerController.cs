@@ -111,10 +111,6 @@ namespace Player
             }
             
             CorrectRigidbody();
-
-            InspectObjects();
-            InteractDoors();
-            UseFlashlight();
             ToggleInventory();
 
             //Cheat to test sounds
@@ -131,43 +127,15 @@ namespace Player
 #endif
 */
         }
-
-        void InspectObjects()
+        
+        private void FixedUpdate()
         {
-            if (objectInspector != null && objectInspector.isActiveAndEnabled)
+            // TODO Reenable stop functionality with GameController.
+            // Access with events and disable StateMachine.
+            // DO NOT REFERENCE GAMEMANAGER FROM HERE.
+            if (stateMachine.isActiveAndEnabled)
             {
-                if (currentBrain.Interact)
-                {
-                    if (objectInspector.Activate(cameraController.attachedCamera))
-                    {
-                        // Disable camera and allow the object inspector the use of mouse input.
-                        bool enableStuff = objectInspector.GetEnabled();
-                        cameraController.angleLocked = enableStuff;
-                        if (enableStuff)
-                        {
-                            stateMachine.SwitchState<State_Player_Inspecting>();
-                        }
-                        else
-                            stateMachine.SwitchState<State_Player_Walking>();
-                    }
-                }
-            }
-        }
-
-        void InteractDoors()
-        {
-            if (simpleActivator != null && simpleActivator.isActiveAndEnabled)
-            {
-                if (currentBrain.MouseInteract)
-                {
-                    if (simpleActivator.Activate(cameraController.attachedCamera))
-                        cameraController.angleLocked = true;
-                }
-                else if (currentBrain.MouseInteractRelease)
-                {
-                    if (simpleActivator.Deactivate())
-                        cameraController.angleLocked = false;
-                }
+                stateMachine.FixedUpdateTick(Time.fixedDeltaTime);
             }
         }
 
@@ -183,11 +151,6 @@ namespace Player
                     simpleActivator.enabled = !enabled;
                     Cursor.visible = enabled;
                 }
-            }
-            else
-            {
-                Debug.LogError("No player inventory in Player!");
-                return;
             }
         }
 
@@ -218,25 +181,7 @@ namespace Player
             footstepSounds[0] = audioSource.clip;
         }
 
-        private void UseFlashlight()
-        {
-            // TODO Remap controls for flashlight.
-            if (currentBrain.FlashlightToggle)
-            {
-                attachedFlashlight.ToggleFlashlight();
-            }
-        }
-
-        private void FixedUpdate()
-        {
-            // TODO Reenable stop functionality with GameController.
-            // Access with events and disable StateMachine.
-            // DO NOT REFERENCE GAMEMANAGER FROM HERE.
-            if (stateMachine.isActiveAndEnabled)
-            {
-                stateMachine.FixedUpdateTick(Time.fixedDeltaTime);
-            }
-        }
+      
 
         public Transform ReturnSelf()
         {

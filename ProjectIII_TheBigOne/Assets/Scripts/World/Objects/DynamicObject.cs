@@ -8,7 +8,7 @@ using UnityEngine.Rendering.HighDefinition;
 
 namespace World.Objects
 {
-    public class DynamicObject : MonoBehaviour, IInteractable
+    public class DynamicObject : MonoBehaviour, IInteractable, IMovable
     {
         #region Declarations
         [System.Serializable]
@@ -98,6 +98,8 @@ namespace World.Objects
             {
                 throw new NullReferenceException($"Missing Handle in {this.gameObject.name}");
             }
+
+            DisplayName = objectType.ToString();
         }
 
         public void Start()
@@ -294,6 +296,13 @@ namespace World.Objects
         }
 
         // Interface Implementation //
+
+        public string DisplayName { get; set; }
+
+        public GameObject attachedGameobject
+        {
+            get { return gameObject;}
+        }
 
         public bool Interact()
         {

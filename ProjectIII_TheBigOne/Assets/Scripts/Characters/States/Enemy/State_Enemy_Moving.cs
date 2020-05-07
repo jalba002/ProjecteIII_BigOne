@@ -1,4 +1,5 @@
-﻿using Characters.Generic;
+﻿using System;
+using Characters.Generic;
 using Player;
 using UnityEngine;
 
@@ -28,13 +29,27 @@ namespace Enemy
             // Movement code.
             /*MovementManager.SetVelocity(_attachedRigidbody, Machine.characterController.currentBrain.Direction,
                 _movementSpeed);*/
-            _attachedController.currentBrain.IsPlayerNearLight =
-                SensesUtil.HasFlashlightEnabled(_attachedController.currentBrain.archnemesis);
-            
-            _attachedController.currentBrain.IsVisible =
-                SensesUtil.IsPlayerSeeingEnemy(_attachedController.currentBrain.archnemesis, _attachedController,
-                    GameManager.instance.GameSettings.DetectionLayers, GameManager.instance.GameSettings.PlayerViewAngle);
+            try
+            {
+                _attachedController.currentBrain.IsPlayerNearLight =
+                    SensesUtil.HasFlashlightEnabled(_attachedController.currentBrain.archnemesis);
+            }
+            catch (NullReferenceException)
+            {
+            }
 
+            try
+            {
+                _attachedController.currentBrain.IsVisible =
+                    SensesUtil.IsPlayerSeeingEnemy(_attachedController.currentBrain.archnemesis, _attachedController,
+                        GameManager.Instance.GameSettings.DetectionLayers,
+                        GameManager.Instance.GameSettings.PlayerViewAngle);
+            }
+            catch (NullReferenceException)
+            {
+            }
+
+            // TODO Maybe move the point from outside the state. Probably from Paranormal or even EnemyController.
             _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
         }
 

@@ -7,7 +7,6 @@ namespace Enemy
     public class State_Enemy_Idle : State
     {
         private EnemyController _attachedController;
-        public LayerMask LayerMask;
 
         protected override void OnStateInitialize(StateMachine machine)
         {
@@ -22,7 +21,7 @@ namespace Enemy
                 SensesUtil.HasFlashlightEnabled(_attachedController.currentBrain.archnemesis);
             _attachedController.currentBrain.IsVisible =
                 SensesUtil.IsPlayerSeeingEnemy(_attachedController.currentBrain.archnemesis, _attachedController,
-                    GameManager.instance.GameSettings.DetectionLayers, GameManager.instance.GameSettings.PlayerViewAngle);
+                    GameManager.Instance.GameSettings.DetectionLayers, GameManager.Instance.GameSettings.PlayerViewAngle);
             Debug.Log(_attachedController.currentBrain.IsVisible);
         }
 

@@ -2,28 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class AudioManager
+public class AudioManager : MonoBehaviour
 {
-    /* private static AudioManager _instance = null;
- 
-     public static AudioManager Instance
-     {
-         get
-         {
-             return _instance;
-         }
-     }*/
-
-    /* private void Awake()
-     {
-         if (Instance != null && Instance != this)
-         {
-             Destroy(this.gameObject);
-         }
- 
-         _instance = this;
-         DontDestroyOnLoad(this.gameObject);
-     }*/
+    private static AudioManager m_Instance = null;
+    public static AudioManager Instance
+    {
+        get
+        {
+            if (m_Instance == null)
+            {
+                m_Instance = (AudioManager) FindObjectOfType(typeof(AudioManager ));
+                if (m_Instance == null)
+                {
+                    m_Instance = (new GameObject("AudioManager")).AddComponent<AudioManager>();
+                }
+                DontDestroyOnLoad(m_Instance.gameObject);
+            }
+            return m_Instance;
+        }
+    }
 
     private static GameObject SoundParent { get; set; }
 
@@ -54,7 +51,7 @@ public static class AudioManager
         //Play
         s.Play();
 
-        GameManager.instance.StartCoroutine(Utils.DestroyAfterTime(sound, s.clip.length));
+        GameManager.Instance.StartCoroutine(Utils.DestroyAfterTime(sound, s.clip.length));
     }
 
     public static void PlayLoopingSound(string route, float volume)
@@ -77,7 +74,7 @@ public static class AudioManager
         //Play
         s.Play();
 
-        GameManager.instance.StartCoroutine(Utils.DestroyAfterTime(sound, s.clip.length));
+        GameManager.Instance.StartCoroutine(Utils.DestroyAfterTime(sound, s.clip.length));
     }
 
     public static void PlaySound2D(string route)
@@ -96,7 +93,7 @@ public static class AudioManager
         Parent(sound);
         sound.name = s.clip.name;
 
-        GameManager.instance.StartCoroutine(Utils.DestroyAfterTime(sound, s.clip.length));
+        GameManager.Instance.StartCoroutine(Utils.DestroyAfterTime(sound, s.clip.length));
     }
 
     private static void Parent(GameObject objectToParent)

@@ -6,13 +6,13 @@ public struct InspectableInfo
 {
     public Mesh objectMesh;
     public Material[] objectTexture;
-    public Quaternion objectRotation;
+    public Transform objectTransform;
 
-    public InspectableInfo(Mesh mesh, Material[] material, Quaternion rObjectRotation)
+    public InspectableInfo(Mesh mesh, Material[] material, Transform objectTransform)
     {
         objectMesh = mesh;
         objectTexture = material;
-        objectRotation = rObjectRotation;
+        this.objectTransform = objectTransform;
     }
 }
 

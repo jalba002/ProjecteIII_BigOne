@@ -5,8 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(MeshRenderer))]
 public class InspectedElement : MonoBehaviour
 {
-    private Quaternion defaultRotation;
-    private Vector3 defaultPosition;
+    /*private Quaternion defaultRotation;
+    private Vector3 defaultPosition;*/
+    private Transform originalTransform;
     public MeshRenderer MeshRenderer { get; set; }
     public MeshFilter MeshFilter { get; set; }
 
@@ -21,23 +22,24 @@ public class InspectedElement : MonoBehaviour
     // Set default variables for the rendered cube.
     void SetDefaults()
     {
-        var objectTransform = transform;
-        defaultRotation = objectTransform.localRotation;
-        defaultPosition = objectTransform.localPosition;
+        originalTransform = this.gameObject.transform;
+        /*defaultRotation = objectTransform.localRotation;
+        defaultPosition = objectTransform.localPosition;*/
     }
 
     void LoadDefaults()
     {
         var objectTransform = transform;
-        objectTransform.localPosition = defaultPosition;
+        objectTransform.localPosition = originalTransform.position;
     }
 
     // Called when being rendered by ObjectInspector.
-    public void SetComponents(Mesh mesh, Material[] materials, Quaternion rotation)
+    public void SetComponents(Mesh mesh, Material[] materials, Transform newTransform)
     {
         MeshFilter.mesh = mesh;
         MeshRenderer.materials = materials;
-        transform.rotation = rotation;
+        transform.rotation = newTransform.rotation;
+        transform.localScale = newTransform.localScale;
         this.gameObject.SetActive(true);
     }
 

@@ -10,16 +10,10 @@ namespace Player
     [RequireComponent(typeof(State))]
     [RequireComponent(typeof(StateMachine))]
     [RequireComponent(typeof(Rigidbody))]
-    [RequireComponent(typeof(SimpleActivator))]
-    [RequireComponent(typeof(ObjectInspector))]
     public class PlayerController : CharacterController
     {
         public Collider attachedCollider { get; set; }
         [Header("Components")] public CameraController cameraController;
-
-        public ObjectInspector objectInspector;
-
-        public SimpleActivator simpleActivator;
 
         public FlashlightController attachedFlashlight;
 
@@ -50,10 +44,6 @@ namespace Player
 
             if (cameraController == null)
                 cameraController = GetComponent<CameraController>();
-
-            simpleActivator = this.gameObject.GetComponent<SimpleActivator>();
-
-            objectInspector = this.gameObject.GetComponent<ObjectInspector>();
 
             if (characterProperties != null)
             {
@@ -112,6 +102,7 @@ namespace Player
             
             CorrectRigidbody();
             ToggleInventory();
+            UseFlashlight();
 
             //Cheat to test sounds
             /*
@@ -128,6 +119,14 @@ namespace Player
 */
         }
         
+        private void UseFlashlight()
+        {
+            if (currentBrain.FlashlightToggle)
+            {
+                attachedFlashlight.ToggleFlashlight();
+            }
+        }
+        
         private void FixedUpdate()
         {
             // TODO Reenable stop functionality with GameController.
@@ -141,14 +140,13 @@ namespace Player
 
         public void ToggleInventory()
         {
-            if (playerInventory != null && playerInventory.isActiveAndEnabled)
+            if (playerInventory && playerInventory.isActiveAndEnabled)
             {
                 if (currentBrain.ShowInventory)
                 {
                     var enabled = playerInventory.ToggleInventory();
                     cameraController.angleLocked = enabled;
                     cameraController.cursorLock = !enabled;
-                    simpleActivator.enabled = !enabled;
                     Cursor.visible = enabled;
                 }
             }

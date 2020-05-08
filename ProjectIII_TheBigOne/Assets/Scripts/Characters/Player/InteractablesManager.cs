@@ -13,23 +13,6 @@ namespace Characters.Player
 
     public class InteractablesManager : MonoBehaviour
     {
-        [System.Serializable]
-        public enum InteractableType
-        {
-            Movable = 0,
-            Pickable,
-            Inspectable
-        }
-
-        public InteractableType interactType;
-
-        public string[] HudText = new string[3]
-        {
-            "Drag",
-            "Take",
-            "Use"
-        };
-
         [Header("Settings")] public LayerMask detectedLayers;
         public float detectionRange;
 
@@ -37,10 +20,14 @@ namespace Characters.Player
         public Text textDebug;
 
         [Header("Private Components")] private IInteractable CurrentInteractable;
+        private ObjectInspector objectInspector;
+        private SimpleActivator simpleActivator;
 
         public void Start()
         {
             attachedPlayer = GetComponent<PlayerController>();
+            objectInspector = GetComponent<ObjectInspector>();
+            simpleActivator = GetComponent<SimpleActivator>();
         }
 
         public void Update()
@@ -57,29 +44,10 @@ namespace Characters.Player
                 textDebug.gameObject.SetActive(false);
                 return;
             }
-            CurrentInteractable = detectedElement;
-            DetermineCurrentType(detectedElement);
-            textDebug.gameObject.SetActive(true);
-            textDebug.text = HudText[(int)interactType] + " " + CurrentInteractable.DisplayName;
-        }
 
-        private void DetermineCurrentType(IInteractable detectedElement)
-        {
-            if (detectedElement.attachedGameobject.GetComponent<IMovable>() != null)
-            {
-                interactType = InteractableType.Movable;
-                return;
-            }
-            else if (detectedElement.attachedGameobject.GetComponent<IPickable>() != null)
-            {
-                interactType = InteractableType.Pickable;
-                return;
-            }
-            else if (detectedElement.attachedGameobject.GetComponent<IInspectable>() != null)
-            {
-                interactType = InteractableType.Inspectable;
-                return;
-            }
+            CurrentInteractable = detectedElement;
+            textDebug.gameObject.SetActive(true);
+            textDebug.text = CurrentInteractable.DisplayName;
         }
 
         private IInteractable DetectElement()
@@ -95,7 +63,7 @@ namespace Characters.Player
                 }
                 catch (MissingComponentException)
                 {
-                    Debug.Log("Object hit was not Interactable.");
+                    //Debug.Log("Object hit was not Interactable.");
                     return null;
                 }
             }
@@ -107,37 +75,20 @@ namespace Characters.Player
 
         private void InteractWithElement()
         {
-            if (CurrentInteractable == null || this.isActiveAndEnabled == false) return;
-            switch (interactType)
-            {
-                case InteractableType.Movable:
-                case InteractableType.Pickable:
-                    if (attachedPlayer.currentBrain.MouseInteract)
-                    {
-                        CurrentInteractable.Interact();
-                    }
-
-                    break;
-                case InteractableType.Inspectable:
-                    if (attachedPlayer.currentBrain.Interact)
-                    {
-                        CurrentInteractable.Interact();
-                    }
-
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            if (CurrentInteractable == null || !isActiveAndEnabled) return;
+            
+            if (InteractDoors()) return;
+            if (InspectObjects()) return;
         }
 
 
-        /*void InspectObjects()
+        bool InspectObjects()
         {
             if (objectInspector != null && objectInspector.isActiveAndEnabled)
             {
                 if (attachedPlayer.currentBrain.Interact)
                 {
-                    if (objectInspector.Activate(attachedPlayer.cameraController.attachedCamera))
+                    if (objectInspector.Activate(CurrentInteractable))
                     {
                         // Disable camera and allow the object inspector the use of mouse input.
                         bool enableStuff = objectInspector.GetEnabled();
@@ -148,34 +99,33 @@ namespace Characters.Player
                         }
                         else
                             attachedPlayer.stateMachine.SwitchState<State_Player_Walking>();
+
+                        return true;
                     }
                 }
             }
+
+            return false;
         }
 
-        void InteractDoors()
+        bool InteractDoors()
         {
             if (simpleActivator != null && simpleActivator.isActiveAndEnabled)
             {
-                if (currentBrain.MouseInteract)
+                if (attachedPlayer.currentBrain.MouseInteract)
                 {
-                    if (simpleActivator.Activate(cameraController.attachedCamera))
-                        cameraController.angleLocked = true;
+                    if (simpleActivator.Activate(CurrentInteractable))
+                        attachedPlayer.cameraController.angleLocked = true;
                 }
-                else if (currentBrain.MouseInteractRelease)
+                else if (attachedPlayer.currentBrain.MouseInteractRelease)
                 {
                     if (simpleActivator.Deactivate())
-                        cameraController.angleLocked = false;
+                        attachedPlayer.cameraController.angleLocked = false;
                 }
-            }
-        }
 
-        private void UseFlashlight()
-        {
-            if (currentBrain.FlashlightToggle)
-            {
-                attachedFlashlight.ToggleFlashlight();
+                return true;
             }
-        }*/
+            return false;
+        }
     }
 }

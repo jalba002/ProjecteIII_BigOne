@@ -99,7 +99,7 @@ namespace World.Objects
                 throw new NullReferenceException($"Missing Handle in {this.gameObject.name}");
             }
 
-            DisplayName = objectType.ToString();
+            DisplayName = $"Drag {objectType.ToString()}";
         }
 
         public void Start()

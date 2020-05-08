@@ -28,17 +28,17 @@ public class CanvasController : MonoBehaviour
         playerController = FindObjectOfType<PlayerController>();
         flashlight = playerController.attachedFlashlight;
         playerWalking = FindObjectOfType<State_Player_Walking>();
-
-        playerController.simpleActivator.OnObjectActivate.AddListener(ChangeCursorToGrab);
-        playerController.simpleActivator.OnObjectDeactivate.AddListener(ChangeCursorToDefault);
     }
 
     void Update()
     {
+        
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.J))
         {
             AddPickupMessage("key");
         }
+#endif
 
         playerLightingUpdate();
         playerRunningUpdate();

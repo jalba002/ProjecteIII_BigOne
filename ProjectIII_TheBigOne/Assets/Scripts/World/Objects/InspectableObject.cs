@@ -69,7 +69,7 @@ public class InspectableObject : MonoBehaviour, IInspectable
         {
             _meshFilter = GetComponent<MeshFilter>();
             _meshRenderer = GetComponent<MeshRenderer>();
-            InspectInfo = new InspectableInfo(_meshFilter.mesh, _meshRenderer.materials, transform.rotation);
+            InspectInfo = new InspectableInfo(_meshFilter.mesh, _meshRenderer.materials, transform);
         }
     }
     

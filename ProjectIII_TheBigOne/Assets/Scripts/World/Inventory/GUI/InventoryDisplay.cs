@@ -151,14 +151,21 @@ public class InventoryDisplay : MonoBehaviour
         if (selectedSlot != null)
         {
             Debug.Log("Removing item is not null.");
-            RemoveItem(selectedSlot.item);
-            inventoryRef.RemoveItem(selectedSlot.item.itemName);
+            if (!selectedSlot.item.isUnique)
+            {
+                RemoveItem(selectedSlot.item);
+                inventoryRef.RemoveItem(selectedSlot.item.itemName);
 
-            selectedItem = null;
-            selectedItemInfo.text = " ";
-            selectedItemName.text = " ";
-            selectedSlot.background.color = Color.white;
-            selectedSlot = null;
+                selectedItem = null;
+                selectedItemInfo.text = " ";
+                selectedItemName.text = " ";
+                selectedSlot.background.color = Color.white;
+                selectedSlot = null;
+            }
+            else
+            {
+                Debug.Log("You can't discard this item");
+            }
         }
     }
 

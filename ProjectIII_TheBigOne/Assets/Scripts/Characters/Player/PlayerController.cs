@@ -214,7 +214,7 @@ namespace Player
                 if (enabled)
                 {
                     //SHOW CURSOR
-                    Cursor.SetCursor(Resources.Load<Texture2D>("Sprites/Cursor/Hand2"), Vector2.zero, CursorMode.ForceSoftware);
+                    Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
                 }
                 else
                 {

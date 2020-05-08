@@ -54,6 +54,12 @@ public class CanvasController : MonoBehaviour
             runningSlider.gameObject.SetActive(false);
         else
             runningSlider.gameObject.SetActive(true);
+
+        if (Input.GetKeyDown(KeyCode.Escape) && inventoryObject.activeInHierarchy)
+        {
+            playerController.ToggleInventory();
+        }
+
     }
 
     public void AddPickupMessage(string itemName)

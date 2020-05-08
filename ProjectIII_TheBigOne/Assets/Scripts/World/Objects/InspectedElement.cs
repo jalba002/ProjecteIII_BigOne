@@ -36,10 +36,11 @@ public class InspectedElement : MonoBehaviour
     // Called when being rendered by ObjectInspector.
     public void SetComponents(Mesh mesh, Material[] materials, Transform newTransform)
     {
+        Debug.Log("Setting components.");
         MeshFilter.mesh = mesh;
         MeshRenderer.materials = materials;
         transform.rotation = newTransform.rotation;
-        transform.localScale = newTransform.localScale;
+        //transform.localScale = newTransform.localScale;
         this.gameObject.SetActive(true);
     }
 

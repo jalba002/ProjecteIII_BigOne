@@ -144,6 +144,7 @@ namespace Player
                     {
                         // Disable camera and allow the object inspector the use of mouse input.
                         bool enableStuff = objectInspector.GetEnabled();
+                        Debug.Log("Is enabled? " + enableStuff);
                         cameraController.angleLocked = enableStuff;
                         if (enableStuff)
                         {

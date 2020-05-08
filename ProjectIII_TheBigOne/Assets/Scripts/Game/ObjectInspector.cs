@@ -60,15 +60,10 @@ public class ObjectInspector : MonoBehaviour
             return true;
         }
 
-        try
-        {
-            var inspectable = interactable.attachedGameobject.GetComponent<IInspectable>();
+        var inspectable = interactable.attachedGameobject.GetComponent<IInspectable>();
+        StartInspect(inspectable);
+        return true;
 
-            StartInspect(inspectable);
-        }
-        catch (NullReferenceException)
-        {
-        }
 
         return false;
     }
@@ -79,11 +74,12 @@ public class ObjectInspector : MonoBehaviour
         {
             var info = inspectable.Inspect();
             objectRenderer.SetComponents(info.objectMesh, info.objectTexture, info.objectTransform);
+            currentInspectedObject = inspectable;
             return true;
         }
         catch (Exception e)
         {
-            Debug.Log(e.Message);
+            Debug.LogWarning(e.Message);
             return false;
         }
     }
@@ -93,7 +89,7 @@ public class ObjectInspector : MonoBehaviour
         currentInspectedObject.StopInspect();
         currentInspectedObject = null;
         objectRenderer.ResetComponents();
-        // Debug.Log("Stopped inspecting.");
+        Debug.Log("Stopped inspecting.");
     }
 
     public bool GetEnabled()

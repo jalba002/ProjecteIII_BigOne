@@ -1,6 +1,5 @@
 ﻿using System;
-using Enemy;
-using Interfaces;
+using System.Collections.Generic;
 using Player;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +12,8 @@ namespace Characters.Player
 
     public class InteractablesManager : MonoBehaviour
     {
+        public List<IInteractable> registeredInteractables = new List<IInteractable>();
+
         [Header("Settings")] public LayerMask detectedLayers;
         public float detectionRange;
 
@@ -29,8 +30,12 @@ namespace Characters.Player
 
         public void Update()
         {
-            if (!attachedPlayer.cameraController.angleLocked)
+            if (registeredInteractables.Count > 0)
                 AnalyzeElement(DetectElement());
+            else if (textDebug.isActiveAndEnabled)
+            {
+                textDebug.gameObject.SetActive(false);
+            }
         }
 
         private void AnalyzeElement(IInteractable detectedElement)
@@ -58,13 +63,13 @@ namespace Characters.Player
 
         private IInteractable DetectElement()
         {
-            RaycastHit hitInfo;
             Ray cameraRay =
                 attachedPlayer.cameraController.attachedCamera.ViewportPointToRay(new Vector3(.5f, .5f, .5f));
-            if (Physics.Raycast(cameraRay, out hitInfo, detectionRange, detectedLayers))
+            if (Physics.Raycast(cameraRay, out var hitInfo, detectionRange, detectedLayers))
             {
                 try
                 {
+                    Debug.DrawRay(cameraRay.origin, cameraRay.direction * hitInfo.distance, Color.green, 1f);
                     return hitInfo.collider.gameObject.GetComponent<IInteractable>();
                 }
                 catch (MissingComponentException)

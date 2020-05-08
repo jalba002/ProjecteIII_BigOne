@@ -22,12 +22,19 @@ public class CanvasController : MonoBehaviour
     private PlayerController playerController;
     private State_Player_Walking playerWalking;
 
+    public GameObject inventoryObject;
 
     private void Start()
     {
         playerController = FindObjectOfType<PlayerController>();
         flashlight = playerController.attachedFlashlight;
         playerWalking = FindObjectOfType<State_Player_Walking>();
+
+        if(inventoryObject == null)
+        {
+            inventoryObject = GameObject.Find("Inventory");
+        }
+
     }
 
     void Update()
@@ -78,4 +85,14 @@ public class CanvasController : MonoBehaviour
         UICrosshair.sprite = grabCrosshair;
         UICrosshair.rectTransform.localScale = new Vector3(.6f, .6f, 1f);
     }
+
+    public void ToggleInventory()
+    {
+        Debug.Log(inventoryObject.activeInHierarchy);
+        if (!inventoryObject.activeInHierarchy)
+        {
+            playerController.ToggleInventory();
+        }
+    }
+
 }

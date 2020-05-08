@@ -21,9 +21,9 @@ namespace Player
         public Inventory playerInventory;
         [Header("Config")] public PlayerProperties characterProperties;
         public new PlayerBrain currentBrain { get; private set; }
-        
+
         private ObjectInspector objectInspector;
-        
+
         private DynamicObjectActivator _dynamicObjectActivator;
 
         private InteractablesManager interactablesManager;
@@ -73,9 +73,9 @@ namespace Player
             {
                 playerInventory = GetComponent<Inventory>();
             }
-            
+
             objectInspector = GetComponent<ObjectInspector>();
-            
+
             _dynamicObjectActivator = GetComponent<DynamicObjectActivator>();
 
             interactablesManager = GetComponent<InteractablesManager>();
@@ -112,11 +112,14 @@ namespace Player
             {
                 stateMachine.UpdateTick(Time.deltaTime);
             }
-            
+
             CorrectRigidbody();
             InspectObjects();
             InteractDynamics();
-            ToggleInventory();
+
+            if (currentBrain.ShowInventory)
+                ToggleInventory();
+
             UseFlashlight();
 
             //Cheat to test sounds
@@ -133,7 +136,7 @@ namespace Player
 #endif
 */
         }
-        
+
         bool InspectObjects()
         {
             if (objectInspector && objectInspector.isActiveAndEnabled)
@@ -159,7 +162,7 @@ namespace Player
 
             return false;
         }
-        
+
         bool InteractDynamics()
         {
             if (_dynamicObjectActivator && _dynamicObjectActivator.isActiveAndEnabled)
@@ -179,7 +182,7 @@ namespace Player
             }
             return false;
         }
-        
+
         private void UseFlashlight()
         {
             if (currentBrain.FlashlightToggle)
@@ -187,7 +190,7 @@ namespace Player
                 attachedFlashlight.ToggleFlashlight();
             }
         }
-        
+
         private void FixedUpdate()
         {
             // TODO Reenable stop functionality with GameController.
@@ -203,13 +206,22 @@ namespace Player
         {
             if (playerInventory && playerInventory.isActiveAndEnabled)
             {
-                if (currentBrain.ShowInventory)
+                var enabled = playerInventory.ToggleInventory();
+                cameraController.angleLocked = enabled;
+                cameraController.cursorLock = !enabled;
+                Cursor.visible = enabled;
+
+                if (enabled)
                 {
-                    var enabled = playerInventory.ToggleInventory();
-                    cameraController.angleLocked = enabled;
-                    cameraController.cursorLock = !enabled;
-                    Cursor.visible = enabled;
+                    //SHOW CURSOR
+                    Cursor.SetCursor(Resources.Load<Texture2D>("Sprites/Cursor/Hand2"), Vector2.zero, CursorMode.ForceSoftware);
                 }
+                else
+                {
+                    //HIDE CURSOR
+                    Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
+                }
+
             }
         }
 
@@ -240,7 +252,7 @@ namespace Player
             footstepSounds[0] = audioSource.clip;
         }
 
-      
+
 
         public Transform ReturnSelf()
         {

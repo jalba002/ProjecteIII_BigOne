@@ -25,5 +25,11 @@ public class ItemRequirements : MonoBehaviour
             playerInventory.characterItems.Remove(item);
             lockedDoor.Unlock();
         }
+        else
+        {
+            //Display iventory
+            Debug.Log("IM HERE");
+            GameObject.FindObjectOfType<CanvasController>().ToggleInventory();
+        }
     }
 }

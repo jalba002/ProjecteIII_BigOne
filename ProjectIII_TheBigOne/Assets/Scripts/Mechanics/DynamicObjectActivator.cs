@@ -5,13 +5,13 @@ using Interfaces;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class SimpleActivator : MonoBehaviour
+public class DynamicObjectActivator : MonoBehaviour
 {
     [Header("Configuration")]
     public float forceScale = 5f;
 
     public IInteractable detectedInteractable;
-
+    [Space(10)]
     public UnityEvent OnObjectActivate;
     public UnityEvent OnObjectDeactivate;
 

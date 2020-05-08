@@ -1,5 +1,6 @@
 ﻿using Characters.Brains;
 using Characters.Generic;
+using Characters.Player;
 using Properties;
 using UnityEngine;
 using CharacterController = Characters.Generic.CharacterController;
@@ -20,6 +21,12 @@ namespace Player
         public Inventory playerInventory;
         [Header("Config")] public PlayerProperties characterProperties;
         public new PlayerBrain currentBrain { get; private set; }
+        
+        private ObjectInspector objectInspector;
+        
+        private DynamicObjectActivator _dynamicObjectActivator;
+
+        private InteractablesManager interactablesManager;
 
 
         [Header("Sound settings")] public AudioClip[] footstepSounds;
@@ -66,6 +73,12 @@ namespace Player
             {
                 playerInventory = GetComponent<Inventory>();
             }
+            
+            objectInspector = GetComponent<ObjectInspector>();
+            
+            _dynamicObjectActivator = GetComponent<DynamicObjectActivator>();
+
+            interactablesManager = GetComponent<InteractablesManager>();
 
             Cursor.visible = false;
         }
@@ -101,6 +114,8 @@ namespace Player
             }
             
             CorrectRigidbody();
+            InspectObjects();
+            InteractDynamics();
             ToggleInventory();
             UseFlashlight();
 
@@ -117,6 +132,52 @@ namespace Player
             }
 #endif
 */
+        }
+        
+        bool InspectObjects()
+        {
+            if (objectInspector && objectInspector.isActiveAndEnabled)
+            {
+                if (currentBrain.Interact)
+                {
+                    if (objectInspector.Activate(interactablesManager.CurrentInteractable))
+                    {
+                        // Disable camera and allow the object inspector the use of mouse input.
+                        bool enableStuff = objectInspector.GetEnabled();
+                        cameraController.angleLocked = enableStuff;
+                        if (enableStuff)
+                        {
+                            stateMachine.SwitchState<State_Player_Inspecting>();
+                        }
+                        else
+                            stateMachine.SwitchState<State_Player_Walking>();
+
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+        
+        bool InteractDynamics()
+        {
+            if (_dynamicObjectActivator && _dynamicObjectActivator.isActiveAndEnabled)
+            {
+                if (currentBrain.MouseInteract)
+                {
+                    if (_dynamicObjectActivator.Activate(interactablesManager.CurrentInteractable))
+                        cameraController.angleLocked = true;
+                }
+                else if (currentBrain.MouseInteractRelease)
+                {
+                    if (_dynamicObjectActivator.Deactivate())
+                        cameraController.angleLocked = false;
+                }
+
+                return true;
+            }
+            return false;
         }
         
         private void UseFlashlight()

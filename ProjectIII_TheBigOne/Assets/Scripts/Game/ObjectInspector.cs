@@ -9,9 +9,6 @@ public class ObjectInspector : MonoBehaviour
 
     [Header("Render output")] public InspectedElement objectRenderer;
 
-    [Header("Settings")] public float range = 20f;
-    public LayerMask LayerMask;
-
     [Header("Render Settings")] public Vector2 distances = new Vector2(1.5f, 2f);
 
     // And more parameters to come.

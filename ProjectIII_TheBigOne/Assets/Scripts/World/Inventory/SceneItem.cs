@@ -18,7 +18,7 @@ public class SceneItem : MonoBehaviour, IInteractable, IPickable
 
     private void Start()
     {
-        DisplayName = itemName;
+        DisplayName = $"Pick up {itemName}";
     }
 
     public bool Interact()

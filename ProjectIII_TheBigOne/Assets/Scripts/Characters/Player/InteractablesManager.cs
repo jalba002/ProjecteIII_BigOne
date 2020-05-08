@@ -19,21 +19,18 @@ namespace Characters.Player
         [Header("Components")] public PlayerController attachedPlayer;
         public Text textDebug;
 
-        [Header("Private Components")] private IInteractable CurrentInteractable;
-        private ObjectInspector objectInspector;
-        private SimpleActivator simpleActivator;
+        public IInteractable CurrentInteractable { get; set; }
+
 
         public void Start()
         {
             attachedPlayer = GetComponent<PlayerController>();
-            objectInspector = GetComponent<ObjectInspector>();
-            simpleActivator = GetComponent<SimpleActivator>();
         }
 
         public void Update()
         {
-            AnalyzeElement(DetectElement());
-            InteractWithElement();
+            if (!attachedPlayer.cameraController.angleLocked)
+                AnalyzeElement(DetectElement());
         }
 
         private void AnalyzeElement(IInteractable detectedElement)
@@ -41,13 +38,22 @@ namespace Characters.Player
             if (detectedElement == null)
             {
                 CurrentInteractable = null;
-                textDebug.gameObject.SetActive(false);
+                ShowText(false);
                 return;
             }
 
             CurrentInteractable = detectedElement;
-            textDebug.gameObject.SetActive(true);
-            textDebug.text = CurrentInteractable.DisplayName;
+            ShowText(true);
+        }
+
+        private void ShowText(bool enable)
+        {
+            if (textDebug)
+            {
+                if (CurrentInteractable != null)
+                    textDebug.text = CurrentInteractable.DisplayName;
+                textDebug.gameObject.SetActive(enable);
+            }
         }
 
         private IInteractable DetectElement()
@@ -71,61 +77,6 @@ namespace Characters.Player
             {
                 return null;
             }
-        }
-
-        private void InteractWithElement()
-        {
-            if (CurrentInteractable == null || !isActiveAndEnabled) return;
-            
-            if (InteractDoors()) return;
-            if (InspectObjects()) return;
-        }
-
-
-        bool InspectObjects()
-        {
-            if (objectInspector != null && objectInspector.isActiveAndEnabled)
-            {
-                if (attachedPlayer.currentBrain.Interact)
-                {
-                    if (objectInspector.Activate(CurrentInteractable))
-                    {
-                        // Disable camera and allow the object inspector the use of mouse input.
-                        bool enableStuff = objectInspector.GetEnabled();
-                        attachedPlayer.cameraController.angleLocked = enableStuff;
-                        if (enableStuff)
-                        {
-                            attachedPlayer.stateMachine.SwitchState<State_Player_Inspecting>();
-                        }
-                        else
-                            attachedPlayer.stateMachine.SwitchState<State_Player_Walking>();
-
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-
-        bool InteractDoors()
-        {
-            if (simpleActivator != null && simpleActivator.isActiveAndEnabled)
-            {
-                if (attachedPlayer.currentBrain.MouseInteract)
-                {
-                    if (simpleActivator.Activate(CurrentInteractable))
-                        attachedPlayer.cameraController.angleLocked = true;
-                }
-                else if (attachedPlayer.currentBrain.MouseInteractRelease)
-                {
-                    if (simpleActivator.Deactivate())
-                        attachedPlayer.cameraController.angleLocked = false;
-                }
-
-                return true;
-            }
-            return false;
         }
     }
 }

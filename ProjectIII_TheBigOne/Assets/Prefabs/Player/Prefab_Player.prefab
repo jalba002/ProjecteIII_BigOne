@@ -342,6 +342,7 @@ GameObject:
   - component: {fileID: 6592646240077006143}
   - component: {fileID: 4041253382631071211}
   - component: {fileID: 2031410052690668047}
+  - component: {fileID: 5598959312946074347}
   m_Layer: 0
   m_Name: Prefab_Player
   m_TagString: Untagged
@@ -436,8 +437,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 4287271706014648181}
   cameraController: {fileID: 4287271704942058502}
-  objectInspector: {fileID: 4287271705462774198}
-  simpleActivator: {fileID: 4287271705462774206}
   attachedFlashlight: {fileID: 6592646240077006143}
   playerInventory: {fileID: 4041253382631071211}
   characterProperties: {fileID: 11400000, guid: 7e571a240adc2994192319d07f6fd24d,
@@ -474,10 +473,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87668cddd42f759458e4d9768a4d5b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raycastDistance: 2
-  interact:
-    serializedVersion: 2
-    m_Bits: 513
   forceScale: 15
   OnObjectActivate:
     m_PersistentCalls:
@@ -498,10 +493,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectRenderer: {fileID: 7698896559584102530}
-  range: 10
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 513
   distances: {x: 1.5, y: 2}
   rotationSpeed: {x: 0.5, y: 0.5}
 --- !u!114 &6592646240077006143
@@ -633,6 +624,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5598959312946074347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287271706014648174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfda6edbabd4932498af44770ba2ca91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectedLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  detectionRange: 3
+  attachedPlayer: {fileID: 0}
+  textDebug: {fileID: 0}
 --- !u!1 &7698896559584102532
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using Characters.Generic;
+﻿using System;
+using Characters.Generic;
 using Player;
 using UnityEngine;
 
@@ -17,11 +18,39 @@ namespace Enemy
         public override void OnStateTick(float deltaTime)
         {
             base.OnStateTick(deltaTime);
-            _attachedController.currentBrain.IsPlayerNearLight =
-                SensesUtil.HasFlashlightEnabled(_attachedController.currentBrain.archnemesis);
-            _attachedController.currentBrain.IsVisible =
-                SensesUtil.IsPlayerSeeingEnemy(_attachedController.currentBrain.archnemesis, _attachedController,
-                    GameManager.Instance.GameSettings.DetectionLayers, GameManager.Instance.GameSettings.PlayerViewAngle);
+            try
+            {
+                _attachedController.currentBrain.IsPlayerNearLight =
+                    SensesUtil.HasFlashlightEnabled(_attachedController.currentBrain.archnemesis);
+            }
+            catch (NullReferenceException)
+            {
+                _attachedController.currentBrain.IsPlayerNearLight = false;
+            }
+
+            try
+            {
+                _attachedController.currentBrain.IsPlayerInSight = SensesUtil.IsInSight(_attachedController.gameObject,
+                    _attachedController.currentBrain.archnemesis.gameObject,
+                    _attachedController.characterProperties.maxDetectionRange,
+                    _attachedController.characterProperties.watchableLayers);
+            }
+            catch (NullReferenceException)
+            {
+            }
+
+            try
+            {
+                _attachedController.currentBrain.IsVisible =
+                    SensesUtil.IsPlayerSeeingEnemy(_attachedController.currentBrain.archnemesis, _attachedController,
+                        GameManager.Instance.GameSettings.DetectionLayers,
+                        GameManager.Instance.GameSettings.PlayerViewAngle);
+            }
+            catch (NullReferenceException)
+            {
+                _attachedController.currentBrain.IsVisible = false;
+            }
+
             Debug.Log(_attachedController.currentBrain.IsVisible);
         }
 

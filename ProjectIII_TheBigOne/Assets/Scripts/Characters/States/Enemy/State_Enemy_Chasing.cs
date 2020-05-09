@@ -1,6 +1,7 @@
 ﻿using System;
 using Characters.Generic;
 using Player;
+using UnityEngine;
 
 namespace Enemy
 {
@@ -18,6 +19,39 @@ namespace Enemy
         public override void OnStateTick(float deltaTime)
         {
             base.OnStateTick(deltaTime);
+            
+            try
+            {
+                _attachedController.currentBrain.IsPlayerInSight = SensesUtil.IsInSight(_attachedController.gameObject,
+                    _attachedController.currentBrain.archnemesis.gameObject,
+                    _attachedController.characterProperties.maxDetectionRange,
+                    _attachedController.characterProperties.watchableLayers);
+            }
+            catch (NullReferenceException)
+            {
+            }
+
+            try
+            {
+                _attachedController.currentBrain.IsPlayerNearLight =
+                    SensesUtil.HasFlashlightEnabled(_attachedController.currentBrain.archnemesis);
+            }
+            catch (NullReferenceException)
+            {
+            }
+
+            try
+            {
+                _attachedController.currentBrain.IsVisible =
+                    SensesUtil.IsPlayerSeeingEnemy(_attachedController.currentBrain.archnemesis, _attachedController,
+                        GameManager.Instance.GameSettings.DetectionLayers,
+                        GameManager.Instance.GameSettings.PlayerViewAngle);
+            }
+            catch (NullReferenceException)
+            {
+            }
+            
+            _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
         }
 
         public override void OnStateFixedTick(float fixedTime)
@@ -36,7 +70,7 @@ namespace Enemy
             _movementSpeed = _attachedController.characterProperties.WalkSpeed;
             //_attachedController.currentBrain._NavMeshAgent.updateRotation = false;
             _attachedController.targetPositionDummy.transform.parent = _attachedController.currentBrain.archnemesis.transform;
-            _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
+            _attachedController.targetPositionDummy.transform.localPosition = Vector3.zero;
             _attachedController.NavMeshAgent.isStopped = false;
         }
 

@@ -22,6 +22,7 @@ public class EnemyBrain : Brain
     public bool IsPlayerNearLight { get; set; }
 
     public bool IsChasingPlayer { get; set; }
+    
 
     public bool UpdateRotation { get; set; }
 

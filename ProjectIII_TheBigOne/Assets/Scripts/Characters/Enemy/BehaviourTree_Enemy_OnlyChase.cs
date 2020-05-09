@@ -19,7 +19,7 @@ public class BehaviourTree_Enemy_OnlyChase : BehaviourTree
     
     private bool CheckEnterJustChase()
     {
-        attachedCharacter.stateMachine.SwitchState<State_Enemy_Moving>();
+        attachedCharacter.stateMachine.SwitchState<State_Enemy_Patrolling>();
         return true;
     }
 }

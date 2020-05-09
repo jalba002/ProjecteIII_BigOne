@@ -60,6 +60,9 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
     {
         // TODO Add conditions.
         // 
+        Debug.Log("EnterPatrol Chasing");
+
+        attachedCharacter.stateMachine.SwitchState<State_Enemy_Chasing>();
         return true;
     }
 }

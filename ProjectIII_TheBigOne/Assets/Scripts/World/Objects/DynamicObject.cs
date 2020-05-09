@@ -354,18 +354,20 @@ namespace World.Objects
 
         public bool Interact(bool interactEnable)
         {
-            if (interactEnable && !IsInteracting)
-            {
-                OnStartInteract();
-                Debug.Log("Starting Interaction");
-            }
-            else if (!interactEnable)
+            if (!interactEnable)
             {
                 Debug.Log("Ending Interaction");
                 OnEndInteract();
+                return true;
             }
-            
-            return interactEnable == IsInteracting;
+            if (!IsInteracting)
+            {
+                OnStartInteract();
+                Debug.Log("Starting Interaction");
+                return true;
+            }
+
+            return false;
         }
 
         public void OnStartInteract()

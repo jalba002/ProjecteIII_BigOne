@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Player;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
 
 namespace Characters.Player
@@ -32,39 +34,46 @@ namespace Characters.Player
         public void Update()
         {
             CanInteract = registeredInteractables.Count > 0 && CurrentInteractable != null;
-            
-            if (registeredInteractables.Count > 0)
+
+            //Debug.Log(CurrentInteractable?.DisplayName ?? "No current interactable.");
+
+            if (CurrentInteractable != null || registeredInteractables.Count > 0)
                 AnalyzeElement(DetectElement());
         }
 
         private void AnalyzeElement(IInteractable detectedElement)
         {
+            //Debug.Log("Detected element is: " + detectedElement);
+            if (detectedElement == CurrentInteractable) return;
+            
             if (detectedElement != null)
             {
                 if (CurrentInteractable != null)
                 {
+                    Debug.Log("Stage 1: Detected & Current");
                     if (!CurrentInteractable.IsInteracting)
                     {
+                        Debug.Log("Stage 2: Detected & Current & Not Interacting");
                         CurrentInteractable = detectedElement;
                     }
                 }
                 else
                 {
+                    Debug.Log("Stage 3: Detected & No Current");
                     CurrentInteractable = detectedElement;
                 }
             }
             else
             {
+                Debug.Log("Stage 4: No Detected");
                 if (CurrentInteractable != null)
                 {
+                    Debug.Log("Entering null/non-null");
                     if (!CurrentInteractable.IsInteracting)
                     {
+                        Debug.Log("Deleting Interactable non-used");
                         CurrentInteractable = null;
                     }
-                }
-                else
-                {
-                    CurrentInteractable = null;
                 }
             }
 

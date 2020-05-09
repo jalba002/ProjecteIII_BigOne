@@ -30,6 +30,8 @@ namespace Player
         [Header("Sound settings")] public AudioClip[] footstepSounds;
         private AudioSource audioSource;
 
+        public int InteractCooldown = 5;
+
 
         /*[Header("Ground Detection")] public Transform groundPosition;
         [Range(0.01f, 1f)] public float castRadius = 1f;
@@ -109,6 +111,7 @@ namespace Player
                 stateMachine.UpdateTick(Time.deltaTime);
             }
 
+            if (InteractCooldown > 0) InteractCooldown -= 1;
             CorrectRigidbody();
             InspectObjects();
             InteractDynamics();
@@ -143,7 +146,6 @@ namespace Player
                     {
                         // Disable camera and allow the object inspector the use of mouse input.
                         bool enableStuff = objectInspector.GetEnabled();
-                        Debug.Log("Is enabled? " + enableStuff);
                         cameraController.angleLocked = enableStuff;
                         if (enableStuff)
                         {
@@ -164,16 +166,18 @@ namespace Player
         {
             if (interactablesManager.CanInteract)
             {
-                if (currentBrain.MouseInteract && !interactablesManager.CurrentInteractable.IsInteracting)
+                if (currentBrain.MouseInteractRelease)
+                {
+                    interactablesManager.CurrentInteractable.Interact(false);
+                    InteractCooldown = 10;
+                }
+                else if (currentBrain.MouseInteract && !interactablesManager.CurrentInteractable.IsInteracting &&
+                         InteractCooldown <= 0)
                 {
                     if (interactablesManager.CurrentInteractable.Interact(true))
                     {
                         stateMachine.SwitchState<State_Player_Interacting>();
                     }
-                }
-                else if (currentBrain.MouseInteractRelease)
-                {
-                    interactablesManager.CurrentInteractable.Interact(false);
                 }
             }
 

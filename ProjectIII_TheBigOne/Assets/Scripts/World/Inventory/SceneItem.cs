@@ -23,21 +23,10 @@ public class SceneItem : MonoBehaviour, IInteractable, IPickable
         DisplayName = $"Pick up {itemName}";
         IsInteracting = false;
     }
-
-    public bool Interact()
-    {
-        if (alreadyUsed) return false;
-        if (FindObjectOfType<PlayerController>().playerInventory.AddItem(itemName))
-        {
-            this.gameObject.SetActive(false);
-            alreadyUsed = true;
-        }
-        return false;
-    }
-
+    
     public bool Interact(bool interactEnable)
     {
-        if (alreadyUsed) return false;
+        if (alreadyUsed || IsInteracting || !interactEnable) return false;
         if (FindObjectOfType<PlayerController>().playerInventory.AddItem(itemName))
         {
             this.gameObject.SetActive(false);

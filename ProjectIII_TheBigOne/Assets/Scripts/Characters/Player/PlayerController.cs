@@ -24,9 +24,7 @@ namespace Player
 
         private ObjectInspector objectInspector;
 
-        private DynamicObjectActivator _dynamicObjectActivator;
-
-        private InteractablesManager interactablesManager;
+        [HideInInspector] public InteractablesManager interactablesManager;
 
 
         [Header("Sound settings")] public AudioClip[] footstepSounds;
@@ -75,8 +73,6 @@ namespace Player
             }
 
             objectInspector = GetComponent<ObjectInspector>();
-
-            _dynamicObjectActivator = GetComponent<DynamicObjectActivator>();
 
             interactablesManager = GetComponent<InteractablesManager>();
 
@@ -164,8 +160,24 @@ namespace Player
             return false;
         }
 
-        bool InteractDynamics()
+        void InteractDynamics()
         {
+            if (interactablesManager.CanInteract)
+            {
+                if (currentBrain.MouseInteract && !interactablesManager.CurrentInteractable.IsInteracting)
+                {
+                    if (interactablesManager.CurrentInteractable.Interact(true))
+                    {
+                        stateMachine.SwitchState<State_Player_Interacting>();
+                    }
+                }
+                else if (currentBrain.MouseInteractRelease)
+                {
+                    interactablesManager.CurrentInteractable.Interact(false);
+                }
+            }
+
+            /*
             if (_dynamicObjectActivator && _dynamicObjectActivator.isActiveAndEnabled)
             {
                 if (currentBrain.MouseInteract)
@@ -181,7 +193,7 @@ namespace Player
 
                 return true;
             }
-            return false;
+            return false;*/
         }
 
         private void UseFlashlight()
@@ -222,7 +234,6 @@ namespace Player
                     //HIDE CURSOR
                     Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
                 }
-
             }
         }
 
@@ -252,7 +263,6 @@ namespace Player
             footstepSounds[i] = footstepSounds[0];
             footstepSounds[0] = audioSource.clip;
         }
-
 
 
         public Transform ReturnSelf()

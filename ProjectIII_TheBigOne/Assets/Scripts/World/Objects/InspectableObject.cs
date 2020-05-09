@@ -6,15 +6,15 @@ using UnityEngine;
 public class InspectableObject : MonoBehaviour, IInteractable, IInspectable
 {
     public string objectName;
-    
+
     private MeshRenderer _meshRenderer;
     private MeshFilter _meshFilter;
     public InspectableInfo InspectInfo { get; set; }
     public bool IsBeingInspected { get; set; }
-    
+
     public List<Collider> ignoredColliders;
     private Collider selfCollider;
-    
+
     private void Start()
     {
         selfCollider = gameObject.GetComponent<Collider>();
@@ -23,7 +23,7 @@ public class InspectableObject : MonoBehaviour, IInteractable, IInspectable
 
         DisplayName = objectName != null ? $"Inspect {objectName}" : $"Inspect defaultName";
     }
-    
+
     private bool GenerateIgnoredColliders(Collider selfCollider)
     {
         try
@@ -60,6 +60,7 @@ public class InspectableObject : MonoBehaviour, IInteractable, IInspectable
     {
         CreateInspectInfo();
         _meshRenderer.enabled = false;
+        OnStartInteract();
         return InspectInfo;
     }
 
@@ -73,19 +74,23 @@ public class InspectableObject : MonoBehaviour, IInteractable, IInspectable
             InspectInfo = new InspectableInfo(_meshFilter.mesh, _meshRenderer.materials, transform);
         }
     }
-    
+
     public bool StopInspect()
     {
         _meshRenderer.enabled = true;
+        OnEndInteract();
         return false;
     }
 
     public string DisplayName { get; set; }
+    public bool IsInteracting { get; set; }
+
     public GameObject attachedGameobject
     {
         get { return this.gameObject; }
     }
-    public bool Interact()
+
+    public bool Interact(bool interactEnable)
     {
         //
         return false;
@@ -94,6 +99,7 @@ public class InspectableObject : MonoBehaviour, IInteractable, IInspectable
     public void OnStartInteract()
     {
         //
+        IsInteracting = true;
     }
 
     public void OnInteracting()
@@ -104,5 +110,6 @@ public class InspectableObject : MonoBehaviour, IInteractable, IInspectable
     public void OnEndInteract()
     {
         //
+        IsInteracting = false;
     }
 }

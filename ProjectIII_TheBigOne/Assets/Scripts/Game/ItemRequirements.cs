@@ -16,6 +16,8 @@ public class ItemRequirements : MonoBehaviour
     
     public void Unlock()
     {
+        if (lockedDoor.lockedMode == DynamicObject.LockedMode.Unlocked) return;
+        
         var item = playerInventory.characterItems.Find(x => x.itemName == requiredItem);
         bool hasItem = item != null;
         
@@ -24,12 +26,6 @@ public class ItemRequirements : MonoBehaviour
             playerInventory.inventoryDisplay.RemoveItem(item);
             playerInventory.characterItems.Remove(item);
             lockedDoor.Unlock();
-        }
-        else
-        {
-            //Display iventory
-            Debug.Log("IM HERE");
-            GameObject.FindObjectOfType<CanvasController>().ToggleInventory();
         }
     }
 }

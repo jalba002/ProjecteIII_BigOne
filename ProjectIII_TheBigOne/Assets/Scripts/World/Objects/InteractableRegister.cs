@@ -16,7 +16,7 @@ public class InteractableRegister : MonoBehaviour
     }
     
     private InteractablesManager _interactablesManager;
-
+    
     private void SetInteractableManager(InteractablesManager interactablesManager)
     {
         _interactablesManager = interactablesManager;
@@ -24,7 +24,6 @@ public class InteractableRegister : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Detected something!");
         SetInteractableManager(other.gameObject.GetComponent<InteractablesManager>());
         if (_interactablesManager != null)
         {
@@ -42,7 +41,6 @@ public class InteractableRegister : MonoBehaviour
         if (_interactablesManager != null)
         {
             _interactablesManager.registeredInteractables.Remove(AttachedInteractable);
-            _interactablesManager = null;
         }
     }
 

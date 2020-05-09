@@ -16,9 +16,12 @@ public class SceneItem : MonoBehaviour, IInteractable, IPickable
         get { return gameObject; }
     }
 
+    public bool IsInteracting { get; set; }
+
     private void Start()
     {
         DisplayName = $"Pick up {itemName}";
+        IsInteracting = false;
     }
 
     public bool Interact()
@@ -32,9 +35,20 @@ public class SceneItem : MonoBehaviour, IInteractable, IPickable
         return false;
     }
 
+    public bool Interact(bool interactEnable)
+    {
+        if (alreadyUsed) return false;
+        if (FindObjectOfType<PlayerController>().playerInventory.AddItem(itemName))
+        {
+            this.gameObject.SetActive(false);
+            alreadyUsed = true;
+        }
+        return true;
+    }
+
     public void OnStartInteract()
     {
-        //throw new System.NotImplementedException();
+        IsInteracting = true;
     }
 
     public void OnInteracting()
@@ -44,6 +58,6 @@ public class SceneItem : MonoBehaviour, IInteractable, IPickable
 
     public void OnEndInteract()
     {
-        //throw new System.NotImplementedException();
+        IsInteracting = false;
     }
 }

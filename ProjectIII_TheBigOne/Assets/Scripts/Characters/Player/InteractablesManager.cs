@@ -22,6 +22,7 @@ namespace Characters.Player
 
         public IInteractable CurrentInteractable { get; set; }
 
+        public bool CanInteract;
 
         public void Start()
         {
@@ -30,36 +31,49 @@ namespace Characters.Player
 
         public void Update()
         {
+            CanInteract = registeredInteractables.Count > 0 && CurrentInteractable != null;
+            
             if (registeredInteractables.Count > 0)
                 AnalyzeElement(DetectElement());
-            else if (textDebug.isActiveAndEnabled)
-            {
-                textDebug.gameObject.SetActive(false);
-            }
         }
 
         private void AnalyzeElement(IInteractable detectedElement)
         {
-            if (detectedElement == null)
-            {
-                CurrentInteractable = null;
-                ShowText(false);
-                return;
-            }
-
-            CurrentInteractable = detectedElement;
-            ShowText(true);
-        }
-
-        private void ShowText(bool enable)
-        {
-            if (textDebug)
+            if (detectedElement != null)
             {
                 if (CurrentInteractable != null)
-                    textDebug.text = CurrentInteractable.DisplayName;
-                textDebug.gameObject.SetActive(enable);
+                {
+                    if (!CurrentInteractable.IsInteracting)
+                    {
+                        CurrentInteractable = detectedElement;
+                    }
+                }
+                else
+                {
+                    CurrentInteractable = detectedElement;
+                }
+            }
+            else
+            {
+                if (CurrentInteractable != null)
+                {
+                    if (!CurrentInteractable.IsInteracting)
+                    {
+                        CurrentInteractable = null;
+                    }
+                }
+                else
+                {
+                    CurrentInteractable = null;
+                }
+            }
+
+            if (textDebug)
+            {
+                textDebug.text = CurrentInteractable?.DisplayName ?? "";
             }
         }
+
 
         private IInteractable DetectElement()
         {

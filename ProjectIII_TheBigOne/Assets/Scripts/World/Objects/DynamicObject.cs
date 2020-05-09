@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml;
 using Interfaces;
 using UnityEngine;
 using UnityEngine.Events;
@@ -295,6 +296,14 @@ namespace World.Objects
             SetJointsLimit(lockedMode);
         }
 
+        void Update()
+        {
+            if (IsInteracting)
+            {
+                OnInteracting();
+            }
+        }
+
         // Interface Implementation //
 
         public string DisplayName { get; set; }
@@ -304,24 +313,8 @@ namespace World.Objects
             get { return gameObject;}
         }
 
-        public bool Interact()
-        {
-            if (Rigidbody == null)
-            {
-                Rigidbody = GetComponent<Rigidbody>();
-                if (!Rigidbody)
-                {
-                    Debug.LogWarning("No rigidbody was found. Adding a new one.");
-                    Rigidbody = gameObject.AddComponent<Rigidbody>();
-                    Rigidbody.useGravity = false;
-                }
-            }
-
-            var useForce = HandlePosition.transform.forward * CalculateForce(doorConfiguration.openForce);
-            Rigidbody.AddForceAtPosition(useForce, HandlePosition.transform.position, ForceMode.Force);
-            return true;
-        }
-
+        public bool IsInteracting { get; set; }
+        
         public bool ForceClose()
         {
             throw new NotImplementedException();
@@ -359,6 +352,22 @@ namespace World.Objects
             throw new NotImplementedException();
         }
 
+        public bool Interact(bool interactEnable)
+        {
+            if (interactEnable && !IsInteracting)
+            {
+                OnStartInteract();
+                Debug.Log("Starting Interaction");
+            }
+            else if (!interactEnable)
+            {
+                Debug.Log("Ending Interaction");
+                OnEndInteract();
+            }
+            
+            return interactEnable == IsInteracting;
+        }
+
         public void OnStartInteract()
         {
             OnStartInteracting.Invoke();
@@ -374,16 +383,31 @@ namespace World.Objects
                     //Play drawer sound
                     break;
             }
+            
+            if (Rigidbody == null)
+            {
+                Rigidbody = GetComponent<Rigidbody>();
+                if (!Rigidbody)
+                {
+                    Debug.LogWarning("No rigidbody was found. Adding a new one.");
+                    Rigidbody = gameObject.AddComponent<Rigidbody>();
+                    Rigidbody.useGravity = false;
+                }
+            }
+
+            IsInteracting = true;
         }
 
         public void OnInteracting()
         {
-            throw new NotImplementedException();
+            var useForce = HandlePosition.transform.forward * CalculateForce(doorConfiguration.openForce);
+            Rigidbody.AddForceAtPosition(useForce, HandlePosition.transform.position, ForceMode.Force);
         }
 
         public void OnEndInteract()
         {
-            throw new NotImplementedException();
+            IsInteracting = false;
+            Debug.Log($"Setting {this.gameObject.name} interaction to {IsInteracting}");
         }
 
         private float CalculateForce(float force = 1f)

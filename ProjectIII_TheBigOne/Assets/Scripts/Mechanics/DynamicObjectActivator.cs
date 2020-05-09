@@ -28,7 +28,7 @@ public class DynamicObjectActivator : MonoBehaviour
         }
         else
         {
-            detectedInteractable.Interact();
+            detectedInteractable.Interact(true);
             OnObjectActivate.Invoke();
             return true;
         }

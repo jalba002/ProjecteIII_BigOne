@@ -18,6 +18,7 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         if (CheckEnterIdle()) return;
         if (CheckEnterPatrol()) return;
         if (CheckEnterChasing()) return;
+        if (CheckEnterSearching()) return;
     }
 
 
@@ -53,23 +54,35 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         // 
         
         //Debug.Log("EnterPatrol Check");
-        if (!attachedCharacter.currentBrain.IsPlayerInSight) return false;
+        if (attachedCharacter.currentBrain.IsPlayerInSight) return false;
 
         if (attachedCharacter.currentBrain.IsChasingPlayer) return false;
 
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Patrolling>();
         return true;
     }
-
+    
     private bool CheckEnterChasing()
     {
         // TODO Add conditions.
         // 
         
         Debug.Log("EnterPatrol Chasing");
-        //if (!attachedCharacter.currentBrain.IsChasingPlayer) return false;
+        if (!attachedCharacter.currentBrain.IsPlayerInSight) return false;
         
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Chasing>();
+        return true;
+    }
+
+    private bool CheckEnterSearching()
+    {
+        Debug.Log("Checking Search");
+
+        //if (attachedCharacter.currentBrain.IsChasingPlayer) return false;
+
+        //if (attachedCharacter.currentBrain.IsPlayerInSight) return false;
+        
+        attachedCharacter.stateMachine.SwitchState<State_Enemy_Searching>();
         return true;
     }
 }

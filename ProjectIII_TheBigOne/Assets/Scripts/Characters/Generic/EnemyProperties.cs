@@ -14,5 +14,9 @@ namespace Properties
         //[Tooltip("Prototype tooltip")] public float chaseConfigValue = 2f;
 
         public float positionReachedDistance = 1f;
+
+        [Header("Search Config")] public float maxSearchTime = 15f;
+
+
     }
 }

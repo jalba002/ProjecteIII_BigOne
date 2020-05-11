@@ -15,6 +15,8 @@ public class EnemyBrain : Brain
     // So every moment they can be overwritten by whatever we want.
     public bool IsVisible { get; set; }
     
+    public bool IsStunned { get; set; }
+    
     public bool IsBeingRendered { get; set; }
 
     public bool IsPlayerInSight { get; set; }

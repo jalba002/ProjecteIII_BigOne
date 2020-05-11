@@ -42,18 +42,6 @@ public class ParanormalManager : MonoBehaviour
         
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            StartFirstPhase();
-        }
-        else if (Input.GetKeyDown(KeyCode.N))
-        {
-            StartSecondPhase();
-        }
-    }
-
     public static void UseRandomDoor()
     {
         UseDoor(ObjectTracker.doorList[alea.Next(0, ObjectTracker.doorList.Count)]);

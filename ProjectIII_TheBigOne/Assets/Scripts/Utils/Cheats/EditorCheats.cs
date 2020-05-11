@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+﻿using System;
+using Enemy;
+using UnityEditor;
 using UnityEngine;
 
 namespace Cheats
@@ -15,7 +17,72 @@ namespace Cheats
             }
             else
             {
-                Debug.LogError("Application is not in play mode.");
+                Debug.LogWarning("Only in Play Mode!");
+            }
+        }
+
+        [MenuItem("Cheats/Game/Stun Dimitry %K")]
+        public static void StunDimitry()
+        {
+            try
+            {
+                if (Application.isPlaying)
+                {
+                    GameObject.FindObjectOfType<EnemyBrain>().IsStunned = true;
+                    return;
+                }
+                else
+                {
+                    Debug.LogWarning("Only in Play Mode!");
+                }
+            }
+            catch (NullReferenceException)
+            {
+                Debug.LogWarning("No Dimitry with brain in-game!");
+            }
+        }
+
+        [MenuItem("Cheats/Enemy/Load First Phase %B")]
+        public static void LoadFirstPhase()
+        {
+            try
+            {
+                if (Application.isPlaying)
+                {
+                    GameObject.FindObjectOfType<ParanormalManager>()?.StartFirstPhase();
+
+                    return;
+                }
+                else
+                {
+                    Debug.LogWarning("Only in Play Mode!");
+                }
+            }
+            catch (NullReferenceException)
+            {
+                Debug.LogWarning("No paranormal manager in-game!");
+            }
+        }
+
+        [MenuItem("Cheats/Enemy/Load Second Phase %N")]
+        public static void LoadSecondPhase()
+        {
+            try
+            {
+
+                if (Application.isPlaying)
+                {
+                    GameObject.FindObjectOfType<ParanormalManager>()?.StartSecondPhase();
+                    return;
+                }
+                else
+                {
+                    Debug.LogWarning("Only in Play Mode!");
+                }
+            }
+            catch (NullReferenceException)
+            {
+                Debug.LogWarning("No paranormal manager in-game!");
             }
         }
     }

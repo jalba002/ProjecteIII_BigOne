@@ -1,4 +1,5 @@
-﻿using System.Runtime.Remoting.Messaging;
+﻿using System.Runtime.InteropServices.WindowsRuntime;
+using System.Runtime.Remoting.Messaging;
 using Enemy;
 using UnityEngine;
 using CharacterController = Characters.Generic.CharacterController;
@@ -18,6 +19,7 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
     public override void CalculateNextState(bool forceExitState)
     {
         // Analyze all possible states.
+        if (CheckEnterStunned()) return;
         if (CheckEnterTraversing()) return;
         if (CheckEnterIdle()) return;
         if (CheckEnterPatrol()) return;
@@ -90,9 +92,11 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
 
     private bool CheckEnterStunned()
     {
-        // attachedCharacter.stateMachine.SwitchState<State_Enemy_Stunned>();
+        if (!attachedCharacter.currentBrain.IsStunned) return false;
         
-        return false;
+        attachedCharacter.stateMachine.SwitchState<State_Enemy_Stunned>();
+        
+        return true;
     }
 
     private bool CheckEnterTraversing()

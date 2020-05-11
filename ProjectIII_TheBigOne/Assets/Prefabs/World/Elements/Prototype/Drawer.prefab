@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100002, guid: 46f48e5f14eff41f9add98c2a52817b5, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -221,17 +221,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectType: 1
+  doorConfiguration:
+    maximumAngle: 90
+    minimumAngle: 0
+    friction: 1
+    openForce: 5
+  drawerConfiguration:
+    maximumDistance: 0.25
+    friction: 10
+    maximumForce: 5
   lockedMode: 1
   HandlePosition: {fileID: 5346720545822744894}
-  DoorJointConfiguration:
-    maximumAngle: 0
-    minimumAngle: 0
-    friction: 0
-  DrawerJointConfiguration:
-    maximumDistance: 0.25
-    friction: 9999
   ignoredColliders: []
-  OnUnlock:
+  OnUnlockEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStartInteracting:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &5346720545822744894

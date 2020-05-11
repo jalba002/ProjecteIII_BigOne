@@ -23,7 +23,10 @@ public class EnemyBrain : Brain
 
     public bool IsChasingPlayer { get; set; }
     
-
+    public bool IsOnOffMeshLink { get; set; }
+    
+    public bool IsCurrentlyBreaking { get; set; }
+    
     public bool UpdateRotation { get; set; }
 
     private void Awake()
@@ -43,6 +46,8 @@ public class EnemyBrain : Brain
 
         IsPlayerInSight = SensesUtil.IsInSight(selfCharacter.gameObject, archnemesis.gameObject,
             selfCharacter.characterProperties.maxDetectionRange, selfCharacter.characterProperties.watchableLayers, false);*/
+
+        IsOnOffMeshLink = selfCharacter.NavMeshAgent.isOnOffMeshLink;
     }
 
     public void SetBrainDead()

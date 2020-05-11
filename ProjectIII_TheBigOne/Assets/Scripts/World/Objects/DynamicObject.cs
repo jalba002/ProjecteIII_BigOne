@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Interfaces;
+using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.PlayerLoop;
@@ -10,6 +11,7 @@ namespace World.Objects
     public class DynamicObject : MonoBehaviour, IInteractable
     {
         #region Declarations
+
         [System.Serializable]
         public struct DoorHingeConfiguration
         {
@@ -51,6 +53,7 @@ namespace World.Objects
 
         [Header("Main Configuration", order = 0)]
         public ObjectType objectType;
+
         public DoorHingeConfiguration doorConfiguration = new DoorHingeConfiguration()
         {
             friction = 1f,
@@ -65,9 +68,9 @@ namespace World.Objects
             maximumDistance = 0.25f,
             maximumForce = 5f
         };
-        
+
         #endregion
-        
+
         public LockedMode lockedMode;
         public OpenState openState { get; set; }
 
@@ -78,7 +81,7 @@ namespace World.Objects
 
         public List<Collider> ignoredColliders;
         private Collider selfCollider;
-        
+
         [Header("Events")] public UnityEvent OnUnlockEvent = new UnityEvent();
         public UnityEvent OnStartInteracting = new UnityEvent();
 
@@ -203,7 +206,7 @@ namespace World.Objects
                             };
                             break;
                         case ObjectType.Drawer:
-                            
+
                             break;
                         default:
                             throw new ArgumentOutOfRangeException(nameof(objectType), objectType, null);
@@ -307,9 +310,17 @@ namespace World.Objects
                 }
             }
 
-            var useForce = HandlePosition.transform.forward * CalculateForce(doorConfiguration.openForce);
-            Rigidbody.AddForceAtPosition(useForce, HandlePosition.transform.position, ForceMode.Force);
+
+            ForceOpen(CalculateForce(doorConfiguration.openForce));
+            //var useForce = HandlePosition.transform.forward * CalculateForce(doorConfiguration.openForce);
+            //Rigidbody.AddForceAtPosition(useForce, HandlePosition.transform.position, ForceMode.Force);
             return true;
+        }
+
+        public void ForceOpen(float force)
+        {
+            var useForce = HandlePosition.transform.forward * force;
+            Rigidbody.AddForceAtPosition(useForce, HandlePosition.transform.position, ForceMode.Force);
         }
 
         public bool ForceClose()
@@ -352,7 +363,7 @@ namespace World.Objects
         public void OnStartInteract()
         {
             OnStartInteracting.Invoke();
-            
+
             switch (objectType)
             {
                 case ObjectType.Door:
@@ -383,6 +394,11 @@ namespace World.Objects
             calculatedForce = (force * mouseY);
 
             return calculatedForce;
+        }
+
+        public float ReturnAngle()
+        {
+            return HingeJoint.angle;
         }
     }
 }

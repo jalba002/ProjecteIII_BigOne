@@ -51,7 +51,7 @@ namespace Enemy
                 _attachedController.currentBrain.IsVisible = false;
             }
 
-            Debug.Log(_attachedController.currentBrain.IsVisible);
+            // Debug.Log(_attachedController.currentBrain.IsVisible);
         }
 
         public override void OnStateFixedTick(float fixedTime)

@@ -25,7 +25,7 @@ namespace Enemy
                 _attachedController.currentBrain.IsPlayerInSight = SensesUtil.IsInSight(_attachedController.gameObject,
                     _attachedController.currentBrain.archnemesis.gameObject,
                     _attachedController.characterProperties.maxDetectionRange,
-                    _attachedController.characterProperties.watchableLayers, true);
+                    _attachedController.characterProperties.watchableLayers);
             }
             catch (NullReferenceException)
             {

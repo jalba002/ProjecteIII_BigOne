@@ -5,6 +5,7 @@ using Player;
 using TMPro;
 using UnityEditor.Rendering;
 using UnityEngine;
+using World.Objects;
 using Random = System.Random;
 
 namespace Enemy
@@ -68,7 +69,8 @@ namespace Enemy
                 _currentBlockage.attachedDynamicObject.ForceOpen(-400f);
             }
             
-            if (_currentBlockage.attachedDynamicObject.ReturnAngle() >= 90f)
+            
+            if (_currentBlockage.attachedDynamicObject.ReturnAngle() >= 85f)
             {
                 // _currentBlockage.attachedLink.activated = false;
                 _attachedController.NavMeshAgent.CompleteOffMeshLink();
@@ -109,6 +111,25 @@ namespace Enemy
             base.OnStateExit();
             //_attachedController.NavMeshAgent.isStopped = false;
             _attachedController.NavMeshAgent.Warp(originalPosition);
+            ResolveBlockage();
+        }
+
+        private void ResolveBlockage()
+        {
+            switch (_currentBlockage.attachedDynamicObject.objectType)
+            {
+                case DynamicObject.ObjectType.Door:
+                    // Nothing yet.
+                    break;
+                case DynamicObject.ObjectType.Drawer:
+                    // Can't get blocked by a drawer...?
+                    break;
+                case DynamicObject.ObjectType.Pallet:
+                    _currentBlockage.gameObject.SetActive(false);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

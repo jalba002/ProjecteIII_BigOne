@@ -55,7 +55,6 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         // If player is not in safe zone.
         // 
         
-        Debug.Log("Checking to patrol.");
         if (attachedCharacter.currentBrain.IsPlayerInSight) return false;
 
         if (attachedCharacter.currentBrain.IsChasingPlayer) return false;
@@ -69,7 +68,6 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         // TODO Add conditions.
         // 
         
-        Debug.Log("Checking for a Chase");
         if (!attachedCharacter.currentBrain.IsPlayerInSight) return false;
         
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Chasing>();
@@ -78,8 +76,6 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
 
     private bool CheckEnterSearching()
     {
-        Debug.Log("Checking Search");
-
         //if (attachedCharacter.currentBrain.IsChasingPlayer) return false;
 
         //if (attachedCharacter.currentBrain.IsPlayerInSight) return false;

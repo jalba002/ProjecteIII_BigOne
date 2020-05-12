@@ -19,7 +19,6 @@ namespace World.Objects
             public float maximumAngle;
             public float minimumAngle;
             [Range(0f, 100f)] public float friction;
-            [Header("Forces")] public float openForce;
         }
 
         [System.Serializable]
@@ -61,9 +60,12 @@ namespace World.Objects
         }
 
         #endregion
+
         #region MainConfiguration
+
         [Header("Main Configuration", order = 0)]
         public ObjectType objectType;
+
         public LockedMode lockedMode;
 
         public DoorHingeConfiguration doorConfiguration = new DoorHingeConfiguration()
@@ -71,7 +73,6 @@ namespace World.Objects
             friction = 1f,
             maximumAngle = 90f,
             minimumAngle = 0f,
-            openForce = 5f
         };
 
         public DrawerHingeConfiguration drawerConfiguration = new DrawerHingeConfiguration()
@@ -88,19 +89,22 @@ namespace World.Objects
         };
 
         public OpenState openState { get; set; }
+
         #endregion
 
         [Header("Hinge Settings", order = 1)] public GameObject HandlePosition;
+        public float openForce = 5f;
+        [Range(1f, 15f)] public float maxMouseInput = 3f;
+        public bool UseMouseXAxis = false;
+
         [Header("Rigidbody Settings")] public bool useGravity = false;
 
-        [Space(2)]
-        [Header("Other Settings")]
-        public List<Collider> ignoredColliders;
+        [Space(2)] [Header("Other Settings")] public List<Collider> ignoredColliders;
         private Collider selfCollider;
-        
+
         // Joints.
-        private HingeJoint HingeJoint;
-        private ConfigurableJoint ConfgJoint;
+        public HingeJoint HingeJoint { get; set; }
+        public ConfigurableJoint ConfgJoint { get; set; }
 
         [Header("Events")] public UnityEvent OnUnlockEvent = new UnityEvent();
         public UnityEvent OnStartInteracting = new UnityEvent();
@@ -134,13 +138,14 @@ namespace World.Objects
         {
             switch (objectType)
             {
-                case ObjectType.Door:
-
-                    break;
                 case ObjectType.Drawer:
                     Vector3 newStartingPosition = this.gameObject.transform.localPosition;
                     newStartingPosition.z -= (drawerConfiguration.maximumDistance * 0.9f);
                     this.gameObject.transform.localPosition = newStartingPosition;
+                    break;
+                case ObjectType.Door:
+                    break;
+                case ObjectType.Pallet:
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -152,6 +157,7 @@ namespace World.Objects
             switch (objectType)
             {
                 case ObjectType.Door:
+                case ObjectType.Pallet:
                     HingeJoint = gameObject.GetComponent<HingeJoint>();
                     if (HingeJoint == null)
                     {
@@ -186,7 +192,7 @@ namespace World.Objects
             Rigidbody.angularDrag = 0f;
             Rigidbody.drag = objectType == ObjectType.Door
                 ? doorConfiguration.friction
-                : drawerConfiguration.friction;
+                : (objectType == ObjectType.Drawer ? drawerConfiguration.friction : Rigidbody.drag);
             return;
         }
 
@@ -285,6 +291,7 @@ namespace World.Objects
         }
 
         #region IgnoreColliders
+
         private bool GenerateIgnoredColliders(Collider selfCollider)
         {
             try
@@ -315,7 +322,7 @@ namespace World.Objects
                 Physics.IgnoreCollision(currentCollider, selfCollider, true);
             }
         }
-        
+
         #endregion
 
         //Update hinge variables when inspector is modified.
@@ -325,6 +332,7 @@ namespace World.Objects
         }
 
         // Interface Implementation //
+
         #region Interface Interactable
 
         public bool Interact()
@@ -341,12 +349,12 @@ namespace World.Objects
             }
 
 
-            ForceOpen(CalculateForce(doorConfiguration.openForce));
+            ForceOpen(CalculateForce(openForce));
             //var useForce = HandlePosition.transform.forward * CalculateForce(doorConfiguration.openForce);
             //Rigidbody.AddForceAtPosition(useForce, HandlePosition.transform.position, ForceMode.Force);
             return true;
         }
-        
+
         public void OnStartInteract()
         {
             OnStartInteracting.Invoke();
@@ -373,8 +381,11 @@ namespace World.Objects
         {
             throw new NotImplementedException();
         }
-#endregion
+
+        #endregion
+
         #region Open&Close
+
         public void ForceOpen(float force)
         {
             var useForce = HandlePosition.transform.forward * force;
@@ -417,15 +428,17 @@ namespace World.Objects
         {
             throw new NotImplementedException();
         }
-        
+
         #endregion
 
-        
-        private float CalculateForce(float force = 1f)
+
+        private float CalculateForce(float forceScale = 1f)
         {
             var calculatedForce = 0f;
-            float mouseY = Input.GetAxis("Mouse Y");
-            calculatedForce = (force * mouseY);
+            float mouseAxis = UseMouseXAxis ? Input.GetAxis("Mouse X") : Input.GetAxis("Mouse Y");
+            mouseAxis = Mathf.Clamp(mouseAxis,-maxMouseInput, maxMouseInput);
+            calculatedForce = (forceScale * mouseAxis);
+            
 
             return calculatedForce;
         }

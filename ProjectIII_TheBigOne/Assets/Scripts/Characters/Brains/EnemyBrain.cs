@@ -5,6 +5,7 @@ using Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using World.Objects;
 
 public class EnemyBrain : Brain
 {
@@ -13,9 +14,15 @@ public class EnemyBrain : Brain
 
     // All sensing variables should be changed from the states.
     // So every moment they can be overwritten by whatever we want.
+    
+    // Cheat or debug variable.
+    //public bool DetectPlayer { get; set; } 
+    
     public bool IsVisible { get; set; }
     
     public bool IsStunned { get; set; }
+    
+    public StunArea StunSource { get; set; }
     
     public bool IsBeingRendered { get; set; }
 
@@ -58,5 +65,12 @@ public class EnemyBrain : Brain
         IsPlayerNearLight = false;
         IsPlayerInSight = false;
         IsChasingPlayer = false;
+    }
+
+    public void Stun(StunArea stunArea)
+    {
+        Debug.Log("CALLED BRAIN STUN");
+        IsStunned = true;
+        StunSource = stunArea;
     }
 }

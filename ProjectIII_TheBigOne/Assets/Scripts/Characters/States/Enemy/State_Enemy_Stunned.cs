@@ -2,6 +2,7 @@
 using Characters.Generic;
 using Player;
 using UnityEngine;
+using World.Objects;
 
 namespace Enemy
 {
@@ -10,6 +11,8 @@ namespace Enemy
         private EnemyController _attachedController;
 
         private float stunTime;
+
+        private StunArea stunSource;
 
         protected override void OnStateInitialize(StateMachine machine)
         {
@@ -45,7 +48,11 @@ namespace Enemy
             base.OnStateEnter();
             Debug.Log("STUNNED UGH");
             _attachedController.NavMeshAgent.isStopped = true;
-            stunTime = 10f;
+            
+            // Stun stuff.
+            stunSource = _attachedController.currentBrain.StunSource;
+            stunTime = stunSource.stunDuration;
+            _attachedController.NavMeshAgent.Warp(stunSource.traversableBlockage.attachedLink.startTransform.position);
         }
 
         protected override void OnStateExit()

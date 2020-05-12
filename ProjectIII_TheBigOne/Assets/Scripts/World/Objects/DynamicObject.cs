@@ -4,7 +4,6 @@ using Interfaces;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.PlayerLoop;
-using UnityEngine.Rendering.HighDefinition;
 
 namespace World.Objects
 {

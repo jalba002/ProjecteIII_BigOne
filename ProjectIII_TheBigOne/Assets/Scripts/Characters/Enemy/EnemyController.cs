@@ -14,18 +14,28 @@ namespace Enemy
     [RequireComponent(typeof(StateMachine))]
     public class EnemyController : CharacterController
     {
-        public Collider attachedCollider;
+        public enum StartingBehaviour
+        {
+            Halt,
+            FirstPhase,
+            SecondPhase,
+            OnlyChase
+        }
+
+        [Header("Behaviours")] public StartingBehaviour startingBehaviour;
+
 
         public new EnemyBrain currentBrain { get; private set; }
-        
-        public BehaviourTree currentBehaviourTree;
 
-        public new EnemyProperties characterProperties;
+        public BehaviourTree currentBehaviourTree { get; set; }
 
-        public EnemyTargetDummy targetPositionDummy;
+        [Header("Enemy Settings")] public new EnemyProperties characterProperties;
 
+        [Header("Components")] 
+        public Collider attachedCollider;
         public Renderer meshRenderer;
-
+        [Header("NavMesh")]
+        public EnemyTargetDummy targetPositionDummy;
         public NavMeshAgent NavMeshAgent;
 
         [Header("Components from Thirds")] private FlashlightController playerFlashlight;
@@ -36,7 +46,7 @@ namespace Enemy
 
             NavMeshAgent = GetComponent<NavMeshAgent>();
 
-            currentBehaviourTree = new BehaviourTree_Enemy_Halted(this);
+            SetStartingBehaviourTree();
 
             if (stateMachine == null)
                 stateMachine = GetComponent<StateMachine>();
@@ -62,14 +72,35 @@ namespace Enemy
             }
         }
 
+        private void SetStartingBehaviourTree()
+        {
+            switch (startingBehaviour)
+            {
+                case StartingBehaviour.Halt:
+                    currentBehaviourTree = new BehaviourTree_Enemy_Halted(this);
+                    break;
+                case StartingBehaviour.FirstPhase:
+                    currentBehaviourTree = new BehaviourTree_Enemy_FirstPhase(this);
+                    break;
+                case StartingBehaviour.SecondPhase:
+                    currentBehaviourTree = new BehaviourTree_Enemy_SecondPhase(this);
+                    break;
+                case StartingBehaviour.OnlyChase:
+                    currentBehaviourTree = new BehaviourTree_Enemy_OnlyChase(this);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         private void Start()
         {
             stateMachine.SwitchState<State_Enemy_Idle>();
-            
+
             NavMeshAgent.speed = characterProperties.WalkSpeed;
-            
+
             playerFlashlight = FindObjectOfType<FlashlightController>();
-            
+
             targetPositionDummy = FindObjectOfType<EnemyTargetDummy>();
         }
 
@@ -109,7 +140,7 @@ namespace Enemy
         {
             return this.gameObject.transform;
         }
-        
+
         public override bool Kill()
         {
             // TODO Add kill functionality?

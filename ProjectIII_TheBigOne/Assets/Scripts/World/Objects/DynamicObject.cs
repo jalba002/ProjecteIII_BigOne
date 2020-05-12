@@ -5,6 +5,7 @@ using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.PlayerLoop;
+using Object = UnityEngine.Object;
 
 namespace World.Objects
 {
@@ -29,12 +30,20 @@ namespace World.Objects
             public float maximumForce;
         }
 
+        [System.Serializable]
+        public struct PalletConfiguration
+        {
+            public float forceToThrow;
+            public float forceScaleApplied;
+        }
+
         // Object type.
         // Changes the hinge used.
         public enum ObjectType
         {
             Door,
-            Drawer
+            Drawer,
+            Pallet
         }
 
         // If the door is closed by a key or not.
@@ -51,8 +60,11 @@ namespace World.Objects
             Opened
         }
 
+        #endregion
+        #region MainConfiguration
         [Header("Main Configuration", order = 0)]
         public ObjectType objectType;
+        public LockedMode lockedMode;
 
         public DoorHingeConfiguration doorConfiguration = new DoorHingeConfiguration()
         {
@@ -69,18 +81,26 @@ namespace World.Objects
             maximumForce = 5f
         };
 
+        public PalletConfiguration palletConfiguration = new PalletConfiguration()
+        {
+            forceToThrow = 100f,
+            forceScaleApplied = 5f
+        };
+
+        public OpenState openState { get; set; }
         #endregion
 
-        public LockedMode lockedMode;
-        public OpenState openState { get; set; }
-
         [Header("Hinge Settings", order = 1)] public GameObject HandlePosition;
+        [Header("Rigidbody Settings")] public bool useGravity = false;
 
-        [Header("Other Settings")] private HingeJoint HingeJoint;
-        private ConfigurableJoint ConfgJoint;
-
+        [Space(2)]
+        [Header("Other Settings")]
         public List<Collider> ignoredColliders;
         private Collider selfCollider;
+        
+        // Joints.
+        private HingeJoint HingeJoint;
+        private ConfigurableJoint ConfgJoint;
 
         [Header("Events")] public UnityEvent OnUnlockEvent = new UnityEvent();
         public UnityEvent OnStartInteracting = new UnityEvent();
@@ -162,7 +182,7 @@ namespace World.Objects
                 Rigidbody = gameObject.AddComponent<Rigidbody>();
             }
 
-            Rigidbody.useGravity = false;
+            Rigidbody.useGravity = useGravity;
             Rigidbody.angularDrag = 0f;
             Rigidbody.drag = objectType == ObjectType.Door
                 ? doorConfiguration.friction
@@ -245,6 +265,13 @@ namespace World.Objects
                                 //positionDamper = DrawerJointConfiguration.friction
                             };
                             break;
+                        case ObjectType.Pallet:
+                            Debug.LogWarning("No pallet configurations!");
+                            /*HingeJoint.limits = new JointLimits()
+                            {
+                                
+                            }*/
+                            break;
                         default:
                             throw new ArgumentOutOfRangeException(nameof(objectType), objectType, null);
                     }
@@ -257,7 +284,7 @@ namespace World.Objects
             lockedMode = lockMode;
         }
 
-
+        #region IgnoreColliders
         private bool GenerateIgnoredColliders(Collider selfCollider)
         {
             try
@@ -288,6 +315,8 @@ namespace World.Objects
                 Physics.IgnoreCollision(currentCollider, selfCollider, true);
             }
         }
+        
+        #endregion
 
         //Update hinge variables when inspector is modified.
         private void OnValidate()
@@ -296,6 +325,7 @@ namespace World.Objects
         }
 
         // Interface Implementation //
+        #region Interface Interactable
 
         public bool Interact()
         {
@@ -316,7 +346,35 @@ namespace World.Objects
             //Rigidbody.AddForceAtPosition(useForce, HandlePosition.transform.position, ForceMode.Force);
             return true;
         }
+        
+        public void OnStartInteract()
+        {
+            OnStartInteracting.Invoke();
 
+            switch (objectType)
+            {
+                case ObjectType.Door:
+                    //Play door sound
+                    AudioManager.PlaySoundAtLocation("Sound/Door/DoorOpen_07", transform.position);
+
+                    break;
+                case ObjectType.Drawer:
+                    //Play drawer sound
+                    break;
+            }
+        }
+
+        public void OnInteracting()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnEndInteract()
+        {
+            throw new NotImplementedException();
+        }
+#endregion
+        #region Open&Close
         public void ForceOpen(float force)
         {
             var useForce = HandlePosition.transform.forward * force;
@@ -359,34 +417,10 @@ namespace World.Objects
         {
             throw new NotImplementedException();
         }
+        
+        #endregion
 
-        public void OnStartInteract()
-        {
-            OnStartInteracting.Invoke();
-
-            switch (objectType)
-            {
-                case ObjectType.Door:
-                    //Play door sound
-                    AudioManager.PlaySoundAtLocation("Sound/Door/DoorOpen_07", transform.position);
-
-                    break;
-                case ObjectType.Drawer:
-                    //Play drawer sound
-                    break;
-            }
-        }
-
-        public void OnInteracting()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnEndInteract()
-        {
-            throw new NotImplementedException();
-        }
-
+        
         private float CalculateForce(float force = 1f)
         {
             var calculatedForce = 0f;

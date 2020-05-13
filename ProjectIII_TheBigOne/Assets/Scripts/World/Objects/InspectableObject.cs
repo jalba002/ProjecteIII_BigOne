@@ -1,28 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using Interfaces;
 using UnityEngine;
 
-[RequireComponent(typeof(MeshRenderer))]
-[RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(Collider))]
-public class InspectableObject : MonoBehaviour, IInspectable
+public class InspectableObject : MonoBehaviour, IInteractable, IInspectable
 {
+    public string objectName;
+
     private MeshRenderer _meshRenderer;
     private MeshFilter _meshFilter;
     public InspectableInfo InspectInfo { get; set; }
     public bool IsBeingInspected { get; set; }
-    
+
     public List<Collider> ignoredColliders;
     private Collider selfCollider;
-    
+
     private void Start()
     {
         selfCollider = gameObject.GetComponent<Collider>();
 
         GenerateIgnoredColliders(selfCollider);
+
+        DisplayName = objectName != null ? $"Inspect {objectName}" : $"Inspect defaultName";
     }
-    
+
     private bool GenerateIgnoredColliders(Collider selfCollider)
     {
         try
@@ -59,6 +60,7 @@ public class InspectableObject : MonoBehaviour, IInspectable
     {
         CreateInspectInfo();
         _meshRenderer.enabled = false;
+        OnStartInteract();
         return InspectInfo;
     }
 
@@ -67,15 +69,47 @@ public class InspectableObject : MonoBehaviour, IInspectable
         Debug.Log("Created inspect info.");
         if (InspectInfo.objectMesh == null || InspectInfo.objectTexture == null)
         {
-            _meshFilter = GetComponent<MeshFilter>();
-            _meshRenderer = GetComponent<MeshRenderer>();
-            InspectInfo = new InspectableInfo(_meshFilter.mesh, _meshRenderer.materials, transform.rotation);
+            _meshFilter = GetComponentInChildren<MeshFilter>();
+            _meshRenderer = GetComponentInChildren<MeshRenderer>();
+            InspectInfo = new InspectableInfo(_meshFilter.mesh, _meshRenderer.materials, transform);
         }
     }
-    
+
     public bool StopInspect()
     {
         _meshRenderer.enabled = true;
+        OnEndInteract();
         return false;
+    }
+
+    public string DisplayName { get; set; }
+    public bool IsInteracting { get; set; }
+
+    public GameObject attachedGameobject
+    {
+        get { return this.gameObject; }
+    }
+
+    public bool Interact(bool interactEnable)
+    {
+        //
+        return false;
+    }
+
+    public void OnStartInteract()
+    {
+        //
+        IsInteracting = true;
+    }
+
+    public void OnInteracting()
+    {
+        //
+    }
+
+    public void OnEndInteract()
+    {
+        //
+        IsInteracting = false;
     }
 }

@@ -9,10 +9,8 @@ public class ObjectInspector : MonoBehaviour
 
     [Header("Render output")] public InspectedElement objectRenderer;
 
-    [Header("Settings")] public float range = 20f;
-    public LayerMask LayerMask;
-
     [Header("Render Settings")] public Vector2 distances = new Vector2(1.5f, 2f);
+
     // And more parameters to come.
     public Vector2 rotationSpeed = new Vector2(0.5f, 0.5f);
 
@@ -47,34 +45,25 @@ public class ObjectInspector : MonoBehaviour
     {
         float xRot = playerController.currentBrain.MouseInput.x * rotationSpeed.x * Mathf.Deg2Rad;
         float yRot = playerController.currentBrain.MouseInput.y * rotationSpeed.y * Mathf.Deg2Rad;
-            
+
         rendererTransform.RotateAround(playerController.cameraController.attachedCamera.transform.up, -xRot);
         rendererTransform.RotateAround(playerController.cameraController.attachedCamera.transform.right, yRot);
     }
 
-    public bool Activate(Camera camera)
+    public bool Activate(IInteractable interactable)
     {
+        if (interactable == null) return false;
         if (GetEnabled())
         {
             StopInspect();
             currentInspectedObject = null;
             return true;
         }
-        
-        RaycastHit raycastHit;
-        if (Utils.LayeredRaycast(camera, range, out raycastHit, LayerMask))
-        {
-            try
-            {
-                currentInspectedObject = raycastHit.collider.gameObject.GetComponent<IInspectable>();
-                return StartInspect(currentInspectedObject);
-            }
-            catch (Exception e)
-            {
-                Debug.LogWarning("Didn't get the Inspected Object");
-                return false;
-            }
-        }
+
+        var inspectable = interactable.attachedGameobject.GetComponent<IInspectable>();
+        StartInspect(inspectable);
+        return true;
+
 
         return false;
     }
@@ -84,12 +73,13 @@ public class ObjectInspector : MonoBehaviour
         try
         {
             var info = inspectable.Inspect();
-            objectRenderer.SetComponents(info.objectMesh, info.objectTexture, info.objectRotation);
+            objectRenderer.SetComponents(info.objectMesh, info.objectTexture, info.objectTransform);
+            currentInspectedObject = inspectable;
             return true;
         }
         catch (Exception e)
         {
-            Debug.Log(e.Message);
+            Debug.LogWarning(e.Message);
             return false;
         }
     }
@@ -99,7 +89,7 @@ public class ObjectInspector : MonoBehaviour
         currentInspectedObject.StopInspect();
         currentInspectedObject = null;
         objectRenderer.ResetComponents();
-        // Debug.Log("Stopped inspecting.");
+        Debug.Log("Stopped inspecting.");
     }
 
     public bool GetEnabled()

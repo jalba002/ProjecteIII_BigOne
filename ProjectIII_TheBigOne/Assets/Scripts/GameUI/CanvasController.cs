@@ -22,6 +22,7 @@ public class CanvasController : MonoBehaviour
     private PlayerController playerController;
     private State_Player_Walking playerWalking;
 
+    public GameObject inventoryObject;
 
     private void Start()
     {
@@ -29,16 +30,22 @@ public class CanvasController : MonoBehaviour
         flashlight = playerController.attachedFlashlight;
         playerWalking = FindObjectOfType<State_Player_Walking>();
 
-        playerController.simpleActivator.OnObjectActivate.AddListener(ChangeCursorToGrab);
-        playerController.simpleActivator.OnObjectDeactivate.AddListener(ChangeCursorToDefault);
+        if(inventoryObject == null)
+        {
+            inventoryObject = GameObject.Find("Inventory");
+        }
+
     }
 
     void Update()
     {
+        
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.J))
         {
             AddPickupMessage("key");
         }
+#endif
 
         playerLightingUpdate();
         playerRunningUpdate();
@@ -78,4 +85,14 @@ public class CanvasController : MonoBehaviour
         UICrosshair.sprite = grabCrosshair;
         UICrosshair.rectTransform.localScale = new Vector3(.6f, .6f, 1f);
     }
+
+    public void ToggleInventory()
+    {
+        Debug.Log(inventoryObject.activeInHierarchy);
+        if (!inventoryObject.activeInHierarchy)
+        {
+            playerController.ToggleInventory();
+        }
+    }
+
 }

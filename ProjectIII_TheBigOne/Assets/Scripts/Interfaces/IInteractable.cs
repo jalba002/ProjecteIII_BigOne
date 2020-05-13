@@ -1,6 +1,12 @@
-﻿public interface IInteractable
+﻿using UnityEngine;
+
+public interface IInteractable
 {
-    bool Interact();
+    string DisplayName { get; set; }
+    GameObject attachedGameobject { get; } 
+    bool IsInteracting { get; set; }
+
+    bool Interact(bool interactEnable);
 
     void OnStartInteract();
     void OnInteracting();

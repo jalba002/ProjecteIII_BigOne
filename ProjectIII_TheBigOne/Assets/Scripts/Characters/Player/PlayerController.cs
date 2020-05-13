@@ -1,5 +1,6 @@
 ﻿using Characters.Brains;
 using Characters.Generic;
+using Characters.Player;
 using Properties;
 using UnityEngine;
 using CharacterController = Characters.Generic.CharacterController;
@@ -10,16 +11,10 @@ namespace Player
     [RequireComponent(typeof(State))]
     [RequireComponent(typeof(StateMachine))]
     [RequireComponent(typeof(Rigidbody))]
-    [RequireComponent(typeof(SimpleActivator))]
-    [RequireComponent(typeof(ObjectInspector))]
     public class PlayerController : CharacterController
     {
         public Collider attachedCollider { get; set; }
         [Header("Components")] public CameraController cameraController;
-
-        public ObjectInspector objectInspector;
-
-        public SimpleActivator simpleActivator;
 
         public FlashlightController attachedFlashlight;
 
@@ -27,9 +22,15 @@ namespace Player
         [Header("Config")] public PlayerProperties characterProperties;
         public new PlayerBrain currentBrain { get; private set; }
 
+        private ObjectInspector objectInspector;
+
+        [HideInInspector] public InteractablesManager interactablesManager;
+
 
         [Header("Sound settings")] public AudioClip[] footstepSounds;
         private AudioSource audioSource;
+
+        public int InteractCooldown = 5;
 
 
         /*[Header("Ground Detection")] public Transform groundPosition;
@@ -50,10 +51,6 @@ namespace Player
 
             if (cameraController == null)
                 cameraController = GetComponent<CameraController>();
-
-            simpleActivator = this.gameObject.GetComponent<SimpleActivator>();
-
-            objectInspector = this.gameObject.GetComponent<ObjectInspector>();
 
             if (characterProperties != null)
             {
@@ -76,6 +73,10 @@ namespace Player
             {
                 playerInventory = GetComponent<Inventory>();
             }
+
+            objectInspector = GetComponent<ObjectInspector>();
+
+            interactablesManager = GetComponent<InteractablesManager>();
 
             Cursor.visible = false;
         }
@@ -109,13 +110,16 @@ namespace Player
             {
                 stateMachine.UpdateTick(Time.deltaTime);
             }
-            
-            CorrectRigidbody();
 
+            if (InteractCooldown > 0) InteractCooldown -= 1;
+            CorrectRigidbody();
             InspectObjects();
-            InteractDoors();
+            InteractDynamics();
+
+            if (currentBrain.ShowInventory)
+                ToggleInventory();
+
             UseFlashlight();
-            ToggleInventory();
 
             //Cheat to test sounds
             /*
@@ -132,13 +136,13 @@ namespace Player
 */
         }
 
-        void InspectObjects()
+        bool InspectObjects()
         {
-            if (objectInspector != null && objectInspector.isActiveAndEnabled)
+            if (objectInspector && objectInspector.isActiveAndEnabled)
             {
                 if (currentBrain.Interact)
                 {
-                    if (objectInspector.Activate(cameraController.attachedCamera))
+                    if (objectInspector.Activate(interactablesManager.CurrentInteractable))
                     {
                         // Disable camera and allow the object inspector the use of mouse input.
                         bool enableStuff = objectInspector.GetEnabled();
@@ -149,45 +153,91 @@ namespace Player
                         }
                         else
                             stateMachine.SwitchState<State_Player_Walking>();
+
+                        return true;
                     }
                 }
             }
+
+            return false;
         }
 
-        void InteractDoors()
+        void InteractDynamics()
         {
-            if (simpleActivator != null && simpleActivator.isActiveAndEnabled)
+            if (interactablesManager.CanInteract)
+            {
+                if (currentBrain.MouseInteractRelease)
+                {
+                    interactablesManager.CurrentInteractable.Interact(false);
+                    InteractCooldown = 10;
+                }
+                else if (currentBrain.MouseInteract && !interactablesManager.CurrentInteractable.IsInteracting &&
+                         InteractCooldown <= 0)
+                {
+                    if (interactablesManager.CurrentInteractable.Interact(true))
+                    {
+                        stateMachine.SwitchState<State_Player_Interacting>();
+                    }
+                }
+            }
+
+            /*
+            if (_dynamicObjectActivator && _dynamicObjectActivator.isActiveAndEnabled)
             {
                 if (currentBrain.MouseInteract)
                 {
-                    if (simpleActivator.Activate(cameraController.attachedCamera))
+                    if (_dynamicObjectActivator.Activate(interactablesManager.CurrentInteractable))
                         cameraController.angleLocked = true;
                 }
                 else if (currentBrain.MouseInteractRelease)
                 {
-                    if (simpleActivator.Deactivate())
+                    if (_dynamicObjectActivator.Deactivate())
                         cameraController.angleLocked = false;
                 }
+
+                return true;
+            }
+            return false;*/
+        }
+
+        private void UseFlashlight()
+        {
+            if (currentBrain.FlashlightToggle)
+            {
+                attachedFlashlight.ToggleFlashlight();
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            // TODO Reenable stop functionality with GameController.
+            // Access with events and disable StateMachine.
+            // DO NOT REFERENCE GAMEMANAGER FROM HERE.
+            if (stateMachine.isActiveAndEnabled)
+            {
+                stateMachine.FixedUpdateTick(Time.fixedDeltaTime);
             }
         }
 
         public void ToggleInventory()
         {
-            if (playerInventory != null && playerInventory.isActiveAndEnabled)
+            if (playerInventory && playerInventory.isActiveAndEnabled)
             {
-                if (currentBrain.ShowInventory)
+                var enabled = playerInventory.ToggleInventory();
+                cameraController.angleLocked = enabled;
+                cameraController.cursorLock = !enabled;
+                Cursor.visible = enabled;
+
+                if (enabled)
                 {
-                    var enabled = playerInventory.ToggleInventory();
-                    cameraController.angleLocked = enabled;
-                    cameraController.cursorLock = !enabled;
-                    simpleActivator.enabled = !enabled;
-                    Cursor.visible = enabled;
+                    //SHOW CURSOR
+                    Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
                 }
-            }
-            else
-            {
-                Debug.LogError("No player inventory in Player!");
-                return;
+                else
+                {
+                    //HIDE CURSOR
+                    Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
+                }
             }
         }
 
@@ -218,25 +268,6 @@ namespace Player
             footstepSounds[0] = audioSource.clip;
         }
 
-        private void UseFlashlight()
-        {
-            // TODO Remap controls for flashlight.
-            if (currentBrain.FlashlightToggle)
-            {
-                attachedFlashlight.ToggleFlashlight();
-            }
-        }
-
-        private void FixedUpdate()
-        {
-            // TODO Reenable stop functionality with GameController.
-            // Access with events and disable StateMachine.
-            // DO NOT REFERENCE GAMEMANAGER FROM HERE.
-            if (stateMachine.isActiveAndEnabled)
-            {
-                stateMachine.FixedUpdateTick(Time.fixedDeltaTime);
-            }
-        }
 
         public Transform ReturnSelf()
         {

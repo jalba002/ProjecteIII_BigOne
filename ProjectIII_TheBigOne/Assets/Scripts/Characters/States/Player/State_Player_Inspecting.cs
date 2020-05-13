@@ -12,6 +12,7 @@ namespace Player
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
+            _attachedRigidbody = Machine.characterController.rigidbody;
         }
 
         public override void OnStateTick(float deltaTime)
@@ -34,7 +35,6 @@ namespace Player
         protected override void OnStateEnter()
         {
             base.OnStateEnter();
-            _attachedRigidbody = Machine.characterController.rigidbody;
         }
 
         protected override void OnStateExit()

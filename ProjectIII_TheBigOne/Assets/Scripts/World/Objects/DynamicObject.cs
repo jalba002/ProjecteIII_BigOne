@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml;
 using Interfaces;
 using UnityEditor.Timeline;
 using UnityEngine;
@@ -9,7 +10,7 @@ using Object = UnityEngine.Object;
 
 namespace World.Objects
 {
-    public class DynamicObject : MonoBehaviour, IInteractable
+    public class DynamicObject : MonoBehaviour, IInteractable, IMovable
     {
         #region Declarations
 
@@ -124,6 +125,8 @@ namespace World.Objects
             {
                 throw new NullReferenceException($"Missing Handle in {this.gameObject.name}");
             }
+
+            DisplayName = $"Drag {objectType.ToString()}";
         }
 
         public void Start()
@@ -335,63 +338,26 @@ namespace World.Objects
 
         #region Interface Interactable
 
-        public bool Interact()
+        void Update()
         {
-            if (Rigidbody == null)
+            if (IsInteracting)
             {
-                Rigidbody = GetComponent<Rigidbody>();
-                if (!Rigidbody)
-                {
-                    Debug.LogWarning("No rigidbody was found. Adding a new one.");
-                    Rigidbody = gameObject.AddComponent<Rigidbody>();
-                    Rigidbody.useGravity = false;
-                }
-            }
-
-
-            ForceOpen(CalculateForce(openForce));
-            //var useForce = HandlePosition.transform.forward * CalculateForce(doorConfiguration.openForce);
-            //Rigidbody.AddForceAtPosition(useForce, HandlePosition.transform.position, ForceMode.Force);
-            return true;
-        }
-
-        public void OnStartInteract()
-        {
-            OnStartInteracting.Invoke();
-
-            switch (objectType)
-            {
-                case ObjectType.Door:
-                    //Play door sound
-                    AudioManager.PlaySoundAtLocation("Sound/Door/DoorOpen_07", transform.position);
-
-                    break;
-                case ObjectType.Drawer:
-                    //Play drawer sound
-                    break;
+                OnInteracting();
             }
         }
 
-        public void OnInteracting()
+
+        // Interface Implementation //
+
+        public string DisplayName { get; set; }
+
+        public GameObject attachedGameobject
         {
-            throw new NotImplementedException();
+            get { return gameObject;}
         }
 
-        public void OnEndInteract()
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-
-        #region Open&Close
-
-        public void ForceOpen(float force)
-        {
-            var useForce = HandlePosition.transform.forward * force;
-            Rigidbody.AddForceAtPosition(useForce, HandlePosition.transform.position, ForceMode.Force);
-        }
-
+        public bool IsInteracting { get; set; }
+        
         public bool ForceClose()
         {
             throw new NotImplementedException();
@@ -431,6 +397,53 @@ namespace World.Objects
 
         #endregion
 
+        public bool Interact(bool interactEnable)
+        {
+            if (!interactEnable)
+            {
+                Debug.Log("Ending Interaction");
+                OnEndInteract();
+                return true;
+            }
+            if (!IsInteracting)
+            {
+                OnStartInteract();
+                Debug.Log("Starting Interaction");
+                return true;
+            }
+
+            return false;
+        }
+
+        public void OnStartInteract()
+        {
+            OnStartInteracting.Invoke();
+            
+            switch (objectType)
+            {
+                case ObjectType.Door:
+                    //Play door sound
+                    AudioManager.PlaySoundAtLocation("Sound/Door/DoorOpen_07", transform.position);
+
+                    break;
+                case ObjectType.Drawer:
+                    //Play drawer sound
+                    break;
+            }
+            
+            if (Rigidbody == null)
+            {
+                Rigidbody = GetComponent<Rigidbody>();
+                if (!Rigidbody)
+                {
+                    Debug.LogWarning("No rigidbody was found. Adding a new one.");
+                    Rigidbody = gameObject.AddComponent<Rigidbody>();
+                    Rigidbody.useGravity = false;
+                }
+            }
+
+            IsInteracting = true;
+        }
 
         private float CalculateForce(float forceScale = 1f)
         {
@@ -441,6 +454,19 @@ namespace World.Objects
             
 
             return calculatedForce;
+        }
+
+        
+        public void ForceOpen(float force)
+        {
+            var useForce = HandlePosition.transform.forward * force;
+            Rigidbody.AddForceAtPosition(useForce, HandlePosition.transform.position, ForceMode.Force);
+        }
+
+        public void OnEndInteract()
+        {
+            IsInteracting = false;
+            Debug.Log($"Setting {this.gameObject.name} interaction to {IsInteracting}");
         }
 
         public float ReturnAngle()

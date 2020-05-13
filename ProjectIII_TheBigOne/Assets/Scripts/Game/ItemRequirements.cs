@@ -16,6 +16,8 @@ public class ItemRequirements : MonoBehaviour
     
     public void Unlock()
     {
+        if (lockedDoor.lockedMode == DynamicObject.LockedMode.Unlocked) return;
+        
         var item = playerInventory.characterItems.Find(x => x.itemName == requiredItem);
         bool hasItem = item != null;
         

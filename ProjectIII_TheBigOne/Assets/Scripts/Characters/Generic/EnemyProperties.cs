@@ -12,5 +12,11 @@ namespace Properties
         [Header("Chase Config")] 
         [Tooltip("Maximum time the enemy will wait after losing the player.")] public float maxChaseLostWaitTime = 10f;
         //[Tooltip("Prototype tooltip")] public float chaseConfigValue = 2f;
+
+        public float positionReachedDistance = 1f;
+
+        [Header("Search Config")] public float maxSearchTime = 15f;
+
+
     }
 }

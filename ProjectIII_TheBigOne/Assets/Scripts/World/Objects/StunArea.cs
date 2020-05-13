@@ -51,22 +51,22 @@ namespace World.Objects
                 if ( attachedDynamicObject.HingeJoint.angle > 25f)
                 {
                     ActivateStun();
-                    var newValue = attachedDynamicObject.HingeJoint.angle - 1f * Time.deltaTime;
+                    /*var newValue = attachedDynamicObject.HingeJoint.angle - 1f * Time.deltaTime;
                     newValue = Mathf.Clamp(newValue, 0f, 87f);
                     var oldMax = attachedDynamicObject.HingeJoint.limits.max;
                     attachedDynamicObject.HingeJoint.limits = new JointLimits()
                     {
                         min = newValue,
                         max = oldMax
-                    };
+                    };*/
                 }
             }
 
-            if (attachedDynamicObject.HingeJoint.angle >= 87f)
+           /* if (attachedDynamicObject.HingeJoint.angle >= 87f)
             {
                
                 // Destroy(this.gameObject);
-            }
+            }*/
         }
 
         public bool ActivateStun()

@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Xml;
 using Interfaces;
-using UnityEditor.Timeline;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.PlayerLoop;
-using Object = UnityEngine.Object;
 
 namespace World.Objects
 {
@@ -275,7 +271,7 @@ namespace World.Objects
                             };
                             break;
                         case ObjectType.Pallet:
-                            Debug.LogWarning("No pallet configurations!");
+                            // Debug.LogWarning("No pallet configurations!");
                             /*HingeJoint.limits = new JointLimits()
                             {
                                 
@@ -414,7 +410,7 @@ namespace World.Objects
 
             return false;
         }
-
+        
         public void OnStartInteract()
         {
             OnStartInteracting.Invoke();
@@ -445,17 +441,20 @@ namespace World.Objects
             IsInteracting = true;
         }
 
+        public void OnInteracting()
+        {
+            ForceOpen(CalculateForce(openForce));
+        }
+
         private float CalculateForce(float forceScale = 1f)
         {
             var calculatedForce = 0f;
             float mouseAxis = UseMouseXAxis ? Input.GetAxis("Mouse X") : Input.GetAxis("Mouse Y");
             mouseAxis = Mathf.Clamp(mouseAxis,-maxMouseInput, maxMouseInput);
             calculatedForce = (forceScale * mouseAxis);
-            
 
             return calculatedForce;
         }
-
         
         public void ForceOpen(float force)
         {

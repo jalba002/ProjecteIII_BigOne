@@ -29,7 +29,7 @@ namespace Enemy
             base.OnStateTick(deltaTime);
 
 
-            /* try
+            try
              {
                  _attachedController.currentBrain.IsPlayerInSight = SensesUtil.IsInSight(_attachedController.gameObject,
                      _attachedController.currentBrain.archnemesis.gameObject,
@@ -59,20 +59,13 @@ namespace Enemy
              catch (NullReferenceException)
              {
              }
- */
+ 
             if (breakTime > 0f)
             {
                 breakTime -= deltaTime;
             }
             else
             {
-                _currentBlockage.attachedDynamicObject.ForceOpen(-400f);
-            }
-
-
-            if (_currentBlockage.attachedDynamicObject.ReturnAngle() >= 85f)
-            {
-                // _currentBlockage.attachedLink.activated = false;
                 _attachedController.NavMeshAgent.CompleteOffMeshLink();
             }
         }
@@ -120,6 +113,7 @@ namespace Enemy
             {
                 case DynamicObject.ObjectType.Door:
                     // Nothing yet.
+                    _currentBlockage.attachedDynamicObject.ForceOpen(-400f);
                     break;
                 case DynamicObject.ObjectType.Drawer:
                     // Can't get blocked by a drawer...?

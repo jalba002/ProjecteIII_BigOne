@@ -7,9 +7,6 @@ using World.Objects;
 
 public class InteractableBlocker : MonoBehaviour
 {
-    public LayerMask defaultLayer;
-    public LayerMask interactableLayer;
-
     public DynamicObject attachedInteractable;
 
     // Start is called before the first frame update
@@ -22,7 +19,7 @@ public class InteractableBlocker : MonoBehaviour
     public void Block()
     {
         attachedInteractable.gameObject.layer = 2;
-        //attachedInteractable.Interact();
+        attachedInteractable.OnEndInteract();
     }
 
     public void Unblock()
@@ -32,8 +29,7 @@ public class InteractableBlocker : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Entering Trigger");
-        if (other.GetComponent<PlayerController>() != null)
+        if (other.CompareTag("Player") || other.CompareTag("Enemy"))
         {
             Block();
         }
@@ -41,8 +37,7 @@ public class InteractableBlocker : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        Debug.Log("Trigger Exit");
-        if (other.GetComponent<PlayerController>() != null)
+        if (other.CompareTag("Player") || other.CompareTag("Enemy"))
         {
             Unblock();
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace World.Objects
 {
-    public class StunArea : MonoBehaviour, IInteractable
+    public class StunArea : MonoBehaviour
     {
         [Header("Settings")] public bool TrappedArea = false;
         [Range(0f, 15f)] public float stunDuration = 3f;
@@ -93,7 +93,7 @@ namespace World.Objects
             return false;
         }
 
-        void OnTriggerEnter(Collider other)
+        /*void OnTriggerEnter(Collider other)
         {
             if (other.gameObject == enemyController.gameObject)
             {
@@ -112,26 +112,6 @@ namespace World.Objects
             {
                 IsEnemyInsideArea = false;
             }
-        }
-
-        public bool Interact()
-        {
-            return ActivateStun();
-        }
-
-        public void OnStartInteract()
-        {
-            //throw new System.NotImplementedException();
-        }
-
-        public void OnInteracting()
-        {
-            //throw new System.NotImplementedException();
-        }
-
-        public void OnEndInteract()
-        {
-            //throw new System.NotImplementedException();
-        }
+        }*/
     }
 }

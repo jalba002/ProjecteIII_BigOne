@@ -17,6 +17,8 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         // Analyze all possible states.
         if (CheckEnterIdle()) return;
         if (CheckEnterPatrol()) return;
+        if (CheckEnterChasing()) return;
+        if (CheckEnterSearching()) return;
     }
 
 
@@ -35,7 +37,7 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         // If player is looking at the enemy.
         // If player has the light turned off.
 
-        //Debug.Log("EnterIdle Check");
+        Debug.Log("EnterIdle Check");
 
         if (!attachedCharacter.currentBrain.IsVisible) return false;
         
@@ -49,17 +51,38 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
     {
         // TODO Add conditions.
         // If player is not in safe zone.
-        // If lost the player in the chase.
-        // Debug.Log("EnterPatrol Check");
+        // 
+        
+        //Debug.Log("EnterPatrol Check");
+        if (attachedCharacter.currentBrain.IsPlayerInSight) return false;
 
-        attachedCharacter.stateMachine.SwitchState<State_Enemy_Moving>();
+        if (attachedCharacter.currentBrain.IsChasingPlayer) return false;
+
+        attachedCharacter.stateMachine.SwitchState<State_Enemy_Patrolling>();
         return true;
     }
-
+    
     private bool CheckEnterChasing()
     {
         // TODO Add conditions.
         // 
+        
+        Debug.Log("EnterPatrol Chasing");
+        if (!attachedCharacter.currentBrain.IsPlayerInSight) return false;
+        
+        attachedCharacter.stateMachine.SwitchState<State_Enemy_Chasing>();
+        return true;
+    }
+
+    private bool CheckEnterSearching()
+    {
+        Debug.Log("Checking Search");
+
+        //if (attachedCharacter.currentBrain.IsChasingPlayer) return false;
+
+        //if (attachedCharacter.currentBrain.IsPlayerInSight) return false;
+        
+        attachedCharacter.stateMachine.SwitchState<State_Enemy_Searching>();
         return true;
     }
 }

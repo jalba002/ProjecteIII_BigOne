@@ -24,6 +24,8 @@ namespace Player
 
         private ObjectInspector objectInspector;
 
+        private PuzzleInspector puzzleInspector;
+
         [HideInInspector] public InteractablesManager interactablesManager;
 
 
@@ -76,6 +78,8 @@ namespace Player
 
             objectInspector = GetComponent<ObjectInspector>();
 
+            puzzleInspector = GetComponent<PuzzleInspector>();
+
             interactablesManager = GetComponent<InteractablesManager>();
 
             Cursor.visible = false;
@@ -112,14 +116,18 @@ namespace Player
             }
 
             if (InteractCooldown > 0) InteractCooldown -= 1;
+            
             CorrectRigidbody();
-            InspectObjects();
-            InteractDynamics();
-
+           
             if (currentBrain.ShowInventory)
                 ToggleInventory();
 
             UseFlashlight();
+
+            if (InspectPuzzle()) return;
+            InspectObjects();
+            InteractDynamics();
+
 
             //Cheat to test sounds
             /*
@@ -134,6 +142,19 @@ namespace Player
             }
 #endif
 */
+        }
+
+        bool InspectPuzzle()
+        {
+            if (puzzleInspector && puzzleInspector.isActiveAndEnabled)
+            {
+                if (currentBrain.Interact)
+                {
+                    return puzzleInspector.Interact(interactablesManager.CurrentInteractable);
+                }
+            }
+
+            return false;
         }
 
         bool InspectObjects()

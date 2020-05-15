@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Player;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     }
 
     public GameSettings GameSettings;
+    public PlayerController PlayerController;
     
     public void Start()
     {
@@ -31,5 +33,12 @@ public class GameManager : MonoBehaviour
         {
             GameSettings = ScriptableObject.CreateInstance<GameSettings>();
         }
+
+        if (PlayerController == null)
+        {
+            PlayerController = FindObjectOfType<PlayerController>();
+        }
     }
+    
+    
 }

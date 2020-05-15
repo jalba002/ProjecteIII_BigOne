@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
     [Space(10)] [Header("Editor Debug")] public KeyCode debugLockAngleKeyCode = KeyCode.I;
     public KeyCode debugLockKeyCode = KeyCode.O;
     public bool angleLocked = true;
-        
+
     private bool _cursorLock;
     public bool applyRotation { get; set; }
 
@@ -37,39 +37,49 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    [Header("Private variables")] Vector2 m_MouseLook;
+    [Header("Private variables")] 
+    Vector2 m_MouseLook;
     Vector2 m_SmoothVector;
     PlayerController character;
+    private Quaternion originalRotation;
 
     void Awake()
     {
         character = GetComponentInParent<PlayerController>();
-        attachedCamera = GetComponent<Camera>();
+        attachedCamera = GetComponentInChildren<Camera>();
+
+        /* m_MouseLook.x = m_PitchControllerTransform.rotation.x;
+         m_MouseLook.y = character.gameObject.transform.rotation.y;*/
     }
 
     void Update()
     {
-        //if (!this.isActiveAndEnabled) return;
+        if (!this.isActiveAndEnabled) return;
         if (!angleLocked)
         {
             CalculateRotation();
         }
+
         if (!applyRotation)
             ApplyRotation();
-#if UNITY_EDITOR
-        LockCameraAndMouse();
-#endif
     }
+
+#if UNITY_EDITOR
+    void LateUpdate()
+    {
+        LockCameraAndMouse();
+    }
+#endif
 
     void CalculateRotation()
     {
         Vector2 deltaMouse = character.currentBrain.MouseInput;
-        
+
         // Return to allow outside control.
         //if (deltaMouse.magnitude < 0.1f) return;
 
         deltaMouse.y = deltaMouse.y * (invertMouse ? 1f : -1f);
-        
+
         deltaMouse = Vector2.Scale(deltaMouse,
             new Vector2(m_Sensitivity * m_Smoothing, m_Sensitivity * m_Smoothing));
 
@@ -90,6 +100,28 @@ public class CameraController : MonoBehaviour
     public void ApplyExternalRotation(Quaternion rotation)
     {
         character.transform.rotation = rotation;
+    }
+
+    public void SetNewPosition(Transform newPosition, bool disableRotation = true)
+    {
+        originalRotation = this.gameObject.transform.localRotation;
+        this.gameObject.transform.parent = newPosition;
+        /*this.gameObject.transform.position = newPosition.transform.position;
+        this.gameObject.transform.rotation = newPosition.transform.rotation;*/
+        if (disableRotation)
+        {
+            angleLocked = true;
+            this.enabled = false;
+        }
+    }
+
+    public void RestorePosition()
+    {
+        this.gameObject.transform.parent = m_PitchControllerTransform;
+        this.gameObject.transform.localPosition = Vector3.zero;
+        this.gameObject.transform.localRotation = originalRotation;
+        angleLocked = false;
+        this.enabled = true;
     }
 
     /// <summary>

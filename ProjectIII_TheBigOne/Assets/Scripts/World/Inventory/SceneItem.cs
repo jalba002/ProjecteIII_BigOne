@@ -5,7 +5,7 @@ using Player;
 using UnityEditor;
 using UnityEngine;
 
-public class SceneItem : MonoBehaviour, IInteractable
+public class SceneItem : MonoBehaviour, IInteractable, IPickable
 {
     public string itemName;
     private bool alreadyUsed = false;

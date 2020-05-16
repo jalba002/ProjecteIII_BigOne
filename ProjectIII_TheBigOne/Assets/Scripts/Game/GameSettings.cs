@@ -7,4 +7,6 @@ public class GameSettings : ScriptableObject
     public float PlayerViewRange = 25f;
     public float EnemyViewRange = 100f;
     public LayerMask DetectionLayers;
+
+    [Header("Puzzles")] public LayerMask PuzzleElementsLayers;
 }

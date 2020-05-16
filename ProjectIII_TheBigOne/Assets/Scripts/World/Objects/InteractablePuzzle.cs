@@ -1,20 +1,25 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Player;
 using UnityEngine;
+using UnityEngine.UIElements;
+using Cursor = UnityEngine.Cursor;
 
 public class InteractablePuzzle : MonoBehaviour, IInteractable, IPuzzle
 {
     public string displayName = "Use puzzle";
-    static CameraController playerCameraController;
+    public Puzzle attachedPuzzle;
 
-    // public Puzzle attachedPuzzle;
+    public Transform cameraPosition;
+
+    static CameraController playerCameraController;
 
     void Awake()
     {
-        // attachedPuzzle = GetComponent<Puzzle>();
+        attachedPuzzle = GetComponent<Puzzle>();
     }
-    
+
     void Start()
     {
         DisplayName = displayName;
@@ -31,14 +36,16 @@ public class InteractablePuzzle : MonoBehaviour, IInteractable, IPuzzle
             OnInteracting();
         }
     }
-    
+
     public string DisplayName { get; set; }
 
     public GameObject attachedGameobject
     {
         get { return this.gameObject; }
     }
+
     public bool IsInteracting { get; set; }
+
     public bool Interact(bool interactEnable)
     {
         if (interactEnable)
@@ -75,13 +82,14 @@ public class InteractablePuzzle : MonoBehaviour, IInteractable, IPuzzle
         // Which blocks movement and camera input. Plus all necessary.
         // Show cursor to begin interacting.
         // Set IsInteracting to true.
-        
-        GameManager.Instance.PlayerController.cameraController.SetNewPosition(null ,true);
-        //GameManager.Instance.PlayerController.stateMachine.SwitchState<State_Player_PuzzleInspect>();
+
+        GameManager.Instance.PlayerController.cameraController.SetNewPosition(cameraPosition, true);
+        GameManager.Instance.PlayerController.stateMachine.SwitchState<State_Player_PuzzleInspect>();
         IsInteracting = true;
         //playerCameraController.SetNewPosition(attachedPuzzle.gameObject.transform,true);
-        // attachedPuzzle.StartGame();
-
+        attachedPuzzle.StartGame();
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void OnInteracting()
@@ -91,8 +99,30 @@ public class InteractablePuzzle : MonoBehaviour, IInteractable, IPuzzle
         // Raycast stuff to activate puzzle.
         // And much more!?...
 
-        //Debug.Log("Interacting!");
+        if (Input.GetMouseButtonDown(0))
+        {
+            InteractWithPuzzlePiece();
+        }
 
+        //Debug.Log("Interacting!");
+    }
+
+    private void InteractWithPuzzlePiece()
+    {
+        Ray mouseRay =
+            GameManager.Instance.PlayerController.cameraController.attachedCamera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(mouseRay, out var hitInfo, 5f, GameManager.Instance.GameSettings.PuzzleElementsLayers))
+        {
+            try
+            {
+                hitInfo.collider.gameObject.GetComponent<PuzzlePiece>()?.OnPuzzlePieceActivate.Invoke();
+                Debug.DrawRay(mouseRay.origin, mouseRay.direction * hitInfo.distance, Color.blue, 3f);
+            }
+            catch (NullReferenceException)
+            {
+                Debug.DrawRay(mouseRay.origin, mouseRay.direction * hitInfo.distance, Color.red, 2f);
+            }
+        }
     }
 
     public void OnEndInteract()
@@ -101,12 +131,12 @@ public class InteractablePuzzle : MonoBehaviour, IInteractable, IPuzzle
         // Restore controls to player.
         // Restore cursor to usual settings.
         // Set IsInteracting to false.
-        Debug.Log("Ending interaction", this.gameObject);
         playerCameraController.RestorePosition();
-        //GameManager.Instance.PlayerController.stateMachine.SwitchState<State_Player_Walking>();
+        GameManager.Instance.PlayerController.stateMachine.SwitchState<State_Player_Walking>();
         IsInteracting = false;
-        
-        // attachedPuzzle.EndGame();
-        
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        attachedPuzzle.EndGame();
     }
 }

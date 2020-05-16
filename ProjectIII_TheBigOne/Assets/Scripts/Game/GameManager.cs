@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     public GameSettings GameSettings;
     public PlayerController PlayerController;
     
-    public void Start()
+    public void Awake()
     {
         if (GameSettings == null)
         {

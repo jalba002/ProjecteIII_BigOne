@@ -16,8 +16,8 @@ public class CameraController : MonoBehaviour
     public KeyCode debugLockKeyCode = KeyCode.O;
     public bool angleLocked = true;
 
-    private bool _cursorLock;
     public bool applyRotation { get; set; }
+    private bool _cursorLock;
 
     public bool cursorLock
     {
@@ -106,8 +106,8 @@ public class CameraController : MonoBehaviour
     {
         originalRotation = this.gameObject.transform.localRotation;
         this.gameObject.transform.parent = newPosition;
-        /*this.gameObject.transform.position = newPosition.transform.position;
-        this.gameObject.transform.rotation = newPosition.transform.rotation;*/
+        this.gameObject.transform.position = newPosition.transform.position;
+        this.gameObject.transform.rotation = newPosition.transform.rotation;
         if (disableRotation)
         {
             angleLocked = true;

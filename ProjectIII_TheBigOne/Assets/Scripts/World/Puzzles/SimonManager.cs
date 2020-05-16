@@ -28,6 +28,7 @@ public class SimonManager : Puzzle
         answering = false;
     }
 
+#if UNITY_EDITOR
     // Update is called once per frame
     void Update()
     {
@@ -42,21 +43,24 @@ public class SimonManager : Puzzle
             {
                 CheckAnswer(0);
             }
+
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 CheckAnswer(1);
             }
+
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 CheckAnswer(2);
             }
+
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
                 CheckAnswer(3);
             }
         }
-
     }
+#endif
 
     public override void StartGame()
     {
@@ -67,7 +71,7 @@ public class SimonManager : Puzzle
 
         //Iniciar la primera secuencia
         StartCoroutine(PlayColorSequence());
-        
+
         //Se suma hasta que este completado
         //Se repite en bucle
         //currentColorCount++;
@@ -75,7 +79,6 @@ public class SimonManager : Puzzle
 
     public override void PuzzleWon()
     {
-        
     }
 
     public override void EndGame()
@@ -86,20 +89,20 @@ public class SimonManager : Puzzle
 
     public int[] GetRandomNumers(int numbersToGet)
     {
-        int[] colors = new int[numbersToGet]; 
-        for(int i = 0; i< numbersToGet; i++)
+        int[] colors = new int[numbersToGet];
+        for (int i = 0; i < numbersToGet; i++)
         {
             colors[i] = Random.Range(0, 4);
         }
+
         return colors;
     }
-    
-    
+
 
     public IEnumerator PlayColorSequence()
     {
         for (int i = 0; i < colors.Length; i++)
-        {                      
+        {
             //Play sound [i]
 
             //Change Material [i]
@@ -118,21 +121,17 @@ public class SimonManager : Puzzle
         }
     }
 
-
-
     public void CheckAnswer(int i)
     {
-        if(i == colors[currentAnswer])
+        if (i == colors[currentAnswer])
         {
             Debug.Log("Acertaste");
             currentAnswer++;
-            if(currentAnswer >= colors.Length)
+            if (currentAnswer >= colors.Length)
             {
                 Debug.Log("Todo bien, todo correcto, y yo que me alegro.");
                 //Next phase
                 IncreasePhase();
-
-                
             }
         }
         else
@@ -147,7 +146,7 @@ public class SimonManager : Puzzle
 
         answering = false;
         currentColorCount++;
-        if(currentColorCount - startingColorCount > roundsToSucceed)
+        if (currentColorCount - startingColorCount > roundsToSucceed)
         {
             PuzzleWon();
         }
@@ -155,5 +154,4 @@ public class SimonManager : Puzzle
         colors = GetRandomNumers(currentColorCount);
         StartCoroutine(PlayColorSequence());
     }
-
 }

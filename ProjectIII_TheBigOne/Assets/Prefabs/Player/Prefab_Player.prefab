@@ -72,7 +72,7 @@ Camera:
   m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 0
+  m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!81 &4287271704942058500
@@ -215,6 +215,8 @@ GameObject:
   - component: {fileID: 4041253382631071211}
   - component: {fileID: 2031410052690668047}
   - component: {fileID: 5598959312946074347}
+  - component: {fileID: 8660583207281345042}
+  - component: {fileID: 7374903855940156470}
   m_Layer: 0
   m_Name: Prefab_Player
   m_TagString: Untagged
@@ -266,8 +268,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 1
+  m_Constraints: 112
+  m_CollisionDetection: 3
 --- !u!114 &4287271706014648180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,7 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 4287271706014648181}
-  cameraController: {fileID: 0}
+  cameraController: {fileID: 2999368691099895388}
   attachedFlashlight: {fileID: 6592646240077006143}
   playerInventory: {fileID: 4041253382631071211}
   characterProperties: {fileID: 11400000, guid: 7e571a240adc2994192319d07f6fd24d,
@@ -517,6 +519,30 @@ MonoBehaviour:
   attachedPlayer: {fileID: 0}
   textDebug: {fileID: 0}
   CanInteract: 0
+--- !u!114 &8660583207281345042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287271706014648174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6262b446a2ae581498686d0ebe2756fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7374903855940156470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287271706014648174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 666b6c2994150d54282a9e73d2de1467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7166994841743022858
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,7 +584,7 @@ Camera:
   m_GameObject: {fileID: 7166994841743022858}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 3
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -572,9 +598,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 10
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: 1
@@ -589,7 +615,7 @@ Camera:
   m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 0
+  m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!1 &7698896559584102532

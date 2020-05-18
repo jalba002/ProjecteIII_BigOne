@@ -47,7 +47,6 @@ GameObject:
   - component: {fileID: 3768073297292347492}
   - component: {fileID: 3768073297292347493}
   - component: {fileID: 3768073297292347494}
-  - component: {fileID: 3768073297810020011}
   - component: {fileID: 3768073297810020003}
   - component: {fileID: 6073201432301013546}
   - component: {fileID: 3972450710502167294}
@@ -151,11 +150,13 @@ MonoBehaviour:
   playerInventory: {fileID: 3972450710502167294}
   characterProperties: {fileID: 11400000, guid: 7e571a240adc2994192319d07f6fd24d,
     type: 2}
+  interactablesManager: {fileID: 0}
   footstepSounds:
   - {fileID: 8300000, guid: 43f8400c80a3a1342bb4e2804640066d, type: 3}
   - {fileID: 8300000, guid: e6147dbf1f309dc419cb2171721dacd2, type: 3}
   - {fileID: 8300000, guid: 31b935b80b229ee4fb119d5371993bbf, type: 3}
   - {fileID: 8300000, guid: fbfe71d7b29121a478f10df9b9096706, type: 3}
+  InteractCooldown: 5
 --- !u!114 &3768073297292347494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,25 +172,6 @@ MonoBehaviour:
   Machine: {fileID: 0}
   stepTimeWalking: 0.6
   stepTimeRunning: 0.4
---- !u!114 &3768073297810020011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3768073297292347515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87668cddd42f759458e4d9768a4d5b62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forceScale: 15
-  OnObjectActivate:
-    m_PersistentCalls:
-      m_Calls: []
-  OnObjectDeactivate:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &3768073297810020003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,6 +334,7 @@ MonoBehaviour:
   detectionRange: 3
   attachedPlayer: {fileID: 0}
   textDebug: {fileID: 0}
+  CanInteract: 0
 --- !u!1 &3768073298362979092
 GameObject:
   m_ObjectHideFlags: 0

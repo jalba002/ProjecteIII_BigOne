@@ -15,8 +15,11 @@ public class BehaviourTree_Enemy_SecondPhase : BehaviourTree
     public override void CalculateNextState(bool forceExitState)
     {
         // Analyze all possible states.
-        if (CheckEnterMoving()) return;
-        if (CheckEnterIdle()) return;
+        if (CheckEnterStunned()) return;
+        if (CheckEnterTraversing()) return;
+        if (CheckEnterPatrol()) return;
+        if (CheckEnterChasing()) return;
+        if (CheckEnterSearching()) return;
     }
 
 
@@ -31,33 +34,70 @@ public class BehaviourTree_Enemy_SecondPhase : BehaviourTree
 
     private bool CheckEnterIdle()
     {
-        // The player is not going anywhere.
+        // TODO Add conditions
+        // If player is looking at the enemy.
+        // If player has the light turned off.
+
+        if (!attachedCharacter.currentBrain.IsVisible) return false;
         
-        // if (!attachedCharacter.currentBrain.IsVisible) return false;
-        
-        // if (!attachedCharacter.currentBrain.IsPlayerNearLight) return false;
+        if (!attachedCharacter.currentBrain.IsPlayerNearLight) return false;
 
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Idle>();
         return true;
     }
 
-    private bool CheckEnterMoving()
+    private bool CheckEnterPatrol()
     {
         // TODO Add conditions.
         // If player is not in safe zone.
-        // If lost the player in the chase.
-        // Debug.Log("EnterPatrol Check");
+        // 
+        
+        if (attachedCharacter.currentBrain.IsPlayerInSight) return false;
 
-        //if (!attachedCharacter.currentBrain.IsChasingPlayer) return false;
+        if (attachedCharacter.currentBrain.IsChasingPlayer) return false;
 
-        attachedCharacter.stateMachine.SwitchState<State_Enemy_Moving>();
+        attachedCharacter.stateMachine.SwitchState<State_Enemy_Patrolling>();
         return true;
     }
-
+    
     private bool CheckEnterChasing()
     {
         // TODO Add conditions.
         // 
+        
+        if (!attachedCharacter.currentBrain.IsPlayerInSight) return false;
+        
+        attachedCharacter.stateMachine.SwitchState<State_Enemy_Chasing>();
+        return true;
+    }
+
+    private bool CheckEnterSearching()
+    {
+        //if (attachedCharacter.currentBrain.IsChasingPlayer) return false;
+
+        //if (attachedCharacter.currentBrain.IsPlayerInSight) return false;
+        
+        attachedCharacter.stateMachine.SwitchState<State_Enemy_Searching>();
+        return true;
+    }
+
+    private bool CheckEnterStunned()
+    {
+        if (!attachedCharacter.currentBrain.IsStunned) return false;
+        
+        attachedCharacter.stateMachine.SwitchState<State_Enemy_Stunned>();
+        
+        return true;
+    }
+
+    private bool CheckEnterTraversing()
+    {
+        if (!attachedCharacter.currentBrain.IsOnOffMeshLink) return false;
+
+        //if (attachedCharacter.currentBrain.IsCurrentlyBreaking) return false;
+        
+        attachedCharacter.stateMachine.SwitchState<State_Enemy_Traversing>();
+
         return true;
     }
 }

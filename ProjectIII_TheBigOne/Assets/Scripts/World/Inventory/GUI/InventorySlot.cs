@@ -148,8 +148,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     {
     }
     public void OnBeginDrag(PointerEventData eventData)
-    {
-        
+    {        
         canvasGroup.blocksRaycasts = false;
 
         this.gameObject.transform.parent = null;
@@ -164,7 +163,8 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     }
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;   
+        //rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
     }
 
     public void AddItemToCombine()

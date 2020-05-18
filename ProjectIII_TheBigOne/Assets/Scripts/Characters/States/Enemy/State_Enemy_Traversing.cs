@@ -113,7 +113,7 @@ namespace Enemy
             {
                 case DynamicObject.ObjectType.Door:
                     // Nothing yet.
-                    _currentBlockage.attachedDynamicObject.ForceOpen(-400f);
+                    _currentBlockage.attachedDynamicObject.ForceOpen(-2200f);
                     break;
                 case DynamicObject.ObjectType.Drawer:
                     // Can't get blocked by a drawer...?

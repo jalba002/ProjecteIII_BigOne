@@ -70,7 +70,7 @@ public class SimonManager : Puzzle
         colors = GetRandomNumers(currentColorCount);
 
         //Iniciar la primera secuencia
-        StartCoroutine(PlayColorSequence());
+        StartCoroutine(PlayColorSequence(true));
 
         //Se suma hasta que este completado
         //Se repite en bucle
@@ -85,6 +85,7 @@ public class SimonManager : Puzzle
     {
         colors = null;
         StopAllCoroutines();
+        //this.GetComponentInParent<InteractablePuzzle>().ForceEndInteraction();
     }
 
     public int[] GetRandomNumers(int numbersToGet)
@@ -99,20 +100,21 @@ public class SimonManager : Puzzle
     }
 
 
-    public IEnumerator PlayColorSequence()
+    public IEnumerator PlayColorSequence(bool first = false)
     {
+        if (first)
+        {
+            yield return new WaitForSeconds(1.5f);
+        }
+
+
         for (int i = 0; i < colors.Length; i++)
         {
             //Play sound [i]
 
             //Change Material [i]
-            active[colors[i]].SetActive(true);
-            inactive[colors[i]].SetActive(false);
-
+            StartCoroutine(HighlightColor(colors[i]));
             yield return new WaitForSeconds(colorLasting);
-
-            active[colors[i]].SetActive(false);
-            inactive[colors[i]].SetActive(true);
 
             yield return new WaitForSeconds(delayBetweenColors);
 
@@ -121,28 +123,58 @@ public class SimonManager : Puzzle
         }
     }
 
+    public IEnumerator HighlightColor(int i, bool answering = false)
+    {
+        
+        active[i].SetActive(true);
+        inactive[i].SetActive(false);
+
+        if (!answering)
+        {
+            AudioManager.PlaySound2D("Sound/Simon/Simon" + i.ToString());
+            yield return new WaitForSeconds(colorLasting);
+        }
+        else
+        {
+            yield return new WaitForSeconds(colorLasting / 2);
+        }
+
+        active[i].SetActive(false);
+        inactive[i].SetActive(true);
+    }
+
+
     public void CheckAnswer(int i)
     {
+        
+
+        StartCoroutine(HighlightColor(i, true));
+
         if (i == colors[currentAnswer])
         {
+            AudioManager.PlaySound2D("Sound/Simon/Simon" + i.ToString());
             Debug.Log("Acertaste");
             currentAnswer++;
             if (currentAnswer >= colors.Length)
             {
                 Debug.Log("Todo bien, todo correcto, y yo que me alegro.");
                 //Next phase
-                IncreasePhase();
+                StartCoroutine(IncreasePhase());
             }
         }
         else
         {
             Debug.Log("Fallaste");
+            AudioManager.PlaySound2D("Sound/Simon/Fail");
+            //EndGame();
         }
     }
 
-    private void IncreasePhase()
+    private IEnumerator IncreasePhase()
     {
         //Start coroutine de acertaste
+
+        yield return new WaitForSeconds(2);
 
         answering = false;
         currentColorCount++;

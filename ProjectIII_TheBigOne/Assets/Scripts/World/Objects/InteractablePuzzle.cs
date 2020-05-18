@@ -17,7 +17,7 @@ public class InteractablePuzzle : MonoBehaviour, IInteractable, IPuzzle
 
     void Awake()
     {
-        attachedPuzzle = GetComponent<Puzzle>();
+        //attachedPuzzle = GetComponent<Puzzle>();
     }
 
     void Start()

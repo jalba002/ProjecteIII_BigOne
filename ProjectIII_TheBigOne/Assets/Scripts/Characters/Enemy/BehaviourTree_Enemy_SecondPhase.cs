@@ -32,7 +32,7 @@ public class BehaviourTree_Enemy_SecondPhase : BehaviourTree
     }
 
 
-    private bool CheckEnterIdle()
+   /* private bool CheckEnterIdle()
     {
         // TODO Add conditions
         // If player is looking at the enemy.
@@ -44,7 +44,7 @@ public class BehaviourTree_Enemy_SecondPhase : BehaviourTree
 
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Idle>();
         return true;
-    }
+    }*/
 
     private bool CheckEnterPatrol()
     {

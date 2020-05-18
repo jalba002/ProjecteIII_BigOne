@@ -98,8 +98,8 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         if (!attachedCharacter.currentBrain.IsOnOffMeshLink) return false;
 
         //if (attachedCharacter.currentBrain.IsCurrentlyBreaking) return false;
-        attachedCharacter.NavMeshAgent.CompleteOffMeshLink();
-        //attachedCharacter.stateMachine.SwitchState<State_Enemy_Traversing>();
+        // attachedCharacter.NavMeshAgent.CompleteOffMeshLink();
+        attachedCharacter.stateMachine.SwitchState<State_Enemy_Traversing>();
 
         return true;
     }

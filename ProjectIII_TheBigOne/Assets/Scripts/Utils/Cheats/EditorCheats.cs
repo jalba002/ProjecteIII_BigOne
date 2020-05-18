@@ -1,4 +1,5 @@
 ﻿using System;
+using Characters.Player;
 using Enemy;
 using UnityEditor;
 using UnityEngine;
@@ -8,6 +9,18 @@ namespace Cheats
 #if UNITY_EDITOR
     public static class EditorCheats
     {
+        [MenuItem("Cheats/Player/Clear Interactable %#R")]
+        public static void ClearInteractable()
+        {
+            if (Application.isPlaying)
+            {
+                GameObject.FindObjectOfType<InteractablesManager>().ClearInteractable();
+            }
+            else
+            {
+                Debug.LogWarning("Only in Play Mode!");
+            }
+        }
         [MenuItem("Cheats/Player/Recharge Battery #R")]
         public static void RechargeBattery()
         {

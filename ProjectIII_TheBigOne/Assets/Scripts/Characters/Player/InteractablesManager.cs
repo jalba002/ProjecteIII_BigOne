@@ -97,5 +97,11 @@ namespace Characters.Player
                 return null;
             }
         }
+
+        public void ClearInteractable()
+        {
+            CurrentInteractable = null;
+            textDebug.text = "";
+        }
     }
 }

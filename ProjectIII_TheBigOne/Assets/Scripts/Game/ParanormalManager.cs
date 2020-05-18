@@ -8,23 +8,22 @@ using Random = System.Random;
 // Also known as the cunt that always tries to scare you.
 public class ParanormalManager : MonoBehaviour
 {
-    public EnemyTargetDummy enemyTargetDummy;
-
-    public Transform firstSpawnPoint;
+    [Header("Spawn points.")] public Transform firstSpawnPoint;
     public Transform secondSpawnPoint;
     public Transform relocationSpawnPoint;
 
-    public AudioClip killerLaugh;
+    [Header("Audio Settings")] public AudioClip killerLaugh;
     public AudioSource ParanormalSoundEmitter;
 
-    public EnemyController Dimitry;
+    [Header("Enemy")] public EnemyController Dimitry;
+    public EnemyTargetDummy enemyTargetDummy;
 
     private static Random alea = new Random();
 
     public void Awake()
     {
         Dimitry = FindObjectOfType<EnemyController>();
-        
+
         if (enemyTargetDummy == null)
         {
             enemyTargetDummy = FindObjectOfType<EnemyTargetDummy>();
@@ -37,9 +36,12 @@ public class ParanormalManager : MonoBehaviour
         }
     }
 
-    public void Start()
+    public void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartSecondPhase();
+        }
     }
 
     public static void UseRandomDoor()
@@ -49,7 +51,7 @@ public class ParanormalManager : MonoBehaviour
 
     public static void UseDoor(DynamicObject door)
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
         //door.Use();
     }
 
@@ -63,18 +65,21 @@ public class ParanormalManager : MonoBehaviour
         // TODO Play spooky sound.
         // Move dimitry away.
         // Set new behaviour.
+        Debug.Log("Starting Dimitry First Phase");
+
         if (!Dimitry.gameObject.activeSelf)
         {
             Debug.LogWarning("Dimitry is disabled in this scene.");
             return;
         }
-        Debug.Log("Starting Dimitry First Phase");
-        Dimitry.gameObject.SetActive(false);
+
         SetEnemyPosition(firstSpawnPoint);
-        SetDummyParent(Dimitry.currentBrain.archnemesis.transform);
+
+        //SetDummyParent(Dimitry.currentBrain.archnemesis.transform);
+
         //SetDummyLocalPosition(Vector3.zero);
+
         Dimitry.currentBehaviourTree = new BehaviourTree_Enemy_FirstPhase(Dimitry);
-        Dimitry.gameObject.SetActive(true);
     }
 
     public void StartSecondPhase()
@@ -82,29 +87,36 @@ public class ParanormalManager : MonoBehaviour
         // TODO Play spooky sound.
         // Move dimitry away.
         // Set new behaviour.
+        Debug.Log("Starting Dimitry Second Phase");
+
         if (!Dimitry.gameObject.activeSelf)
         {
             Debug.LogWarning("Dimitry is disabled in this scene.");
             return;
         }
-        
+
         ParanormalSoundEmitter.Play();
-        Dimitry.gameObject.SetActive(true);
-        Debug.Log("Starting Dimitry Second Phase");
-        SetDummyParent(Dimitry.currentBrain.archnemesis.transform);
-        //SetDummyLocalPosition(Vector3.zero);
+
         SetEnemyPosition(secondSpawnPoint);
+
+        //Dimitry.gameObject.SetActive(true);
+
+        SetDummyParent(Dimitry.currentBrain.archnemesis.transform);
+
+        //SetDummyLocalPosition(Vector3.zero);
+
         Dimitry.currentBehaviourTree = new BehaviourTree_Enemy_SecondPhase(Dimitry);
     }
 
     private void SetEnemyPosition(Transform newPosition)
     {
-        if (newPosition == null)
+        if (newPosition == null || Dimitry == null)
         {
             Debug.LogWarning("Not moving Dimitry. Position is null.");
             return;
         }
-        Dimitry.transform.position = newPosition.position;
+
+        Dimitry.NavMeshAgent.Warp(newPosition.position);
     }
 
     public void SetDummyPosition(Vector3 newPosition)
@@ -126,5 +138,14 @@ public class ParanormalManager : MonoBehaviour
     public void TeleportAway(Transform newPosition)
     {
         SetEnemyPosition(newPosition);
+    }
+
+    private void PalletsSetDestructible(bool enable)
+    {
+        Debug.Log("Pallets can now be destructed!");
+        foreach (TraversableBlockage pallet in ObjectTracker.palletList)
+        {
+            pallet.attachedLink.activated = enable;
+        }
     }
 }

@@ -43,7 +43,7 @@ namespace Characters.Player
         {
             //Debug.Log("Detected element is: " + detectedElement);
             if (detectedElement == CurrentInteractable) return;
-            
+
             if (detectedElement != null)
             {
                 if (CurrentInteractable != null)
@@ -102,7 +102,8 @@ namespace Characters.Player
         public void ClearInteractable()
         {
             CurrentInteractable = null;
-            textDebug.text = "";
+            if (textDebug)
+                textDebug.text = "";
         }
     }
 }

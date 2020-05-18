@@ -26,6 +26,7 @@ namespace Characters.Player
         public void Start()
         {
             attachedPlayer = GetComponent<PlayerController>();
+            ClearInteractable();
         }
 
         public void Update()

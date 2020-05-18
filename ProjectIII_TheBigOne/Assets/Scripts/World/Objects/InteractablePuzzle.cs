@@ -116,11 +116,11 @@ public class InteractablePuzzle : MonoBehaviour, IInteractable, IPuzzle
             try
             {
                 hitInfo.collider.gameObject.GetComponent<PuzzlePiece>()?.OnPuzzlePieceActivate.Invoke();
-                Debug.DrawRay(mouseRay.origin, mouseRay.direction * hitInfo.distance, Color.blue, 3f);
+                //Debug.DrawRay(mouseRay.origin, mouseRay.direction * hitInfo.distance, Color.blue, 3f);
             }
             catch (NullReferenceException)
             {
-                Debug.DrawRay(mouseRay.origin, mouseRay.direction * hitInfo.distance, Color.red, 2f);
+                //Debug.DrawRay(mouseRay.origin, mouseRay.direction * hitInfo.distance, Color.red, 2f);
             }
         }
     }

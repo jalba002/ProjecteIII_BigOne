@@ -24,6 +24,10 @@ namespace Player
 
         private ObjectInspector objectInspector;
 
+        private DynamicActivator dynamicActivator;
+
+        private PuzzleInspector puzzleInspector;
+
         [HideInInspector] public InteractablesManager interactablesManager;
 
 
@@ -76,6 +80,10 @@ namespace Player
 
             objectInspector = GetComponent<ObjectInspector>();
 
+            dynamicActivator = GetComponent<DynamicActivator>();
+
+            puzzleInspector = GetComponent<PuzzleInspector>();
+
             interactablesManager = GetComponent<InteractablesManager>();
 
             Cursor.visible = false;
@@ -112,14 +120,18 @@ namespace Player
             }
 
             if (InteractCooldown > 0) InteractCooldown -= 1;
+
             CorrectRigidbody();
-            InspectObjects();
-            InteractDynamics();
 
             if (currentBrain.ShowInventory)
                 ToggleInventory();
 
             UseFlashlight();
+
+            if (InspectPuzzle()) return;
+            InspectObjects();
+            InteractDynamics();
+
 
             //Cheat to test sounds
             /*
@@ -134,6 +146,19 @@ namespace Player
             }
 #endif
 */
+        }
+
+        bool InspectPuzzle()
+        {
+            if (puzzleInspector && puzzleInspector.isActiveAndEnabled)
+            {
+                if (currentBrain.Interact)
+                {
+                    return puzzleInspector.Interact(interactablesManager.CurrentInteractable);
+                }
+            }
+
+            return false;
         }
 
         bool InspectObjects()
@@ -164,19 +189,22 @@ namespace Player
 
         void InteractDynamics()
         {
-            if (interactablesManager.CanInteract)
+            if (interactablesManager != null && dynamicActivator != null && interactablesManager.CurrentInteractable != null)
             {
-                if (currentBrain.MouseInteractRelease)
+                if (interactablesManager.CanInteract)
                 {
-                    interactablesManager.CurrentInteractable.Interact(false);
-                    InteractCooldown = 10;
-                }
-                else if (currentBrain.MouseInteract && !interactablesManager.CurrentInteractable.IsInteracting &&
-                         InteractCooldown <= 0)
-                {
-                    if (interactablesManager.CurrentInteractable.Interact(true))
+                    if (currentBrain.MouseInteractRelease)
                     {
-                        stateMachine.SwitchState<State_Player_Interacting>();
+                        dynamicActivator.Interact(interactablesManager.CurrentInteractable, false);
+                        InteractCooldown = 10;
+                    }
+                    else if (currentBrain.MouseInteract && !interactablesManager.CurrentInteractable.IsInteracting &&
+                             InteractCooldown <= 0)
+                    {
+                        if (dynamicActivator.Interact(interactablesManager.CurrentInteractable, true))
+                        {
+                            stateMachine.SwitchState<State_Player_Interacting>();
+                        }
                     }
                 }
             }

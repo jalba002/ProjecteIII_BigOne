@@ -60,9 +60,16 @@ public class ObjectInspector : MonoBehaviour
             return true;
         }
 
-        var inspectable = interactable.attachedGameobject.GetComponent<IInspectable>();
-        StartInspect(inspectable);
-        return true;
+        try
+        {
+            var inspectable = interactable.attachedGameobject.GetComponent<IInspectable>();
+            StartInspect(inspectable);
+            return true;
+        }
+        catch (NullReferenceException)
+        {
+            return false;
+        }
 
 
         return false;

@@ -47,28 +47,22 @@ namespace Characters.Player
             {
                 if (CurrentInteractable != null)
                 {
-                    Debug.Log("Stage 1: Detected & Current");
                     if (!CurrentInteractable.IsInteracting)
                     {
-                        Debug.Log("Stage 2: Detected & Current & Not Interacting");
                         CurrentInteractable = detectedElement;
                     }
                 }
                 else
                 {
-                    Debug.Log("Stage 3: Detected & No Current");
                     CurrentInteractable = detectedElement;
                 }
             }
             else
             {
-                Debug.Log("Stage 4: No Detected");
                 if (CurrentInteractable != null)
                 {
-                    Debug.Log("Entering null/non-null");
                     if (!CurrentInteractable.IsInteracting)
                     {
-                        Debug.Log("Deleting Interactable non-used");
                         CurrentInteractable = null;
                     }
                 }

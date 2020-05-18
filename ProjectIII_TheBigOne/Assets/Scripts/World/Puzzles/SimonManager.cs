@@ -124,12 +124,16 @@ public class SimonManager : Puzzle
     }
 
     public IEnumerator HighlightColor(int i, bool answering = false)
-    {  
+    {
+        
         active[i].SetActive(true);
         inactive[i].SetActive(false);
 
-        if(!answering)
+        if (!answering)
+        {
+            AudioManager.PlaySound2D("Sound/Simon/Simon" + i.ToString());
             yield return new WaitForSeconds(colorLasting);
+        }
         else
         {
             yield return new WaitForSeconds(colorLasting / 2);
@@ -142,10 +146,13 @@ public class SimonManager : Puzzle
 
     public void CheckAnswer(int i)
     {
+        
+
         StartCoroutine(HighlightColor(i, true));
 
         if (i == colors[currentAnswer])
         {
+            AudioManager.PlaySound2D("Sound/Simon/Simon" + i.ToString());
             Debug.Log("Acertaste");
             currentAnswer++;
             if (currentAnswer >= colors.Length)
@@ -158,7 +165,8 @@ public class SimonManager : Puzzle
         else
         {
             Debug.Log("Fallaste");
-            EndGame();
+            AudioManager.PlaySound2D("Sound/Simon/Fail");
+            //EndGame();
         }
     }
 

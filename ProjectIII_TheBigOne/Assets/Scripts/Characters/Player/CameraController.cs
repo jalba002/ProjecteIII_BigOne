@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour
     [Range(-100.0f, 100.0f)] public float m_MinPitch = -80f;
     [Range(-100.0f, 100.0f)] public float m_MaxPitch = 70f;
     public Transform m_PitchControllerTransform;
+    public Camera m_inpsectCamera;
 
     [Space(10)] [Header("Editor Debug")] public KeyCode debugLockAngleKeyCode = KeyCode.I;
     public KeyCode debugLockKeyCode = KeyCode.O;
@@ -21,6 +22,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
+        m_inpsectCamera.gameObject.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -42,7 +44,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    [Header("Private variables")] 
+    [Header("Private variables")]
     Vector2 m_MouseLook;
     Vector2 m_SmoothVector;
     PlayerController character;

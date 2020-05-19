@@ -30,6 +30,7 @@ namespace Player
 
         [HideInInspector] public InteractablesManager interactablesManager;
 
+        public StateMachine stateMachine;
 
         [Header("Sound settings")] public AudioClip[] footstepSounds;
         private AudioSource audioSource;
@@ -55,6 +56,9 @@ namespace Player
 
             if (cameraController == null)
                 cameraController = GetComponent<CameraController>();
+
+            if (stateMachine == null)
+                stateMachine = GetComponent<StateMachine>();
 
             if (characterProperties != null)
             {
@@ -268,6 +272,7 @@ namespace Player
                 }
             }
         }
+
 
         public void CorrectRigidbody()
         {

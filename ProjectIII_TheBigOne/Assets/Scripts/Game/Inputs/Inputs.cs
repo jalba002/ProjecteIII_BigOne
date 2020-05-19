@@ -14,5 +14,6 @@ namespace Game.Inputs
         public InputNames horizontal;
         public InputNames forward;
         public InputNames inventory;
+        public InputNames pause;
     }
 }

@@ -101,6 +101,9 @@ namespace Characters.Player
 
         public void ClearInteractable()
         {
+            if (CurrentInteractable != null)
+                CurrentInteractable.OnEndInteract();
+            
             CurrentInteractable = null;
             if (textDebug)
                 textDebug.text = "";

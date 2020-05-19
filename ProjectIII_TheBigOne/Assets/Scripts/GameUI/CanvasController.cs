@@ -97,6 +97,7 @@ public class CanvasController : MonoBehaviour
             Cursor.visible = !enabled;
             playerController.stateMachine.enabled = enabled;
             playerController.interactablesManager.enabled = enabled;
+            playerController.interactablesManager.ClearInteractable();
             playerController.objectInspector.enabled = enabled;
 
             //Something about enemy?

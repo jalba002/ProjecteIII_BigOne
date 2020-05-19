@@ -22,7 +22,7 @@ namespace Player
         [Header("Config")] public PlayerProperties characterProperties;
         public new PlayerBrain currentBrain { get; private set; }
 
-        private ObjectInspector objectInspector;
+        public ObjectInspector objectInspector { get; private set; }
 
         private DynamicActivator dynamicActivator;
 

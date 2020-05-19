@@ -19,6 +19,11 @@ public class CameraController : MonoBehaviour
     public bool applyRotation { get; set; }
     private bool _cursorLock;
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     public bool cursorLock
     {
         get { return _cursorLock; }

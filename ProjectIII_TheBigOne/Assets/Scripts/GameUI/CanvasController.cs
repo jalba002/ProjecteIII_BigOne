@@ -10,6 +10,8 @@ public class CanvasController : MonoBehaviour
     [Header("Inventory")] public GameObject NotificationPrefab;
     public GameObject NotificationPanel;
 
+    [Header("PauseMenu")] public GameObject pauseMenu;
+
     [Header("Sliders")] public Slider lightingSlider;
     public Slider runningSlider;
 
@@ -28,6 +30,7 @@ public class CanvasController : MonoBehaviour
         playerController = FindObjectOfType<PlayerController>();
         flashlight = playerController.attachedFlashlight;
         playerWalking = FindObjectOfType<State_Player_Walking>();
+        
     }
 
     void Update()
@@ -42,6 +45,7 @@ public class CanvasController : MonoBehaviour
 
         playerLightingUpdate();
         playerRunningUpdate();
+        TooglePauseMenu();
 
         if (playerWalking.currentStamina >= playerController.characterProperties.maximumStamina)
             runningSlider.gameObject.SetActive(false);
@@ -77,5 +81,40 @@ public class CanvasController : MonoBehaviour
     {
         UICrosshair.sprite = grabCrosshair;
         UICrosshair.rectTransform.localScale = new Vector3(.6f, .6f, 1f);
+    }
+
+    public void TooglePauseMenu()
+    {
+        if (playerController.currentBrain.ShowPause)
+        {
+            var enabled = pauseMenu.activeInHierarchy;
+            playerController.cameraController.angleLocked = !enabled;
+            playerController.cameraController.cursorLock = enabled;
+            Cursor.visible = !enabled;
+            playerController.stateMachine.enabled = enabled;
+            playerController.interactablesManager.enabled = enabled;
+            playerController.objectInspector.enabled = enabled;
+
+            //Something about enemy?
+
+            pauseMenu.SetActive(!enabled);
+
+            gameObject.GetComponentInChildren<PauseManager>().DesactivateOptions();
+        }
+    }
+
+    public void ResumeGame()
+    {
+        var enabled = true;
+        playerController.cameraController.angleLocked = !enabled;
+        playerController.cameraController.cursorLock = enabled;
+        Cursor.visible = !enabled;
+        playerController.stateMachine.enabled = enabled;
+        playerController.interactablesManager.enabled = enabled;
+        playerController.objectInspector.enabled = enabled;
+
+        //Something about enemy?
+
+        pauseMenu.SetActive(!enabled);
     }
 }

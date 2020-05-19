@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(ItemEffectsManager))]
 public class InventoryItem
 {
+    public string itemID = "Default_ID";
     public string itemName = "New Item";      
     public string itemDescription = "new description";
     public int MaxStackQuantity = 1;          

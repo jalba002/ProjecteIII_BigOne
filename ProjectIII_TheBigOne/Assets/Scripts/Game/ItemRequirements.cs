@@ -3,7 +3,7 @@ using World.Objects;
 
 public class ItemRequirements : MonoBehaviour
 {
-    public string requiredItem;
+    public string requiredItemID;
     private Inventory playerInventory;
     public DynamicObject lockedDoor;
 
@@ -18,7 +18,7 @@ public class ItemRequirements : MonoBehaviour
     {
         if (lockedDoor.lockedMode == DynamicObject.LockedMode.Unlocked) return;
         
-        var item = playerInventory.characterItems.Find(x => x.itemName == requiredItem);
+        var item = playerInventory.characterItems.Find(x => x.itemID == requiredItemID);
         bool hasItem = item != null;
         
         if (hasItem)

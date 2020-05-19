@@ -22,21 +22,21 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void GiveItem(string itemName)
+    public void GiveItem(string itemID)
     {
-        InventoryItem itemToAdd = database.GetItem(itemName);
+        InventoryItem itemToAdd = database.GetItem(itemID);
         characterItems.Add(itemToAdd);
         //  Debug.Log("gave item:" + itemToAdd.itemName);
         inventoryDisplay.AddNewItem(itemToAdd); //add the item to the inventory display
     }
 
-    public bool AddItem(string itemName)
+    public bool AddItem(string itemID)
     {
-        InventoryItem itemToAdd = database.GetItem(itemName); //get reference to our listed item
+        InventoryItem itemToAdd = database.GetItem(itemID); //get reference to our listed item
 
         if (itemToAdd.isStackable)
         {
-            InventoryItem itemSearched = CheckThisItem(itemName);
+            InventoryItem itemSearched = CheckThisItem(itemID);
             if (itemSearched != null)
             {
                 itemSearched.SetActualQuantity(itemSearched.GetActualQuantity() + 1);
@@ -54,7 +54,7 @@ public class Inventory : MonoBehaviour
             characterItems.Add(itemToAdd);
             inventoryDisplay.AddNewItem(itemToAdd);
         }
-        inventoryDisplay.canvas.AddPickupMessage(itemName);
+        inventoryDisplay.canvas.AddPickupMessage(itemToAdd.itemName);
         return true;
     }
 

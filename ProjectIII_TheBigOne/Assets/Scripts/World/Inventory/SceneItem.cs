@@ -7,7 +7,8 @@ using UnityEngine;
 
 public class SceneItem : MonoBehaviour, IInteractable, IPickable
 {
-    public string itemName;
+    public string itemID;
+    public string displayName;
     private bool alreadyUsed = false;
 
     public string DisplayName { get; set; }
@@ -20,14 +21,14 @@ public class SceneItem : MonoBehaviour, IInteractable, IPickable
 
     private void Start()
     {
-        DisplayName = $"Pick up {itemName}";
+        DisplayName = $"Pick up {displayName}";
         IsInteracting = false;
     }
     
     public bool Interact(bool interactEnable)
     {
         if (alreadyUsed || IsInteracting || !interactEnable) return false;
-        if (FindObjectOfType<PlayerController>().playerInventory.AddItem(itemName))
+        if (FindObjectOfType<PlayerController>().playerInventory.AddItem(itemID))
         {
             this.gameObject.SetActive(false);
             alreadyUsed = true;

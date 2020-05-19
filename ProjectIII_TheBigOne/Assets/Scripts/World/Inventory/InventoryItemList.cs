@@ -9,7 +9,7 @@ public class InventoryItemList : ScriptableObject
 
     public InventoryItem GetItem(string itemName)
     {
-        return itemList.Find(x => x.itemName == itemName);
+        return itemList.Find(x => x.itemID == itemName);
     }
 
     public InventoryItem GetItem(int itemIndex)

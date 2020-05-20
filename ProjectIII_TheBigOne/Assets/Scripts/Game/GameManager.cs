@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public OptionsData OptionsData;
     public GameSettings GameSettings;
     public PlayerController PlayerController;
     public CanvasController CanvasController;
@@ -39,6 +40,10 @@ public class GameManager : MonoBehaviour
         if (GameSettings == null)
         {
             GameSettings = ScriptableObject.CreateInstance<GameSettings>();
+        }
+        if (OptionsData == null)
+        {
+            OptionsData = ScriptableObject.CreateInstance<OptionsData>();
         }
 
         if (PlayerController == null)

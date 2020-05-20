@@ -141,7 +141,7 @@ namespace World.Objects
             {
                 case ObjectType.Drawer:
                     Vector3 newStartingPosition = this.gameObject.transform.localPosition;
-                    Vector3 forward = HandlePosition.transform.forward;
+                    Vector3 forward = HandlePosition.transform.InverseTransformDirection(HandlePosition.transform.forward);
                     newStartingPosition += (InvertInitialization ? -forward : forward) * (drawerConfiguration.maximumDistance * StartupClosePercentage);
                     this.gameObject.transform.localPosition = newStartingPosition;
                     break;

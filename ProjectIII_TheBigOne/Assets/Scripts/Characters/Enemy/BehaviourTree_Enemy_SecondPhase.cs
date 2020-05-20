@@ -15,6 +15,7 @@ public class BehaviourTree_Enemy_SecondPhase : BehaviourTree
     public override void CalculateNextState(bool forceExitState)
     {
         // Analyze all possible states.
+        if (CheckPlayerKilled()) return;
         if (CheckEnterStunned()) return;
         if (CheckEnterTraversing()) return;
         if (CheckEnterPatrol()) return;
@@ -22,8 +23,16 @@ public class BehaviourTree_Enemy_SecondPhase : BehaviourTree
         if (CheckEnterSearching()) return;
     }
 
-
     /// All states for Enemy first phase listed below. ///
+    private bool CheckPlayerKilled()
+    {
+        if (!attachedCharacter.currentBrain.IsPlayerCloseEnoughForDeath) return false;
+
+        attachedCharacter.stateMachine.SwitchState<State_Enemy_Killing>();
+        
+        return true;
+    }
+
     private bool CheckEnterDisable()
     {
         // TODO Add Conditions.

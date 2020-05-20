@@ -11,6 +11,7 @@ public class CanvasController : MonoBehaviour
     public GameObject NotificationPanel;
 
     [Header("PauseMenu")] public GameObject pauseMenu;
+    public GameObject inventory;
 
     [Header("Sliders")] public Slider lightingSlider;
     public Slider runningSlider;
@@ -19,17 +20,19 @@ public class CanvasController : MonoBehaviour
     public Sprite grabCrosshair;
 
     [Header("Components")] public Image UICrosshair;
+    public Image blackFade;
 
     private FlashlightController flashlight;
     private PlayerController playerController;
     private State_Player_Walking playerWalking;
+    private PauseManager _pauseManager;
 
     private void Start()
     {
         playerController = FindObjectOfType<PlayerController>();
         flashlight = playerController.attachedFlashlight;
         playerWalking = FindObjectOfType<State_Player_Walking>();
-        
+        _pauseManager = GetComponentInChildren<PauseManager>();
     }
 
     void Update()
@@ -43,7 +46,8 @@ public class CanvasController : MonoBehaviour
 
         playerLightingUpdate();
         playerRunningUpdate();
-        TooglePauseMenu();
+        if (!GameManager.Instance.PlayerController.IsDead)
+            TooglePauseMenu(false);
 
         if (playerWalking.currentStamina >= playerController.characterProperties.maximumStamina)
             runningSlider.gameObject.SetActive(false);
@@ -87,9 +91,9 @@ public class CanvasController : MonoBehaviour
         UICrosshair.rectTransform.localScale = new Vector3(.6f, .6f, 1f);
     }
 
-    public void TooglePauseMenu()
+    public void TooglePauseMenu(bool forceEnable)
     {
-        if (playerController.currentBrain.ShowPause)
+        if (playerController.currentBrain.ShowPause || forceEnable)
         {
             var enabled = pauseMenu.activeInHierarchy;
             playerController.cameraController.angleLocked = !enabled;
@@ -104,7 +108,7 @@ public class CanvasController : MonoBehaviour
 
             pauseMenu.SetActive(!enabled);
 
-            gameObject.GetComponentInChildren<PauseManager>().DesactivateOptions();
+            _pauseManager.DesactivateOptions();
         }
     }
 

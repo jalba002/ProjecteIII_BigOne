@@ -1,9 +1,11 @@
-﻿using Characters.Brains;
+﻿using System;
+using Characters.Brains;
 using Characters.Generic;
 using Characters.Player;
 using Properties;
 using UnityEngine;
 using CharacterController = Characters.Generic.CharacterController;
+using Random = UnityEngine.Random;
 
 namespace Player
 {
@@ -135,21 +137,6 @@ namespace Player
             if (InspectPuzzle()) return;
             InspectObjects();
             InteractDynamics();
-
-
-            //Cheat to test sounds
-            /*
-#if UNITY_EDITOR
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                PlayerStartsBeingChased();
-            }
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                PlayerStopsBeingChased();
-            }
-#endif
-*/
         }
 
         bool InspectPuzzle()
@@ -195,20 +182,17 @@ namespace Player
         {
             if (interactablesManager != null && dynamicActivator != null && interactablesManager.CurrentInteractable != null)
             {
-                if (interactablesManager.CanInteract)
+                if (currentBrain.MouseInteractRelease)
                 {
-                    if (currentBrain.MouseInteractRelease)
+                    dynamicActivator.Interact(interactablesManager.CurrentInteractable, false);
+                    InteractCooldown = 20;
+                }
+                else if (currentBrain.MouseInteract && !interactablesManager.CurrentInteractable.IsInteracting &&
+                         InteractCooldown <= 0)
+                {
+                    if (dynamicActivator.Interact(interactablesManager.CurrentInteractable, true))
                     {
-                        dynamicActivator.Interact(interactablesManager.CurrentInteractable, false);
-                        InteractCooldown = 10;
-                    }
-                    else if (currentBrain.MouseInteract && !interactablesManager.CurrentInteractable.IsInteracting &&
-                             InteractCooldown <= 0)
-                    {
-                        if (dynamicActivator.Interact(interactablesManager.CurrentInteractable, true))
-                        {
-                            stateMachine.SwitchState<State_Player_Interacting>();
-                        }
+                        stateMachine.SwitchState<State_Player_Interacting>();
                     }
                 }
             }
@@ -301,10 +285,63 @@ namespace Player
             footstepSounds[0] = audioSource.clip;
         }
 
-
         public Transform ReturnSelf()
         {
             return this.gameObject.transform;
+        }
+
+        // Deth
+        public override bool Kill()
+        {
+            // Disable all managers.
+            if (IsDead) return false;
+            IsDead = true;
+
+            stateMachine.SwitchState<State_Player_Dying>();
+
+            interactablesManager.ClearInteractable();
+
+            FailproofEnabling(interactablesManager, false);
+            FailproofEnabling(puzzleInspector, false);
+            FailproofEnabling(objectInspector, false);
+            FailproofEnabling(dynamicActivator, false);
+            FailproofEnabling(attachedFlashlight, false);
+            FailproofEnabling(playerInventory, false);
+            FailproofEnabling(cameraController, false);
+            return true;
+        }
+
+        public bool Resurrect()
+        {
+            // Enable all managers.
+            if (!IsDead) return false;
+            IsDead = false;
+
+            stateMachine.SwitchState<State_Player_Walking>();
+
+            FailproofEnabling(interactablesManager, true);
+            interactablesManager.ClearInteractable();
+
+            FailproofEnabling(objectInspector, true);
+            FailproofEnabling(dynamicActivator, true);
+            FailproofEnabling(playerInventory, true);
+            FailproofEnabling(attachedFlashlight, true);
+            FailproofEnabling(puzzleInspector, true);
+            FailproofEnabling(cameraController, true);
+            FailproofEnabling(stateMachine, true);
+            return true;
+        }
+
+        private void FailproofEnabling(MonoBehaviour component, bool enable)
+        {
+            try
+            {
+                component.enabled = enable;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e.Message, this.gameObject);
+            }
         }
     }
 }

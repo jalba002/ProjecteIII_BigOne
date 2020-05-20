@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class LockManager : MonoBehaviour
+public class LockManager : Puzzle
 {
     public int solutionNumber0 = 1;
     public int solutionNumber1 = 1;
@@ -17,15 +17,7 @@ public class LockManager : MonoBehaviour
     private bool _isCompleted = false;
 
     public UnityEvent whatUnlocks;
- 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (solutionNumber0 == dice0.actualNumber && solutionNumber1 == dice1.actualNumber && solutionNumber2 == dice2.actualNumber && !_isCompleted)
@@ -36,6 +28,6 @@ public class LockManager : MonoBehaviour
             whatUnlocks.Invoke();
         }
     }
-
     
+
 }

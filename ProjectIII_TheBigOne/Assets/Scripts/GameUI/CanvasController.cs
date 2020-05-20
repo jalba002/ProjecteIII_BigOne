@@ -63,10 +63,17 @@ public class CanvasController : MonoBehaviour
 
     public void AddPickupMessage(string itemName)
     {
-        GameObject Message = Instantiate(NotificationPrefab, NotificationPanel.transform);
+        CustomPickupMessage(itemName + " COLLECTED");
+        /*GameObject Message = Instantiate(NotificationPrefab, NotificationPanel.transform);
         //Notifications.Add(Message);
         //Message.GetComponent<Notification>().SetMessage(string.Format("Picked up {0}", itemName));
-        Message.GetComponent<Notification>().SetMessage(itemName + " COLLECTED");
+        Message.GetComponent<Notification>().SetMessage(itemName + " COLLECTED");*/
+    }
+
+    public void CustomPickupMessage(string text)
+    {
+        GameObject Message = Instantiate(NotificationPrefab, NotificationPanel.transform);
+        Message.GetComponent<Notification>().SetMessage(text);
     }
 
     public void playerLightingUpdate()

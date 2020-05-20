@@ -32,7 +32,7 @@ public class DrawerPiece : Puzzle
             currentRot -= 360;
         Debug.Log(currentRot);
         transform.eulerAngles = transform.eulerAngles + new Vector3(0,grades,0);
-        attachedDrawerLocker.eulerAngles = attachedDrawerLocker.eulerAngles + new Vector3(0, grades, 0);
+        attachedDrawerLocker.localEulerAngles = attachedDrawerLocker.localEulerAngles + new Vector3(grades, 0, 0);
         dm.CheckAnswer();
     }
 

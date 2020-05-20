@@ -93,6 +93,8 @@ namespace World.Objects
         public float openForce = 5f;
         [Range(1f, 15f)] public float maxMouseInput = 3f;
         public bool UseMouseXAxis = false;
+        public bool InvertInitialization = false;
+        [Range(0f, 1f)] public float StartupClosePercentage = 0.96f;
 
         [Header("Rigidbody Settings")] public bool useGravity = false;
 
@@ -139,7 +141,8 @@ namespace World.Objects
             {
                 case ObjectType.Drawer:
                     Vector3 newStartingPosition = this.gameObject.transform.localPosition;
-                    newStartingPosition.z -= (drawerConfiguration.maximumDistance * 0.9f);
+                    Vector3 forward = HandlePosition.transform.forward;
+                    newStartingPosition += (InvertInitialization ? -forward : forward) * (drawerConfiguration.maximumDistance * StartupClosePercentage);
                     this.gameObject.transform.localPosition = newStartingPosition;
                     break;
                 case ObjectType.Door:
@@ -349,11 +352,11 @@ namespace World.Objects
 
         public GameObject attachedGameobject
         {
-            get { return gameObject;}
+            get { return gameObject; }
         }
 
         public bool IsInteracting { get; set; }
-        
+
         public bool ForceClose()
         {
             throw new NotImplementedException();
@@ -401,6 +404,7 @@ namespace World.Objects
                 OnEndInteract();
                 return true;
             }
+
             if (!IsInteracting)
             {
                 OnStartInteract();
@@ -410,11 +414,11 @@ namespace World.Objects
 
             return false;
         }
-        
+
         public void OnStartInteract()
         {
             OnStartInteracting.Invoke();
-            
+
             switch (objectType)
             {
                 case ObjectType.Door:
@@ -426,7 +430,7 @@ namespace World.Objects
                     //Play drawer sound
                     break;
             }
-            
+
             if (Rigidbody == null)
             {
                 Rigidbody = GetComponent<Rigidbody>();
@@ -450,12 +454,12 @@ namespace World.Objects
         {
             var calculatedForce = 0f;
             float mouseAxis = UseMouseXAxis ? Input.GetAxis("Mouse X") : Input.GetAxis("Mouse Y");
-            mouseAxis = Mathf.Clamp(mouseAxis,-maxMouseInput, maxMouseInput);
+            mouseAxis = Mathf.Clamp(mouseAxis, -maxMouseInput, maxMouseInput);
             calculatedForce = (forceScale * mouseAxis);
 
             return calculatedForce;
         }
-        
+
         public void ForceOpen(float force)
         {
             var useForce = HandlePosition.transform.forward * force;

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class InventoryDisplay : MonoBehaviour
 {
@@ -40,7 +41,8 @@ public class InventoryDisplay : MonoBehaviour
         }
     }
 
-    public Text selectedItemName;
+    //public Text selectedItemName;
+    public TextMeshProUGUI selectedItemName;
     public Text selectedItemInfo;
 
     public static UnityEvent OnSlotSelected = new UnityEvent();

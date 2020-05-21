@@ -6,15 +6,15 @@ public class DrawerPiece : Puzzle
 {
     // Start is called before the first frame update
     public Transform attachedDrawerLocker;
-    public float correctRot;
-    public float currentRot;
+    public int correctRot;
+    public int currentRot;
 
     private DrawerManager dm;
 
     void Start()
     {
         dm = GameObject.FindObjectOfType<DrawerManager>();
-        currentRot = transform.eulerAngles.y;
+        
     }     
     // Update is called once per frame
     void Update()
@@ -25,14 +25,16 @@ public class DrawerPiece : Puzzle
         }
     }
 
-    public void RotateEulerY(float grades = 5)
+    public void RotateEulerY(int grades = 5)
     {        
         currentRot += grades;
         if (currentRot >= 360)
-            currentRot -= 360;
+            currentRot = currentRot - 360;
+
         Debug.Log(currentRot);
         transform.eulerAngles = transform.eulerAngles + new Vector3(0,grades,0);
-        attachedDrawerLocker.localEulerAngles = attachedDrawerLocker.localEulerAngles + new Vector3(grades, 0, 0);
+        //attachedDrawerLocker.eulerAngles = attachedDrawerLocker.eulerAngles + new Vector3(grades, 0, 0);
+        attachedDrawerLocker.Rotate(0, grades, 0);
         dm.CheckAnswer();
     }
 

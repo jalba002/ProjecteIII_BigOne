@@ -1,6 +1,5 @@
 ﻿using System;
 using Characters.Player;
-using Enemy;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,6 +8,26 @@ namespace Cheats
 #if UNITY_EDITOR
     public static class EditorCheats
     {
+        [MenuItem("Cheats/Level/Destroy Wall %E")]
+        public static void DestroyWall()
+        {
+            if (Application.isPlaying)
+            {
+                try
+                {
+                    Selection.activeGameObject.GetComponent<Destructible_Walls>().Activate();
+                }
+                catch (NullReferenceException)
+                {
+                    Debug.LogWarning("Selection is not a destructible wall!");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Only in Play Mode!");
+            }
+        }
+
         [MenuItem("Cheats/Player/Clear Interactable %#R")]
         public static void ClearInteractable()
         {
@@ -21,6 +40,7 @@ namespace Cheats
                 Debug.LogWarning("Only in Play Mode!");
             }
         }
+
         [MenuItem("Cheats/Player/Recharge Battery #R")]
         public static void RechargeBattery()
         {
@@ -82,7 +102,6 @@ namespace Cheats
         {
             try
             {
-
                 if (Application.isPlaying)
                 {
                     GameObject.FindObjectOfType<ParanormalManager>()?.StartSecondPhase();

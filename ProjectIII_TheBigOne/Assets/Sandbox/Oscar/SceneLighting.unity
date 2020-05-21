@@ -416,7 +416,7 @@ PrefabInstance:
     - target: {fileID: 2688642709759057942, guid: e0cbcf60bef618e439c477ec7bdb9837,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2688642709759057942, guid: e0cbcf60bef618e439c477ec7bdb9837,
         type: 3}
@@ -436,7 +436,7 @@ PrefabInstance:
     - target: {fileID: 2688642709759057943, guid: e0cbcf60bef618e439c477ec7bdb9837,
         type: 3}
       propertyPath: m_Name
-      value: Dymitri_Room
+      value: 11_Dymitri_Room
       objectReference: {fileID: 0}
     - target: {fileID: 3599601441449714801, guid: e0cbcf60bef618e439c477ec7bdb9837,
         type: 3}
@@ -1117,7 +1117,7 @@ PrefabInstance:
     - target: {fileID: 7946827091247081992, guid: 094509d853ee9ae47bddca821e9278d6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7946827091247081992, guid: 094509d853ee9ae47bddca821e9278d6,
         type: 3}
@@ -1137,7 +1137,7 @@ PrefabInstance:
     - target: {fileID: 7946827091247081993, guid: 094509d853ee9ae47bddca821e9278d6,
         type: 3}
       propertyPath: m_Name
-      value: ManBathroom_Room
+      value: 06_ManBathroom_Room
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 094509d853ee9ae47bddca821e9278d6, type: 3}
@@ -1869,7 +1869,7 @@ PrefabInstance:
     - target: {fileID: 6157046293043733867, guid: c7f552ad3bca409438a0c1a753869494,
         type: 3}
       propertyPath: m_Name
-      value: 01_Reception_Room
+      value: 02_Reception_Room
       objectReference: {fileID: 0}
     - target: {fileID: 6255906988578456968, guid: c7f552ad3bca409438a0c1a753869494,
         type: 3}
@@ -2166,7 +2166,7 @@ PrefabInstance:
     - target: {fileID: 5094867461483729073, guid: 7eb636a07aab19c44930e273650942e4,
         type: 3}
       propertyPath: m_Name
-      value: 00_SaveZone_Room
+      value: 01_SaveZone_Room
       objectReference: {fileID: 0}
     - target: {fileID: 5094867461498619378, guid: 7eb636a07aab19c44930e273650942e4,
         type: 3}
@@ -2666,7 +2666,7 @@ PrefabInstance:
     - target: {fileID: 6752482778064901256, guid: 95824cf095ce77644b854508ea9661c8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 6752482778064901256, guid: 95824cf095ce77644b854508ea9661c8,
         type: 3}
@@ -2686,7 +2686,7 @@ PrefabInstance:
     - target: {fileID: 6752482778064901257, guid: 95824cf095ce77644b854508ea9661c8,
         type: 3}
       propertyPath: m_Name
-      value: Officer2_Room
+      value: 14_Officer2_Room
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95824cf095ce77644b854508ea9661c8, type: 3}
@@ -2728,6 +2728,32 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 3, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &512351380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59306422a2ca4454aabce3daa79c3334, type: 3}
+  m_Name: New Aura Base Settings
+  m_EditorClassIdentifier: 
+  useDensity: 1
+  density: 0.25
+  useScattering: 1
+  scattering: 0.5
+  useAmbientLighting: 1
+  ambientLightingStrength: 1
+  useColor: 0
+  color: {r: 0, g: 0.5, b: 0.5, a: 0.5}
+  colorStrength: 1
+  useTint: 0
+  tint: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  tintStrength: 1
+  useExtinction: 0
+  extinction: 0.75
 --- !u!1 &519095070 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1576759589111076174, guid: f56108c3c33500144b3c56d825eb851e,
@@ -2747,6 +2773,41 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.720848, y: 0.10000002, z: 3.0000007}
   m_Center: {x: 0.023406982, y: 8.4591486e-17, z: 1.5000002}
+--- !u!84 &520050127
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Spotlight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &523712681 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -417365640512014922, guid: f56108c3c33500144b3c56d825eb851e,
@@ -3037,18 +3098,18 @@ Transform:
   - {fileID: 255924917}
   - {fileID: 1949726394}
   - {fileID: 228536277}
-  - {fileID: 1118666771}
-  - {fileID: 2078741800}
-  - {fileID: 1061152488}
   - {fileID: 525027298}
-  - {fileID: 229169138}
-  - {fileID: 240363891}
-  - {fileID: 544633695}
-  - {fileID: 2044037662}
-  - {fileID: 1033944796}
+  - {fileID: 1118666771}
   - {fileID: 1928014683}
   - {fileID: 957841552}
+  - {fileID: 2078741800}
   - {fileID: 1526219018}
+  - {fileID: 229169138}
+  - {fileID: 240363891}
+  - {fileID: 1033944796}
+  - {fileID: 544633695}
+  - {fileID: 2044037662}
+  - {fileID: 1061152488}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3197,32 +3258,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 3.1058276, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &720103924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59306422a2ca4454aabce3daa79c3334, type: 3}
-  m_Name: New Aura Base Settings
-  m_EditorClassIdentifier: 
-  useDensity: 1
-  density: 0.25
-  useScattering: 1
-  scattering: 0.5
-  useAmbientLighting: 1
-  ambientLightingStrength: 1
-  useColor: 0
-  color: {r: 0, g: 0.5, b: 0.5, a: 0.5}
-  colorStrength: 1
-  useTint: 0
-  tint: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  tintStrength: 1
-  useExtinction: 0
-  extinction: 0.75
 --- !u!1 &724256365 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6123213036027453945, guid: f56108c3c33500144b3c56d825eb851e,
@@ -3675,6 +3710,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &837198529
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Spotlight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &838263809 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5581978809396331472, guid: f56108c3c33500144b3c56d825eb851e,
@@ -4372,7 +4442,7 @@ PrefabInstance:
     - target: {fileID: 9095772312975052240, guid: 4b59ff4d7623b9c42825b93054937a19,
         type: 3}
       propertyPath: m_Name
-      value: Officer1_Room
+      value: 13_Officer1_Room
       objectReference: {fileID: 0}
     - target: {fileID: 9095772312975052243, guid: 4b59ff4d7623b9c42825b93054937a19,
         type: 3}
@@ -4412,7 +4482,7 @@ PrefabInstance:
     - target: {fileID: 9095772312975052243, guid: 4b59ff4d7623b9c42825b93054937a19,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 9095772312975052243, guid: 4b59ff4d7623b9c42825b93054937a19,
         type: 3}
@@ -4466,7 +4536,7 @@ PrefabInstance:
     - target: {fileID: 6899028909299908000, guid: fdf54fee5f69869488d164e98364378e,
         type: 3}
       propertyPath: m_Name
-      value: Computers_Room
+      value: 08_Computers_Room
       objectReference: {fileID: 0}
     - target: {fileID: 6899028909299908001, guid: fdf54fee5f69869488d164e98364378e,
         type: 3}
@@ -4506,7 +4576,7 @@ PrefabInstance:
     - target: {fileID: 6899028909299908001, guid: fdf54fee5f69869488d164e98364378e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6899028909299908001, guid: fdf54fee5f69869488d164e98364378e,
         type: 3}
@@ -5113,7 +5183,7 @@ PrefabInstance:
     - target: {fileID: 2012055666405978868, guid: ed196176ce711ba47b1b9ac90f9df0ee,
         type: 3}
       propertyPath: m_Name
-      value: Meeting_Room
+      value: 05_Meeting_Room
       objectReference: {fileID: 0}
     - target: {fileID: 2012055666405978869, guid: ed196176ce711ba47b1b9ac90f9df0ee,
         type: 3}
@@ -5153,7 +5223,7 @@ PrefabInstance:
     - target: {fileID: 2012055666405978869, guid: ed196176ce711ba47b1b9ac90f9df0ee,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2012055666405978869, guid: ed196176ce711ba47b1b9ac90f9df0ee,
         type: 3}
@@ -6211,7 +6281,7 @@ PrefabInstance:
     - target: {fileID: 551072097130436347, guid: fc3b804bc1cb4474fad7a79a9a3c93c4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 551072097130436347, guid: fc3b804bc1cb4474fad7a79a9a3c93c4,
         type: 3}
@@ -6271,7 +6341,7 @@ PrefabInstance:
     - target: {fileID: 1827863986262896721, guid: fc3b804bc1cb4474fad7a79a9a3c93c4,
         type: 3}
       propertyPath: m_Name
-      value: Gas_Room
+      value: 10_Gas_Room
       objectReference: {fileID: 0}
     - target: {fileID: 2387323965428816205, guid: fc3b804bc1cb4474fad7a79a9a3c93c4,
         type: 3}
@@ -6574,6 +6644,41 @@ PrefabInstance:
       objectReference: {fileID: 1083788665}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310c655bc510cdc4ea7a4790e96ea657, type: 3}
+--- !u!84 &1208196595
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Spotlight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1214956369 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5463408250268002590, guid: f56108c3c33500144b3c56d825eb851e,
@@ -9140,7 +9245,7 @@ PrefabInstance:
     - target: {fileID: 1458305955895304722, guid: dda1240b04a025047916f44242ceae84,
         type: 3}
       propertyPath: m_Name
-      value: WomanBathroom_Room
+      value: 07_WomanBathroom_Room
       objectReference: {fileID: 0}
     - target: {fileID: 1458305955895304749, guid: dda1240b04a025047916f44242ceae84,
         type: 3}
@@ -9180,7 +9285,7 @@ PrefabInstance:
     - target: {fileID: 1458305955895304749, guid: dda1240b04a025047916f44242ceae84,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1458305955895304749, guid: dda1240b04a025047916f44242ceae84,
         type: 3}
@@ -9766,7 +9871,7 @@ PrefabInstance:
     - target: {fileID: 4434373054531142804, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
       propertyPath: m_Name
-      value: WarRoom_Room
+      value: 04_WarRoom_Room
       objectReference: {fileID: 0}
     - target: {fileID: 4434373054531142807, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
@@ -9806,7 +9911,7 @@ PrefabInstance:
     - target: {fileID: 4434373054531142807, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4434373054531142807, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
@@ -10043,7 +10148,7 @@ PrefabInstance:
     - target: {fileID: 4435286711181666888, guid: dd0235bdfcbd4b24f85235b5c4ff7667,
         type: 3}
       propertyPath: m_Name
-      value: 02_MainHall_Room
+      value: 03_MainHall_Room
       objectReference: {fileID: 0}
     - target: {fileID: 4435286711181666891, guid: dd0235bdfcbd4b24f85235b5c4ff7667,
         type: 3}
@@ -10533,6 +10638,41 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.0000024, y: 6.0000014, z: 0.0000014305117}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!84 &1533172963
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Flashlight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1533335842 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5315515124566006770, guid: f56108c3c33500144b3c56d825eb851e,
@@ -10694,41 +10834,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1926677526}
   m_PrefabAsset: {fileID: 0}
---- !u!84 &1562169877
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'Spotlight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1567288931 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3271484355587743115, guid: f56108c3c33500144b3c56d825eb851e,
@@ -10906,41 +11011,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 3.1058276, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!84 &1644312777
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'Flashlight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1657602097 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -524246482607610788, guid: f56108c3c33500144b3c56d825eb851e,
@@ -11036,41 +11106,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.774501, y: 0.19272555, z: 3.0000007}
   m_Center: {x: -0.0010495186, y: -0.046362787, z: 1.5000002}
---- !u!84 &1679362673
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'Spotlight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1680025378 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2493568987226269393, guid: f56108c3c33500144b3c56d825eb851e,
@@ -16659,41 +16694,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 3, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!84 &1773232434
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'Spotlight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1783208519 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6172760845995563045, guid: f56108c3c33500144b3c56d825eb851e,
@@ -17223,7 +17223,7 @@ PrefabInstance:
     - target: {fileID: 3751695148397581802, guid: e92f50438d5dcb8438c5f90185005ebd,
         type: 3}
       propertyPath: m_Name
-      value: Troops_Room
+      value: 12_Troops_Room
       objectReference: {fileID: 0}
     - target: {fileID: 3751695148397581803, guid: e92f50438d5dcb8438c5f90185005ebd,
         type: 3}
@@ -17574,7 +17574,7 @@ PrefabInstance:
     - target: {fileID: 2056461003587493138, guid: aea984b64a1e60e41937b61e1d2aa283,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2056461003587493138, guid: aea984b64a1e60e41937b61e1d2aa283,
         type: 3}
@@ -17594,7 +17594,7 @@ PrefabInstance:
     - target: {fileID: 2056461003587493139, guid: aea984b64a1e60e41937b61e1d2aa283,
         type: 3}
       propertyPath: m_Name
-      value: Storage_Room
+      value: 15_Storage_Room
       objectReference: {fileID: 0}
     - target: {fileID: 3994950413942986162, guid: aea984b64a1e60e41937b61e1d2aa283,
         type: 3}
@@ -19723,7 +19723,7 @@ PrefabInstance:
     - target: {fileID: 2974976356908144404, guid: 6fdadc4f0e633584a85df270acebc050,
         type: 3}
       propertyPath: m_Name
-      value: AirFilter_Room
+      value: 09_AirFilter_Room
       objectReference: {fileID: 0}
     - target: {fileID: 2974976356908144407, guid: 6fdadc4f0e633584a85df270acebc050,
         type: 3}
@@ -19763,7 +19763,7 @@ PrefabInstance:
     - target: {fileID: 2974976356908144407, guid: 6fdadc4f0e633584a85df270acebc050,
         type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2974976356908144407, guid: 6fdadc4f0e633584a85df270acebc050,
         type: 3}

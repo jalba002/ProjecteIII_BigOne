@@ -25,14 +25,14 @@ public class CanvasController : MonoBehaviour
     private FlashlightController flashlight;
     private PlayerController playerController;
     private State_Player_Walking playerWalking;
-    private PauseManager _pauseManager;
+    public PauseManager pauseManager;
 
     private void Start()
     {
         playerController = FindObjectOfType<PlayerController>();
         flashlight = playerController.attachedFlashlight;
         playerWalking = FindObjectOfType<State_Player_Walking>();
-        _pauseManager = GetComponentInChildren<PauseManager>();
+        //_pauseManager = GetComponentInChildren<PauseManager>();
     }
 
     void Update()
@@ -115,7 +115,7 @@ public class CanvasController : MonoBehaviour
 
             pauseMenu.SetActive(!enabled);
 
-            _pauseManager.DesactivateOptions();
+            pauseManager.DesactivateOptions();
         }
     }
 

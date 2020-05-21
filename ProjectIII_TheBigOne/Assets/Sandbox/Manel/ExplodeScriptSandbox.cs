@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -30,18 +31,23 @@ public class ExplodeScriptSandbox : MonoBehaviour
 
             if (rb != null)
             {
+                rb.mass = 5f;
                 rb.AddExplosionForce(Random.Range(minForce, maxForce), explosionOrigin.position, radius);
             }
         }
-        Invoke(nameof(RemovePieces), removingTime);
+
+        StartCoroutine(RemovePieces());
     }
 
-    public void RemovePieces()
+    public IEnumerator RemovePieces()
     {
+        yield return new WaitForSeconds(removingTime);
         foreach (Rigidbody rb in brokenPieces)
         {
-            Destroy(rb.gameObject);
+            Destroy(rb.gameObject.GetComponent<Collider>());
+            rb.gameObject.isStatic = true;
+            Destroy(rb);
         }
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
     }
 }

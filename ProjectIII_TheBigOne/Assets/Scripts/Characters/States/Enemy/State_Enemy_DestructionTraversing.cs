@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Security.Cryptography;
-using Assets.Scripts.Game;
-using TMPro;
-using UnityEditor.Rendering;
-using UnityEditorInternal;
 using UnityEngine;
 using World.Objects;
-using Random = System.Random;
 using State = Player.State;
 using StateMachine = Characters.Generic.StateMachine;
 

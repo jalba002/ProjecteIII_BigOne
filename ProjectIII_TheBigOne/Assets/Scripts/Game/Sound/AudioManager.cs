@@ -96,6 +96,25 @@ public class AudioManager : MonoBehaviour
         GameManager.Instance.StartCoroutine(Utils.DestroyAfterTime(sound, s.clip.length));
     }
 
+    public void PlaySound2D(AudioClip clip)
+    {
+        GameObject sound = new GameObject();
+        AudioSource s = sound.AddComponent<AudioSource>();
+        s.spatialBlend = 0;
+        s.clip = clip;
+        if (s.clip == null)
+        {
+            Debug.LogWarning("Invalid path for audio clip");
+        }
+
+        s.Play();
+
+        Parent(sound);
+        sound.name = s.clip.name;
+
+        GameManager.Instance.StartCoroutine(Utils.DestroyAfterTime(sound, s.clip.length));
+    }
+
     private static void Parent(GameObject objectToParent)
     {
         if (SoundParent == null)

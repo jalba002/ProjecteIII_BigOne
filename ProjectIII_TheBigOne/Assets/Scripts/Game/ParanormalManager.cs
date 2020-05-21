@@ -31,7 +31,7 @@ public class ParanormalManager : MonoBehaviour
             {
                 var newDummy = new GameObject("EnemyTargetDummy");
                 enemyTargetDummy = newDummy.AddComponent<EnemyTargetDummy>();
-                SetDummyPosition(Vector3.zero);
+                //SetDummyPosition(null);
             }
         }
     }
@@ -97,7 +97,6 @@ public class ParanormalManager : MonoBehaviour
             Debug.LogWarning(error.Message);
         }
 
-        SetEnemyPosition(secondSpawnPoint);
 
         //Dimitry.gameObject.SetActive(true);
 
@@ -106,6 +105,12 @@ public class ParanormalManager : MonoBehaviour
         //SetDummyLocalPosition(Vector3.zero);
         
         PalletsSetDestructible(true);
+        
+        SetDummyPosition(Dimitry.currentBrain.archnemesis.transform);
+
+        Dimitry.stateMachine.SwitchState<State_Enemy_Chasing>();
+        
+        SetEnemyPosition(secondSpawnPoint);
 
         Dimitry.currentBehaviourTree = new BehaviourTree_Enemy_SecondPhase(Dimitry);
     }
@@ -121,9 +126,9 @@ public class ParanormalManager : MonoBehaviour
         Dimitry.NavMeshAgent.Warp(newPosition.position);
     }
 
-    public void SetDummyPosition(Vector3 newPosition)
+    public void SetDummyPosition(Transform newPosition)
     {
-        enemyTargetDummy.transform.position = newPosition;
+        enemyTargetDummy.transform.position = newPosition.position;
     }
 
     public void SetDummyLocalPosition(Vector3 newPosition)

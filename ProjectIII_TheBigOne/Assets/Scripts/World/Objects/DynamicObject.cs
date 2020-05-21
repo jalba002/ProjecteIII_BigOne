@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Interfaces;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 
 namespace World.Objects
@@ -377,6 +378,13 @@ namespace World.Objects
         private void OnUnlock()
         {
             AudioManager.PlaySound2D("Sound/Door/Unlock01");
+        }
+
+        public void BreakJoint()
+        {
+            Destroy(HingeJoint);
+            Destroy(GetComponent<NavMeshObstacle>());
+            Rigidbody.drag = 0f;
         }
 
         public bool Lock()

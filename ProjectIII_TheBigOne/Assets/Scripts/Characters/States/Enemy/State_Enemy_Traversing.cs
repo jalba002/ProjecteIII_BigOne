@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Security.Cryptography;
 using Assets.Scripts.Game;
-using Characters.Generic;
-using Player;
 using TMPro;
 using UnityEditor.Rendering;
+using UnityEditorInternal;
 using UnityEngine;
 using World.Objects;
 using Random = System.Random;
+using State = Player.State;
+using StateMachine = Characters.Generic.StateMachine;
 
 namespace Enemy
 {
@@ -113,7 +115,9 @@ namespace Enemy
             {
                 case DynamicObject.ObjectType.Door:
                     // Nothing yet.
-                    _currentBlockage.attachedDynamicObject.ForceOpen(-2200f);
+                    //_currentBlockage.attachedDynamicObject.ForceOpen(-2200f);
+                    _currentBlockage.attachedDynamicObject.BreakJoint();
+                    _currentBlockage.attachedDynamicObject.ForceOpen(2500f);
                     break;
                 case DynamicObject.ObjectType.Drawer:
                     // Can't get blocked by a drawer...?

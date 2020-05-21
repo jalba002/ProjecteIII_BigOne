@@ -45,7 +45,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -359,19 +359,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 239685578, guid: e0cbcf60bef618e439c477ec7bdb9837, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 5.91e-43
+      value: 4.1612e-41
       objectReference: {fileID: 0}
     - target: {fileID: 239685578, guid: e0cbcf60bef618e439c477ec7bdb9837, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 0
+      value: 1.04e-43
       objectReference: {fileID: 0}
     - target: {fileID: 239685578, guid: e0cbcf60bef618e439c477ec7bdb9837, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 0
+      value: 1.1577061e+27
       objectReference: {fileID: 0}
     - target: {fileID: 239685578, guid: e0cbcf60bef618e439c477ec7bdb9837, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 2.1e-44
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1055836356983717877, guid: e0cbcf60bef618e439c477ec7bdb9837,
         type: 3}
@@ -1722,19 +1722,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 286163192, guid: c7f552ad3bca409438a0c1a753869494, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 5.91e-43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 286163192, guid: c7f552ad3bca409438a0c1a753869494, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -0.000000013509897
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 286163192, guid: c7f552ad3bca409438a0c1a753869494, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 5.91e-43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 286163192, guid: c7f552ad3bca409438a0c1a753869494, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 1.5e-43
+      value: -0.0000000015654127
       objectReference: {fileID: 0}
     - target: {fileID: 551072960005821038, guid: c7f552ad3bca409438a0c1a753869494,
         type: 3}
@@ -2046,6 +2046,41 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.0000043, y: 0.100001104, z: 3.8038466}
   m_Center: {x: 0.00000029802322, y: -0.0000003054738, z: 0.051110864}
+--- !u!84 &387894860
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Flashlight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1001 &392094169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2056,22 +2091,22 @@ PrefabInstance:
     - target: {fileID: 270853138572807494, guid: 7eb636a07aab19c44930e273650942e4,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 5.91e-43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 270853138572807494, guid: 7eb636a07aab19c44930e273650942e4,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 1.5e-43
+      value: 4.88e-43
       objectReference: {fileID: 0}
     - target: {fileID: 270853138572807494, guid: 7eb636a07aab19c44930e273650942e4,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 5.91e-43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 270853138572807494, guid: 7eb636a07aab19c44930e273650942e4,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -0.0000000017954003
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3469018945256840887, guid: 7eb636a07aab19c44930e273650942e4,
         type: 3}
@@ -2167,6 +2202,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 00_SaveZone_Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 5094867461498619378, guid: 7eb636a07aab19c44930e273650942e4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7eb636a07aab19c44930e273650942e4, type: 3}
@@ -2606,7 +2646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 700142473, guid: 95824cf095ce77644b854508ea9661c8, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 0
+      value: 1.352e-41
       objectReference: {fileID: 0}
     - target: {fileID: 2731016929237719076, guid: 95824cf095ce77644b854508ea9661c8,
         type: 3}
@@ -2685,6 +2725,41 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95824cf095ce77644b854508ea9661c8, type: 3}
+--- !u!84 &498684518
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Spotlight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &507158283 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6003123791531448569, guid: f56108c3c33500144b3c56d825eb851e,
@@ -3047,6 +3122,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &616344078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59306422a2ca4454aabce3daa79c3334, type: 3}
+  m_Name: New Aura Base Settings
+  m_EditorClassIdentifier: 
+  useDensity: 1
+  density: 0.25
+  useScattering: 1
+  scattering: 0.5
+  useAmbientLighting: 1
+  ambientLightingStrength: 1
+  useColor: 0
+  color: {r: 0, g: 0.5, b: 0.5, a: 0.5}
+  colorStrength: 1
+  useTint: 0
+  tint: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  tintStrength: 1
+  useExtinction: 0
+  extinction: 0.75
 --- !u!1 &617450080 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -33046413395751231, guid: f56108c3c33500144b3c56d825eb851e,
@@ -3116,6 +3217,41 @@ Transform:
   m_Father: {fileID: 1681934799257813459}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!84 &648890121
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Spotlight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &654805232 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2600891722725382783, guid: f56108c3c33500144b3c56d825eb851e,
@@ -3301,6 +3437,41 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 3.1058276, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!84 &737052051
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Spotlight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &737364156 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1862938956491739121, guid: f56108c3c33500144b3c56d825eb851e,
@@ -4219,11 +4390,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 220705593, guid: 4b59ff4d7623b9c42825b93054937a19, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 5.91e-43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 220705593, guid: 4b59ff4d7623b9c42825b93054937a19, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 1.61e-43
+      value: 1.04e-43
       objectReference: {fileID: 0}
     - target: {fileID: 220705593, guid: 4b59ff4d7623b9c42825b93054937a19, type: 3}
       propertyPath: m_BoundingSphereOverride.z
@@ -4231,7 +4402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 220705593, guid: 4b59ff4d7623b9c42825b93054937a19, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: -0.0000000068637824
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1472462831633616773, guid: 4b59ff4d7623b9c42825b93054937a19,
         type: 3}
@@ -4415,22 +4586,22 @@ PrefabInstance:
     - target: {fileID: 1364262947507035739, guid: fdf54fee5f69869488d164e98364378e,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 7.2368274e+25
+      value: 1.0059e-41
       objectReference: {fileID: 0}
     - target: {fileID: 1364262947507035739, guid: fdf54fee5f69869488d164e98364378e,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 7.2130683e+22
+      value: 1.01e-43
       objectReference: {fileID: 0}
     - target: {fileID: 1364262947507035739, guid: fdf54fee5f69869488d164e98364378e,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 1.4504204e+19
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1364262947507035739, guid: fdf54fee5f69869488d164e98364378e,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 3.882435e+9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6899028909299908000, guid: fdf54fee5f69869488d164e98364378e,
         type: 3}
@@ -4985,15 +5156,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1628874445, guid: ed196176ce711ba47b1b9ac90f9df0ee, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 5.91e-43
+      value: 4.1424e-41
       objectReference: {fileID: 0}
     - target: {fileID: 1628874445, guid: ed196176ce711ba47b1b9ac90f9df0ee, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -0.000000004001034
+      value: 1.04e-43
       objectReference: {fileID: 0}
     - target: {fileID: 1628874445, guid: ed196176ce711ba47b1b9ac90f9df0ee, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 5.91e-43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1628874445, guid: ed196176ce711ba47b1b9ac90f9df0ee, type: 3}
       propertyPath: m_BoundingSphereOverride.w
@@ -5620,41 +5791,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 3, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!84 &1071069296
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'Spotlight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1083788665 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9001148095904322227, guid: 178d6527a3360844d823f83e48030ff9,
@@ -6250,22 +6386,22 @@ PrefabInstance:
     - target: {fileID: 1364262947038010237, guid: fc3b804bc1cb4474fad7a79a9a3c93c4,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 5.91e-43
+      value: 4.226e-41
       objectReference: {fileID: 0}
     - target: {fileID: 1364262947038010237, guid: fc3b804bc1cb4474fad7a79a9a3c93c4,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -0.0000000015305668
+      value: 1.04e-43
       objectReference: {fileID: 0}
     - target: {fileID: 1364262947038010237, guid: fc3b804bc1cb4474fad7a79a9a3c93c4,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 5.91e-43
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1364262947038010237, guid: fc3b804bc1cb4474fad7a79a9a3c93c4,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 4.004583e+24
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1817716006261999143, guid: fc3b804bc1cb4474fad7a79a9a3c93c4,
         type: 3}
@@ -6509,17 +6645,17 @@ PrefabInstance:
     - target: {fileID: 4287271706014648178, guid: 310c655bc510cdc4ea7a4790e96ea657,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.69
+      value: -10.15
       objectReference: {fileID: 0}
     - target: {fileID: 4287271706014648178, guid: 310c655bc510cdc4ea7a4790e96ea657,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.81
+      value: -1.42
       objectReference: {fileID: 0}
     - target: {fileID: 4287271706014648178, guid: 310c655bc510cdc4ea7a4790e96ea657,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.1
+      value: 0.36
       objectReference: {fileID: 0}
     - target: {fileID: 4287271706014648178, guid: 310c655bc510cdc4ea7a4790e96ea657,
         type: 3}
@@ -9267,41 +9403,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 3, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!84 &1268265907
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'Spotlight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1274988565 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 736384749652723523, guid: f56108c3c33500144b3c56d825eb851e,
@@ -9743,19 +9844,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 164502189, guid: 50a38f06b742c924c967ecc3a82b458c, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 5.91e-43
+      value: 2.4474e-41
       objectReference: {fileID: 0}
     - target: {fileID: 164502189, guid: 50a38f06b742c924c967ecc3a82b458c, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -0.0000000068894686
+      value: 1.04e-43
       objectReference: {fileID: 0}
     - target: {fileID: 164502189, guid: 50a38f06b742c924c967ecc3a82b458c, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 5.91e-43
+      value: 1.06e-43
       objectReference: {fileID: 0}
     - target: {fileID: 164502189, guid: 50a38f06b742c924c967ecc3a82b458c, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 7.4e-44
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 931658343287943754, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
@@ -9968,31 +10069,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 291131438, guid: dd0235bdfcbd4b24f85235b5c4ff7667, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 5.91e-43
+      value: 1.5596e-41
       objectReference: {fileID: 0}
     - target: {fileID: 291131438, guid: dd0235bdfcbd4b24f85235b5c4ff7667, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 9.4e-44
+      value: 1.04e-43
       objectReference: {fileID: 0}
     - target: {fileID: 291131438, guid: dd0235bdfcbd4b24f85235b5c4ff7667, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: -0.00000001304884
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1870946226, guid: dd0235bdfcbd4b24f85235b5c4ff7667, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 0.00000004149041
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1870946226, guid: dd0235bdfcbd4b24f85235b5c4ff7667, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 4.1914613e+21
+      value: 0.000010859737
       objectReference: {fileID: 0}
     - target: {fileID: 1870946226, guid: dd0235bdfcbd4b24f85235b5c4ff7667, type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 2.6610443e+23
+      value: 5.3183332e+22
       objectReference: {fileID: 0}
     - target: {fileID: 1870946226, guid: dd0235bdfcbd4b24f85235b5c4ff7667, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: NaN
+      value: 1.39e-43
       objectReference: {fileID: 0}
     - target: {fileID: 210539608433756435, guid: dd0235bdfcbd4b24f85235b5c4ff7667,
         type: 3}
@@ -11031,41 +11132,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4480187646084889942}
   m_PrefabAsset: {fileID: 0}
---- !u!84 &1694053218
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'Spotlight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1719110408 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1294322554005343600, guid: f56108c3c33500144b3c56d825eb851e,
@@ -17122,22 +17188,22 @@ PrefabInstance:
     - target: {fileID: 1364262948286308559, guid: e92f50438d5dcb8438c5f90185005ebd,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 0
+      value: 1.7977e-41
       objectReference: {fileID: 0}
     - target: {fileID: 1364262948286308559, guid: e92f50438d5dcb8438c5f90185005ebd,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 1.7126859e-36
+      value: 1.04e-43
       objectReference: {fileID: 0}
     - target: {fileID: 1364262948286308559, guid: e92f50438d5dcb8438c5f90185005ebd,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 1.736058e-36
+      value: 5.91e-43
       objectReference: {fileID: 0}
     - target: {fileID: 1364262948286308559, guid: e92f50438d5dcb8438c5f90185005ebd,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: -0.0000000027356126
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3019237094984106748, guid: e92f50438d5dcb8438c5f90185005ebd,
         type: 3}
@@ -17428,22 +17494,22 @@ PrefabInstance:
     - target: {fileID: 1364262947098633887, guid: aea984b64a1e60e41937b61e1d2aa283,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 5.91e-43
+      value: 1.1577061e+27
       objectReference: {fileID: 0}
     - target: {fileID: 1364262947098633887, guid: aea984b64a1e60e41937b61e1d2aa283,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: -0.0000000028768703
+      value: 1.707776e+19
       objectReference: {fileID: 0}
     - target: {fileID: 1364262947098633887, guid: aea984b64a1e60e41937b61e1d2aa283,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 5.91e-43
+      value: 6.7110867e+22
       objectReference: {fileID: 0}
     - target: {fileID: 1364262947098633887, guid: aea984b64a1e60e41937b61e1d2aa283,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -0.0000000017297532
+      value: 7.1546075e+22
       objectReference: {fileID: 0}
     - target: {fileID: 1364262947876983448, guid: aea984b64a1e60e41937b61e1d2aa283,
         type: 3}
@@ -17463,7 +17529,7 @@ PrefabInstance:
     - target: {fileID: 1364262947876983448, guid: aea984b64a1e60e41937b61e1d2aa283,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 2.1e-44
+      value: -0.0000000021313724
       objectReference: {fileID: 0}
     - target: {fileID: 2056461003444117781, guid: aea984b64a1e60e41937b61e1d2aa283,
         type: 3}
@@ -17884,32 +17950,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 3, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2054820441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59306422a2ca4454aabce3daa79c3334, type: 3}
-  m_Name: New Aura Base Settings
-  m_EditorClassIdentifier: 
-  useDensity: 1
-  density: 0.25
-  useScattering: 1
-  scattering: 0.5
-  useAmbientLighting: 1
-  ambientLightingStrength: 1
-  useColor: 0
-  color: {r: 0, g: 0.5, b: 0.5, a: 0.5}
-  colorStrength: 1
-  useTint: 0
-  tint: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  tintStrength: 1
-  useExtinction: 0
-  extinction: 0.75
 --- !u!1 &2067721486 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -4049946858313882971, guid: f56108c3c33500144b3c56d825eb851e,
@@ -18134,41 +18174,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 3.1058276, z: 0.00000018512178}
   m_Center: {x: 0, y: 0, z: 0.0000009536743}
---- !u!84 &2139248284
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'Flashlight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &2141100211 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2830743245235634988, guid: d8c8b79a7ea557849bfc483310a6f1c2,
@@ -19321,6 +19326,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 2370694316534532057, guid: d8c8b79a7ea557849bfc483310a6f1c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2370694316583235641, guid: d8c8b79a7ea557849bfc483310a6f1c2,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -19330,6 +19340,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2370694316613717048, guid: d8c8b79a7ea557849bfc483310a6f1c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2370694316678699748, guid: d8c8b79a7ea557849bfc483310a6f1c2,
         type: 3}
@@ -19824,22 +19839,22 @@ PrefabInstance:
     - target: {fileID: 4298660349907208431, guid: 6fdadc4f0e633584a85df270acebc050,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 5.9e-43
+      value: 1.6258649e+25
       objectReference: {fileID: 0}
     - target: {fileID: 4298660349907208431, guid: 6fdadc4f0e633584a85df270acebc050,
         type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: -0.0000000059690386
+      value: 4.8554528e+33
       objectReference: {fileID: 0}
     - target: {fileID: 4298660349907208431, guid: 6fdadc4f0e633584a85df270acebc050,
         type: 3}
       propertyPath: m_BoundingSphereOverride.z
-      value: 5.91e-43
+      value: 2.8168867e+20
       objectReference: {fileID: 0}
     - target: {fileID: 4298660349907208431, guid: 6fdadc4f0e633584a85df270acebc050,
         type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: -0.0000000045125077
+      value: 1.0899303e+27
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fdadc4f0e633584a85df270acebc050, type: 3}
@@ -19886,6 +19901,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3262639411179299897, guid: 3307a31eaf8e4c14483fea22daf1d08d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3262639411500264805, guid: 3307a31eaf8e4c14483fea22daf1d08d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3262639412637377472, guid: 3307a31eaf8e4c14483fea22daf1d08d,
         type: 3}
@@ -19990,7 +20015,7 @@ PrefabInstance:
     - target: {fileID: 7770216634459805862, guid: 3307a31eaf8e4c14483fea22daf1d08d,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -16.978989
+      value: -17.10899
       objectReference: {fileID: 0}
     - target: {fileID: 8296172667835572374, guid: 3307a31eaf8e4c14483fea22daf1d08d,
         type: 3}

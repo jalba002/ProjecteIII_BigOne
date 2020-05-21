@@ -2548,6 +2548,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8baa0b603821e5c4c8f35cb4355e6435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnPuzzleWin:
+    m_PersistentCalls:
+      m_Calls: []
   attachedDrawerLocker: {fileID: 8131125246825964424}
   correctRot: 90
   currentRot: 0
@@ -4971,6 +4974,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8baa0b603821e5c4c8f35cb4355e6435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnPuzzleWin:
+    m_PersistentCalls:
+      m_Calls: []
   attachedDrawerLocker: {fileID: 8131125245751185417}
   correctRot: 270
   currentRot: 0
@@ -6264,6 +6270,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8baa0b603821e5c4c8f35cb4355e6435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnPuzzleWin:
+    m_PersistentCalls:
+      m_Calls: []
   attachedDrawerLocker: {fileID: 8131125246070350003}
   correctRot: 0
   currentRot: 0
@@ -6394,6 +6403,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8131125246575550970}
+  - component: {fileID: 4924446755762042596}
   m_Layer: 0
   m_Name: DrawerPuzzle
   m_TagString: Untagged
@@ -6424,6 +6434,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4924446755762042596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8131125246575550971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78ce432d45c58dd42a50c7b580282df6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dp1: {fileID: 8131125246106267768}
+  dp2: {fileID: 8131125246226301389}
+  dp3: {fileID: 8131125245969920210}
+  dp4: {fileID: 8131125247459643435}
 --- !u!1 &8131125246825964425
 GameObject:
   m_ObjectHideFlags: 0
@@ -10038,6 +10064,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8baa0b603821e5c4c8f35cb4355e6435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnPuzzleWin:
+    m_PersistentCalls:
+      m_Calls: []
   attachedDrawerLocker: {fileID: 8131125247397294737}
   correctRot: 180
   currentRot: 0

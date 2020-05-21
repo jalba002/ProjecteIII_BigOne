@@ -12,7 +12,7 @@ using StateMachine = Characters.Generic.StateMachine;
 
 namespace Enemy
 {
-    public class State_Enemy_Traversing : State
+    public class State_Enemy_DestructionTraversing : State
     {
         private EnemyController _attachedController;
 
@@ -116,13 +116,14 @@ namespace Enemy
                 case DynamicObject.ObjectType.Door:
                     // Nothing yet.
                     //_currentBlockage.attachedDynamicObject.ForceOpen(-2200f);
-                    
-                    _currentBlockage.attachedDynamicObject.StrongOpening();
+                    _currentBlockage.attachedDynamicObject.BreakJoint();
+                    _currentBlockage.attachedDynamicObject.ForceOpen(2500f);
                     break;
                 case DynamicObject.ObjectType.Drawer:
                     // Can't get blocked by a drawer...?
                     break;
                 case DynamicObject.ObjectType.Pallet:
+                    // This should be the wall explosion.
                     _currentBlockage.gameObject.SetActive(false);
                     break;
                 default:

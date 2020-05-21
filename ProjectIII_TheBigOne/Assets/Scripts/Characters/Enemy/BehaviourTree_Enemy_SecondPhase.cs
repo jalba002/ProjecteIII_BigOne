@@ -105,7 +105,7 @@ public class BehaviourTree_Enemy_SecondPhase : BehaviourTree
 
         //if (attachedCharacter.currentBrain.IsCurrentlyBreaking) return false;
         
-        attachedCharacter.stateMachine.SwitchState<State_Enemy_Traversing>();
+        attachedCharacter.stateMachine.SwitchState<State_Enemy_DestructionTraversing>();
 
         return true;
     }

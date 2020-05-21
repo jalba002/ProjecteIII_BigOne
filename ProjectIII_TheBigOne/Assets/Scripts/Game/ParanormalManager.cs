@@ -36,23 +36,16 @@ public class ParanormalManager : MonoBehaviour
         }
     }
 
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartSecondPhase();
-        }
-    }
-
-    public static void UseRandomDoor()
-    {
-        UseDoor(ObjectTracker.doorList[alea.Next(0, ObjectTracker.doorList.Count)]);
-    }
-
-    public static void UseDoor(DynamicObject door)
+    public static void OpenDoor(DynamicObject door)
     {
         //throw new NotImplementedException();
         //door.Use();
+        door.StrongOpening();
+    }
+
+    public static void CloseDoor(DynamicObject door)
+    {
+        door.StrongClosing();
     }
 
     /*public float CalculateRandomForce(float scale = 1f)
@@ -95,15 +88,23 @@ public class ParanormalManager : MonoBehaviour
             return;
         }
 
-        ParanormalSoundEmitter.Play();
+        try
+        {
+            ParanormalSoundEmitter.Play();
+        }
+        catch (Exception error)
+        {
+            Debug.LogWarning(error.Message);
+        }
 
         SetEnemyPosition(secondSpawnPoint);
 
         //Dimitry.gameObject.SetActive(true);
 
-        SetDummyParent(Dimitry.currentBrain.archnemesis.transform);
+        //SetDummyParent(Dimitry.currentBrain.archnemesis.transform);
 
         //SetDummyLocalPosition(Vector3.zero);
+        PalletsSetDestructible(true);
 
         Dimitry.currentBehaviourTree = new BehaviourTree_Enemy_SecondPhase(Dimitry);
     }

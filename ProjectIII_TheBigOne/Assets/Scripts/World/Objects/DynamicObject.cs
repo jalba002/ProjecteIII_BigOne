@@ -474,6 +474,18 @@ namespace World.Objects
             Rigidbody.AddForceAtPosition(useForce, HandlePosition.transform.position, ForceMode.Force);
         }
 
+        public void StrongOpening()
+        {
+            var useForce = HandlePosition.transform.forward * (Rigidbody.mass * openForce);
+            Rigidbody.AddForceAtPosition(useForce, HandlePosition.transform.position, ForceMode.Impulse);
+        }
+
+        public void StrongClosing()
+        {
+            var useForce = HandlePosition.transform.forward * (Rigidbody.mass * openForce);
+            Rigidbody.AddForceAtPosition(-useForce, HandlePosition.transform.position, ForceMode.Impulse);
+        }
+
         public void OnEndInteract()
         {
             IsInteracting = false;

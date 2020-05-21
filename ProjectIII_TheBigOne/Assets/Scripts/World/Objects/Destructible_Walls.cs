@@ -4,25 +4,22 @@ public class Destructible_Walls : MonoBehaviour
 {
     // TODO Load from resources at runtime or prefab.
     public GameObject destroyedVersion;
-    public bool cheatMode = false;
+    public Transform explosionOrigin;
 
-    private void Update()
+    private ExplodeScriptSandbox instantiatedVersion;
+
+    public void Activate()
     {
-        #if UNITY_EDITOR
-        
-            if (Input.GetKeyDown(KeyCode.Z))
-            {
-                ChangeTheWall();
-            }
-        
-        #endif
+        var instantiatedWall = Instantiate(destroyedVersion, transform.position, transform.rotation);
+        instantiatedVersion = instantiatedWall.GetComponent<ExplodeScriptSandbox>();
+        instantiatedVersion.Explode(explosionOrigin);
+        Destroy(gameObject);
+        CallRemovePieces();
     }
 
-
-    public void ChangeTheWall()
+    public void CallRemovePieces()
     {
-        Instantiate(destroyedVersion, transform.position, transform.rotation);
-        Destroy(gameObject);
+        instantiatedVersion.RemovePieces();
     }
 
 }

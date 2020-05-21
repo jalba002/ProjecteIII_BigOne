@@ -104,6 +104,7 @@ public class ParanormalManager : MonoBehaviour
         //SetDummyParent(Dimitry.currentBrain.archnemesis.transform);
 
         //SetDummyLocalPosition(Vector3.zero);
+        
         PalletsSetDestructible(true);
 
         Dimitry.currentBehaviourTree = new BehaviourTree_Enemy_SecondPhase(Dimitry);

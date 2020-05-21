@@ -3,6 +3,8 @@ using Assets.Scripts.Game;
 using Characters.Generic;
 using Player;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Animations;
 using Random = System.Random;
 
 namespace Enemy
@@ -13,6 +15,8 @@ namespace Enemy
         private float _movementSpeed;
         private PatrolPoint[] _patrolPoints;
         private Random Alea = new Random();
+        private NavMeshPath lastNavMeshPath;
+        private float currentWaitTime = 3f;
 
         protected override void OnStateInitialize(StateMachine machine)
         {
@@ -26,42 +30,16 @@ namespace Enemy
             base.OnStateTick(deltaTime);
             // Move target point to closes patrol point, or a point that has not been visited BUT is near the player.
 
-            try
-            {
-                _attachedController.currentBrain.IsPlayerInSight = SensesUtil.IsInSight(_attachedController.gameObject,
-                    _attachedController.currentBrain.archnemesis.gameObject,
-                    _attachedController.characterProperties.maxDetectionRange,
-                    _attachedController.characterProperties.watchableLayers);
-            }
-            catch (NullReferenceException)
-            {
-            }
+            _attachedController.CheckForPlayerOnSight();
+            _attachedController.CheckForPlayerNearLight();
+            _attachedController.CheckForEnemyVisibility();
+          
 
-            try
+            if (_attachedController.NavMeshAgent.remainingDistance <=
+                     _attachedController.characterProperties.positionReachedDistance && lastNavMeshPath == null)
             {
-                _attachedController.currentBrain.IsPlayerNearLight =
-                    SensesUtil.HasFlashlightEnabled(_attachedController.currentBrain.archnemesis);
-            }
-            catch (NullReferenceException)
-            {
-            }
+                currentWaitTime = _attachedController.characterProperties.patrolWaitTime;
 
-            try
-            {
-                _attachedController.currentBrain.IsVisible =
-                    SensesUtil.IsPlayerSeeingEnemy(_attachedController.currentBrain.archnemesis, _attachedController,
-                        GameManager.Instance.GameSettings.DetectionLayers,
-                        GameManager.Instance.GameSettings.PlayerViewAngle);
-            }
-            catch (NullReferenceException)
-            {
-            }
-
-
-            // If the point is reached, then generate a new one.
-            if (Vector3.Distance(_attachedController.NavMeshAgent.destination, this.gameObject.transform.position) <=
-                _attachedController.characterProperties.positionReachedDistance)
-            {
                 SetNewPatrolPoint();
             }
         }
@@ -74,7 +52,7 @@ namespace Enemy
         public override void OnStateCheckTransition()
         {
             base.OnStateCheckTransition();
-            
+
             // This goes in the Behaviour Tree.
             /*
             if (_attachedController.currentBrain.IsPlayerInSight)
@@ -86,6 +64,12 @@ namespace Enemy
         protected override void OnStateEnter()
         {
             base.OnStateEnter();
+            if (lastNavMeshPath != null)
+            {
+                _attachedController.NavMeshAgent.path = lastNavMeshPath;
+                lastNavMeshPath = null;
+            }
+
             _movementSpeed = _attachedController.characterProperties.WalkSpeed;
             //_attachedController.currentBrain._NavMeshAgent.updateRotation = false;
             //_attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
@@ -95,6 +79,7 @@ namespace Enemy
         protected override void OnStateExit()
         {
             base.OnStateExit();
+            lastNavMeshPath = _attachedController.NavMeshAgent.path;
         }
 
         private void SetNewPatrolPoint()

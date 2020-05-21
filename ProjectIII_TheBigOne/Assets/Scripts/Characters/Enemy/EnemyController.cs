@@ -31,11 +31,9 @@ namespace Enemy
 
         [Header("Enemy Settings")] public new EnemyProperties characterProperties;
 
-        [Header("Components")] 
-        public Collider attachedCollider;
+        [Header("Components")] public Collider attachedCollider;
         public Renderer meshRenderer;
-        [Header("NavMesh")]
-        public EnemyTargetDummy targetPositionDummy;
+        [Header("NavMesh")] public EnemyTargetDummy targetPositionDummy;
         public NavMeshAgent NavMeshAgent;
 
         [Header("Components from Thirds")] private FlashlightController playerFlashlight;
@@ -147,6 +145,47 @@ namespace Enemy
             return false;
         }
 
+        public void CheckForPlayerOnSight()
+        {
+            try
+            {
+                currentBrain.IsPlayerInSight = SensesUtil.IsInSight(gameObject,
+                    currentBrain.archnemesis.gameObject,
+                    characterProperties.maxDetectionRange,
+                    characterProperties.watchableLayers);
+            }
+            catch (NullReferenceException)
+            {
+            }
+        }
+
+        public void CheckForPlayerNearLight()
+        {
+            try
+            {
+                currentBrain.IsPlayerNearLight =
+                    SensesUtil.HasFlashlightEnabled(currentBrain.archnemesis);
+            }
+            catch (NullReferenceException)
+            {
+            }
+        }
+
+        public void CheckForEnemyVisibility()
+        {
+            try
+            {
+                currentBrain.IsVisible =
+                    SensesUtil.IsPlayerSeeingEnemy(currentBrain.archnemesis, this,
+                        GameManager.Instance.GameSettings.DetectionLayers,
+                        GameManager.Instance.GameSettings.PlayerViewAngle);
+            }
+            catch (NullReferenceException)
+            {
+            }
+        }
+
+        // Invisiblity Enabled.
         private void OnBecameInvisible()
         {
             currentBrain.IsBeingRendered = false;

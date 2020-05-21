@@ -79,6 +79,7 @@ public class SimonManager : Puzzle
 
     public override void PuzzleWon()
     {
+        OnPuzzleWin.Invoke();
     }
 
     public override void EndGame()

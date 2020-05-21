@@ -10,6 +10,7 @@ public class ParanormalTrigger : MonoBehaviour
     private bool ActivateOnce = false;
 
     public Animation[] Animations;
+    public UnityEvent OnStartup;
     public UnityEvent OnActivation;
 
     private bool hasBeenTriggered = false;
@@ -23,7 +24,9 @@ public class ParanormalTrigger : MonoBehaviour
     public void Start()
     {
         hasBeenTriggered = false;
+        OnStartup.Invoke();
     }
+    
 
     private void OnTriggerEnter(Collider other)
     {

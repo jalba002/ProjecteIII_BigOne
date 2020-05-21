@@ -185,6 +185,11 @@ namespace Enemy
             }
         }
 
+        public void ChillDown()
+        {
+            currentBehaviourTree = new BehaviourTree_Enemy_Halted(this);
+        }
+
         // Invisiblity Enabled.
         private void OnBecameInvisible()
         {

@@ -18,7 +18,7 @@ public class DrawerManager : MonoBehaviour
 
     void Start()
     {
-        
+        _done = false;
     }
 
     // Update is called once per frame
@@ -34,7 +34,7 @@ public class DrawerManager : MonoBehaviour
             //UnlockDoor
             _done = true;
             puzzleWon.Invoke();
-            //Debug.Log("FUNCIONA");
+            Debug.Log("FUNCIONA");
         }
     }
 

@@ -13,5 +13,7 @@ namespace Properties
 
         [Header("Search Config")] public float maxTimeOfPerfectTracking = 1.25f;
         public float maxSearchTime = 15f;
+
+        [Header("Terror Radius")] public float terrorRadiusRange = 8f;
     }
 }

@@ -69,6 +69,8 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
 
         if (attachedCharacter.currentBrain.IsChasingPlayer) return false;
 
+        if (attachedCharacter.currentBrain.IsTrackingPlayer) return false;
+
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Patrolling>();
         return true;
     }
@@ -88,7 +90,7 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
     {
         //if (attachedCharacter.currentBrain.IsChasingPlayer) return false;
 
-        //if (attachedCharacter.currentBrain.IsPlayerInSight) return false;
+        if (!attachedCharacter.currentBrain.IsTrackingPlayer) return false;
         
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Searching>();
         return true;

@@ -12,6 +12,8 @@ public class TraversableBlockage : MonoBehaviour
     [Space(10)] [Header("Components")] public OffMeshLink attachedLink;
     public DynamicObject attachedDynamicObject;
 
+    private Coroutine coroutineHolder;
+
     void Start()
     {
         if (attachedLink == null)
@@ -24,5 +26,19 @@ public class TraversableBlockage : MonoBehaviour
     {
         if (doCheck)
             attachedLink.activated = attachedDynamicObject.HingeJoint.angle > 15f;
+    }
+
+    public void DisableLink(float disableTime = 0.5f)
+    {
+        if (coroutineHolder != null)
+            StopCoroutine(coroutineHolder);
+        coroutineHolder = StartCoroutine(TempDisable(disableTime));
+    }
+
+    IEnumerator TempDisable(float disableTime)
+    {
+        attachedLink.activated = false;
+        yield return new WaitForSeconds(disableTime);
+        attachedLink.activated = true;
     }
 }

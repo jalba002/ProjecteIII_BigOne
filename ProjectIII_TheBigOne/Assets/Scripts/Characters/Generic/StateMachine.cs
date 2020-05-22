@@ -12,6 +12,8 @@ namespace Characters.Generic
         //public State initialState;
         protected State currentState;
 
+        public State lastState { get; private set; }
+
         public CharacterController characterController;
         [Header("Debug Options")] public bool enableDebug = false;
 
@@ -41,16 +43,16 @@ namespace Characters.Generic
         {
             if (newState && newState != currentState)
             {
-                State oldState = currentState;
+                lastState = currentState;
                 currentState = newState;
-                if (oldState)
-                    oldState.StateExit();
+                if (lastState)
+                    lastState.StateExit();
                 currentState.StateEnter();
                 if (enableDebug)
                 {
                     try
                     {
-                        Debug.Log($"{oldState.GetType()} to {currentState.GetType()}");
+                        Debug.Log($"{lastState.GetType()} to {currentState.GetType()}");
                     }
                     catch (NullReferenceException)
                     {

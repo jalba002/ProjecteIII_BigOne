@@ -26,36 +26,36 @@ namespace Enemy
 
 
             try
-             {
-                 _attachedController.currentBrain.IsPlayerInSight = SensesUtil.IsInSight(_attachedController.gameObject,
-                     _attachedController.currentBrain.archnemesis.gameObject,
-                     _attachedController.characterProperties.maxDetectionRange,
-                     _attachedController.characterProperties.watchableLayers);
-             }
-             catch (NullReferenceException)
-             {
-             }
- 
-             try
-             {
-                 _attachedController.currentBrain.IsPlayerNearLight =
-                     SensesUtil.HasFlashlightEnabled(_attachedController.currentBrain.archnemesis);
-             }
-             catch (NullReferenceException)
-             {
-             }
- 
-             try
-             {
-                 _attachedController.currentBrain.IsVisible =
-                     SensesUtil.IsPlayerSeeingEnemy(_attachedController.currentBrain.archnemesis, _attachedController,
-                         GameManager.Instance.GameSettings.DetectionLayers,
-                         GameManager.Instance.GameSettings.PlayerViewAngle);
-             }
-             catch (NullReferenceException)
-             {
-             }
- 
+            {
+                _attachedController.currentBrain.IsPlayerInSight = SensesUtil.IsInSight(_attachedController.gameObject,
+                    _attachedController.currentBrain.archnemesis.gameObject,
+                    _attachedController.characterProperties.maxDetectionRange,
+                    _attachedController.characterProperties.watchableLayers);
+            }
+            catch (NullReferenceException)
+            {
+            }
+
+            try
+            {
+                _attachedController.currentBrain.IsPlayerNearLight =
+                    SensesUtil.HasFlashlightEnabled(_attachedController.currentBrain.archnemesis);
+            }
+            catch (NullReferenceException)
+            {
+            }
+
+            try
+            {
+                _attachedController.currentBrain.IsVisible =
+                    SensesUtil.IsPlayerSeeingEnemy(_attachedController.currentBrain.archnemesis, _attachedController,
+                        GameManager.Instance.GameSettings.DetectionLayers,
+                        GameManager.Instance.GameSettings.PlayerViewAngle);
+            }
+            catch (NullReferenceException)
+            {
+            }
+
             if (breakTime > 0f)
             {
                 breakTime -= deltaTime;
@@ -110,8 +110,8 @@ namespace Enemy
                 case DynamicObject.ObjectType.Door:
                     // Nothing yet.
                     //_currentBlockage.attachedDynamicObject.ForceOpen(-2200f);
-                    
                     _currentBlockage.attachedDynamicObject.StrongOpening();
+                    _currentBlockage.DisableLink();
                     break;
                 case DynamicObject.ObjectType.Drawer:
                     // Can't get blocked by a drawer...?

@@ -12,6 +12,7 @@ namespace Enemy
         private EnemyController _attachedController;
         private float _movementSpeed;
         private Random Alea = new Random();
+        private float trackTime;
 
         private float currentSearchTime;
 
@@ -24,41 +25,22 @@ namespace Enemy
         public override void OnStateTick(float deltaTime)
         {
             base.OnStateTick(deltaTime);
-            // Move target point to closes patrol point, or a point that has not been visited BUT is near the player.
 
-            try
-            {
-                _attachedController.currentBrain.IsPlayerInSight = SensesUtil.IsInSight(_attachedController.gameObject,
-                    _attachedController.currentBrain.archnemesis.gameObject,
-                    _attachedController.characterProperties.maxDetectionRange,
-                    _attachedController.characterProperties.watchableLayers);
-            }
-            catch (NullReferenceException)
-            {
-            }
+            // Move target point to closest patrol point, or a point that has not been visited BUT is near the player.
+            _attachedController.CheckForPlayerNearLight();
+            _attachedController.CheckForPlayerOnSight();
+            _attachedController.CheckForEnemyVisibility();
 
-            try
+            if (trackTime > 0f)
             {
-                _attachedController.currentBrain.IsPlayerNearLight =
-                    SensesUtil.HasFlashlightEnabled(_attachedController.currentBrain.archnemesis);
+                trackTime -= deltaTime;
             }
-            catch (NullReferenceException)
+            else if (trackTime <= 0f)
             {
-            }
-
-            try
-            {
-                _attachedController.currentBrain.IsVisible =
-                    SensesUtil.IsPlayerSeeingEnemy(_attachedController.currentBrain.archnemesis, _attachedController,
-                        GameManager.Instance.GameSettings.DetectionLayers,
-                        GameManager.Instance.GameSettings.PlayerViewAngle);
-            }
-            catch (NullReferenceException)
-            {
+                StopChase();
             }
 
             currentSearchTime += deltaTime;
-            // If the point is reached, then generate a new one.
         }
 
         public override void OnStateFixedTick(float fixedTime)
@@ -69,17 +51,10 @@ namespace Enemy
         public override void OnStateCheckTransition()
         {
             base.OnStateCheckTransition();
-            
-            // This goes in the Behaviour Tree.
-            /*
-            if (_attachedController.currentBrain.IsPlayerInSight)
-            {
-                _attachedController.stateMachine.SwitchState<State_Enemy_Chasing>();
-            }*/
 
             if (currentSearchTime >= _attachedController.characterProperties.maxSearchTime)
             {
-                _attachedController.currentBrain.IsChasingPlayer = false;
+                _attachedController.currentBrain.IsTrackingPlayer = false;
             }
         }
 
@@ -89,9 +64,15 @@ namespace Enemy
             _movementSpeed = _attachedController.characterProperties.WalkSpeed;
             //_attachedController.currentBrain._NavMeshAgent.updateRotation = false;
             _attachedController.NavMeshAgent.isStopped = false;
+
+            trackTime = _attachedController.characterProperties.maxTimeOfPerfectTracking;
+            currentSearchTime = 0f;
+        }
+
+        private void StopChase()
+        {
             _attachedController.targetPositionDummy.transform.parent = null;
             _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
-            currentSearchTime = 0f;
         }
 
         protected override void OnStateExit()

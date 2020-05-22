@@ -18,40 +18,10 @@ namespace Enemy
         public override void OnStateTick(float deltaTime)
         {
             base.OnStateTick(deltaTime);
-            try
-            {
-                _attachedController.currentBrain.IsPlayerNearLight =
-                    SensesUtil.HasFlashlightEnabled(_attachedController.currentBrain.archnemesis);
-            }
-            catch (NullReferenceException)
-            {
-                _attachedController.currentBrain.IsPlayerNearLight = false;
-            }
-
-            try
-            {
-                _attachedController.currentBrain.IsPlayerInSight = SensesUtil.IsInSight(_attachedController.gameObject,
-                    _attachedController.currentBrain.archnemesis.gameObject,
-                    _attachedController.characterProperties.maxDetectionRange,
-                    _attachedController.characterProperties.watchableLayers);
-            }
-            catch (NullReferenceException)
-            {
-            }
-
-            try
-            {
-                _attachedController.currentBrain.IsVisible =
-                    SensesUtil.IsPlayerSeeingEnemy(_attachedController.currentBrain.archnemesis, _attachedController,
-                        GameManager.Instance.GameSettings.DetectionLayers,
-                        GameManager.Instance.GameSettings.PlayerViewAngle);
-            }
-            catch (NullReferenceException)
-            {
-                _attachedController.currentBrain.IsVisible = false;
-            }
-
-            // Debug.Log(_attachedController.currentBrain.IsVisible);
+            
+            _attachedController.CheckForPlayerNearLight();
+            _attachedController.CheckForPlayerOnSight();
+            _attachedController.CheckForEnemyVisibility();
         }
 
         public override void OnStateFixedTick(float fixedTime)
@@ -68,14 +38,15 @@ namespace Enemy
         {
             base.OnStateEnter();
 
-            // Updates the rotation based on the brain decisions.
-            //_attachedController.currentBrain._NavMeshAgent.updateRotation = false;
             _attachedController.NavMeshAgent.isStopped = true;
         }
 
         protected override void OnStateExit()
         {
             base.OnStateExit();
+            /*_attachedController.targetPositionDummy.transform.position =
+                _attachedController.currentBrain.archnemesis.transform.position;
+            _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);*/
         }
     }
 }

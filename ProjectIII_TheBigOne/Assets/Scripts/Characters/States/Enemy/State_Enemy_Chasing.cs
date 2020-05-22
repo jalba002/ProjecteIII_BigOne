@@ -68,17 +68,22 @@ namespace Enemy
         {
             base.OnStateEnter();
             _movementSpeed = _attachedController.characterProperties.RunSpeed;
-            //_attachedController.currentBrain._NavMeshAgent.updateRotation = false;
+            
             _attachedController.targetPositionDummy.transform.parent = _attachedController.currentBrain.archnemesis.transform;
             _attachedController.targetPositionDummy.transform.localPosition = Vector3.zero;
+            
             _attachedController.NavMeshAgent.isStopped = false;
             _attachedController.currentBrain.IsChasingPlayer = true;
+
+            _attachedController.NavMeshAgent.speed = _attachedController.characterProperties.WalkSpeed;
         }
 
         protected override void OnStateExit()
         {
             base.OnStateExit();
             _attachedController.targetPositionDummy.transform.parent = null;
+            _attachedController.currentBrain.IsChasingPlayer = false;
+            _attachedController.currentBrain.IsTrackingPlayer = true;
         }
     }
 }

@@ -31,6 +31,8 @@ public class EnemyBrain : Brain
     public bool IsPlayerNearLight { get; set; }
 
     public bool IsChasingPlayer { get; set; }
+    
+    public bool IsTrackingPlayer { get; set; }
 
     public bool IsOnOffMeshLink { get; set; }
 

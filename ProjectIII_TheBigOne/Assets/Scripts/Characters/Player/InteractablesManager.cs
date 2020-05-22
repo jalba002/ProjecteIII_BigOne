@@ -23,10 +23,14 @@ namespace Characters.Player
 
         public bool CanInteract;
 
+        public float raycastCooldownPerCheck = 0.2f;
+        private float currentRaycastCooldown;
+
         public void Start()
         {
             attachedPlayer = GetComponent<PlayerController>();
             ClearInteractable();
+            currentRaycastCooldown = raycastCooldownPerCheck;
         }
 
         public void Update()
@@ -34,9 +38,16 @@ namespace Characters.Player
             CanInteract = registeredInteractables.Count > 0 && CurrentInteractable != null;
 
             //Debug.Log(CurrentInteractable?.DisplayName ?? "No current interactable.");
+            if (currentRaycastCooldown > 0f)
+            {
+                currentRaycastCooldown -= Time.deltaTime;
+            }
 
-            if (CurrentInteractable != null || registeredInteractables.Count > 0)
+            if (CurrentInteractable != null || registeredInteractables.Count > 0 && currentRaycastCooldown <= 0f)
+            {
                 AnalyzeElement(DetectElement());
+                currentRaycastCooldown = raycastCooldownPerCheck;
+            }
         }
 
         private void AnalyzeElement(IInteractable detectedElement)
@@ -103,7 +114,7 @@ namespace Characters.Player
         {
             if (CurrentInteractable != null)
                 CurrentInteractable.OnEndInteract();
-            
+
             CurrentInteractable = null;
             if (textDebug)
                 textDebug.text = "";

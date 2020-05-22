@@ -151,6 +151,7 @@ namespace Enemy
             {
                 currentBrain.IsPlayerInSight = SensesUtil.IsInSight(gameObject,
                     currentBrain.archnemesis.gameObject,
+                    currentBrain.archnemesis.cameraController.m_PitchControllerTransform,
                     characterProperties.maxDetectionRange,
                     characterProperties.watchableLayers);
             }

@@ -16,7 +16,7 @@ public static class SensesUtil
         {
             if (debug)
                 Debug.Log("Casted a laser!");
-            if (raycastHitInfo.collider.gameObject.GetHashCode().Equals(target.gameObject.GetHashCode()))
+            if (raycastHitInfo.collider.gameObject == target.gameObject)
             {
                 if (debug)
                     Debug.Log($"Hit my target ··> {raycastHitInfo.collider.gameObject.name}");
@@ -38,7 +38,40 @@ public static class SensesUtil
 
         return HitTarget;
     }
+    
+    public static bool IsInSight(GameObject instigator, GameObject hitGameobject,Transform targetPosition, float maxRange, LayerMask layerMask,
+        bool debug = false)
+    {
+        bool HitTarget = false;
+        Ray detectionRay = new Ray(instigator.transform.position,
+            (targetPosition.position - instigator.transform.position).normalized);
+        RaycastHit raycastHitInfo;
+        if (Physics.Raycast(detectionRay, out raycastHitInfo, maxRange, layerMask))
+        {
+            if (debug)
+                Debug.Log("Casted a laser!");
+            if (raycastHitInfo.collider.gameObject == hitGameobject)
+            {
+                if (debug)
+                    Debug.Log($"Hit my target ··> {raycastHitInfo.collider.gameObject.name}");
+                HitTarget = true;
+            }
+        }
 
+        if (debug)
+        {
+            if (HitTarget)
+            {
+                Debug.DrawRay(detectionRay.origin, detectionRay.direction * raycastHitInfo.distance, Color.green, 5f);
+            }
+            else
+            {
+                Debug.DrawRay(detectionRay.origin, detectionRay.direction * maxRange, Color.red, 1f);
+            }
+        }
+
+        return HitTarget;
+    }
     public static bool HasFlashlightEnabled(PlayerController playerController)
     {
         if (playerController == null) return false;

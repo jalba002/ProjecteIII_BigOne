@@ -1,5 +1,6 @@
 ﻿using System;
 using Characters.Player;
+using Player;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,6 +9,29 @@ namespace Cheats
 #if UNITY_EDITOR
     public static class EditorCheats
     {
+        [MenuItem("Cheats/Game/Complete Nearest Puzzle %#C")]
+        public static void CompleteNearestPuzzle()
+        {
+            if (Application.isPlaying)
+            {
+                try
+                {
+                    var PuzzleFound =
+                        GameManager.Instance.PlayerController.interactablesManager.registeredInteractables.Find(x =>
+                            x.attachedGameobject.GetComponent<Puzzle>());
+                    PuzzleFound.attachedGameobject.GetComponent<Puzzle>()?.OnPuzzleWin.Invoke();
+                }
+                catch (NullReferenceException)
+                {
+                    Debug.LogWarning("No puzzle detected.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Only in Play Mode!");
+            }
+        }
+
         [MenuItem("Cheats/Level/Destroy Wall %E")]
         public static void DestroyWall()
         {

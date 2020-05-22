@@ -44,7 +44,6 @@ public class PathDrawer : MonoBehaviour
         if (trackedAgent.path.corners.Length < 2)
         {
             // return
-            Debug.Log("Returning no");
         }
         else
         {

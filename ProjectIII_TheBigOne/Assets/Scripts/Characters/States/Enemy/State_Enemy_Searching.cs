@@ -67,6 +67,7 @@ namespace Enemy
 
             trackTime = _attachedController.characterProperties.maxTimeOfPerfectTracking;
             currentSearchTime = 0f;
+            _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
         }
 
         private void StopChase()

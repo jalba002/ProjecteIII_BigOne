@@ -20,36 +20,9 @@ namespace Enemy
         {
             base.OnStateTick(deltaTime);
             
-            try
-            {
-                _attachedController.currentBrain.IsPlayerInSight = SensesUtil.IsInSight(_attachedController.gameObject,
-                    _attachedController.currentBrain.archnemesis.gameObject,
-                    _attachedController.characterProperties.maxDetectionRange,
-                    _attachedController.characterProperties.watchableLayers);
-            }
-            catch (NullReferenceException)
-            {
-            }
-
-            try
-            {
-                _attachedController.currentBrain.IsPlayerNearLight =
-                    SensesUtil.HasFlashlightEnabled(_attachedController.currentBrain.archnemesis);
-            }
-            catch (NullReferenceException)
-            {
-            }
-
-            try
-            {
-                _attachedController.currentBrain.IsVisible =
-                    SensesUtil.IsPlayerSeeingEnemy(_attachedController.currentBrain.archnemesis, _attachedController,
-                        GameManager.Instance.GameSettings.DetectionLayers,
-                        GameManager.Instance.GameSettings.PlayerViewAngle);
-            }
-            catch (NullReferenceException)
-            {
-            }
+            _attachedController.CheckForEnemyVisibility();
+            _attachedController.CheckForPlayerNearLight();
+            _attachedController.CheckForPlayerOnSight();
             
             _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
         }
@@ -74,6 +47,7 @@ namespace Enemy
             
             _attachedController.NavMeshAgent.isStopped = false;
             _attachedController.currentBrain.IsChasingPlayer = true;
+            _attachedController.currentBrain.IsTrackingPlayer = true;
 
             _attachedController.NavMeshAgent.speed = _attachedController.characterProperties.WalkSpeed;
         }
@@ -81,9 +55,8 @@ namespace Enemy
         protected override void OnStateExit()
         {
             base.OnStateExit();
-            _attachedController.targetPositionDummy.transform.parent = null;
+            //_attachedController.targetPositionDummy.transform.parent = null;
             _attachedController.currentBrain.IsChasingPlayer = false;
-            _attachedController.currentBrain.IsTrackingPlayer = true;
         }
     }
 }

@@ -96,4 +96,9 @@ public class GameManager : MonoBehaviour
         {
         }
     }
+
+    public void ExitGame(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
 }

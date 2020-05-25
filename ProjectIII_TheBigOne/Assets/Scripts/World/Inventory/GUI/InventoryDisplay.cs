@@ -6,9 +6,11 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using Characters.Player;
 
 public class InventoryDisplay : MonoBehaviour
-{
+{    
+    
     public  InventoryDisplay Instance;
     
     [Header("Gameobjects")] public  Inventory inventoryRef;
@@ -85,11 +87,15 @@ public class InventoryDisplay : MonoBehaviour
             contextMenu.SetActive(false);
             return;
         }
-
-        contextMenu.SetActive(true);
-        contextMenu.transform.SetParent(selectedSlot.transform);
-        contextMenu.GetComponent<RectTransform>().anchoredPosition =
+        if (!selectedSlot.item.isUnique)
+        {
+            contextMenu.transform.SetParent(selectedSlot.transform);
+            contextMenu.SetActive(true);
+            contextMenu.GetComponent<RectTransform>().anchoredPosition =
             new Vector3(0 - selectedSlot.gameObject.GetComponent<RectTransform>().rect.size.x, 0, 0);
+        }
+        
+        
     }
 
     public void SetupSlot(int slot, InventoryItem item)
@@ -222,7 +228,15 @@ public class InventoryDisplay : MonoBehaviour
 
     public bool ToggleInventoryUI()
     {
+        Debug.Log("Hello team i go b");
         contextMenu.SetActive(false);
+        if (!inventoryParent.activeSelf)
+        {
+            GameManager.Instance.PlayerController.interactablesManager.ClearInteractable();
+        }
+
+        GameManager.Instance.PlayerController.interactablesManager.enabled = inventoryParent.activeSelf;
+        
         inventoryParent.SetActive(!inventoryParent.activeSelf);
         return inventoryParent.activeSelf;
     }

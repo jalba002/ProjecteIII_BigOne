@@ -161,7 +161,8 @@ public class InventoryDisplay : MonoBehaviour
                 selectedItem = null;
                 selectedItemInfo.text = " ";
                 selectedItemName.text = " ";
-                selectedSlot.background.color = Color.white;
+                if(selectedSlot != null)
+                    selectedSlot.background.color = Color.white;
                 selectedSlot = null;
             }
             else
@@ -180,8 +181,9 @@ public class InventoryDisplay : MonoBehaviour
             selectedSlot.item.UseItem();
             if (selectedSlot.item.destroyOnUse)
             {
-                inventoryRef.RemoveItem(selectedSlot.item.itemName);
                 RemoveItem(selectedSlot.item);
+                inventoryRef.RemoveItem(selectedSlot.item.itemName);
+                
                 selectedSlot = null;
             }
         }

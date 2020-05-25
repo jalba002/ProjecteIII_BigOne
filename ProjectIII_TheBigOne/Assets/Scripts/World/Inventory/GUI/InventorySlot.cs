@@ -112,8 +112,11 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
                 {
                     InventoryDisplay.selectedSlot.background.color = Color.grey;
                 }
-                background.color = Color.white;
-                InventoryDisplay.selectedSlot = this;
+                background.color = Color.white;  
+                
+                if(item.isStackable)
+                    InventoryDisplay.selectedSlot = this;
+
                 inventoryDisplayRef.selectedItem = item;
                 inventoryDisplayRef.selectedItemName.text = item.itemName;
                 inventoryDisplayRef.selectedItemName.gameObject.SetActive(true);

@@ -42,6 +42,8 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         Setup(null);                                                                        
         inventoryDisplayRef = GameObject.FindObjectOfType<InventoryDisplay>();
     }
+
+    
     
 
     public void Setup(InventoryItem item)               
@@ -50,6 +52,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
         if (this.item != null)                          
         {
+            spriteImage = GetComponent<Image>();
             spriteImage.color = Color.white;            
             spriteImage.sprite = this.item.itemIcon;
             if (this.item.isStackable)
@@ -93,6 +96,11 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         else
         {
             background.color = Color.grey;
+        }
+
+        if(spriteImage == null)
+        {
+            spriteImage = GetComponent<Image>();
         }
 
     }

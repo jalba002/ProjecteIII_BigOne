@@ -96,15 +96,21 @@ public class InventoryDisplay : MonoBehaviour
     {
         Debug.Log("Slot is " + slot);
         inventorySlotList[slot].Setup(item);
+
+        if (item == null)
+            RemoveText();
     }
     
     public void CopySlot(InventorySlot origin, InventorySlot copy)
     {
-        InventoryItem i = copy.item;
+        if (origin.item != null)
+        {
+            InventoryItem i = copy.item;
 
-        copy.Setup(origin.item);
-        copy.SelectThisSlot();
-        origin.Setup(i);
+            copy.Setup(origin.item);
+            copy.SelectThisSlot();
+            origin.Setup(i);
+        }
     }
 
     public void AddNewItem(InventoryItem item)
@@ -126,16 +132,19 @@ public class InventoryDisplay : MonoBehaviour
         else
         {
             int a = item.GetActualQuantity();
-            if (a == 1)
+            if (a == 0)
             {
-                /*Debug.Log(inventorySlotList.Count);
-                var index = inventorySlotList.FindIndex(i => i.item == item);
-                SetupSlot(index, null);*/
-                // Only works on Inventory. BRUH.
+               Debug.Log(inventorySlotList.Count);
+               var index = inventorySlotList.FindIndex(i => i.item == item);
+               SetupSlot(index, null);
+                
+               //Only works on Inventory. BRUH.
+               
+                
             }
             else
             {
-                // quantity is changed on the Inventory.cs, it's useless do it here.
+                //quantity is changed on the Inventory.cs, it's useless do it here.
             }
         }
     }
@@ -159,8 +168,7 @@ public class InventoryDisplay : MonoBehaviour
                 inventoryRef.RemoveItem(selectedSlot.item.itemName);
 
                 selectedItem = null;
-                selectedItemInfo.text = " ";
-                selectedItemName.text = " ";
+                RemoveText();
                 if(selectedSlot != null)
                     selectedSlot.background.color = Color.white;
                 selectedSlot = null;
@@ -170,6 +178,12 @@ public class InventoryDisplay : MonoBehaviour
                 Debug.Log("You can't discard this item");
             }
         }
+    }
+
+    public void RemoveText()
+    {
+        selectedItemInfo.text = " ";
+        selectedItemName.text = " ";
     }
 
     public void UseButton()
@@ -182,10 +196,10 @@ public class InventoryDisplay : MonoBehaviour
             if (selectedSlot.item.destroyOnUse)
             {
                 RemoveItem(selectedSlot.item);
-                inventoryRef.RemoveItem(selectedSlot.item.itemName);
-                
+                inventoryRef.RemoveItem(selectedSlot.item.itemName);                  
                 selectedSlot = null;
             }
+            
         }
     }
 

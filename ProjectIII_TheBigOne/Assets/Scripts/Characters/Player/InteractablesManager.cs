@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Player;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,19 +12,22 @@ namespace Characters.Player
 
     public class InteractablesManager : MonoBehaviour
     {
-        public List<IInteractable> registeredInteractables = new List<IInteractable>();
+        [Header("Interactions")] public float sphereCastRange = 1.5f;
+        public Transform sphereCastPosition;
+        public LayerMask sphereCastLayerMask;
+        private List<IInteractable> registeredInteractables = new List<IInteractable>();
 
         [Header("Settings")] public LayerMask detectedLayers;
-        public float detectionRange;
 
         [Header("Components")] public PlayerController attachedPlayer;
         public Text textDebug;
 
+        public GameObject aimedObject;
         public IInteractable CurrentInteractable { get; set; }
 
         public bool CanInteract;
 
-        public float raycastCooldownPerCheck = 0.2f;
+        public float raycastCooldownPerCheck = 0.1f;
         private float currentRaycastCooldown;
 
         public void Start()
@@ -35,18 +39,57 @@ namespace Characters.Player
 
         public void Update()
         {
+            if (!enabled)
+            {
+                // TODO Add more stuff to stop?
+                return;
+            }
+            
+            registeredInteractables = CheckForItems(sphereCastPosition, sphereCastRange, sphereCastLayerMask);
             CanInteract = registeredInteractables.Count > 0 && CurrentInteractable != null;
 
-            //Debug.Log(CurrentInteractable?.DisplayName ?? "No current interactable.");
+            // Debug.Log(CurrentInteractable?.DisplayName ?? "No current interactable.");
             if (currentRaycastCooldown > 0f)
             {
                 currentRaycastCooldown -= Time.deltaTime;
             }
 
-            if (CurrentInteractable != null || registeredInteractables.Count > 0 && currentRaycastCooldown <= 0f)
+            aimedObject = DetectElement();
+            TreatInteractables();
+        }
+
+        private void TreatInteractables()
+        {
+            if (registeredInteractables.Count > 0 || CurrentInteractable != null)
             {
-                AnalyzeElement(DetectElement());
-                currentRaycastCooldown = raycastCooldownPerCheck;
+                // UpdateInteractables(registeredInteractables);
+
+                try
+                {
+                    CurrentInteractable.UpdateInteractable();
+                }
+                catch (NullReferenceException)
+                {
+                    
+                }
+                
+                if (currentRaycastCooldown <= 0f)
+                {
+                    IInteractable collidedInteractable;
+                    collidedInteractable = registeredInteractables.Find(x => x.attachedGameobject == aimedObject);
+
+                    AnalyzeElement(collidedInteractable);
+
+                    currentRaycastCooldown = raycastCooldownPerCheck;
+                }
+            }
+        }
+
+        private void UpdateInteractables(List<IInteractable> interactablesList)
+        {
+            foreach (IInteractable interactable in interactablesList)
+            {
+                interactable.UpdateInteractable();
             }
         }
 
@@ -87,22 +130,15 @@ namespace Characters.Player
         }
 
 
-        private IInteractable DetectElement()
+        private GameObject DetectElement()
         {
             Ray cameraRay =
                 attachedPlayer.cameraController.attachedCamera.ViewportPointToRay(new Vector3(.5f, .5f, .5f));
-            if (Physics.Raycast(cameraRay, out var hitInfo, detectionRange, detectedLayers))
+            if (Physics.Raycast(cameraRay, out var hitInfo, 
+                sphereCastRange, detectedLayers))
             {
-                try
-                {
-                    Debug.DrawRay(cameraRay.origin, cameraRay.direction * hitInfo.distance, Color.green, 1f);
-                    return hitInfo.collider.gameObject.GetComponent<IInteractable>();
-                }
-                catch (MissingComponentException)
-                {
-                    //Debug.Log("Object hit was not Interactable.");
-                    return null;
-                }
+                Debug.DrawRay(cameraRay.origin, cameraRay.direction * hitInfo.distance, Color.green, 1f);
+                return hitInfo.collider.gameObject;
             }
             else
             {
@@ -118,6 +154,23 @@ namespace Characters.Player
             CurrentInteractable = null;
             if (textDebug)
                 textDebug.text = "";
+        }
+
+        public List<IInteractable> CheckForItems(Transform castPosition, float castRange, LayerMask castLayer)
+        {
+            Collider[] objects = Physics.OverlapSphere(castPosition.position, castRange, castLayer);
+            List<IInteractable> objectList = new List<IInteractable>();
+            foreach (Collider objectDetected in objects)
+            {
+                IInteractable objectFound =
+                    ObjectTracker.interactablesList.Find(x => x.attachedGameobject == objectDetected.gameObject);
+                if (objectFound != null)
+                {
+                    objectList.Add(objectFound);
+                }
+            }
+
+            return objectList;
         }
     }
 }

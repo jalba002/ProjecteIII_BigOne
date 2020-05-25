@@ -24,6 +24,11 @@ public class InspectableObject : MonoBehaviour, IInteractable, IInspectable
         DisplayName = objectName != null ? $"Inspect {objectName}" : $"Inspect defaultName";
     }
 
+    public void UpdateInteractable()
+    {
+        // Nothing.
+    }
+
     private bool GenerateIgnoredColliders(Collider selfCollider)
     {
         try

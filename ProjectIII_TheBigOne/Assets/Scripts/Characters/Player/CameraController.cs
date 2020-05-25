@@ -10,6 +10,7 @@ public class CameraController : MonoBehaviour
     [Range(0.1f, 10.0f)] public float m_Smoothing = 3f;
     [Range(-100.0f, 100.0f)] public float m_MinPitch = -80f;
     [Range(-100.0f, 100.0f)] public float m_MaxPitch = 70f;
+
     public Transform m_PitchControllerTransform;
     //public Camera inspectCamera;
 
@@ -44,8 +45,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    [Header("Private variables")]
-    Vector2 m_MouseLook;
+    [Header("Private variables")] Vector2 m_MouseLook;
     Vector2 m_SmoothVector;
     PlayerController character;
     private Quaternion originalRotation;
@@ -54,9 +54,6 @@ public class CameraController : MonoBehaviour
     {
         character = GetComponentInParent<PlayerController>();
         attachedCamera = GetComponentInChildren<Camera>();
-
-        /* m_MouseLook.x = m_PitchControllerTransform.rotation.x;
-         m_MouseLook.y = character.gameObject.transform.rotation.y;*/
     }
 
     void Update()

@@ -338,7 +338,7 @@ namespace World.Objects
 
         #region Interface Interactable
 
-        void Update()
+        public void UpdateInteractable()
         {
             if (IsInteracting)
             {
@@ -346,9 +346,7 @@ namespace World.Objects
             }
         }
 
-
         // Interface Implementation //
-
         public string DisplayName { get; set; }
 
         public GameObject attachedGameobject
@@ -377,6 +375,7 @@ namespace World.Objects
 
         private void OnUnlock()
         {
+            // TODO Play sound depending on the type? 
             AudioManager.PlaySound2D("Sound/Door/Unlock01");
         }
 
@@ -437,6 +436,10 @@ namespace World.Objects
                 case ObjectType.Drawer:
                     //Play drawer sound
                     break;
+                case ObjectType.Pallet:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             if (Rigidbody == null)
@@ -460,11 +463,11 @@ namespace World.Objects
 
         private float CalculateForce(float forceScale = 1f)
         {
-            var calculatedForce = 0f;
+            float calculatedForce = 1f;
             float mouseAxis = UseMouseXAxis ? Input.GetAxis("Mouse X") : Input.GetAxis("Mouse Y");
             mouseAxis = Mathf.Clamp(mouseAxis, -maxMouseInput, maxMouseInput);
-            calculatedForce = (forceScale * mouseAxis);
-
+            calculatedForce = (forceScale * mouseAxis) * OptionsManager.optionsData.sensitivity;
+            
             return calculatedForce;
         }
 

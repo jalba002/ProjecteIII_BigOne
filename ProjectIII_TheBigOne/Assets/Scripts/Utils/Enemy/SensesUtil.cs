@@ -5,42 +5,8 @@ using CharacterController = Characters.Generic.CharacterController;
 
 public static class SensesUtil
 {
-    public static bool IsInSight(GameObject instigator, GameObject target, float maxRange, LayerMask layerMask,
-        bool debug = false)
-    {
-        bool HitTarget = false;
-        Ray detectionRay = new Ray(instigator.transform.position,
-            (target.transform.position - instigator.transform.position).normalized);
-        RaycastHit raycastHitInfo;
-        if (Physics.Raycast(detectionRay, out raycastHitInfo, maxRange, layerMask))
-        {
-            if (debug)
-                Debug.Log("Casted a laser!");
-            if (raycastHitInfo.collider.gameObject == target.gameObject)
-            {
-                if (debug)
-                    Debug.Log($"Hit my target ··> {raycastHitInfo.collider.gameObject.name}");
-                HitTarget = true;
-            }
-        }
-
-        if (debug)
-        {
-            if (HitTarget)
-            {
-                Debug.DrawRay(detectionRay.origin, detectionRay.direction * raycastHitInfo.distance, Color.green, 5f);
-            }
-            else
-            {
-                Debug.DrawRay(detectionRay.origin, detectionRay.direction * maxRange, Color.red, 1f);
-            }
-        }
-
-        return HitTarget;
-    }
-    
     public static bool IsInSight(GameObject instigator, GameObject hitGameobject,Transform targetPosition, float maxRange, LayerMask layerMask,
-        bool debug = false)
+        bool debug = false, float angle = 140f)
     {
         bool HitTarget = false;
         Ray detectionRay = new Ray(instigator.transform.position,
@@ -70,8 +36,16 @@ public static class SensesUtil
             }
         }
 
-        return HitTarget;
+        float l_DotAngle = Vector3.Dot(detectionRay.direction, instigator.transform.forward);
+        
+        return HitTarget && l_DotAngle > Mathf.Cos(angle * 0.5f * Mathf.Deg2Rad);
     }
+
+    /*public static bool IsHearingTarget()
+    {
+        
+    }*/
+    
     public static bool HasFlashlightEnabled(PlayerController playerController)
     {
         if (playerController == null) return false;

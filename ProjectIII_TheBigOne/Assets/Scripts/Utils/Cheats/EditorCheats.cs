@@ -9,7 +9,7 @@ namespace Cheats
 #if UNITY_EDITOR
     public static class EditorCheats
     {
-        [MenuItem("Cheats/Game/Complete Nearest Puzzle %#C")]
+        /*[MenuItem("Cheats/Game/Complete Nearest Puzzle %#C")]
         public static void CompleteNearestPuzzle()
         {
             if (Application.isPlaying)
@@ -30,7 +30,7 @@ namespace Cheats
             {
                 Debug.LogWarning("Only in Play Mode!");
             }
-        }
+        }*/
 
         [MenuItem("Cheats/Level/Destroy Wall %E")]
         public static void DestroyWall()

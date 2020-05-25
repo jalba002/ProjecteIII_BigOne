@@ -29,7 +29,7 @@ public class InteractablePuzzle : MonoBehaviour, IInteractable, IPuzzle
         }
     }
 
-    void Update()
+    public void UpdateInteractable()
     {
         if (IsInteracting)
         {

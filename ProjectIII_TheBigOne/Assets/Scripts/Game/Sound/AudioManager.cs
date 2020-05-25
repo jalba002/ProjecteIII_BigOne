@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class AudioManager : MonoBehaviour
             return m_Instance;
         }
     }
+
+    public AudioMixer audioMixer;
 
     private static GameObject SoundParent { get; set; }
 

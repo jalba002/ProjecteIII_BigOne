@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Characters.Player;
-using Player;
-using UnityEngine;
-
+﻿
+/*
 [RequireComponent(typeof(SphereCollider))]
 public class InteractableRegister : MonoBehaviour
 {
@@ -53,4 +48,4 @@ public class InteractableRegister : MonoBehaviour
     {
         RemoveFromList();
     }
-}
+}*/

@@ -24,7 +24,8 @@ namespace Enemy
             _attachedController.CheckForPlayerNearLight();
             _attachedController.CheckForPlayerOnSight();
             
-            _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
+            
+            
         }
 
         public override void OnStateFixedTick(float fixedTime)
@@ -50,6 +51,8 @@ namespace Enemy
             _attachedController.currentBrain.IsTrackingPlayer = true;
 
             _attachedController.NavMeshAgent.speed = _attachedController.characterProperties.WalkSpeed;
+            
+            _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
         }
 
         protected override void OnStateExit()

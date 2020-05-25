@@ -1,71 +1,103 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Player;
 using CharacterController = Characters.Generic.CharacterController;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.PlayerLoop;
 
 public class OptionsManager : MonoBehaviour
 {
-    private PlayerController playerController;
-    public AudioMixer audioMixer;
+    private static OptionsManager m_Instance = null;
 
-
-    private void Awake()
+    public static OptionsManager Instance
     {
-        
+        get
+        {
+            if (m_Instance == null)
+            {
+                m_Instance = (OptionsManager) FindObjectOfType(typeof(OptionsManager));
+                if (m_Instance == null)
+                {
+                    m_Instance = (new GameObject("PauseManager")).AddComponent<OptionsManager>();
+                }
+
+                DontDestroyOnLoad(m_Instance.gameObject);
+            }
+
+            return m_Instance;
+        }
     }
-    // Start is called before the first frame update
-    void Start()
+    
+    private static OptionsData _optionsData;
+
+    public static OptionsData optionsData
     {
-        
+        get
+        {
+            if (_optionsData == null)
+            {
+                _optionsData = ScriptableObject.CreateInstance<OptionsData>();
+            }
+
+            return _optionsData;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void Start()
     {
-        ActualizeOptions();
+        UpdateOptions();
     }
 
     public void SetMasterVolume(float volume)
-    {     
-        GameManager.Instance.OptionsData.masterVolume = volume;
+    {
+        optionsData.masterVolume = volume;
+        UpdateOptions();
     }
+
     public void SetMusicVolume(float volume)
     {
-        GameManager.Instance.OptionsData.musicVolume = volume;
+        optionsData.musicVolume = volume;
+        UpdateOptions();
     }
+
     public void SetEffectsVolume(float volume)
     {
-        GameManager.Instance.OptionsData.effectsVolume = volume;
+        optionsData.effectsVolume = volume;
+        UpdateOptions();
     }
 
     public void SetSensibility(float sensibility)
     {
-        GameManager.Instance.OptionsData.sensitivity = sensibility;
-    }
-    public void SetInvertMouse(bool invert)
-    {
-        GameManager.Instance.OptionsData.invertedMouse = invert;
+        optionsData.sensitivity = sensibility;
+        UpdateOptions();
     }
 
-    public void ActualizeOptions()
+    public void SetInvertMouse(bool invert)
     {
-        audioMixer.SetFloat("MasterVolume", GameManager.Instance.OptionsData.masterVolume);
-        audioMixer.SetFloat("MusicVolume", GameManager.Instance.OptionsData.musicVolume);
-        audioMixer.SetFloat("EffectsVolume", GameManager.Instance.OptionsData.effectsVolume);
+        optionsData.invertedMouse = invert;
+        UpdateOptions();
+    }
+
+    public void UpdateOptions()
+    {
+        Debug.Log("Updated Options");
+        AudioManager.Instance.audioMixer.SetFloat("MasterVolume", optionsData.masterVolume);
+        AudioManager.Instance.audioMixer.SetFloat("MusicVolume", optionsData.musicVolume);
+        AudioManager.Instance.audioMixer.SetFloat("EffectsVolume", optionsData.effectsVolume);
         try
         {
-            FindObjectOfType<CameraController>().m_Sensitivity = GameManager.Instance.OptionsData.sensitivity;
-            FindObjectOfType<CameraController>().invertMouse = GameManager.Instance.OptionsData.invertedMouse;
+            GameManager.Instance.PlayerController.cameraController.m_Sensitivity =
+                optionsData.sensitivity;
+            GameManager.Instance.PlayerController.cameraController.invertMouse =
+                optionsData.invertedMouse;
         }
         catch (System.Exception)
         {
-
             throw;
         }
-        
     }
-
 }

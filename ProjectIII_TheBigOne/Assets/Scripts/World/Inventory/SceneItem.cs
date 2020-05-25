@@ -17,6 +17,11 @@ public class SceneItem : MonoBehaviour, IInteractable, IPickable
         get { return gameObject; }
     }
 
+    public void UpdateInteractable()
+    {
+        // Nothing.
+    }
+
     public bool IsInteracting { get; set; }
 
     private void Start()

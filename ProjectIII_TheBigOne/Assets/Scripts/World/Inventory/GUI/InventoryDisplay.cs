@@ -100,11 +100,14 @@ public class InventoryDisplay : MonoBehaviour
     
     public void CopySlot(InventorySlot origin, InventorySlot copy)
     {
-        InventoryItem i = copy.item;
+        if (origin.item != null)
+        {
+            InventoryItem i = copy.item;
 
-        copy.Setup(origin.item);
-        copy.SelectThisSlot();
-        origin.Setup(i);
+            copy.Setup(origin.item);
+            copy.SelectThisSlot();
+            origin.Setup(i);
+        }
     }
 
     public void AddNewItem(InventoryItem item)
@@ -126,16 +129,18 @@ public class InventoryDisplay : MonoBehaviour
         else
         {
             int a = item.GetActualQuantity();
-            if (a == 1)
+            if (a == 0)
             {
-                /*Debug.Log(inventorySlotList.Count);
-                var index = inventorySlotList.FindIndex(i => i.item == item);
-                SetupSlot(index, null);*/
-                // Only works on Inventory. BRUH.
+               Debug.Log(inventorySlotList.Count);
+               var index = inventorySlotList.FindIndex(i => i.item == item);
+               SetupSlot(index, null);
+               //Only works on Inventory. BRUH.
+               
+                
             }
             else
             {
-                // quantity is changed on the Inventory.cs, it's useless do it here.
+                //quantity is changed on the Inventory.cs, it's useless do it here.
             }
         }
     }
@@ -181,11 +186,11 @@ public class InventoryDisplay : MonoBehaviour
             selectedSlot.item.UseItem();
             if (selectedSlot.item.destroyOnUse)
             {
-                RemoveItem(selectedSlot.item);
                 inventoryRef.RemoveItem(selectedSlot.item.itemName);
-                
+                RemoveItem(selectedSlot.item);  
                 selectedSlot = null;
             }
+            
         }
     }
 

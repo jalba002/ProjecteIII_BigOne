@@ -134,9 +134,9 @@ namespace Player
 
             UseFlashlight();
 
-            InteractDynamics();
             if (InspectPuzzle()) return;
             InspectObjects();
+            InteractDynamics();
         }
 
         bool InspectPuzzle()

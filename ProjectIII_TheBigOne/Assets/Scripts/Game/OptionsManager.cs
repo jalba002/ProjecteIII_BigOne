@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Player;
-using CharacterController = Characters.Generic.CharacterController;
-using UnityEngine.UI;
-using UnityEngine.Audio;
-using UnityEngine.PlayerLoop;
+﻿using UnityEngine;
 
 public class OptionsManager : MonoBehaviour
 {

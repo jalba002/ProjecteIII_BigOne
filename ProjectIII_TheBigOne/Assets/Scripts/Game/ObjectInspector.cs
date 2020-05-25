@@ -1,5 +1,4 @@
 ﻿using System;
-using Interfaces;
 using Player;
 using UnityEngine;
 
@@ -50,7 +49,7 @@ public class ObjectInspector : MonoBehaviour
         rendererTransform.RotateAround(playerController.cameraController.attachedCamera.transform.right, yRot);
     }
 
-    public bool Activate(IInteractable interactable)
+    public bool Activate(InteractableObject interactable)
     {
         if (interactable == null) return false;
         if (GetEnabled())
@@ -62,7 +61,7 @@ public class ObjectInspector : MonoBehaviour
 
         try
         {
-            var inspectable = interactable.attachedGameobject.GetComponent<IInspectable>();
+            var inspectable = interactable.gameObject.GetComponent<IInspectable>();
             StartInspect(inspectable);
             return true;
         }

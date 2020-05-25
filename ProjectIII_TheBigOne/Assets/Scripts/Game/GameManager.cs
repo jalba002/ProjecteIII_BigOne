@@ -21,9 +21,10 @@ public class GameManager : MonoBehaviour
                 if (m_Instance == null)
                 {
                     m_Instance = (new GameObject("GameManager")).AddComponent<GameManager>();
+                    m_Instance.transform.parent = null;
                 }
 
-                DontDestroyOnLoad(m_Instance.gameObject);
+                //DontDestroyOnLoad(m_Instance.gameObject);
             }
 
             return m_Instance;

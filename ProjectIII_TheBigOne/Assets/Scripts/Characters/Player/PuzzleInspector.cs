@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class PuzzleInspector : MonoBehaviour
 {
-    private IInteractable _currentInteractable;
+    private InteractableObject _currentInteractable;
 
-    public bool Interact(IInteractable newInteractable)
+    public bool Interact(InteractableObject newInteractable)
     {
         try
         {
-            if (newInteractable.attachedGameobject.GetComponent<IPuzzle>() == null) return false;
+            if (newInteractable.interactionType == InteractableObject.InteractionType.Inspect) return false;
         }
         catch (NullReferenceException)
         {

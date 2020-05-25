@@ -569,13 +569,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfda6edbabd4932498af44770ba2ca91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sphereCastRange: 3
+  sphereCastPosition: {fileID: 4287271706014648178}
+  sphereCastLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
   detectedLayers:
     serializedVersion: 2
     m_Bits: 513
-  detectionRange: 3
   attachedPlayer: {fileID: 0}
   textDebug: {fileID: 0}
+  aimedObject: {fileID: 0}
   CanInteract: 0
+  raycastCooldownPerCheck: 0.1
 --- !u!114 &8660583207281345042
 MonoBehaviour:
   m_ObjectHideFlags: 0

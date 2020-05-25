@@ -319,7 +319,7 @@ Transform:
   - {fileID: 1386346233373334361}
   - {fileID: 1477780593221575510}
   m_Father: {fileID: 4407223417357970319}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1386346232544849593
 MeshFilter:
@@ -1138,63 +1138,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
---- !u!1 &4407223415522582597
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4407223415522582596}
-  - component: {fileID: 4407223415522582598}
-  - component: {fileID: 4407223415522582599}
-  m_Layer: 0
-  m_Name: ObjectRegiste
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
---- !u!4 &4407223415522582596
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4407223415522582597}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4407223417357970319}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &4407223415522582598
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4407223415522582597}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4407223415522582599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4407223415522582597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c2c610584565f7498fe9515b28b0029, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4407223417133697302
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,7 +1166,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4407223417357970319}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 155, y: 90, z: 180}
 --- !u!1 &4407223417357970312
 GameObject:
@@ -1254,7 +1197,6 @@ Transform:
   m_LocalPosition: {x: 10, y: 0.8, z: 12.12}
   m_LocalScale: {x: 0.7034, y: 0.7034, z: 0.7034}
   m_Children:
-  - {fileID: 4407223415522582596}
   - {fileID: 4407223417133697305}
   - {fileID: 1386346232544849592}
   m_Father: {fileID: 0}
@@ -1285,7 +1227,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7effcbd914737934eb15cbf06518db53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showLogDebug: 0
+  interactionType: 3
   displayName: Activate Simon
+  displayImage: {fileID: 0}
   attachedPuzzle: {fileID: 1386346232544849595}
   cameraPosition: {fileID: 4407223417133697305}
 --- !u!1 &4591738668293679973

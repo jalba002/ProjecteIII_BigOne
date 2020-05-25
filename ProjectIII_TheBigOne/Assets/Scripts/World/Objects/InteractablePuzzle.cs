@@ -6,9 +6,8 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Cursor = UnityEngine.Cursor;
 
-public class InteractablePuzzle : MonoBehaviour, IInteractable, IPuzzle
+public class InteractablePuzzle : InteractableObject, IPuzzle
 {
-    public string displayName = "Use puzzle";
     public Puzzle attachedPuzzle;
 
     public Transform cameraPosition;
@@ -22,31 +21,22 @@ public class InteractablePuzzle : MonoBehaviour, IInteractable, IPuzzle
 
     void Start()
     {
-        DisplayName = displayName;
         if (playerCameraController == null)
         {
             playerCameraController = FindObjectOfType<CameraController>();
         }
     }
 
-    public void UpdateInteractable()
+    public override void UpdateInteractable()
     {
+        base.UpdateInteractable();
         if (IsInteracting)
         {
             OnInteracting();
         }
     }
 
-    public string DisplayName { get; set; }
-
-    public GameObject attachedGameobject
-    {
-        get { return this.gameObject; }
-    }
-
-    public bool IsInteracting { get; set; }
-
-    public bool Interact(bool interactEnable)
+    public override bool Interact(bool interactEnable)
     {
         if (interactEnable)
         {
@@ -75,8 +65,9 @@ public class InteractablePuzzle : MonoBehaviour, IInteractable, IPuzzle
         IsInteracting = false;
     }
 
-    public void OnStartInteract()
+    public override void OnStartInteract()
     {
+        base.OnStartInteract();
         // Change camera position
         // Change player state to puzzle interaction.
         // Which blocks movement and camera input. Plus all necessary.
@@ -92,8 +83,9 @@ public class InteractablePuzzle : MonoBehaviour, IInteractable, IPuzzle
         Cursor.visible = true;
     }
 
-    public void OnInteracting()
+    public override void OnInteracting()
     {
+        base.OnInteracting();
         // Lerp camera position?
         // Read mouse inputs for clicks.
         // Raycast stuff to activate puzzle.
@@ -125,8 +117,9 @@ public class InteractablePuzzle : MonoBehaviour, IInteractable, IPuzzle
         }
     }
 
-    public void OnEndInteract()
+    public override void OnEndInteract()
     {
+        base.OnEndInteract();
         // Restore camera position.
         // Restore controls to player.
         // Restore cursor to usual settings.

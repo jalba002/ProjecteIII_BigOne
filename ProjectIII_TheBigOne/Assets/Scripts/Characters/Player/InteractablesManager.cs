@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Aura2API;
 using Player;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.GameCenter;
 using UnityEngine.UI;
 
 namespace Characters.Player
@@ -59,13 +62,21 @@ namespace Characters.Player
 
         private void TreatInteractables()
         {
-            if (registeredInteractables.Count > 0 || CurrentInteractable != null)
+            bool isCurrentInteractable = CurrentInteractable != null;
+            if (!isCurrentInteractable)
+            {
+                GameManager.Instance.CanvasController.ChangeCursor(
+                    GameManager.Instance.CanvasController.CrosshairController.defaultCrosshair,
+                    new Vector3(0.1f, 0.1f, 1f));
+            }
+
+            if (registeredInteractables.Count > 0 || isCurrentInteractable)
             {
                 // UpdateInteractables(registeredInteractables);
-
-                if (CurrentInteractable != null)
+                if (isCurrentInteractable)
+                {
                     CurrentInteractable.UpdateInteractable();
-
+                }
 
                 if (currentRaycastCooldown <= 0f)
                 {

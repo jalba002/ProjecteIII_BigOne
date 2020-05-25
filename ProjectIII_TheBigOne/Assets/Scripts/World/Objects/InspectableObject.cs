@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class InspectableObject : InteractableObject
+public class InspectableObject : InteractableObject, IInspectable
 {
     private MeshRenderer _meshRenderer;
     private MeshFilter _meshFilter;

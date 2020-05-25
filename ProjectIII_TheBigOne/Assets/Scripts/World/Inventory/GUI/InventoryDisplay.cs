@@ -96,6 +96,9 @@ public class InventoryDisplay : MonoBehaviour
     {
         Debug.Log("Slot is " + slot);
         inventorySlotList[slot].Setup(item);
+
+        if (item == null)
+            RemoveText();
     }
     
     public void CopySlot(InventorySlot origin, InventorySlot copy)
@@ -134,6 +137,7 @@ public class InventoryDisplay : MonoBehaviour
                Debug.Log(inventorySlotList.Count);
                var index = inventorySlotList.FindIndex(i => i.item == item);
                SetupSlot(index, null);
+                
                //Only works on Inventory. BRUH.
                
                 
@@ -164,8 +168,7 @@ public class InventoryDisplay : MonoBehaviour
                 inventoryRef.RemoveItem(selectedSlot.item.itemName);
 
                 selectedItem = null;
-                selectedItemInfo.text = " ";
-                selectedItemName.text = " ";
+                RemoveText();
                 if(selectedSlot != null)
                     selectedSlot.background.color = Color.white;
                 selectedSlot = null;
@@ -177,6 +180,12 @@ public class InventoryDisplay : MonoBehaviour
         }
     }
 
+    public void RemoveText()
+    {
+        selectedItemInfo.text = " ";
+        selectedItemName.text = " ";
+    }
+
     public void UseButton()
     {
         Debug.Log("Using button.");
@@ -186,8 +195,8 @@ public class InventoryDisplay : MonoBehaviour
             selectedSlot.item.UseItem();
             if (selectedSlot.item.destroyOnUse)
             {
-                inventoryRef.RemoveItem(selectedSlot.item.itemName);
-                RemoveItem(selectedSlot.item);  
+                RemoveItem(selectedSlot.item);
+                inventoryRef.RemoveItem(selectedSlot.item.itemName);                  
                 selectedSlot = null;
             }
             

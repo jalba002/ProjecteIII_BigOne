@@ -9,12 +9,12 @@ using TMPro;
 
 public class InventoryDisplay : MonoBehaviour
 {
-    public static InventoryDisplay Instance;
+    public  InventoryDisplay Instance;
     
-    [Header("Gameobjects")] public static Inventory inventoryRef;
+    [Header("Gameobjects")] public  Inventory inventoryRef;
 
     public GameObject inventoryParent;
-    [Header("Settings")] public static List<InventorySlot> inventorySlotList = new List<InventorySlot>();
+    [Header("Settings")] public  List<InventorySlot> inventorySlotList = new List<InventorySlot>();
     public GameObject slotPrefab;
     public Transform slotGrid;
     public int numberOfSlots = 12;
@@ -31,7 +31,7 @@ public class InventoryDisplay : MonoBehaviour
 
     public CanvasController canvas { get; protected set; }
 
-    public static InventorySlot selectedSlot
+    public InventorySlot selectedSlot
     {
         get { return _selectedSlot; }
         set

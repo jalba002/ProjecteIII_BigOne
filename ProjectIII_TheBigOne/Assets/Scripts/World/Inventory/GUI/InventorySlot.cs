@@ -20,7 +20,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     public GameObject quantity;
     public Text quantityText;
     private InventoryDisplay inventoryDisplayRef;
-
+    
     [HideInInspector] public GameObject selectedSlot;
     [HideInInspector] public InventoryItem selectedItem;
     [HideInInspector] public bool changeSlot = false;
@@ -108,7 +108,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     
     public void SelectThisSlot()
     {
-        if (InventoryDisplay.selectedSlot == this)
+        if (inventoryDisplayRef.selectedSlot == this)
         {
             UnselectThisSlot();
         }
@@ -116,14 +116,14 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         {
             if (item != null)
             {
-                if (InventoryDisplay.selectedSlot != null)
+                if (inventoryDisplayRef.selectedSlot != null)
                 {
-                    InventoryDisplay.selectedSlot.background.color = Color.grey;
+                    inventoryDisplayRef.selectedSlot.background.color = Color.grey;
                 }
                 background.color = Color.white;  
                 
                 if(item.isStackable)
-                    InventoryDisplay.selectedSlot = this;
+                    inventoryDisplayRef.selectedSlot = this;
 
                 inventoryDisplayRef.selectedItem = item;
                 inventoryDisplayRef.selectedItemName.text = item.itemName;
@@ -138,10 +138,10 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     public void UnselectThisSlot()
     {
         Debug.Log("Unselecting");
-        InventoryDisplay.selectedSlot.background.color = Color.grey;
+       inventoryDisplayRef.selectedSlot.background.color = Color.grey;
             
             background.color = Color.grey;
-            InventoryDisplay.selectedSlot = null;
+            inventoryDisplayRef.selectedSlot = null;
             inventoryDisplayRef.selectedItem = null;
             inventoryDisplayRef.selectedItemName.text = " ";
             inventoryDisplayRef.selectedItemName.gameObject.SetActive(false);

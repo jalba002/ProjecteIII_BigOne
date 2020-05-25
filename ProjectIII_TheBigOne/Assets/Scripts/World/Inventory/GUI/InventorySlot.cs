@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler    
+public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
 
     [SerializeField]
@@ -14,8 +14,8 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     public GameObject slot;
     public Image background;
-    public Image spriteImage;            
-    public InventoryItem item;            
+    public Image spriteImage;
+    public InventoryItem item;
     public Text itemNameText;
     public GameObject quantity;
     public Text quantityText;
@@ -27,7 +27,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     public bool isThisSlotToCombine = false;
 
-    void Awake()                                                                            
+    void Awake()
     {
         canvas = GameObject.FindObjectOfType<Canvas>();
         rectTransform = gameObject.GetComponent<RectTransform>();
@@ -38,35 +38,41 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
             slot.GetComponent<RectTransform>().localScale *= canvas.scaleFactor;
         }
 
-        spriteImage = GetComponent<Image>();                                                
-        Setup(null);                                                                        
+        spriteImage = GetComponent<Image>();
+        Setup(null);
         inventoryDisplayRef = GameObject.FindObjectOfType<InventoryDisplay>();
     }
 
-    
-    
 
-    public void Setup(InventoryItem item)               
+
+
+    public void Setup(InventoryItem item)
     {
-        this.item = item;                              
+        this.item = item;
 
-        if (this.item != null)                          
+        if (this.item != null)
         {
             spriteImage = GetComponent<Image>();
-            spriteImage.color = Color.white;            
+            spriteImage.color = Color.white;
             spriteImage.sprite = this.item.itemIcon;
+            background.color = Color.grey;
             if (this.item.isStackable)
             {
                 quantity.SetActive(true);
             }
-
-            if (itemNameText != null)                    
+            else
             {
-                itemNameText.text = item.itemName;      
+                quantity.SetActive(false);
+            }
+
+            if (itemNameText != null)
+            {
+                itemNameText.text = item.itemName;
             }
         }
-        else                                                
+        else
         {
+            background.color = Color.grey;
             spriteImage.color = Color.clear;
             quantity.SetActive(false);
             if (itemNameText != null)
@@ -98,32 +104,34 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
             background.color = Color.grey;
         }
 
-        if(spriteImage == null)
+        if (spriteImage == null)
         {
             spriteImage = GetComponent<Image>();
         }
 
     }
 
-    
+
     public void SelectThisSlot()
     {
-        if (InventoryDisplay.selectedSlot == this)
+
+        if (inventoryDisplayRef.selectedSlot == this)
         {
+
             UnselectThisSlot();
         }
         else
         {
             if (item != null)
             {
-                if (InventoryDisplay.selectedSlot != null)
+                if (inventoryDisplayRef.selectedSlot != null)
                 {
-                    InventoryDisplay.selectedSlot.background.color = Color.grey;
+                    inventoryDisplayRef.selectedSlot.background.color = Color.grey;
                 }
-                background.color = Color.white;  
-                
-                if(item.isStackable)
-                    InventoryDisplay.selectedSlot = this;
+                background.color = Color.white;
+
+
+                inventoryDisplayRef.selectedSlot = this;
 
                 inventoryDisplayRef.selectedItem = item;
                 inventoryDisplayRef.selectedItemName.text = item.itemName;
@@ -132,21 +140,21 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
                 inventoryDisplayRef.selectedItemInfo.gameObject.SetActive(true);
             }
         }
-        
+
 
     }
     public void UnselectThisSlot()
     {
-        Debug.Log("Unselecting");
-        InventoryDisplay.selectedSlot.background.color = Color.grey;
-            
-            background.color = Color.grey;
-            InventoryDisplay.selectedSlot = null;
-            inventoryDisplayRef.selectedItem = null;
-            inventoryDisplayRef.selectedItemName.text = " ";
-            inventoryDisplayRef.selectedItemName.gameObject.SetActive(false);
-            inventoryDisplayRef.selectedItemInfo.text = " ";
-            inventoryDisplayRef.selectedItemInfo.gameObject.SetActive(false);
+
+        inventoryDisplayRef.selectedSlot.background.color = Color.grey;
+
+        background.color = Color.grey;
+        inventoryDisplayRef.selectedSlot = null;
+        inventoryDisplayRef.selectedItem = null;
+        inventoryDisplayRef.selectedItemName.text = " ";
+        inventoryDisplayRef.selectedItemName.gameObject.SetActive(false);
+        inventoryDisplayRef.selectedItemInfo.text = " ";
+        inventoryDisplayRef.selectedItemInfo.gameObject.SetActive(false);
     }
 
     public void ResetSlot()
@@ -155,11 +163,11 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
         Setup(null);
     }
 
-    public void OnPointerDown(PointerEventData eventData) 
+    public void OnPointerDown(PointerEventData eventData)
     {
     }
     public void OnBeginDrag(PointerEventData eventData)
-    {        
+    {
         canvasGroup.blocksRaycasts = false;
 
         this.gameObject.transform.parent = null;
@@ -182,5 +190,5 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     {
         Setup(inventoryDisplayRef.selectedItem);
     }
-    
+
 }

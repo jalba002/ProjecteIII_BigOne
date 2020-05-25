@@ -119,6 +119,8 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    
+
     public void RestorePosition()
     {
         this.gameObject.transform.parent = m_PitchControllerTransform;

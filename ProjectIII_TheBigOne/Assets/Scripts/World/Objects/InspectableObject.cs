@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class InspectableObject : MonoBehaviour, IInteractable, IInspectable
+public class InspectableObject : InteractableObject
 {
-    public string objectName;
-
     private MeshRenderer _meshRenderer;
     private MeshFilter _meshFilter;
     public InspectableInfo InspectInfo { get; set; }
@@ -20,8 +18,6 @@ public class InspectableObject : MonoBehaviour, IInteractable, IInspectable
         selfCollider = gameObject.GetComponent<Collider>();
 
         GenerateIgnoredColliders(selfCollider);
-
-        DisplayName = objectName != null ? $"Inspect {objectName}" : $"Inspect defaultName";
     }
 
     public void UpdateInteractable()
@@ -86,35 +82,31 @@ public class InspectableObject : MonoBehaviour, IInteractable, IInspectable
         OnEndInteract();
         return false;
     }
-
-    public string DisplayName { get; set; }
-    public bool IsInteracting { get; set; }
-
-    public GameObject attachedGameobject
-    {
-        get { return this.gameObject; }
-    }
-
-    public bool Interact(bool interactEnable)
+    
+    public override bool Interact(bool interactEnable)
     {
         //
+        Inspect();
         return false;
     }
 
-    public void OnStartInteract()
+    public override void OnStartInteract()
     {
         //
+        base.OnStartInteract();
         IsInteracting = true;
     }
 
-    public void OnInteracting()
+    public override void OnInteracting()
     {
         //
+        base.OnInteracting();
     }
 
-    public void OnEndInteract()
+    public override void OnEndInteract()
     {
         //
+        base.OnEndInteract();
         IsInteracting = false;
     }
 }

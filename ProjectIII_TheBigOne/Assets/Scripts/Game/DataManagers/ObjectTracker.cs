@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System;
 using UnityEngine;
 using World.Objects;
-using System.Linq;
 
 public class ObjectTracker : MonoBehaviour
 {
@@ -12,7 +10,7 @@ public class ObjectTracker : MonoBehaviour
 
     public static List<TraversableBlockage> palletList;
 
-    public static List<IInteractable> interactablesList;
+    public static List<InteractableObject> interactablesList;
 
     // Start is called before the first frame update
     void Start()
@@ -31,12 +29,12 @@ public class ObjectTracker : MonoBehaviour
         }
     }
     
-    private void PrepareObjectList(out List<IInteractable> storedList)
+    private void PrepareObjectList(out List<InteractableObject> storedList)
     {
-        storedList = new List<IInteractable>();
-        var givenArray = FindObjectsOfType<MonoBehaviour>().OfType<IInteractable>();
+        storedList = new List<InteractableObject>();
+        var givenArray = FindObjectsOfType<InteractableObject>();
 
-        foreach(IInteractable currentObject in givenArray)
+        foreach(InteractableObject currentObject in givenArray)
         {
             storedList.Add(currentObject);
         }

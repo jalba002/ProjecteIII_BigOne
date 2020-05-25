@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Player;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,7 +14,7 @@ namespace Characters.Player
         [Header("Interactions")] public float sphereCastRange = 1.5f;
         public Transform sphereCastPosition;
         public LayerMask sphereCastLayerMask;
-        private List<IInteractable> registeredInteractables = new List<IInteractable>();
+        private List<InteractableObject> registeredInteractables = new List<InteractableObject>();
 
         [Header("Settings")] public LayerMask detectedLayers;
 
@@ -23,7 +22,7 @@ namespace Characters.Player
         public Text textDebug;
 
         public GameObject aimedObject;
-        public IInteractable CurrentInteractable { get; set; }
+        public InteractableObject CurrentInteractable { get; set; }
 
         public bool CanInteract;
 
@@ -44,7 +43,7 @@ namespace Characters.Player
                 // TODO Add more stuff to stop?
                 return;
             }
-            
+
             registeredInteractables = CheckForItems(sphereCastPosition, sphereCastRange, sphereCastLayerMask);
             CanInteract = registeredInteractables.Count > 0 && CurrentInteractable != null;
 
@@ -64,19 +63,14 @@ namespace Characters.Player
             {
                 // UpdateInteractables(registeredInteractables);
 
-                try
-                {
+                if (CurrentInteractable != null)
                     CurrentInteractable.UpdateInteractable();
-                }
-                catch (NullReferenceException)
-                {
-                    
-                }
-                
+
+
                 if (currentRaycastCooldown <= 0f)
                 {
-                    IInteractable collidedInteractable;
-                    collidedInteractable = registeredInteractables.Find(x => x.attachedGameobject == aimedObject);
+                    InteractableObject collidedInteractable;
+                    collidedInteractable = registeredInteractables.Find(x => x.gameObject == aimedObject);
 
                     AnalyzeElement(collidedInteractable);
 
@@ -85,15 +79,15 @@ namespace Characters.Player
             }
         }
 
-        private void UpdateInteractables(List<IInteractable> interactablesList)
+        private void UpdateInteractables(List<InteractableObject> interactablesList)
         {
-            foreach (IInteractable interactable in interactablesList)
+            foreach (InteractableObject interactable in interactablesList)
             {
                 interactable.UpdateInteractable();
             }
         }
 
-        private void AnalyzeElement(IInteractable detectedElement)
+        private void AnalyzeElement(InteractableObject detectedElement)
         {
             //Debug.Log("Detected element is: " + detectedElement);
             if (detectedElement == CurrentInteractable) return;
@@ -125,7 +119,7 @@ namespace Characters.Player
 
             if (textDebug)
             {
-                textDebug.text = CurrentInteractable?.DisplayName ?? "";
+                textDebug.text = CurrentInteractable != null ? CurrentInteractable.displayName : "";
             }
         }
 
@@ -134,7 +128,7 @@ namespace Characters.Player
         {
             Ray cameraRay =
                 attachedPlayer.cameraController.attachedCamera.ViewportPointToRay(new Vector3(.5f, .5f, .5f));
-            if (Physics.Raycast(cameraRay, out var hitInfo, 
+            if (Physics.Raycast(cameraRay, out var hitInfo,
                 sphereCastRange, detectedLayers))
             {
                 Debug.DrawRay(cameraRay.origin, cameraRay.direction * hitInfo.distance, Color.green, 1f);
@@ -156,14 +150,14 @@ namespace Characters.Player
                 textDebug.text = "";
         }
 
-        public List<IInteractable> CheckForItems(Transform castPosition, float castRange, LayerMask castLayer)
+        public List<InteractableObject> CheckForItems(Transform castPosition, float castRange, LayerMask castLayer)
         {
             Collider[] objects = Physics.OverlapSphere(castPosition.position, castRange, castLayer);
-            List<IInteractable> objectList = new List<IInteractable>();
+            List<InteractableObject> objectList = new List<InteractableObject>();
             foreach (Collider objectDetected in objects)
             {
-                IInteractable objectFound =
-                    ObjectTracker.interactablesList.Find(x => x.attachedGameobject == objectDetected.gameObject);
+                InteractableObject objectFound =
+                    ObjectTracker.interactablesList.Find(x => x.gameObject == objectDetected.gameObject);
                 if (objectFound != null)
                 {
                     objectList.Add(objectFound);

@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using Player;
-using CharacterController = Characters.Generic.CharacterController;
 using UnityEngine.UI;
 
 public class CanvasController : MonoBehaviour
@@ -16,10 +14,11 @@ public class CanvasController : MonoBehaviour
     [Header("Sliders")] public Slider lightingSlider;
     public Slider runningSlider;
 
-    [Header("Crosshair")] public Sprite defaultCrosshair;
+    [Header("Crosshair")] public Sprite inspectCrosshair;
     public Sprite grabCrosshair;
+    public Sprite draggingCrosshair;
 
-    [Header("Components")] public Image UICrosshair;
+    [Header("Components")] public CrosshairController CrosshairController;
     public Image blackFade;
 
     private FlashlightController flashlight;
@@ -32,20 +31,25 @@ public class CanvasController : MonoBehaviour
         playerController = FindObjectOfType<PlayerController>();
         flashlight = playerController.attachedFlashlight;
         playerWalking = FindObjectOfType<State_Player_Walking>();
+
+        if (CrosshairController == null)
+            CrosshairController = FindObjectOfType<CrosshairController>();
+
         //_pauseManager = GetComponentInChildren<PauseManager>();
     }
 
     void Update()
     {
-#if UNITY_EDITOR
+/*#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.J))
         {
             AddPickupMessage("key");
         }
-#endif
+#endif*/
 
-        playerLightingUpdate();
-        playerRunningUpdate();
+        PlayerLightingUpdate();
+        PlayerRunningUpdate();
+
         if (!GameManager.Instance.PlayerController.IsDead)
             TooglePauseMenu(false);
 
@@ -59,15 +63,43 @@ public class CanvasController : MonoBehaviour
         {
             playerController.ToggleInventory();
         }
+
+        SetupCursor();
+    }
+
+    public void SetupCursor()
+    {
+        if (GameManager.Instance.PlayerController.interactablesManager.CurrentInteractable != null)
+        {
+            switch (GameManager.Instance.PlayerController.interactablesManager.CurrentInteractable.interactionType)
+            {
+                case InteractableObject.InteractionType.Drag:
+                case InteractableObject.InteractionType.Pick:
+                    ChangeCursor(grabCrosshair, new Vector3(.6f, .6f, 1f));
+                    break;
+                case InteractableObject.InteractionType.Inspect:
+                    ChangeCursor(inspectCrosshair, new Vector3(.6f, .6f, 1f));
+                    break;
+                case InteractableObject.InteractionType.Interact:
+                    break;
+                default:
+                    ChangeCursor(CrosshairController.defaultCrosshair, new Vector3(0.1f, .1f, 1f));
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+        else if (GameManager.Instance.PlayerController.interactablesManager.CurrentInteractable.IsInteracting)
+        {
+            ChangeCursor(draggingCrosshair, new Vector3(.6f, .6f, 1f));
+        }
+        else 
+        {
+            ChangeCursor(CrosshairController.defaultCrosshair, new Vector3(.1f, .1f, 1f));
+        }
     }
 
     public void AddPickupMessage(string itemName)
     {
         CustomPickupMessage(itemName + " COLLECTED");
-        /*GameObject Message = Instantiate(NotificationPrefab, NotificationPanel.transform);
-        //Notifications.Add(Message);
-        //Message.GetComponent<Notification>().SetMessage(string.Format("Picked up {0}", itemName));
-        Message.GetComponent<Notification>().SetMessage(itemName + " COLLECTED");*/
     }
 
     public void CustomPickupMessage(string text)
@@ -76,26 +108,20 @@ public class CanvasController : MonoBehaviour
         Message.GetComponent<Notification>().SetMessage(text);
     }
 
-    public void playerLightingUpdate()
+    public void PlayerLightingUpdate()
     {
         lightingSlider.value = flashlight.currentCharge / flashlight.maxCharge;
     }
 
-    public void playerRunningUpdate()
+    public void PlayerRunningUpdate()
     {
         runningSlider.value = playerWalking.currentStamina / playerController.characterProperties.maximumStamina;
     }
 
-    public void ChangeCursorToDefault()
+    public void ChangeCursor(Sprite newCursor, Vector3 newScale)
     {
-        UICrosshair.sprite = defaultCrosshair;
-        UICrosshair.rectTransform.localScale = new Vector3(.1f, .1f, 1f);
-    }
-
-    public void ChangeCursorToGrab()
-    {
-        UICrosshair.sprite = grabCrosshair;
-        UICrosshair.rectTransform.localScale = new Vector3(.6f, .6f, 1f);
+        CrosshairController.SetNewCrosshair(newCursor);
+        CrosshairController.UIImage.rectTransform.localScale = newScale;
     }
 
     public void TooglePauseMenu(bool forceEnable)

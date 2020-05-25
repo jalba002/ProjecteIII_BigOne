@@ -1,21 +1,23 @@
 ﻿using System;
-using Interfaces;
 using UnityEngine;
-using World.Objects;
 
 public class DynamicActivator : MonoBehaviour
 {
-    public bool Interact(IInteractable newInteractable, bool enable)
+    public bool Interact(InteractableObject newInteractable, bool enable)
     {
         try
         {
-            if (newInteractable.attachedGameobject.GetComponent<IMovable>() == null 
-                && newInteractable.attachedGameobject.GetComponent<IPickable>() == null) return false;
+            if (newInteractable.interactionType == InteractableObject.InteractionType.Drag ||
+                newInteractable.interactionType == InteractableObject.InteractionType.Pick)
+            {
+                return newInteractable.Interact(enable);
+            }
         }
         catch (NullReferenceException)
         {
             return false;
         }
-        return newInteractable.Interact(enable);
+
+        return false;
     }
 }

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Interfaces;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 
 namespace World.Objects
 {
-    public class DynamicObject : MonoBehaviour, IInteractable, IMovable
+    public class DynamicObject : InteractableObject
     {
         #region Declarations
 
@@ -124,8 +123,6 @@ namespace World.Objects
             {
                 throw new NullReferenceException($"Missing Handle in {this.gameObject.name}");
             }
-
-            DisplayName = $"Drag {objectType.ToString()}";
         }
 
         public void Start()
@@ -155,6 +152,24 @@ namespace World.Objects
             }
         }
 
+        private void GetRigidbody()
+        {
+            Rigidbody = GetComponent<Rigidbody>();
+            if (Rigidbody == null)
+            {
+                Rigidbody = gameObject.AddComponent<Rigidbody>();
+            }
+
+            Rigidbody.useGravity = useGravity;
+            Rigidbody.angularDrag = 0f;
+            Rigidbody.drag = objectType == ObjectType.Door
+                ? doorConfiguration.friction
+                : (objectType == ObjectType.Drawer ? drawerConfiguration.friction : Rigidbody.drag);
+            return;
+        }
+
+        #region Joints
+
         private void GetJoints(ObjectType objectType)
         {
             switch (objectType)
@@ -183,21 +198,6 @@ namespace World.Objects
             }
         }
 
-        private void GetRigidbody()
-        {
-            Rigidbody = GetComponent<Rigidbody>();
-            if (Rigidbody == null)
-            {
-                Rigidbody = gameObject.AddComponent<Rigidbody>();
-            }
-
-            Rigidbody.useGravity = useGravity;
-            Rigidbody.angularDrag = 0f;
-            Rigidbody.drag = objectType == ObjectType.Door
-                ? doorConfiguration.friction
-                : (objectType == ObjectType.Drawer ? drawerConfiguration.friction : Rigidbody.drag);
-            return;
-        }
 
         private void ConfigurateNewJoint(ConfigurableJoint joint)
         {
@@ -292,6 +292,7 @@ namespace World.Objects
 
             lockedMode = lockMode;
         }
+        #endregion
 
         #region IgnoreColliders
 
@@ -328,18 +329,11 @@ namespace World.Objects
 
         #endregion
 
-        //Update hinge variables when inspector is modified.
-        private void OnValidate()
+        #region Interactable
+
+        public override void UpdateInteractable()
         {
-            SetJointsLimit(lockedMode);
-        }
-
-        // Interface Implementation //
-
-        #region Interface Interactable
-
-        public void UpdateInteractable()
-        {
+            base.UpdateInteractable();
             if (IsInteracting)
             {
                 OnInteracting();
@@ -347,15 +341,6 @@ namespace World.Objects
         }
 
         // Interface Implementation //
-        public string DisplayName { get; set; }
-
-        public GameObject attachedGameobject
-        {
-            get { return gameObject; }
-        }
-
-        public bool IsInteracting { get; set; }
-
         public bool ForceClose()
         {
             throw new NotImplementedException();
@@ -403,7 +388,7 @@ namespace World.Objects
 
         #endregion
 
-        public bool Interact(bool interactEnable)
+        public override bool Interact(bool interactEnable)
         {
             if (!interactEnable)
             {
@@ -422,8 +407,10 @@ namespace World.Objects
             return false;
         }
 
-        public void OnStartInteract()
+        #region OnInteractions
+        public override void OnStartInteract()
         {
+            base.OnStartInteract();
             OnStartInteracting.Invoke();
 
             switch (objectType)
@@ -456,10 +443,18 @@ namespace World.Objects
             IsInteracting = true;
         }
 
-        public void OnInteracting()
+        public override void OnInteracting()
         {
+            base.OnInteracting();
             ForceOpen(CalculateForce(openForce));
         }
+        
+        public override void OnEndInteract()
+        {
+            IsInteracting = false;
+            Debug.Log($"Setting {this.gameObject.name} interaction to {IsInteracting}");
+        }
+        #endregion
 
         private float CalculateForce(float forceScale = 1f)
         {
@@ -477,6 +472,7 @@ namespace World.Objects
             Rigidbody.AddForceAtPosition(useForce, HandlePosition.transform.position, ForceMode.Force);
         }
 
+        #region Opening
         public void StrongOpening()
         {
             var useForce = HandlePosition.transform.forward * (Rigidbody.mass * openForce);
@@ -488,16 +484,12 @@ namespace World.Objects
             var useForce = HandlePosition.transform.forward * (Rigidbody.mass * openForce);
             Rigidbody.AddForceAtPosition(-useForce, HandlePosition.transform.position, ForceMode.Impulse);
         }
-
-        public void OnEndInteract()
+        #endregion
+        
+        //Update hinge variables when inspector is modified.
+        private void OnValidate()
         {
-            IsInteracting = false;
-            Debug.Log($"Setting {this.gameObject.name} interaction to {IsInteracting}");
-        }
-
-        public float ReturnAngle()
-        {
-            return HingeJoint.angle;
+            SetJointsLimit(lockedMode);
         }
     }
 }

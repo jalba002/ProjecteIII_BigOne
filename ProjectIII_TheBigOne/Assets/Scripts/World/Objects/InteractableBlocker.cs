@@ -27,7 +27,7 @@ public class InteractableBlocker : MonoBehaviour
         attachedInteractable.OnEndInteract();
         try
         {
-            if (playerInteractableManager.CurrentInteractable.attachedGameobject == attachedInteractable.gameObject)
+            if (playerInteractableManager.CurrentInteractable.gameObject == attachedInteractable.gameObject)
             {
                 playerInteractableManager.ClearInteractable();
             }

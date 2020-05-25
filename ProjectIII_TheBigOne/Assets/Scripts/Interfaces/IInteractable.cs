@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public interface IInteractable
+/*public interface IInteractable
 {
     string DisplayName { get; set; }
     GameObject attachedGameobject { get; }
@@ -13,4 +13,4 @@ public interface IInteractable
     void OnStartInteract();
     void OnInteracting();
     void OnEndInteract();
-}
+}*/

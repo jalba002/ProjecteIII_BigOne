@@ -134,9 +134,9 @@ namespace Player
 
             UseFlashlight();
 
+            InteractDynamics();
             if (InspectPuzzle()) return;
             InspectObjects();
-            InteractDynamics();
         }
 
         bool InspectPuzzle()
@@ -180,19 +180,23 @@ namespace Player
 
         void InteractDynamics()
         {
-            if (interactablesManager != null && dynamicActivator != null && interactablesManager.CurrentInteractable != null)
+            if (dynamicActivator != null)
             {
-                if (currentBrain.MouseInteractRelease)
+                if (interactablesManager != null && interactablesManager.CurrentInteractable != null)
                 {
-                    dynamicActivator.Interact(interactablesManager.CurrentInteractable, false);
-                    InteractCooldown = 20;
-                }
-                else if (currentBrain.MouseInteract && !interactablesManager.CurrentInteractable.IsInteracting &&
-                         InteractCooldown <= 0)
-                {
-                    if (dynamicActivator.Interact(interactablesManager.CurrentInteractable, true))
+                    if (currentBrain.MouseInteractRelease)
                     {
-                        stateMachine.SwitchState<State_Player_Interacting>();
+                        dynamicActivator.Interact(interactablesManager.CurrentInteractable, false);
+                        InteractCooldown = 20;
+                    }
+                    else if (currentBrain.MouseInteract && 
+                             !interactablesManager.CurrentInteractable.IsInteracting &&
+                             InteractCooldown <= 0)
+                    {
+                        if (dynamicActivator.Interact(interactablesManager.CurrentInteractable, true))
+                        {
+                            stateMachine.SwitchState<State_Player_Interacting>();
+                        }
                     }
                 }
             }
@@ -263,6 +267,11 @@ namespace Player
             if (rigidbody.angularVelocity != Vector3.zero)
             {
                 rigidbody.angularVelocity = Vector3.zero;
+            }
+
+            if (rigidbody.velocity != Vector3.zero && currentBrain.Direction == Vector3.zero)
+            {
+                rigidbody.velocity = Vector3.zero;
             }
         }
 

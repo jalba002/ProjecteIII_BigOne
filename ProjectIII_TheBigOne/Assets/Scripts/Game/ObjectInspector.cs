@@ -70,7 +70,6 @@ public class ObjectInspector : MonoBehaviour
             return false;
         }
 
-
         return false;
     }
 
@@ -95,7 +94,6 @@ public class ObjectInspector : MonoBehaviour
         currentInspectedObject.StopInspect();
         currentInspectedObject = null;
         objectRenderer.ResetComponents();
-        Debug.Log("Stopped inspecting.");
     }
 
     public bool GetEnabled()

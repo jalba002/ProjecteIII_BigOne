@@ -74,7 +74,7 @@ public class InteractablePuzzle : InteractableObject, IPuzzle
         // Show cursor to begin interacting.
         // Set IsInteracting to true.
 
-        GameManager.Instance.PlayerController.cameraController.SetNewPosition(cameraPosition, true);
+        GameManager.Instance.PlayerController.cameraController.StartLerpToPos(cameraPosition);
         GameManager.Instance.PlayerController.stateMachine.SwitchState<State_Player_PuzzleInspect>();
         IsInteracting = true;
         //playerCameraController.SetNewPosition(attachedPuzzle.gameObject.transform,true);
@@ -124,12 +124,17 @@ public class InteractablePuzzle : InteractableObject, IPuzzle
         // Restore controls to player.
         // Restore cursor to usual settings.
         // Set IsInteracting to false.
+
+        EndInteractActions();    
+        attachedPuzzle.EndGame();
+    }
+
+    public void EndInteractActions()
+    {
         playerCameraController.RestorePosition();
         GameManager.Instance.PlayerController.stateMachine.SwitchState<State_Player_Walking>();
         IsInteracting = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        attachedPuzzle.EndGame();
     }
 }

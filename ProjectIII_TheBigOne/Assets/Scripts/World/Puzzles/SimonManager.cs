@@ -80,14 +80,26 @@ public class SimonManager : Puzzle
     public override void PuzzleWon()
     {
         OnPuzzleWin.Invoke();
+        EndGame();
     }
 
     public override void EndGame()
+    {        
+        StopAllCoroutines();
+        ResetColors();
+        this.GetComponentInParent<InteractablePuzzle>().EndInteractActions();
+    }
+
+    private void ResetColors()
     {
         colors = null;
-        StopAllCoroutines();
-        //this.GetComponentInParent<InteractablePuzzle>().ForceEndInteraction();
+        for(int i = 0; i<active.Length; i++)
+        {
+            active[i].SetActive(false);
+            inactive[i].SetActive(true);
+        }
     }
+
 
     public int[] GetRandomNumers(int numbersToGet)
     {
@@ -167,6 +179,7 @@ public class SimonManager : Puzzle
         {
             Debug.Log("Fallaste");
             AudioManager.PlaySound2D("Sound/Simon/Fail");
+            EndGame();
             //EndGame();
         }
     }

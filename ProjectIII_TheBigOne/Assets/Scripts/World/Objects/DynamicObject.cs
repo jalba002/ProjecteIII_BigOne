@@ -98,7 +98,8 @@ namespace World.Objects
 
         [Header("Rigidbody Settings")] public bool useGravity = false;
 
-        [Space(2)] [Header("Other Settings")] public List<Collider> ignoredColliders;
+        [Space(2)] [Header("Other Settings")] public bool ignorePlayerCollider = false;
+        public List<Collider> ignoredColliders;
         private Collider selfCollider;
 
         // Joints.
@@ -139,8 +140,10 @@ namespace World.Objects
             {
                 case ObjectType.Drawer:
                     Vector3 newStartingPosition = this.gameObject.transform.localPosition;
-                    Vector3 forward = HandlePosition.transform.InverseTransformDirection(HandlePosition.transform.forward);
-                    newStartingPosition += (InvertInitialization ? -forward : forward) * (drawerConfiguration.maximumDistance * StartupClosePercentage);
+                    Vector3 forward =
+                        HandlePosition.transform.InverseTransformDirection(HandlePosition.transform.forward);
+                    newStartingPosition += (InvertInitialization ? -forward : forward) *
+                                           (drawerConfiguration.maximumDistance * StartupClosePercentage);
                     this.gameObject.transform.localPosition = newStartingPosition;
                     break;
                 case ObjectType.Door:
@@ -292,6 +295,7 @@ namespace World.Objects
 
             lockedMode = lockMode;
         }
+
         #endregion
 
         #region IgnoreColliders
@@ -300,12 +304,24 @@ namespace World.Objects
         {
             try
             {
-                Collider[] collectedColliders = gameObject.GetComponentsInChildren<Collider>();
+               /* Collider[] collectedColliders = gameObject.GetComponentsInChildren<Collider>();
                 foreach (Collider collider in collectedColliders)
                 {
-                    if (collider.GetHashCode() != selfCollider.GetHashCode())
+                    if (collider != selfCollider)
                     {
                         ignoredColliders.Add(collider);
+                    }
+                }*/
+
+                if (ignorePlayerCollider)
+                {
+                    if (showLogDebug)
+                        Debug.Log("Ignoring Player Collider.");
+                    if (GameManager.Instance.PlayerController != null)
+                    {
+                        if (showLogDebug)
+                            Debug.Log("Player Collider Not Null.");
+                        ignoredColliders.Add(GameManager.Instance.PlayerController.attachedCollider);
                     }
                 }
             }
@@ -323,6 +339,8 @@ namespace World.Objects
             foreach (Collider currentCollider in ignoredColliders)
             {
                 if (currentCollider == null) break;
+                if (showLogDebug)
+                    Debug.Log($"Ignoring {currentCollider.gameObject.name} with {selfCollider.gameObject.name}");
                 Physics.IgnoreCollision(currentCollider, selfCollider, true);
             }
         }
@@ -408,6 +426,7 @@ namespace World.Objects
         }
 
         #region OnInteractions
+
         public override void OnStartInteract()
         {
             base.OnStartInteract();
@@ -448,11 +467,12 @@ namespace World.Objects
             base.OnInteracting();
             ForceOpen(CalculateForce(openForce));
         }
-        
+
         public override void OnEndInteract()
         {
             IsInteracting = false;
         }
+
         #endregion
 
         private float CalculateForce(float forceScale = 1f)
@@ -461,7 +481,7 @@ namespace World.Objects
             float mouseAxis = UseMouseXAxis ? Input.GetAxis("Mouse X") : Input.GetAxis("Mouse Y");
             mouseAxis = Mathf.Clamp(mouseAxis, -maxMouseInput, maxMouseInput);
             calculatedForce = (forceScale * mouseAxis) * OptionsManager.optionsData.sensitivity;
-            
+
             return calculatedForce;
         }
 
@@ -472,6 +492,7 @@ namespace World.Objects
         }
 
         #region Opening
+
         public void StrongOpening()
         {
             var useForce = HandlePosition.transform.forward * (Rigidbody.mass * openForce);
@@ -483,8 +504,9 @@ namespace World.Objects
             var useForce = HandlePosition.transform.forward * (Rigidbody.mass * openForce);
             Rigidbody.AddForceAtPosition(-useForce, HandlePosition.transform.position, ForceMode.Impulse);
         }
+
         #endregion
-        
+
         //Update hinge variables when inspector is modified.
         private void OnValidate()
         {

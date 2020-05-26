@@ -67,7 +67,7 @@ public class InspectableObject : InteractableObject, IInspectable
 
     private void CreateInspectInfo()
     {
-        Debug.Log("Created inspect info.");
+        //Debug.Log("Created inspect info.");
         if (InspectInfo.objectMesh == null || InspectInfo.objectTexture == null)
         {
             _meshFilter = GetComponentInChildren<MeshFilter>();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class InspectableObject : InteractableObject
+public class InspectableObject : InteractableObject, IInspectable
 {
     private MeshRenderer _meshRenderer;
     private MeshFilter _meshFilter;
@@ -67,7 +67,7 @@ public class InspectableObject : InteractableObject
 
     private void CreateInspectInfo()
     {
-        Debug.Log("Created inspect info.");
+        //Debug.Log("Created inspect info.");
         if (InspectInfo.objectMesh == null || InspectInfo.objectTexture == null)
         {
             _meshFilter = GetComponentInChildren<MeshFilter>();

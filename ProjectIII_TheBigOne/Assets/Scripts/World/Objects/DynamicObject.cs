@@ -452,7 +452,6 @@ namespace World.Objects
         public override void OnEndInteract()
         {
             IsInteracting = false;
-            Debug.Log($"Setting {this.gameObject.name} interaction to {IsInteracting}");
         }
         #endregion
 

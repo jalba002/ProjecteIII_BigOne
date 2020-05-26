@@ -65,6 +65,8 @@ namespace World.Objects
 
         public LockedMode lockedMode;
 
+        public OpenState openState;
+
         public DoorHingeConfiguration doorConfiguration = new DoorHingeConfiguration()
         {
             friction = 1f,
@@ -85,8 +87,6 @@ namespace World.Objects
             forceScaleApplied = 5f
         };
 
-        public OpenState openState { get; set; }
-
         #endregion
 
         [Header("Hinge Settings", order = 1)] public GameObject HandlePosition;
@@ -98,7 +98,9 @@ namespace World.Objects
 
         [Header("Rigidbody Settings")] public bool useGravity = false;
 
-        [Space(2)] [Header("Other Settings")] public bool ignorePlayerCollider = false;
+        [Space(2)] [Header("Collision Settings")]
+        public bool ignorePlayerCollider = false;
+
         public List<Collider> ignoredColliders;
         private Collider selfCollider;
 
@@ -222,6 +224,22 @@ namespace World.Objects
             //joint.anchor = new Vector3(0f, -0.5f, 0f);
         }
 
+        private void CheckObjectOpening()
+        {
+            switch (objectType)
+            {
+                case ObjectType.Door:
+
+                    break;
+                case ObjectType.Drawer:
+                    break;
+                case ObjectType.Pallet:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         private void SetJointsLimit(LockedMode lockMode)
         {
             switch (lockMode)
@@ -304,14 +322,14 @@ namespace World.Objects
         {
             try
             {
-               /* Collider[] collectedColliders = gameObject.GetComponentsInChildren<Collider>();
-                foreach (Collider collider in collectedColliders)
-                {
-                    if (collider != selfCollider)
-                    {
-                        ignoredColliders.Add(collider);
-                    }
-                }*/
+                /* Collider[] collectedColliders = gameObject.GetComponentsInChildren<Collider>();
+                 foreach (Collider collider in collectedColliders)
+                 {
+                     if (collider != selfCollider)
+                     {
+                         ignoredColliders.Add(collider);
+                     }
+                 }*/
 
                 if (ignorePlayerCollider)
                 {
@@ -387,6 +405,7 @@ namespace World.Objects
             Destroy(HingeJoint);
             Destroy(GetComponent<NavMeshObstacle>());
             Rigidbody.drag = 0f;
+            this.gameObject.layer = 0;
         }
 
         public bool Lock()
@@ -437,7 +456,6 @@ namespace World.Objects
                 case ObjectType.Door:
                     //Play door sound
                     AudioManager.PlaySoundAtLocation("Sound/Door/DoorOpen_07", transform.position);
-
                     break;
                 case ObjectType.Drawer:
                     //Play drawer sound
@@ -496,6 +514,12 @@ namespace World.Objects
         public void StrongOpening()
         {
             var useForce = HandlePosition.transform.forward * (Rigidbody.mass * openForce);
+            Rigidbody.AddForceAtPosition(useForce, HandlePosition.transform.position, ForceMode.Impulse);
+        }
+
+        public void BreakOpening(Vector3 direction, float force = 10f)
+        {
+            var useForce = direction * (Rigidbody.mass * force);
             Rigidbody.AddForceAtPosition(useForce, HandlePosition.transform.position, ForceMode.Impulse);
         }
 

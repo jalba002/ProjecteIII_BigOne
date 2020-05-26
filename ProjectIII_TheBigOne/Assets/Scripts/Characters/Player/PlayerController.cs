@@ -15,8 +15,10 @@ namespace Player
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerController : CharacterController
     {
-        public Collider attachedCollider { get; set; }
-        [Header("Components")] public CameraController cameraController;
+        [Space(2)]
+        [Header("Components")] 
+        public Collider attachedCollider;
+        public CameraController cameraController;
 
         public FlashlightController attachedFlashlight;
 
@@ -71,7 +73,7 @@ namespace Player
                 Debug.LogWarning("Character properties not set!");
             }
 
-            if (!attachedCollider)
+            if (attachedCollider == null)
                 attachedCollider = GetComponent<Collider>();
 
             audioSource = GetComponent<AudioSource>();

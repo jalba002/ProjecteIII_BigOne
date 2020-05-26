@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 0115c4439b4373b42af30d04c613d612, type: 3}
+  - {fileID: 2100000, guid: 1b598a8de1ce1be4a9875cb03f302047, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -137,7 +137,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 0115c4439b4373b42af30d04c613d612, type: 3}
+  - {fileID: 2100000, guid: 1b598a8de1ce1be4a9875cb03f302047, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -217,7 +217,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 0115c4439b4373b42af30d04c613d612, type: 3}
+  - {fileID: 2100000, guid: 3e68837dd1673dc478e4357a05874907, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -369,7 +369,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 0115c4439b4373b42af30d04c613d612, type: 3}
+  - {fileID: 2100000, guid: 5dffe8e8a693b5a4492990f744822c16, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -418,7 +418,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2360833333278513182}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.44635844, y: 0.00068573863, z: 0.41338378}
+  m_LocalPosition: {x: 0.445, y: 0, z: 0.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 520573136876423476}
@@ -453,12 +453,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showLogDebug: 0
   interactionType: 0
-  displayName: 
-  displayImage: {fileID: 0}
+  displayName: Open wardrobe door
+  previewImage: {fileID: 21300000, guid: 31a82a7fec8da8a4cbe52985360c4ac6, type: 3}
+  displayImage: {fileID: 21300000, guid: c50947eb986193f44952acbdcf6f835d, type: 3}
   objectType: 0
   lockedMode: 1
   doorConfiguration:
-    maximumAngle: 90
+    maximumAngle: 100
     minimumAngle: 0
     friction: 5
   drawerConfiguration:
@@ -509,7 +510,7 @@ HingeJoint:
   m_Anchor: {x: -0.03, y: 0, z: 0.01}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.43635845, y: 0.00068573863, z: 0.38338378}
+  m_ConnectedAnchor: {x: 0.435, y: 0, z: 0.43}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -581,8 +582,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showLogDebug: 0
   interactionType: 0
-  displayName: 
-  displayImage: {fileID: 0}
+  displayName: Open wardrobe drawer
+  previewImage: {fileID: 21300000, guid: 31a82a7fec8da8a4cbe52985360c4ac6, type: 3}
+  displayImage: {fileID: 21300000, guid: 96efc1977c2ea4547bb329bd246f7839, type: 3}
   objectType: 1
   lockedMode: 1
   doorConfiguration:
@@ -702,8 +704,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showLogDebug: 0
   interactionType: 0
-  displayName: 
-  displayImage: {fileID: 0}
+  displayName: Open wardrobe drawer
+  previewImage: {fileID: 21300000, guid: 31a82a7fec8da8a4cbe52985360c4ac6, type: 3}
+  displayImage: {fileID: 21300000, guid: 96efc1977c2ea4547bb329bd246f7839, type: 3}
   objectType: 1
   lockedMode: 1
   doorConfiguration:
@@ -839,7 +842,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 0115c4439b4373b42af30d04c613d612, type: 3}
+  - {fileID: 2100000, guid: 5dffe8e8a693b5a4492990f744822c16, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -888,7 +891,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5693718707429301674}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.4463564, y: 0.0007653689, z: 0.41338378}
+  m_LocalPosition: {x: -0.445, y: 0, z: 0.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2640693903437871423}
@@ -910,12 +913,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showLogDebug: 0
   interactionType: 0
-  displayName: 
-  displayImage: {fileID: 0}
+  displayName: Open wardrobe door
+  previewImage: {fileID: 21300000, guid: 31a82a7fec8da8a4cbe52985360c4ac6, type: 3}
+  displayImage: {fileID: 21300000, guid: c50947eb986193f44952acbdcf6f835d, type: 3}
   objectType: 0
   lockedMode: 1
   doorConfiguration:
-    maximumAngle: -90
+    maximumAngle: -100
     minimumAngle: 0
     friction: 5
   drawerConfiguration:
@@ -966,7 +970,7 @@ HingeJoint:
   m_Anchor: {x: 0.03, y: 0, z: 0.01}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.4363564, y: 0.0007653689, z: 0.38338378}
+  m_ConnectedAnchor: {x: -0.435, y: 0, z: 0.43}
   m_UseSpring: 0
   m_Spring:
     spring: 0

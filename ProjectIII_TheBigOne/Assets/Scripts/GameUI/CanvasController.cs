@@ -63,38 +63,6 @@ public class CanvasController : MonoBehaviour
         {
             playerController.ToggleInventory();
         }
-
-        SetupCursor();
-    }
-
-    public void SetupCursor()
-    {
-        if (GameManager.Instance.PlayerController.interactablesManager.CurrentInteractable != null)
-        {
-            switch (GameManager.Instance.PlayerController.interactablesManager.CurrentInteractable.interactionType)
-            {
-                case InteractableObject.InteractionType.Drag:
-                case InteractableObject.InteractionType.Pick:
-                    ChangeCursor(grabCrosshair, new Vector3(.6f, .6f, 1f));
-                    break;
-                case InteractableObject.InteractionType.Inspect:
-                    ChangeCursor(inspectCrosshair, new Vector3(.6f, .6f, 1f));
-                    break;
-                case InteractableObject.InteractionType.Interact:
-                    break;
-                default:
-                    ChangeCursor(CrosshairController.defaultCrosshair, new Vector3(0.1f, .1f, 1f));
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-        else if (GameManager.Instance.PlayerController.interactablesManager.CurrentInteractable.IsInteracting)
-        {
-            ChangeCursor(draggingCrosshair, new Vector3(.6f, .6f, 1f));
-        }
-        else 
-        {
-            ChangeCursor(CrosshairController.defaultCrosshair, new Vector3(.1f, .1f, 1f));
-        }
     }
 
     public void AddPickupMessage(string itemName)

@@ -228,7 +228,7 @@ public class InventoryDisplay : MonoBehaviour
 
     public bool ToggleInventoryUI()
     {
-        Debug.Log("Hello team i go b");
+        // Debug.Log("Hello team i go b"); TODO RUSH B.
         contextMenu.SetActive(false);
         if (!inventoryParent.activeSelf)
         {

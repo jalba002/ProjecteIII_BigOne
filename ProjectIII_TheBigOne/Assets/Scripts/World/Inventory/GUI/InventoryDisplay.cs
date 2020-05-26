@@ -94,6 +94,10 @@ public class InventoryDisplay : MonoBehaviour
             contextMenu.GetComponent<RectTransform>().anchoredPosition =
             new Vector3(0 - selectedSlot.gameObject.GetComponent<RectTransform>().rect.size.x, 0, 0);
         }
+        else
+        {
+            contextMenu.SetActive(false);
+        }
         
         
     }
@@ -228,7 +232,9 @@ public class InventoryDisplay : MonoBehaviour
 
     public bool ToggleInventoryUI()
     {
-        // Debug.Log("Hello team i go b"); TODO RUSH B.
+        if(selectedSlot != null)
+            selectedSlot.UnselectThisSlot();
+        //selectedSlot = null;        
         contextMenu.SetActive(false);
         if (!inventoryParent.activeSelf)
         {

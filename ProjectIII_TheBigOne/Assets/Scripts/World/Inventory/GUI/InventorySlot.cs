@@ -114,10 +114,8 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     public void SelectThisSlot()
     {
-
         if (inventoryDisplayRef.selectedSlot == this)
         {
-
             UnselectThisSlot();
         }
         else
@@ -170,6 +168,10 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     {
         canvasGroup.blocksRaycasts = false;
 
+        if(selectedSlot == this)
+        {
+            UnselectThisSlot();
+        }
         this.gameObject.transform.parent = null;
         this.gameObject.transform.SetParent(canvas.transform);
     }
@@ -177,7 +179,7 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     {
         canvasGroup.blocksRaycasts = true;
         this.gameObject.transform.SetParent(slot.transform);
-
+        
         rectTransform.anchoredPosition = new Vector3(0, 0, 0);
     }
     public void OnDrag(PointerEventData eventData)

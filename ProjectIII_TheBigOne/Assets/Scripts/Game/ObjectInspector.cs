@@ -80,6 +80,7 @@ public class ObjectInspector : MonoBehaviour
         try
         {
             var info = inspectable.Inspect();
+            distances = info.maxRanges;
             objectRenderer.SetComponents(info.objectMesh, info.objectTexture, info.objectTransform);
             currentInspectedObject = inspectable;
             renderCamera.enabled = true;

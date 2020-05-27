@@ -385,6 +385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 4287271706014648181}
+  attachedCollider: {fileID: 4287271706014648175}
   cameraController: {fileID: 2999368691099895388}
   attachedFlashlight: {fileID: 6592646240077006143}
   playerInventory: {fileID: 4041253382631071211}
@@ -426,6 +427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectRenderer: {fileID: 7698896559584102530}
+  renderCamera: {fileID: 473544106632521736}
   distances: {x: 1.5, y: 2}
   rotationSpeed: {x: 0.5, y: 0.5}
 --- !u!114 &6592646240077006143
@@ -459,7 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterItems: []
-  database: {fileID: 11400000, guid: 830643a5e8ee3e44b904e40a709dce92, type: 2}
+  database: {fileID: 11400000, guid: 1b8c232879a17a74b89be2a9328dd0a8, type: 2}
   inventoryDisplay: {fileID: 0}
 --- !u!82 &2031410052690668047
 AudioSource:
@@ -577,7 +579,7 @@ MonoBehaviour:
   detectedLayers:
     serializedVersion: 2
     m_Bits: 513
-  attachedPlayer: {fileID: 0}
+  attachedPlayer: {fileID: 4287271706014648176}
   textDebug: {fileID: 0}
   aimedObject: {fileID: 0}
   CanInteract: 0

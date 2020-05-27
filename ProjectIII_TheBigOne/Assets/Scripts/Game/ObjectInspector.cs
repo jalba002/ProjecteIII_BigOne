@@ -7,6 +7,7 @@ public class ObjectInspector : MonoBehaviour
     public IInspectable currentInspectedObject;
 
     [Header("Render output")] public InspectedElement objectRenderer;
+    public Camera renderCamera;
 
     [Header("Render Settings")] public Vector2 distances = new Vector2(1.5f, 2f);
 
@@ -19,6 +20,7 @@ public class ObjectInspector : MonoBehaviour
     public void Start()
     {
         playerController = FindObjectOfType<PlayerController>();
+        renderCamera.enabled = false;
     }
 
     public void Update()
@@ -80,6 +82,7 @@ public class ObjectInspector : MonoBehaviour
             var info = inspectable.Inspect();
             objectRenderer.SetComponents(info.objectMesh, info.objectTexture, info.objectTransform);
             currentInspectedObject = inspectable;
+            renderCamera.enabled = true;
             return true;
         }
         catch (Exception e)
@@ -93,6 +96,7 @@ public class ObjectInspector : MonoBehaviour
     {
         currentInspectedObject.StopInspect();
         currentInspectedObject = null;
+        renderCamera.enabled = false;
         objectRenderer.ResetComponents();
     }
 

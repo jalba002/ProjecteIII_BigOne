@@ -159,8 +159,6 @@ public class SimonManager : Puzzle
 
     public void CheckAnswer(int i)
     {
-        
-
         StartCoroutine(HighlightColor(i, true));
 
         if (i == colors[currentAnswer])
@@ -171,32 +169,28 @@ public class SimonManager : Puzzle
             if (currentAnswer >= colors.Length)
             {
                 Debug.Log("Todo bien, todo correcto, y yo que me alegro.");
-                //Next phase
-                StartCoroutine(IncreasePhase());
+                if (currentColorCount - startingColorCount >= roundsToSucceed)
+                {
+                    PuzzleWon();
+                }
+                else                
+                    StartCoroutine(IncreasePhase());
             }
         }
         else
         {
             Debug.Log("Fallaste");
             AudioManager.PlaySound2D("Sound/Simon/Fail");
-            EndGame();
-            //EndGame();
+            EndGame();            
         }
     }
 
     private IEnumerator IncreasePhase()
     {
         //Start coroutine de acertaste
-
         yield return new WaitForSeconds(2);
-
         answering = false;
         currentColorCount++;
-        if (currentColorCount - startingColorCount > roundsToSucceed)
-        {
-            PuzzleWon();
-        }
-
         colors = GetRandomNumers(currentColorCount);
         StartCoroutine(PlayColorSequence());
     }

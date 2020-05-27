@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 4278664259149847473}
   - component: {fileID: 7797349782265728570}
   - component: {fileID: 3516026850478053993}
-  - component: {fileID: 284001480951585401}
+  - component: {fileID: 84686116530699929}
+  - component: {fileID: 7264845043905753937}
+  - component: {fileID: 5491429809773041721}
   m_Layer: 0
   m_Name: Mesh_Cubicle
   m_TagString: Untagged
@@ -80,8 +82,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &284001480951585401
-MeshCollider:
+--- !u!65 &84686116530699929
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -90,10 +92,35 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -4964976195398216410, guid: 7f29c85f65acf6a4e80b8b26eec88cfe, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.116817474, y: 2.5, z: 2.8524349}
+  m_Center: {x: 0.83394134, y: 0, z: 0}
+--- !u!65 &7264845043905753937
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3367016949619055801}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.11385512, y: 2.4937167, z: 2.8524349}
+  m_Center: {x: -0.83542204, y: 0, z: 0}
+--- !u!65 &5491429809773041721
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3367016949619055801}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.7846997, y: 2.4937167, z: 0.15176249}
+  m_Center: {x: 0.00000023841858, y: 0, z: -1.3503363}
 --- !u!1 &6126672633702740772
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,6 +285,7 @@ MonoBehaviour:
   displayImage: {fileID: 21300000, guid: c50947eb986193f44952acbdcf6f835d, type: 3}
   objectType: 0
   lockedMode: 1
+  openState: 0
   doorConfiguration:
     maximumAngle: 90
     minimumAngle: 0
@@ -270,12 +298,14 @@ MonoBehaviour:
     forceToThrow: 100
     forceScaleApplied: 5
   HandlePosition: {fileID: 6126672633702740772}
+  applyHandleRotation: 0
   openForce: 5
   maxMouseInput: 7
   UseMouseXAxis: 0
   InvertInitialization: 0
   StartupClosePercentage: 1
   useGravity: 0
+  ignorePlayerCollider: 0
   ignoredColliders: []
   OnUnlockEvent:
     m_PersistentCalls:
@@ -294,8 +324,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.4817488, y: 2.4937167, z: 0.092231154}
-  m_Center: {x: 0.7195102, y: 0, z: -0.0016281009}
+  m_Size: {x: 1.4096848, y: 2.3448544, z: 0.092231154}
+  m_Center: {x: 0.7555422, y: 0.0129519105, z: -0.0016281009}
 --- !u!54 &790526778002681770
 Rigidbody:
   m_ObjectHideFlags: 0

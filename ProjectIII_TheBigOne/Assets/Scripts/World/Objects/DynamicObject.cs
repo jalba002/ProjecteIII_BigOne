@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using UnityEngine.XR;
 
 namespace World.Objects
 {
@@ -477,21 +478,38 @@ namespace World.Objects
                 }
             }
 
-            IsInteracting = true;
+            CheckPlayerSide();
         }
 
         public override void OnInteracting()
         {
             base.OnInteracting();
+            // TODO Check player side.
             ForceOpen(CalculateForce(openForce));
         }
 
         public override void OnEndInteract()
         {
-            IsInteracting = false;
+            base.OnEndInteract();
         }
 
         #endregion
+
+        private void CheckPlayerSide()
+        {
+            Plane directionPlane = new Plane(gameObject.transform.forward, gameObject.transform.position);
+            bool playerOnSide = directionPlane.GetSide(GameManager.Instance.PlayerController.transform.position);
+            Debug.Log(playerOnSide);
+
+            if (playerOnSide)
+            {
+                HandlePosition.transform.localEulerAngles = new Vector3(0f, 180f, 0f);
+            }
+            else
+            {
+                HandlePosition.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+            }
+        }
 
         private float CalculateForce(float forceScale = 1f)
         {

@@ -41,6 +41,7 @@ public class InteractableObject : MonoBehaviour
     {
         if (showLogDebug)
             Debug.Log("Started interacting with " + this.gameObject.name, this);
+        IsInteracting = true;
     }
 
     public virtual void OnInteracting()
@@ -69,5 +70,7 @@ public class InteractableObject : MonoBehaviour
         catch (NullReferenceException)
         {
         }
+
+        IsInteracting = false;
     }
 }

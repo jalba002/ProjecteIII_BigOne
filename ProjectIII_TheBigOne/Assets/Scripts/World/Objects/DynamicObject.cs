@@ -91,6 +91,7 @@ namespace World.Objects
         #endregion
 
         [Header("Hinge Settings", order = 1)] public GameObject HandlePosition;
+        public bool applyHandleRotation = false;
         public float openForce = 5f;
         [Range(1f, 15f)] public float maxMouseInput = 3f;
         public bool UseMouseXAxis = false;
@@ -484,7 +485,6 @@ namespace World.Objects
         public override void OnInteracting()
         {
             base.OnInteracting();
-            // TODO Check player side.
             ForceOpen(CalculateForce(openForce));
         }
 
@@ -497,6 +497,8 @@ namespace World.Objects
 
         private void CheckPlayerSide()
         {
+            if(!applyHandleRotation) return;
+            
             Plane directionPlane = new Plane(gameObject.transform.forward, gameObject.transform.position);
             bool playerOnSide = directionPlane.GetSide(GameManager.Instance.PlayerController.transform.position);
             Debug.Log(playerOnSide);

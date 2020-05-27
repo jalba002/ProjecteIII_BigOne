@@ -48,9 +48,7 @@ public class UIFade : MonoBehaviour
     private bool fadedOut;
     private bool colorFade;
 
-    /// <summary>
-    /// Create or Find Fading Instance
-    /// </summary>
+    //Create or Find Fading Instance
     public static UIFade CreateInstance(GameObject FadeObject, string name = "[UIFader]", bool hide = true)
     {
         if (FindObjectsOfType<UIFade>().Count(x => x.FadeObj == FadeObject) < 1)
@@ -67,9 +65,8 @@ public class UIFade : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Find Fader with a specified FadeObject
-    /// </summary>
+
+    // Find Fader with a specified FadeObject
     public static UIFade FindUIFader(GameObject FadeObject)
     {
         if (FindObjectsOfType<UIFade>().Count(x => x.FadeObj == FadeObject) > 0)
@@ -80,26 +77,23 @@ public class UIFade : MonoBehaviour
         return null;
     }
 
-    /// <summary>
-    /// Set Graphics Max Alpha Fade
-    /// </summary>
+
+    // Set Graphics Max Alpha Fade
     public void ImageTextAlpha(float ImageAlpha = 1f, float TextAlpha = 1f)
     {
         m_imgAlpha = ImageAlpha;
         m_txtAlpha = TextAlpha;
     }
 
-    /// <summary>
-    /// Set Objects FadeValue
-    /// </summary>
+ 
+    // Set Objects FadeValue
     public void SetFadeValues(FadeValue[] values)
     {
         fadeValues = values;
     }
 
-    /// <summary>
-    /// Start FadeInOut Sequence (Color)
-    /// </summary>
+
+    // Start FadeInOut Sequence (Color)
     public void FadeInOut(Color startColor, float fadeTo = 1f, float fadeInSpeed = 1.2f, float fadeOutSpeed = 2.5f, float fadeOutTime = 3f, bool SingleFade = false, DisableTypeAfter disableTypeAfter = DisableTypeAfter.Disable, FadeOutAfter fadeOutAfter = FadeOutAfter.Bool)
     {
         FadeObj.SetActive(true);
@@ -122,9 +116,8 @@ public class UIFade : MonoBehaviour
         time = 0;
     }
 
-    /// <summary>
-    /// Start FadeInOut Sequence (Alpha)
-    /// </summary>
+
+    // Start FadeInOut Sequence (Alpha)
     public void FadeInOut(float fadeTo = 1f, float fadeInSpeed = 1.2f, float fadeOutSpeed = 2.5f, float fadeOutTime = 3f, bool SingleFade = false, DisableTypeAfter disableTypeAfter = DisableTypeAfter.Disable, FadeOutAfter fadeOutAfter = FadeOutAfter.Bool)
     {
         FadeObj.SetActive(true);
@@ -280,9 +273,8 @@ public class UIFade : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Reset Fade Obj Graphics Alpha
-    /// </summary>
+
+    //Reset Fade Obj Graphics Alpha
     public void ResetGraphicsColor(float alpha = 0f)
     {
         if (FadeObj)

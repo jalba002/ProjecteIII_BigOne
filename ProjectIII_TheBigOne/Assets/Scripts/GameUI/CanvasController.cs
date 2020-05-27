@@ -1,12 +1,23 @@
 ﻿using System;
 using UnityEngine;
+using System.Collections.Generic;
 using Player;
 using UnityEngine.UI;
 
 public class CanvasController : MonoBehaviour
 {
-    [Header("Inventory")] public GameObject NotificationPrefab;
+    [Header("Item Collected")] public GameObject NotificationPrefab;
     public GameObject NotificationPanel;
+
+    [Header("Quest List")] public GameObject ObjectivesUI;
+    public GameObject ObjectivePrefab;
+
+    [Header("Quest Track")] public GameObject PushObjectivesUI;
+    public GameObject PushObjectivePrefab;
+
+    [Header("Hint")] public GameObject HintNotification;
+
+    private List<ObjectiveModel> objectives = new List<ObjectiveModel>();
 
     [Header("PauseMenu")] public GameObject pauseMenu;
     public GameObject inventory;
@@ -40,13 +51,6 @@ public class CanvasController : MonoBehaviour
 
     void Update()
     {
-/*#if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            AddPickupMessage("key");
-        }
-#endif*/
-
         PlayerLightingUpdate();
         PlayerRunningUpdate();
 
@@ -62,6 +66,11 @@ public class CanvasController : MonoBehaviour
                 .parent.gameObject.activeSelf)
         {
             playerController.ToggleInventory();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ShowHint("metas are your friends", true); // true = upper
         }
     }
 
@@ -127,4 +136,78 @@ public class CanvasController : MonoBehaviour
 
         pauseMenu.SetActive(!enabled);
     }
+
+    public void PushObjectiveText(string text, float time, bool upper, int id)
+    {
+        ObjectiveModel objModel = new ObjectiveModel(id, text);
+
+        GameObject objObject = Instantiate(ObjectivePrefab, ObjectivesUI.transform);
+
+        objObject.transform.GetChild(0).GetComponent<Text>().text = text;
+
+        objModel.objective = objObject;
+
+        objectives.Add(objModel);
+
+        GameObject obj = Instantiate(PushObjectivePrefab, PushObjectivesUI.transform);
+        obj.GetComponent<Notification>().SetMessage(text, time, upper: upper);
+    }
+
+    public void ObjectiveCompleted(int id)
+    {
+        foreach (var obj in objectives)
+        {
+            if (obj.identifier == id)
+            {
+                obj.isCompleted = true;
+                PushObjectiveCompleted(id, obj);
+                Destroy(obj.objective);
+            }
+        }
+    }
+
+    public void PushObjectiveCompleted(int questID, ObjectiveModel quest)
+    {
+        GameObject obj = Instantiate(PushObjectivePrefab, PushObjectivesUI.transform);
+        obj.GetComponent<Notification>().SetMessage(quest.objectiveText + " completed", 3, upper: false);
+    }
+
+    public void ShowHint(string text, bool upper)
+    {
+        HintNotification.SetActive(true);
+
+        if (upper)
+            HintNotification.transform.GetChild(0).GetComponent<Text>().text = text.ToUpper();
+        else
+            HintNotification.transform.GetChild(0).GetComponent<Text>().text = text;
+
+        UIFade uIFade = UIFade.CreateInstance(HintNotification, "[UIFader] HintNotification");
+        uIFade.ResetGraphicsColor();
+        uIFade.ImageTextAlpha(0.8f, 1f);
+        uIFade.FadeInOut(fadeOutTime: 3, fadeOutAfter: UIFade.FadeOutAfter.Time);
+    }
+}
+
+public class ObjectiveModel
+{
+    public string objectiveText;
+    public int identifier;
+
+    public GameObject objective;
+    public bool isCompleted;
+
+    public ObjectiveModel(int id, string text)
+    {
+        identifier = id;
+        objectiveText = text;
+    }
+
+    public ObjectiveModel(int id, bool completed)
+    {
+        identifier = id;
+        isCompleted = completed;
+        objectiveText = "";
+    }
+
+    public ObjectiveModel() { }
 }

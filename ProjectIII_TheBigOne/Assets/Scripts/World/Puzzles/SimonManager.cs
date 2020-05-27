@@ -17,7 +17,7 @@ public class SimonManager : Puzzle
 
     public int[] colors;
 
-    private int currentColorCount;
+    private int currentColorCount;    
 
     public bool answering = false;
     //llista de materials a canviar del simon
@@ -160,29 +160,33 @@ public class SimonManager : Puzzle
 
     public void CheckAnswer(int i)
     {
-        StartCoroutine(HighlightColor(i, true));
+        if (answering)
+        {
+            StartCoroutine(HighlightColor(i, true));
 
-        if (i == colors[currentAnswer])
-        {
-            AudioManager.PlaySound2D("Sound/Simon/Simon" + i.ToString());
-            Debug.Log("Acertaste");
-            currentAnswer++;
-            if (currentAnswer >= colors.Length)
+            if (i == colors[currentAnswer])
             {
-                Debug.Log("Todo bien, todo correcto, y yo que me alegro.");
-                if (currentColorCount - startingColorCount >= roundsToSucceed)
+                AudioManager.PlaySound2D("Sound/Simon/Simon" + i.ToString());
+                Debug.Log("Acertaste");
+                currentAnswer++;
+                if (currentAnswer >= colors.Length)
                 {
-                    PuzzleWon();
+                    answering = false;
+                    Debug.Log("Todo bien, todo correcto, y yo que me alegro.");
+                    if (currentColorCount - startingColorCount >= roundsToSucceed)
+                    {
+                        PuzzleWon();
+                    }
+                    else
+                        StartCoroutine(IncreasePhase());
                 }
-                else                
-                    StartCoroutine(IncreasePhase());
             }
-        }
-        else
-        {
-            Debug.Log("Fallaste");
-            AudioManager.PlaySound2D("Sound/Simon/Fail");
-            EndGame();            
+            else
+            {
+                Debug.Log("Fallaste");
+                AudioManager.PlaySound2D("Sound/Simon/Fail");
+                EndGame();
+            }
         }
     }
 

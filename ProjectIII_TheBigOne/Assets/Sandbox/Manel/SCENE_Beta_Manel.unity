@@ -567,32 +567,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 3, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &75831234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59306422a2ca4454aabce3daa79c3334, type: 3}
-  m_Name: New Aura Base Settings
-  m_EditorClassIdentifier: 
-  useDensity: 1
-  density: 0.25
-  useScattering: 1
-  scattering: 0.5
-  useAmbientLighting: 1
-  ambientLightingStrength: 1
-  useColor: 0
-  color: {r: 0, g: 0.5, b: 0.5, a: 0.5}
-  colorStrength: 1
-  useTint: 0
-  tint: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  tintStrength: 1
-  useExtinction: 0
-  extinction: 0.75
 --- !u!1 &86513348 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1448075406051361297, guid: f56108c3c33500144b3c56d825eb851e,
@@ -650,18 +624,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.0930462, y: 0.19262695, z: 3}
   m_Center: {x: -0.9534769, y: 0.04634285, z: 1.5}
---- !u!114 &93782953 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 860182140764108722, guid: 178d6527a3360844d823f83e48030ff9,
-    type: 3}
-  m_PrefabInstance: {fileID: 1039481686}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9791f6de2e34704e9918b4d98cc53ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &95221781
 GameObject:
   m_ObjectHideFlags: 0
@@ -1375,6 +1337,41 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 60696143}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &247270133
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Flashlight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &249149779
 GameObject:
   m_ObjectHideFlags: 0
@@ -7684,30 +7681,15 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1923849537}
-    - target: {fileID: 3417005158880246249, guid: 178d6527a3360844d823f83e48030ff9,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RestartWholeGame
-      objectReference: {fileID: 0}
     - target: {fileID: 3417005159643381190, guid: 178d6527a3360844d823f83e48030ff9,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1923849537}
-    - target: {fileID: 3417005159643381190, guid: 178d6527a3360844d823f83e48030ff9,
+    - target: {fileID: 4202791362593805276, guid: 178d6527a3360844d823f83e48030ff9,
         type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ExitGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 3958558647828407079, guid: 178d6527a3360844d823f83e48030ff9,
-        type: 3}
-      propertyPath: numberOfSlots
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4202791362896934934, guid: 178d6527a3360844d823f83e48030ff9,
-        type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
+      propertyPath: m_AnchoredPosition.x
+      value: 14.964844
       objectReference: {fileID: 0}
     - target: {fileID: 4202791364004799661, guid: 178d6527a3360844d823f83e48030ff9,
         type: 3}
@@ -7764,55 +7746,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4202791364004799662, guid: 178d6527a3360844d823f83e48030ff9,
-        type: 3}
-      propertyPath: pauseManager
-      value: 
-      objectReference: {fileID: 93782953}
     - target: {fileID: 4202791364004799663, guid: 178d6527a3360844d823f83e48030ff9,
         type: 3}
       propertyPath: m_Name
       value: CompleteUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 4425160117736685922, guid: 178d6527a3360844d823f83e48030ff9,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.0053100586
-      objectReference: {fileID: 0}
-    - target: {fileID: 4425160117736685922, guid: 178d6527a3360844d823f83e48030ff9,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 193.00381
-      objectReference: {fileID: 0}
-    - target: {fileID: 6599226226219420661, guid: 178d6527a3360844d823f83e48030ff9,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6833104672789894308, guid: 178d6527a3360844d823f83e48030ff9,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6833104672789894308, guid: 178d6527a3360844d823f83e48030ff9,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6833104672789894308, guid: 178d6527a3360844d823f83e48030ff9,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6833104672789894308, guid: 178d6527a3360844d823f83e48030ff9,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6833104672789894308, guid: 178d6527a3360844d823f83e48030ff9,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7848364242960561582, guid: 178d6527a3360844d823f83e48030ff9,
         type: 3}
@@ -8482,6 +8419,32 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.0000055, y: 0.10000234, z: 3.8038483}
   m_Center: {x: -0.0000004172329, y: 2.4158442e-13, z: -0.0000024437911}
+--- !u!114 &1115514609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59306422a2ca4454aabce3daa79c3334, type: 3}
+  m_Name: New Aura Base Settings
+  m_EditorClassIdentifier: 
+  useDensity: 1
+  density: 0.25
+  useScattering: 1
+  scattering: 0.5
+  useAmbientLighting: 1
+  ambientLightingStrength: 1
+  useColor: 0
+  color: {r: 0, g: 0.5, b: 0.5, a: 0.5}
+  colorStrength: 1
+  useTint: 0
+  tint: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  tintStrength: 1
+  useExtinction: 0
+  extinction: 0.75
 --- !u!4 &1118666771 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2012055666405978869, guid: ed196176ce711ba47b1b9ac90f9df0ee,
@@ -24232,41 +24195,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d84205c2f84b1f4fbd196088b8a5295, type: 3}
---- !u!84 &1875680174
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'Flashlight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1876747632 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2740726638166160727, guid: f56108c3c33500144b3c56d825eb851e,

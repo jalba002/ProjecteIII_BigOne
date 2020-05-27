@@ -7,12 +7,14 @@ public struct InspectableInfo
     public Mesh objectMesh;
     public Material[] objectTexture;
     public Transform objectTransform;
+    public Vector2 maxRanges;
 
-    public InspectableInfo(Mesh mesh, Material[] material, Transform objectTransform)
+    public InspectableInfo(Mesh mesh, Material[] material, Transform objectTransform, Vector2 maxRanges)
     {
         objectMesh = mesh;
         objectTexture = material;
         this.objectTransform = objectTransform;
+        this.maxRanges = maxRanges;
     }
 }
 

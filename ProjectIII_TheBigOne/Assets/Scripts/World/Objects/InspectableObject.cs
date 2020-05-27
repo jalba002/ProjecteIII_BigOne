@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class InspectableObject : InteractableObject, IInspectable
 {
+    public Vector2 maxLimits;
     private MeshRenderer _meshRenderer;
     private MeshFilter _meshFilter;
     public InspectableInfo InspectInfo { get; set; }
@@ -72,7 +73,7 @@ public class InspectableObject : InteractableObject, IInspectable
         {
             _meshFilter = GetComponentInChildren<MeshFilter>();
             _meshRenderer = GetComponentInChildren<MeshRenderer>();
-            InspectInfo = new InspectableInfo(_meshFilter.mesh, _meshRenderer.materials, transform);
+            InspectInfo = new InspectableInfo(_meshFilter.mesh, _meshRenderer.materials, transform, maxLimits);
         }
     }
 

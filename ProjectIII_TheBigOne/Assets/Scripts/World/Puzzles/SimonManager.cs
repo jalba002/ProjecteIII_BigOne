@@ -84,7 +84,8 @@ public class SimonManager : Puzzle
     }
 
     public override void EndGame()
-    {        
+    {
+        currentColorCount = startingColorCount;
         StopAllCoroutines();
         ResetColors();
         this.GetComponentInParent<InteractablePuzzle>().EndInteractActions();

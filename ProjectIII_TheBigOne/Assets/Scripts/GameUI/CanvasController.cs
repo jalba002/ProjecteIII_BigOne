@@ -186,6 +186,21 @@ public class CanvasController : MonoBehaviour
         uIFade.ImageTextAlpha(0.8f, 1f);
         uIFade.FadeInOut(fadeOutTime: 3, fadeOutAfter: UIFade.FadeOutAfter.Time);
     }
+
+    public bool CheckObjectiveIDList(int questID)
+    {
+        foreach (var obj in objectives)
+        {
+            if (obj.identifier == questID)
+                return true;
+        }
+        return false;
+    }
+
+    public bool CheckEmtpyObjectiveList()
+    {
+        return objectives.Count == 0;
+    }
 }
 
 public class ObjectiveModel

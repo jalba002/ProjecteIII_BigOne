@@ -23,25 +23,24 @@ public class triggerObjective : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !isTriggered)
-        {
-            isTriggered = true;
             OnTrigger();
-        }
     }
 
     public void OnTrigger()
     {
-
-        if (triggerType == TriggerType.Completed)
+        if (triggerType == TriggerType.Completed && !GameManager.Instance.CanvasController.CheckEmtpyObjectiveList())
         {
-            FindObjectOfType<CanvasController>().ObjectiveCompleted(questID);
+            if (GameManager.Instance.CanvasController.CheckObjectiveIDList(questID)) //if quest has been received
+            {
+                GameManager.Instance.CanvasController.ObjectiveCompleted(questID);
+                isTriggered = true;
+            }
         }
 
         if (triggerType == TriggerType.NewObjective)
         {
-            triggerType = TriggerType.Completed;
             FindObjectOfType<CanvasController>().PushObjectiveText(questObjective, 3, false, questID);
+            isTriggered = true;
         }
-
     }
 }

@@ -66,12 +66,14 @@ namespace Enemy
                 .GetComponent<TraversableBlockage>();
             originalPosition = _attachedController.gameObject.transform.position;
             breakTime = _currentBlockage.removalTime;
+            _attachedController.NavMeshAgent.isStopped = true;
+            //_attachedController.NavMeshAgent.Warp(_currentBlockage.attachedLink.startTransform.position);
         }
 
         protected override void OnStateExit()
         {
             base.OnStateExit();
-            //_attachedController.NavMeshAgent.isStopped = false;
+            _attachedController.NavMeshAgent.isStopped = false;
             _attachedController.NavMeshAgent.Warp(originalPosition);
             ResolveBlockage();
         }
@@ -82,9 +84,8 @@ namespace Enemy
             {
                 case DynamicObject.ObjectType.Door:
                     // Nothing yet.
-                    //_currentBlockage.attachedDynamicObject.ForceOpen(-2200f);
                     _currentBlockage.attachedDynamicObject.BreakJoint();
-                    _currentBlockage.attachedDynamicObject.ForceOpen(2500f);
+                    _currentBlockage.attachedDynamicObject.BreakOpening(Machine.characterController.transform.forward,10f);
                     break;
                 case DynamicObject.ObjectType.Drawer:
                     // Can't get blocked by a drawer...?

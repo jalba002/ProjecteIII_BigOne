@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Assets.Scripts.Game;
 using Characters.Generic;
 using Player;
@@ -13,7 +14,6 @@ namespace Enemy
     {
         private EnemyController _attachedController;
         private float _movementSpeed;
-        private PatrolPoint[] _patrolPoints;
         private Random Alea = new Random();
         private float patrolCooldown = 1f;
 
@@ -23,7 +23,6 @@ namespace Enemy
         {
             base.OnStateInitialize(machine);
             _attachedController = (EnemyController) Machine.characterController;
-            _patrolPoints = FindObjectsOfType<PatrolPoint>();
         }
 
         public override void OnStateTick(float deltaTime)
@@ -82,6 +81,7 @@ namespace Enemy
         protected override void OnStateExit()
         {
             base.OnStateExit();
+            _attachedController.targetPositionDummy.transform.parent = null;
         }
 
         private void SetNewPatrolPoint(PatrolPoint forcedPoint = null)
@@ -103,7 +103,7 @@ namespace Enemy
         {
             // Calculate new position.
 
-            return _patrolPoints[Alea.Next(0, _patrolPoints.Length)];
+            return _attachedController.patrolPoints[Alea.Next(0, _attachedController.patrolPoints.Count)];
         }
     }
 }

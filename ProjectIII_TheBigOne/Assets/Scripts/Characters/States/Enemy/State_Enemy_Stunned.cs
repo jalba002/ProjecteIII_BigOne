@@ -51,7 +51,7 @@ namespace Enemy
             
             // Stun stuff.
             stunSource = _attachedController.currentBrain.StunSource;
-            stunTime = stunSource.stunDuration;
+            stunTime = stunSource != null ? stunSource.stunDuration : 5f;
             _attachedController.NavMeshAgent.Warp(stunSource.traversableBlockage.attachedLink.startTransform.position);
         }
 

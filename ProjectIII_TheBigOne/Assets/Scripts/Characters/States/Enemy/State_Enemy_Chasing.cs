@@ -1,5 +1,4 @@
-﻿using System;
-using Characters.Generic;
+﻿using Characters.Generic;
 using Player;
 using UnityEngine;
 
@@ -24,8 +23,7 @@ namespace Enemy
             _attachedController.CheckForPlayerNearLight();
             _attachedController.CheckForPlayerOnSight();
             
-            
-            
+            _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
         }
 
         public override void OnStateFixedTick(float fixedTime)
@@ -36,6 +34,10 @@ namespace Enemy
         public override void OnStateCheckTransition()
         {
             base.OnStateCheckTransition();
+            if (!_attachedController.currentBrain.IsPlayerInSight)
+            {
+                _attachedController.currentBrain.IsChasingPlayer = false;
+            }
         }
 
         protected override void OnStateEnter()

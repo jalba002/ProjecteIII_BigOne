@@ -17,8 +17,8 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
     public override void CalculateNextState(bool forceExitState)
     {
         // Analyze all possible states.
-        if (CheckPlayerKilled()) return;
         if (CheckEnterStunned()) return;
+        //if (CheckPlayerKilled()) return;
         if (CheckEnterTraversing()) return;
         if (CheckEnterIdle()) return;
         if (CheckEnterPatrol()) return;
@@ -50,6 +50,8 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         // TODO Add conditions
         // If player is looking at the enemy.
         // If player has the light turned off.
+
+        if (!attachedCharacter.currentBrain.IsPlayerInSight) return false;
 
         if (!attachedCharacter.currentBrain.IsVisible) return false;
         

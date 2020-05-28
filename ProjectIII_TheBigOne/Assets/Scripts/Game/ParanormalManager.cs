@@ -1,6 +1,5 @@
 ﻿using System;
 using Enemy;
-using Game.Inputs;
 using UnityEngine;
 using World.Objects;
 using Random = System.Random;
@@ -72,7 +71,7 @@ public class ParanormalManager : MonoBehaviour
 
         //SetDummyLocalPosition(Vector3.zero);
 
-        Dimitry.currentBehaviourTree = new BehaviourTree_Enemy_FirstPhase(Dimitry);
+        Dimitry.SetNewPhase(new BehaviourTree_Enemy_FirstPhase(Dimitry));
     }
 
     public void StartSecondPhase()
@@ -112,7 +111,7 @@ public class ParanormalManager : MonoBehaviour
         
         SetEnemyPosition(secondSpawnPoint);
 
-        Dimitry.currentBehaviourTree = new BehaviourTree_Enemy_SecondPhase(Dimitry);
+        Dimitry.SetNewPhase(new BehaviourTree_Enemy_SecondPhase(Dimitry));
     }
 
     private void SetEnemyPosition(Transform newPosition)

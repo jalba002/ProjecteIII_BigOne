@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
+using Assets.Scripts.Game;
 using UnityEngine;
 using World.Objects;
 
@@ -12,12 +14,37 @@ public class ObjectTracker : MonoBehaviour
 
     public static List<InteractableObject> interactablesList;
 
+    public static List<PatrolPoint> PatrolPointsFirstPhase = new List<PatrolPoint>();
+    
+    public static List<PatrolPoint> PatrolPointsSecondPhase = new List<PatrolPoint>();
+    
     // Start is called before the first frame update
     void Start()
     {
         PrepareLists(FindObjectsOfType<DynamicObject>());
         PrepareObjectList(out palletList, FindObjectsOfType<TraversableBlockage>());
         PrepareObjectList(out interactablesList);
+        SplitPatrolPoints();
+    }
+
+    private void SplitPatrolPoints()
+    {
+        var patrolPoints = FindObjectsOfType<PatrolPoint>();
+        foreach (PatrolPoint point in patrolPoints)
+        {
+            if (point.ID == 0)
+            {
+                PatrolPointsFirstPhase.Add(point);
+            }
+            else if(point.ID == 1)
+            {
+                PatrolPointsSecondPhase.Add(point);
+            }
+            else
+            {
+                Debug.LogError(point.gameObject.name + " does not have a valid ID.");
+            }
+        }
     }
 
     private void PrepareObjectList(out List<TraversableBlockage> storedList, TraversableBlockage[] givenArray)

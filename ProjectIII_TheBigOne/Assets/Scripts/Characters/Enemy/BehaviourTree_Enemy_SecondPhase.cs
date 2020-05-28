@@ -1,5 +1,4 @@
 ﻿using Enemy;
-using UnityEngine;
 using CharacterController = Characters.Generic.CharacterController;
 
 public class BehaviourTree_Enemy_SecondPhase : BehaviourTree
@@ -15,8 +14,8 @@ public class BehaviourTree_Enemy_SecondPhase : BehaviourTree
     public override void CalculateNextState(bool forceExitState)
     {
         // Analyze all possible states.
-        if (CheckPlayerKilled()) return;
         if (CheckEnterStunned()) return;
+        if (CheckPlayerKilled()) return;
         if (CheckEnterTraversing()) return;
         if (CheckEnterPatrol()) return;
         if (CheckEnterChasing()) return;

@@ -1,6 +1,5 @@
 ﻿using System;
 using Characters.Player;
-using Player;
 using UnityEditor;
 using UnityEngine;
 
@@ -44,6 +43,26 @@ namespace Cheats
                 catch (NullReferenceException)
                 {
                     Debug.LogWarning("Selection is not a destructible wall!");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Only in Play Mode!");
+            }
+        }
+        
+        [MenuItem("Cheats/Level/Activate Selected Trigger")]
+        public static void ActivateTrigger()
+        {
+            if (Application.isPlaying)
+            {
+                try
+                {
+                    Selection.activeGameObject.GetComponent<ParanormalTrigger>().Activate();
+                }
+                catch (NullReferenceException)
+                {
+                    Debug.LogWarning("Selection is not valid!");
                 }
             }
             else

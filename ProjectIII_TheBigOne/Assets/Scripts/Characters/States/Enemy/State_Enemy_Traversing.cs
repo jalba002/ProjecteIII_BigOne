@@ -24,10 +24,9 @@ namespace Enemy
         {
             base.OnStateTick(deltaTime);
 
-            _attachedController.CheckForPlayerNearLight();
+            /*_attachedController.CheckForPlayerNearLight();
             _attachedController.CheckForPlayerOnSight();
-            _attachedController.CheckForEnemyVisibility();
-
+            _attachedController.CheckForEnemyVisibility();*/
 
             if (breakTime > 0f)
             {

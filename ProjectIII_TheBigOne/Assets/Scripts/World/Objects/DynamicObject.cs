@@ -431,7 +431,6 @@ namespace World.Objects
         {
             if (!interactEnable)
             {
-                Debug.Log("Ending Interaction");
                 OnEndInteract();
                 return true;
             }
@@ -439,7 +438,6 @@ namespace World.Objects
             if (!IsInteracting)
             {
                 OnStartInteract();
-                Debug.Log("Starting Interaction");
                 return true;
             }
 

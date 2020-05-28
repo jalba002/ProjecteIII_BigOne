@@ -1,5 +1,6 @@
 ﻿using System;
-using Characters.Brains;
+using System.Collections.Generic;
+using Assets.Scripts.Game;
 using Characters.Generic;
 using Player;
 using Properties;
@@ -38,13 +39,15 @@ namespace Enemy
 
         [Header("Components from Thirds")] private FlashlightController playerFlashlight;
 
+        public List<PatrolPoint> patrolPoints = new List<PatrolPoint>();
+
         public void Awake()
         {
             currentBrain = GetComponent<EnemyBrain>();
 
             NavMeshAgent = GetComponent<NavMeshAgent>();
 
-            SetStartingBehaviourTree();
+            //SetStartingBehaviourTree();
 
             if (stateMachine == null)
                 stateMachine = GetComponent<StateMachine>();
@@ -75,24 +78,40 @@ namespace Enemy
             switch (startingBehaviour)
             {
                 case StartingBehaviour.Halt:
-                    currentBehaviourTree = new BehaviourTree_Enemy_Halted(this);
+                    SetNewPhase(new BehaviourTree_Enemy_Halted(this));
                     break;
                 case StartingBehaviour.FirstPhase:
-                    currentBehaviourTree = new BehaviourTree_Enemy_FirstPhase(this);
+                    SetNewPhase(new BehaviourTree_Enemy_FirstPhase(this));
                     break;
                 case StartingBehaviour.SecondPhase:
-                    currentBehaviourTree = new BehaviourTree_Enemy_SecondPhase(this);
+                    SetNewPhase(new BehaviourTree_Enemy_SecondPhase(this));
                     break;
                 case StartingBehaviour.OnlyChase:
-                    currentBehaviourTree = new BehaviourTree_Enemy_OnlyChase(this);
+                    SetNewPhase(new BehaviourTree_Enemy_OnlyChase(this));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
 
+        public void SetNewPhase(BehaviourTree newBehaviour)
+        {
+            currentBehaviourTree = newBehaviour;
+
+            if (newBehaviour is BehaviourTree_Enemy_FirstPhase)
+            {
+                patrolPoints = ObjectTracker.PatrolPointsFirstPhase;
+            }
+            else if (newBehaviour is BehaviourTree_Enemy_SecondPhase)
+            {
+                patrolPoints = ObjectTracker.PatrolPointsSecondPhase;
+            }
+        }
+
         private void Start()
         {
+            SetStartingBehaviourTree();
+
             stateMachine.SwitchState<State_Enemy_Idle>();
 
             NavMeshAgent.speed = characterProperties.WalkSpeed;
@@ -183,6 +202,23 @@ namespace Enemy
             }
             catch (NullReferenceException)
             {
+            }
+        }
+
+        public void HearPlayerAround()
+        {
+            try
+            {
+                // Make a sphere cast. 
+                // Check the player distances, if too close, he is heard.
+                // If inside but far, if he moves, he is detected.
+                // Both should transition to the alerted state, then do their thing.
+                
+                // currentBrain.IsHearingPlayer = SensesUtil.IsHearingPlayer();
+            }
+            catch (NullReferenceException)
+            {
+                
             }
         }
 

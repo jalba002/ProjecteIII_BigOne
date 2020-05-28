@@ -1,9 +1,11 @@
 ﻿using System;
 using Assets.Scripts.Game;
-using Characters.Generic;
-using Player;
+using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = System.Random;
+using State = Player.State;
+using StateMachine = Characters.Generic.StateMachine;
 
 namespace Enemy
 {
@@ -14,6 +16,8 @@ namespace Enemy
         private Random Alea = new Random();
         private float trackTime;
 
+        private NavMeshPath forcedPath;
+        
         private float currentSearchTime;
 
         protected override void OnStateInitialize(StateMachine machine)
@@ -31,6 +35,7 @@ namespace Enemy
             _attachedController.CheckForPlayerOnSight();
             _attachedController.CheckForEnemyVisibility();
 
+
             if (trackTime > 0f)
             {
                 trackTime -= deltaTime;
@@ -40,7 +45,14 @@ namespace Enemy
                 StopChase();
             }
 
-            currentSearchTime += deltaTime;
+            //_attachedController.NavMeshAgent.path = forcedPath;
+
+            if (Vector3.Distance(_attachedController.targetPositionDummy.transform.position,
+                    _attachedController.NavMeshAgent.transform.position) <=
+                _attachedController.characterProperties.positionReachedDistance)
+            {
+                currentSearchTime += deltaTime;
+            }
         }
 
         public override void OnStateFixedTick(float fixedTime)
@@ -68,11 +80,13 @@ namespace Enemy
             trackTime = _attachedController.characterProperties.maxTimeOfPerfectTracking;
             currentSearchTime = 0f;
             _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
+            _attachedController.NavMeshAgent.autoRepath = false;
+            //forcedPath = _attachedController.NavMeshAgent.path;
         }
 
         private void StopChase()
         {
-            _attachedController.targetPositionDummy.transform.parent = null;
+            _attachedController.targetPositionDummy.transform.parent = null; 
             _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
         }
 

@@ -14,6 +14,8 @@ public class InteractablePuzzle : InteractableObject, IPuzzle
 
     static CameraController playerCameraController;
 
+    public Sprite puzzleCursor;
+
     void Awake()
     {
         //attachedPuzzle = GetComponent<Puzzle>();
@@ -76,6 +78,9 @@ public class InteractablePuzzle : InteractableObject, IPuzzle
 
         GameManager.Instance.PlayerController.cameraController.StartLerpToPos(cameraPosition);
         GameManager.Instance.PlayerController.stateMachine.SwitchState<State_Player_PuzzleInspect>();
+
+        Cursor.SetCursor(puzzleCursor.texture, Vector3.zero, CursorMode.Auto);
+
         IsInteracting = true;
         //playerCameraController.SetNewPosition(attachedPuzzle.gameObject.transform,true);
         attachedPuzzle.StartGame();
@@ -120,6 +125,7 @@ public class InteractablePuzzle : InteractableObject, IPuzzle
     public override void OnEndInteract()
     {
         base.OnEndInteract();
+        Cursor.SetCursor(null, Vector3.zero, CursorMode.Auto);
         // Restore camera position.
         // Restore controls to player.
         // Restore cursor to usual settings.

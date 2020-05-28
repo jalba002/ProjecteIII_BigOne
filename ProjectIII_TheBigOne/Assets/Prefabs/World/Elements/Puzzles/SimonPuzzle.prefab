@@ -382,7 +382,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnPuzzleWin:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: AddPickupMessage
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Key Collected.
+          m_BoolArgument: 0
+        m_CallState: 1
+      - m_Target: {fileID: 0}
+        m_MethodName: GiveItem
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Key_AirFilterRoom
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4407223417357970315}
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   startingColorCount: 1
   delayBetweenColors: 0.1
   colorLasting: 1
@@ -1230,9 +1263,11 @@ MonoBehaviour:
   showLogDebug: 0
   interactionType: 3
   displayName: Activate Simon
-  displayImage: {fileID: 0}
+  previewImage: {fileID: 21300000, guid: bfa7de3f3b8b1cd4c8cbe62c0c44532a, type: 3}
+  displayImage: {fileID: 21300000, guid: f65c933329825ad41a43d825a2666dea, type: 3}
   attachedPuzzle: {fileID: 1386346232544849595}
   cameraPosition: {fileID: 4407223417133697305}
+  puzzleCursor: {fileID: 21300000, guid: 8744cef0b8d07824eb45013147cd4cae, type: 3}
 --- !u!1 &4591738668293679973
 GameObject:
   m_ObjectHideFlags: 0

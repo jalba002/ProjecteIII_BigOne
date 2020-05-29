@@ -82,6 +82,8 @@ namespace Enemy
                 case DynamicObject.ObjectType.Door:
                     // Nothing yet.
                     //_currentBlockage.attachedDynamicObject.ForceOpen(-2200f);
+                    
+                    _currentBlockage.attachedDynamicObject.SetHandleDirection(originalPosition);
                     _currentBlockage.attachedDynamicObject.StrongOpening();
                     _currentBlockage.DisableLink();
                     break;

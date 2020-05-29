@@ -477,7 +477,7 @@ namespace World.Objects
                 }
             }
 
-            CheckPlayerSide();
+            SetHandleDirection(GameManager.Instance.PlayerController.transform.position);
         }
 
         public override void OnInteracting()
@@ -493,22 +493,17 @@ namespace World.Objects
 
         #endregion
 
-        private void CheckPlayerSide()
+        public void SetHandleDirection(Vector3 position)
         {
-            if(!applyHandleRotation) return;
-            
-            Plane directionPlane = new Plane(gameObject.transform.forward, gameObject.transform.position);
-            bool playerOnSide = directionPlane.GetSide(GameManager.Instance.PlayerController.transform.position);
+            if (!applyHandleRotation) return;
+
+            Transform objectTransform = gameObject.transform;
+
+            Plane directionPlane = new Plane(objectTransform.forward, objectTransform.position);
+            bool playerOnSide = directionPlane.GetSide(position);
             Debug.Log(playerOnSide);
 
-            if (playerOnSide)
-            {
-                HandlePosition.transform.localEulerAngles = new Vector3(0f, 180f, 0f);
-            }
-            else
-            {
-                HandlePosition.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
-            }
+            HandlePosition.transform.forward = playerOnSide ? -objectTransform.forward : objectTransform.forward;
         }
 
         private float CalculateForce(float forceScale = 1f)

@@ -17,7 +17,7 @@ namespace Enemy
         private float trackTime;
 
         private NavMeshPath forcedPath;
-        
+
         private float currentSearchTime;
 
         protected override void OnStateInitialize(StateMachine machine)
@@ -34,7 +34,7 @@ namespace Enemy
             _attachedController.CheckForPlayerNearLight();
             _attachedController.CheckForPlayerOnSight();
             _attachedController.CheckForEnemyVisibility();
-
+            _attachedController.HearPlayerAround();
 
             if (trackTime > 0f)
             {
@@ -86,7 +86,7 @@ namespace Enemy
 
         private void StopChase()
         {
-            _attachedController.targetPositionDummy.transform.parent = null; 
+            _attachedController.targetPositionDummy.transform.parent = null;
             _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
         }
 

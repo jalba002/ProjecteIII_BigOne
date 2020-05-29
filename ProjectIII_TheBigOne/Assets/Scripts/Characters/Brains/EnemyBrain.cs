@@ -31,9 +31,9 @@ public class EnemyBrain : Brain
     public bool IsPlayerNearLight { get; set; }
 
     public bool IsChasingPlayer { get; set; }
-    
+
     public bool IsTrackingPlayer { get; set; }
-    
+
     public bool IsHearingPlayer { get; set; }
 
     public bool IsOnOffMeshLink { get; set; }
@@ -41,6 +41,8 @@ public class EnemyBrain : Brain
     public bool IsCurrentlyBreaking { get; set; }
 
     public bool UpdateRotation { get; set; }
+
+    public float DistanceToPlayer { get; set; }
 
     public bool IsPlayerCloseEnoughForDeath { get; set; }
 
@@ -64,9 +66,10 @@ public class EnemyBrain : Brain
 
         IsOnOffMeshLink = selfCharacter.NavMeshAgent.isOnOffMeshLink;
 
+        DistanceToPlayer = Vector3.Distance(archnemesis.transform.position, this.gameObject.transform.position);
+
         IsPlayerCloseEnoughForDeath = IsPlayerInSight &&
-                                      Vector3.Distance(archnemesis.transform.position,
-                                          this.gameObject.transform.position) <= 2f
+                                      DistanceToPlayer <= selfCharacter.characterProperties.tooCloseRange
                                       && !archnemesis.IsDead;
     }
 

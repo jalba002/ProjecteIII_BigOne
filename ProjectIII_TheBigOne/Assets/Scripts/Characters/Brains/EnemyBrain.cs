@@ -66,8 +66,6 @@ public class EnemyBrain : Brain
         IsPlayerInSight = SensesUtil.IsInSight(selfCharacter.gameObject, archnemesis.gameObject,
             selfCharacter.characterProperties.maxDetectionRange, selfCharacter.characterProperties.watchableLayers, false);*/
 
-        IsOnOffMeshLink = selfCharacter.NavMeshAgent.isOnOffMeshLink;
-
         DistanceToPlayer = Vector3.Distance(archnemesis.transform.position, this.gameObject.transform.position);
 
         IsPlayerCloseEnoughForDeath = IsPlayerInSight &&

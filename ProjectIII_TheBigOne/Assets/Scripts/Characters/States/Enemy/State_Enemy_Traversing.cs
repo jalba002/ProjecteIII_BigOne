@@ -35,6 +35,7 @@ namespace Enemy
             else
             {
                 _attachedController.NavMeshAgent.CompleteOffMeshLink();
+                _attachedController.currentBrain.IsOnOffMeshLink = false;
             }
         }
 
@@ -63,15 +64,42 @@ namespace Enemy
             // _attachedController.NavMeshAgent.isStopped = true;
             _currentBlockage = _attachedController.NavMeshAgent.currentOffMeshLinkData.offMeshLink.gameObject
                 .GetComponent<TraversableBlockage>();
-            originalPosition = _attachedController.gameObject.transform.position;
+
+            _attachedController.NavMeshAgent.isStopped = true;
+            Vector3 closestPoint = GetTheShortestPoint(this.gameObject.transform.position,
+                _currentBlockage.attachedLink.startTransform.position,
+                _currentBlockage.attachedLink.endTransform.position);
+            _attachedController.NavMeshAgent.Warp(closestPoint);
+            originalPosition = closestPoint;
+
+            _attachedController.NavMeshAgent.updateRotation = false;
+
+            Vector3 alteredPos = _currentBlockage.attachedDynamicObject.transform.position;
+            alteredPos.y = _attachedController.transform.position.y;
+            
+            _attachedController.transform.forward = (alteredPos -
+                                                     _attachedController.transform.position).normalized;
+
             breakTime = _currentBlockage.removalTime;
+        }
+
+        private Vector3 GetTheShortestPoint(Vector3 currentPos, Vector3 firstPos, Vector3 secondPos)
+        {
+            firstPos.y = secondPos.y = currentPos.y;
+            Vector3 chosenVector = Vector3.Distance(currentPos, firstPos) < Vector3.Distance(currentPos, secondPos)
+                ? firstPos
+                : secondPos;
+
+            return chosenVector;
         }
 
         protected override void OnStateExit()
         {
             base.OnStateExit();
             //_attachedController.NavMeshAgent.isStopped = false;
-            _attachedController.NavMeshAgent.Warp(originalPosition);
+            //_attachedController.NavMeshAgent.Warp(originalPosition);
+            _attachedController.NavMeshAgent.isStopped = false;
+            _attachedController.NavMeshAgent.updateRotation = true;
             ResolveBlockage();
         }
 
@@ -82,10 +110,10 @@ namespace Enemy
                 case DynamicObject.ObjectType.Door:
                     // Nothing yet.
                     //_currentBlockage.attachedDynamicObject.ForceOpen(-2200f);
-                    
-                    _currentBlockage.attachedDynamicObject.SetHandleDirection(originalPosition);
+                    _currentBlockage.attachedDynamicObject.SetHandleDirection(_attachedController.gameObject.transform.position);
                     _currentBlockage.attachedDynamicObject.StrongOpening();
-                    _currentBlockage.DisableLink();
+                    //_currentBlockage.attachedDynamicObject.BreakOpening(_attachedController.gameObject.transform.forward, 25f);
+                    _currentBlockage.DisableLink(0.25f);
                     break;
                 case DynamicObject.ObjectType.Drawer:
                     // Can't get blocked by a drawer...?

@@ -498,12 +498,11 @@ namespace World.Objects
             if (!applyHandleRotation) return;
 
             Transform objectTransform = gameObject.transform;
-
-            Plane directionPlane = new Plane(objectTransform.forward, objectTransform.position);
+            Vector3 forwardVector = objectTransform.forward;
+            Plane directionPlane = new Plane(forwardVector, objectTransform.position);
             bool playerOnSide = directionPlane.GetSide(position);
-            Debug.Log(playerOnSide);
 
-            HandlePosition.transform.forward = playerOnSide ? -objectTransform.forward : objectTransform.forward;
+            HandlePosition.transform.forward = playerOnSide ? -forwardVector : forwardVector;
         }
 
         private float CalculateForce(float forceScale = 1f)

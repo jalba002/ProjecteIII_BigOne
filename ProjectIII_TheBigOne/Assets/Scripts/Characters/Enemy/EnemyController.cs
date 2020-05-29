@@ -222,6 +222,11 @@ namespace Enemy
             }
         }
 
+        public void CheckForMeshLink()
+        {
+            currentBrain.IsOnOffMeshLink = NavMeshAgent.isOnOffMeshLink;
+        }
+
         public void ChillDown()
         {
             currentBehaviourTree = new BehaviourTree_Enemy_Halted(this);

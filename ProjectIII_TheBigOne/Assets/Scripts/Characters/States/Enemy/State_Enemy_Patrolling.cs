@@ -34,6 +34,8 @@ namespace Enemy
             _attachedController.CheckForPlayerNearLight();
             _attachedController.CheckForEnemyVisibility();
             _attachedController.HearPlayerAround();
+            _attachedController.currentBrain.IsNoticingPlayer = _attachedController.currentBrain.IsHearingPlayer;
+            _attachedController.CheckForMeshLink();
 
             if (_attachedController.NavMeshAgent.remainingDistance <=
                 _attachedController.characterProperties.positionReachedDistance)
@@ -75,6 +77,7 @@ namespace Enemy
 
             if (Machine.lastState is State_Enemy_Traversing)
             {
+                Debug.Log("Last state was Traversing.");
                 SetNewPatrolPoint(lastPatrolPoint);
             }
         }

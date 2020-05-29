@@ -80,6 +80,7 @@ public class SimonManager : Puzzle
     public override void PuzzleWon()
     {
         OnPuzzleWin.Invoke();
+        GameManager.Instance.CanvasController.ShowHint("You won!!", true);
         EndGame();
     }
 
@@ -184,6 +185,9 @@ public class SimonManager : Puzzle
             else
             {
                 Debug.Log("Fallaste");
+
+                GameManager.Instance.CanvasController.ShowHint("You missed", false);
+
                 AudioManager.PlaySound2D("Sound/Simon/Fail");
                 EndGame();
             }

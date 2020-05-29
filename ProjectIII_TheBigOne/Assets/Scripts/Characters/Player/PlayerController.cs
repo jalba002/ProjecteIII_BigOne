@@ -15,9 +15,7 @@ namespace Player
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerController : CharacterController
     {
-        [Space(2)]
-        [Header("Components")] 
-        public Collider attachedCollider;
+        [Space(2)] [Header("Components")] public Collider attachedCollider;
         public CameraController cameraController;
 
         public FlashlightController attachedFlashlight;
@@ -145,9 +143,13 @@ namespace Player
         {
             if (puzzleInspector && puzzleInspector.isActiveAndEnabled)
             {
-                if (currentBrain.Interact)
+                if (interactablesManager.CurrentInteractable.interactionType ==
+                    InteractableObject.InteractionType.Inspect)
                 {
-                    return puzzleInspector.Interact(interactablesManager.CurrentInteractable);
+                    if (currentBrain.Interact)
+                    {
+                        return puzzleInspector.Interact(interactablesManager.CurrentInteractable);
+                    }
                 }
             }
 
@@ -160,19 +162,23 @@ namespace Player
             {
                 if (currentBrain.Interact)
                 {
-                    if (objectInspector.Activate(interactablesManager.CurrentInteractable))
+                    if (interactablesManager.CurrentInteractable.interactionType ==
+                        InteractableObject.InteractionType.Inspect)
                     {
-                        // Disable camera and allow the object inspector the use of mouse input.
-                        bool enableStuff = objectInspector.GetEnabled();
-                        cameraController.angleLocked = enableStuff;
-                        if (enableStuff)
+                        if (objectInspector.Activate(interactablesManager.CurrentInteractable))
                         {
-                            stateMachine.SwitchState<State_Player_Inspecting>();
-                        }
-                        else
-                            stateMachine.SwitchState<State_Player_Walking>();
+                            // Disable camera and allow the object inspector the use of mouse input.
+                            bool enableStuff = objectInspector.GetEnabled();
+                            cameraController.angleLocked = enableStuff;
+                            if (enableStuff)
+                            {
+                                stateMachine.SwitchState<State_Player_Inspecting>();
+                            }
+                            else
+                                stateMachine.SwitchState<State_Player_Walking>();
 
-                        return true;
+                            return true;
+                        }
                     }
                 }
             }
@@ -191,7 +197,7 @@ namespace Player
                         dynamicActivator.Interact(interactablesManager.CurrentInteractable, false);
                         InteractCooldown = 20;
                     }
-                    else if (currentBrain.MouseInteract && 
+                    else if (currentBrain.MouseInteract &&
                              !interactablesManager.CurrentInteractable.IsInteracting &&
                              InteractCooldown <= 0)
                     {

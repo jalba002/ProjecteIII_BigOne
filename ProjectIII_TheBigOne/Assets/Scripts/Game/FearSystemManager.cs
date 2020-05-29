@@ -92,7 +92,6 @@ public class FearSystemManager : MonoBehaviour
         float calculatedValue = Mathf.Abs(
             (clampedDistance / enemyBrain.selfCharacter.characterProperties.hearingMaxRange) -
             1f);
-        Debug.Log("Visual Debug: " + calculatedValue);
 
         currentAberrationMaxValue = calculatedValue * chromaticSettings.maximumAberration;
         currentVignetteMaxValue = Mathf.Lerp(vignetteSettings.minimumVignette, vignetteSettings.maximumVignette,

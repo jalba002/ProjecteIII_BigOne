@@ -37,7 +37,7 @@ public class SoundManager : MonoBehaviour
     {
         if ((instance != null && instance != this))
         {
-            DestroyObject(this.gameObject);
+            Destroy(this.gameObject);
             return;
         }
         else
@@ -88,7 +88,7 @@ public class SoundManager : MonoBehaviour
         EventInstance soundEvent = RuntimeManager.CreateInstance(path);
         if (!soundEvent.Equals(null))
         {
-            if(parameters!=null)
+            if (parameters != null)
                 for (int i = 0; i < parameters.Count; i++)
                     soundEvent.setParameterByName(parameters[i].GetName(), parameters[i].GetValue());
 
@@ -139,6 +139,33 @@ public class SoundManager : MonoBehaviour
         return soundEvent;
     }
 
+
+    public void PlaySound2D(string path)
+    {
+        EventInstance soundEvent = RuntimeManager.CreateInstance(path);
+        if (!soundEvent.Equals(null))
+        {
+            soundEvent.start();
+            SoundManagerMovingSound movingSound = new SoundManagerMovingSound(transform, soundEvent);
+            eventsList.Add(soundEvent);
+        }
+    }
+
+    public void PlayuSoundAtLocation(string path, Vector3 position, float volume = 1, float minRange = 1, float maxRange = 10)
+    {
+        EventInstance soundEvent = RuntimeManager.CreateInstance(path);
+        if (!soundEvent.Equals(null))
+        {
+            soundEvent.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
+            soundEvent.setVolume(volume);            
+            soundEvent.start();
+            SoundManagerMovingSound movingSound = new SoundManagerMovingSound(transform, soundEvent);
+            positionEvents.Add(movingSound);
+            eventsList.Add(soundEvent);
+        }
+    }
+
+
     public void UpdateEventParameter(EventInstance soundEvent, SoundManagerParameter parameter)
     {
         soundEvent.setParameterByName(parameter.GetName(), parameter.GetValue());
@@ -152,7 +179,7 @@ public class SoundManager : MonoBehaviour
 
     public void StopEvent(EventInstance soundEvent, bool fadeout = true)
     {
-		soundEvent.clearHandle ();
+        soundEvent.clearHandle();
         if (eventsList.Remove(soundEvent))
         {
             if (fadeout)
@@ -207,11 +234,12 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-	public bool isPlaying(EventInstance soundEvent) {
-		PLAYBACK_STATE state;
-		soundEvent.getPlaybackState (out state);
-		return !state.Equals (PLAYBACK_STATE.STOPPED);
-	}
+    public bool isPlaying(EventInstance soundEvent)
+    {
+        PLAYBACK_STATE state;
+        soundEvent.getPlaybackState(out state);
+        return !state.Equals(PLAYBACK_STATE.STOPPED);
+    }
 
     #endregion Events
 
@@ -220,7 +248,7 @@ public class SoundManager : MonoBehaviour
     public void SetChannelVolume(string channel, float channelVolume)
     {
         VCA vca;
-        if (RuntimeManager.StudioSystem.getVCA("vca:/"+channel, out vca) != FMOD.RESULT.OK)
+        if (RuntimeManager.StudioSystem.getVCA("vca:/" + channel, out vca) != FMOD.RESULT.OK)
             return;
         vca.setVolume(channelVolume);
     }

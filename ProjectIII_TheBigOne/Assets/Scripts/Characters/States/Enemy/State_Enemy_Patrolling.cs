@@ -33,6 +33,7 @@ namespace Enemy
             _attachedController.CheckForPlayerOnSight();
             _attachedController.CheckForPlayerNearLight();
             _attachedController.CheckForEnemyVisibility();
+            _attachedController.HearPlayerAround();
 
             if (_attachedController.NavMeshAgent.remainingDistance <=
                 _attachedController.characterProperties.positionReachedDistance)

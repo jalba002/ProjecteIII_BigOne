@@ -5,7 +5,8 @@ using CharacterController = Characters.Generic.CharacterController;
 
 public static class SensesUtil
 {
-    public static bool IsInSight(GameObject instigator, GameObject hitGameobject,Transform targetPosition, float maxRange, LayerMask layerMask,
+    public static bool IsInSight(GameObject instigator, GameObject hitGameobject, Transform targetPosition,
+        float maxRange, LayerMask layerMask,
         bool debug = false, float angle = 140f)
     {
         bool HitTarget = false;
@@ -37,15 +38,42 @@ public static class SensesUtil
         }
 
         float l_DotAngle = Vector3.Dot(detectionRay.direction, instigator.transform.forward);
-        
+
         return HitTarget && l_DotAngle > Mathf.Cos(angle * 0.5f * Mathf.Deg2Rad);
     }
 
-    /*public static bool IsHearingTarget()
+    public static bool IsHearingPlayer(EnemyController enemyController, PlayerController playerController,
+        float maxRange, LayerMask cantHearThroughLayers, bool debug = false)
     {
+        bool hearingTarget = false;
+        Vector3 enemyPos = enemyController.gameObject.transform.position;
+        Ray hearingRay = new Ray(enemyPos,
+            (playerController.gameObject.transform.position - enemyPos));
+        if (Physics.Raycast(hearingRay, out var hitInfo, maxRange, cantHearThroughLayers))
+        {
+            if (hitInfo.collider.gameObject == playerController.gameObject)
+            {
+                if(debug)
+                    Debug.Log("Hearing player!");
+                hearingTarget = true;
+            }
+        }
         
-    }*/
-    
+        if (debug)
+        {
+            if (hearingTarget)
+            {
+                Debug.DrawRay(hearingRay.origin, hearingRay.direction * hitInfo.distance, Color.blue, 1f);
+            }
+            else
+            {
+                Debug.DrawRay(hearingRay.origin, hearingRay.direction * maxRange, Color.yellow, 0.5f);
+            }
+        }
+
+        return hearingTarget;
+    }
+
     public static bool HasFlashlightEnabled(PlayerController playerController)
     {
         if (playerController == null) return false;

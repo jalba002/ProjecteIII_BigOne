@@ -22,6 +22,7 @@ namespace Enemy
             _attachedController.CheckForEnemyVisibility();
             _attachedController.CheckForPlayerNearLight();
             _attachedController.CheckForPlayerOnSight();
+            _attachedController.HearPlayerAround();
             
             _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
         }

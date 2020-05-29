@@ -72,11 +72,8 @@ namespace Enemy
                 .GetComponent<TraversableBlockage>();
 
             _attachedController.NavMeshAgent.isStopped = true;
-            Vector3 closestPoint = GetTheShortestPoint(this.gameObject.transform.position,
-                _currentBlockage.attachedLink.startTransform.position,
-                _currentBlockage.attachedLink.endTransform.position);
-            _attachedController.NavMeshAgent.Warp(closestPoint);
-            originalPosition = closestPoint;
+            
+           TeleportToCorrectPosition();
 
             _attachedController.NavMeshAgent.updateRotation = false;
 
@@ -87,6 +84,15 @@ namespace Enemy
                                                      _attachedController.transform.position).normalized;
 
             breakTime = originalBreakTime = _currentBlockage.removalTime;
+        }
+
+        private void TeleportToCorrectPosition()
+        {
+            Vector3 closestPoint = GetTheShortestPoint(this.gameObject.transform.position,
+                _currentBlockage.attachedLink.startTransform.position,
+                _currentBlockage.attachedLink.endTransform.position);
+            _attachedController.NavMeshAgent.Warp(closestPoint);
+            originalPosition = closestPoint;
         }
 
         private Vector3 GetTheShortestPoint(Vector3 currentPos, Vector3 firstPos, Vector3 secondPos)

@@ -78,6 +78,7 @@ public class FearSystemManager : MonoBehaviour
             UpdateVisuals();
         }
     }
+    
 
     public void UpdateVisuals()
     {

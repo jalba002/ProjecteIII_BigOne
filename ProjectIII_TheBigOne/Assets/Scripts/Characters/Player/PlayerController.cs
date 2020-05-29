@@ -39,12 +39,8 @@ namespace Player
 
         public int InteractCooldown = 5;
 
-
-        /*[Header("Ground Detection")] public Transform groundPosition;
-        [Range(0.01f, 1f)] public float castRadius = 1f;
-        public LayerMask walkableLayers;
-        public bool isPlayerGrounded { get; private set; }*/
-
+        [Header("Physical Materials")] public PhysicMaterial playerMovingMaterial;
+        public PhysicMaterial playerStoppedMaterial;
 
         public void Awake()
         {
@@ -143,10 +139,10 @@ namespace Player
         {
             if (puzzleInspector && puzzleInspector.isActiveAndEnabled)
             {
-                if (interactablesManager.CurrentInteractable.interactionType ==
-                    InteractableObject.InteractionType.Inspect)
+                if (currentBrain.Interact && interactablesManager.CurrentInteractable != null)
                 {
-                    if (currentBrain.Interact)
+                    if (interactablesManager.CurrentInteractable.interactionType ==
+                        InteractableObject.InteractionType.Inspect)
                     {
                         return puzzleInspector.Interact(interactablesManager.CurrentInteractable);
                     }
@@ -270,16 +266,26 @@ namespace Player
         }
 
 
-        public void CorrectRigidbody()
+        private void CorrectRigidbody()
         {
             if (rigidbody.angularVelocity != Vector3.zero)
             {
                 rigidbody.angularVelocity = Vector3.zero;
             }
 
-            if (rigidbody.velocity != Vector3.zero && currentBrain.Direction == Vector3.zero)
+            if (currentBrain.Direction == Vector3.zero)
             {
-                rigidbody.velocity = Vector3.zero;
+                if (attachedCollider.material.dynamicFriction < 1f)
+                {
+                    attachedCollider.material = playerStoppedMaterial;
+                }
+            }
+            else
+            {
+                if (attachedCollider.material.dynamicFriction > 0f)
+                {
+                    attachedCollider.material = playerMovingMaterial;
+                }   
             }
         }
 

@@ -93,6 +93,7 @@ namespace World.Objects
         [Header("Hinge Settings", order = 1)] public GameObject HandlePosition;
         public bool applyHandleRotation = false;
         public float openForce = 5f;
+        private Quaternion originalHandleRotation;
         [Range(1f, 15f)] public float maxMouseInput = 3f;
         public bool UseMouseXAxis = false;
         public bool InvertInitialization = false;
@@ -136,6 +137,7 @@ namespace World.Objects
             SetJointsLimit(lockedMode);
             SetInitialPositions();
             OnUnlockEvent.AddListener(OnUnlock);
+            originalHandleRotation = HandlePosition.transform.rotation;
         }
 
         private void SetInitialPositions()
@@ -503,6 +505,11 @@ namespace World.Objects
             bool playerOnSide = directionPlane.GetSide(position);
 
             HandlePosition.transform.forward = playerOnSide ? -forwardVector : forwardVector;
+        }
+
+        public void ResetHandle()
+        {
+            HandlePosition.transform.rotation = originalHandleRotation;
         }
 
         private float CalculateForce(float forceScale = 1f)

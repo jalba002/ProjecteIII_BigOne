@@ -12,6 +12,7 @@ namespace Enemy
 
         private TraversableBlockage _currentBlockage;
         private float breakTime = 0f;
+        private float originalBreakTime = 0f;
         private Vector3 originalPosition;
 
         protected override void OnStateInitialize(StateMachine machine)
@@ -32,7 +33,12 @@ namespace Enemy
             {
                 breakTime -= deltaTime;
             }
-            else
+            
+            if (breakTime <= originalBreakTime * 0.25f && _currentBlockage != null)
+            {            
+                ResolveBlockage();
+            }
+            else if (breakTime <= 0f)
             {
                 _attachedController.NavMeshAgent.CompleteOffMeshLink();
                 _attachedController.currentBrain.IsOnOffMeshLink = false;
@@ -80,7 +86,7 @@ namespace Enemy
             _attachedController.transform.forward = (alteredPos -
                                                      _attachedController.transform.position).normalized;
 
-            breakTime = _currentBlockage.removalTime;
+            breakTime = originalBreakTime = _currentBlockage.removalTime;
         }
 
         private Vector3 GetTheShortestPoint(Vector3 currentPos, Vector3 firstPos, Vector3 secondPos)
@@ -100,20 +106,21 @@ namespace Enemy
             //_attachedController.NavMeshAgent.Warp(originalPosition);
             _attachedController.NavMeshAgent.isStopped = false;
             _attachedController.NavMeshAgent.updateRotation = true;
-            ResolveBlockage();
         }
 
         private void ResolveBlockage()
         {
+            if (_currentBlockage == null) return;
             switch (_currentBlockage.attachedDynamicObject.objectType)
             {
                 case DynamicObject.ObjectType.Door:
                     // Nothing yet.
                     //_currentBlockage.attachedDynamicObject.ForceOpen(-2200f);
-                    _currentBlockage.attachedDynamicObject.SetHandleDirection(_attachedController.gameObject.transform.position);
+                    //_currentBlockage.attachedDynamicObject.SetHandleDirection(_attachedController.gameObject.transform.position);
+                    _currentBlockage.attachedDynamicObject.ResetHandle();
                     _currentBlockage.attachedDynamicObject.StrongOpening();
                     //_currentBlockage.attachedDynamicObject.BreakOpening(_attachedController.gameObject.transform.forward, 25f);
-                    _currentBlockage.DisableLink(0.25f);
+                    _currentBlockage.DisableLink(4f);
                     break;
                 case DynamicObject.ObjectType.Drawer:
                     // Can't get blocked by a drawer...?
@@ -124,6 +131,8 @@ namespace Enemy
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
+            _currentBlockage = null;
         }
     }
 }

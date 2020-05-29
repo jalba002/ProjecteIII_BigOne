@@ -77,6 +77,7 @@ namespace Enemy
 
             if (Machine.lastState is State_Enemy_Traversing)
             {
+                Debug.Log("Last state was Traversing.");
                 SetNewPatrolPoint(lastPatrolPoint);
             }
         }

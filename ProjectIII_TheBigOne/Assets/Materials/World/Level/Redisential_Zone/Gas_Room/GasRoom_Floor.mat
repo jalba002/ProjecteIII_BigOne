@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: GasRoom_Floor
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _PARALLAXMAP _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 662637fa6f0bac04daef3e7628c3c7b0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -52,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 569f793ad943b834e8673570fce327ad, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -67,7 +67,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
+    - _SmoothnessTextureChannel: 1
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0

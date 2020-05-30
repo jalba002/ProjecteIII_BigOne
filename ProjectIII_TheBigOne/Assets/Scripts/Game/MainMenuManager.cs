@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
+    private OptionsManager m_OptionsManager;
+
     public GameObject b_options;
     public GameObject b_play;
     public GameObject b_exit;
@@ -26,8 +29,28 @@ public class MainMenuManager : MonoBehaviour
 
     public float speed = 3;
 
+    [Header("Sliders")]
+    public Slider masterVolumeSlider;
+    public Slider effectsVolumeSlider;
+    public Slider musicVolumeSlider;
+    public Slider sensibilitySlider;
+    public Toggle invertToogle;
+    public Slider brightnessSlider;
+
+    [Header("Options")]
+    public GameObject options;
+    public GameObject controls;
+    public GameObject volume;
+    public GameObject mouse;
+    public GameObject screen;
+
     // Start is called before the first frame update
     void Start()
+    {
+        UpdateOptions();
+    }
+
+    private void Awake()
     {
         buttons.Add(b_play);
         buttons.Add(b_options);
@@ -41,7 +64,6 @@ public class MainMenuManager : MonoBehaviour
         b_exit.SetActive(false);
 
         selectedOption.SetActive(true);
-
     }
 
     // Update is called once per frame
@@ -149,7 +171,97 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
-    
+    public void ActivateOptions()
+    {
+        options.SetActive(true);
+        controls.SetActive(false);
+        volume.SetActive(false);
+        mouse.SetActive(false);
+        screen.SetActive(false);
+    }
+    public void DesactivateOptions()
+    {
+        options.SetActive(false);
+        controls.SetActive(false);
+        volume.SetActive(false);
+        mouse.SetActive(false);
+        screen.SetActive(false);
+    }
 
+    public void ActivateControls()
+    {
+        options.SetActive(true);
+        controls.SetActive(true);
+        volume.SetActive(false);
+        mouse.SetActive(false);
+        screen.SetActive(false);
+    }
+    public void ActivateVolume()
+    {
+        options.SetActive(true);
+        controls.SetActive(false);
+        volume.SetActive(true);
+        mouse.SetActive(false);
+        screen.SetActive(false);
+    }
+    public void ActivateMouse()
+    {
+        options.SetActive(true);
+        controls.SetActive(false);
+        volume.SetActive(false);
+        mouse.SetActive(true);
+        screen.SetActive(false);
+    }
+    public void ActivateScreen()
+    {
+        options.SetActive(true);
+        controls.SetActive(false);
+        volume.SetActive(false);
+        mouse.SetActive(false);
+        screen.SetActive(true);
+    }
+
+    public void SetMasterVolume(float volume)
+    {
+        OptionsManager.Instance.SetMasterVolume(volume);
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        OptionsManager.Instance.SetMusicVolume(volume);
+    }
+
+    public void SetEffectsVolume(float volume)
+    {
+        OptionsManager.Instance.SetEffectsVolume(volume);
+    }
+
+    public void SetSensibility(float sensibility)
+    {
+        OptionsManager.Instance.SetSensibility(sensibility);
+        //GameManager.Instance.PlayerController.cameraController.m_Sensitivity = OptionsManager.Instance.sensitivity;
+    }
+
+    public void SetInvertMouse(bool invert)
+    {
+        OptionsManager.Instance.SetInvertMouse(invert);
+        //GameManager.Instance.PlayerController.cameraController.invertMouse = OptionsManager.Instance.invertedMouse;
+    }
+
+    public void SetBrightness(float bright)
+    {
+        OptionsManager.Instance.SetBrightness(bright);
+    }
+    public void UpdateOptions()
+    {
+        masterVolumeSlider.value = OptionsManager.Instance.masterVolume;
+        musicVolumeSlider.value = OptionsManager.Instance.musicVolume;
+        effectsVolumeSlider.value = OptionsManager.Instance.effectsVolume;
+
+        sensibilitySlider.value = OptionsManager.Instance.sensitivity;
+        invertToogle.isOn = OptionsManager.Instance.invertedMouse;
+
+        brightnessSlider.value = OptionsManager.Instance.brightness;
+    }
 
 }

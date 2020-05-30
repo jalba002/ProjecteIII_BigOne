@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
         {
             if (m_Instance == null)
             {
-                m_Instance = (AudioManager) FindObjectOfType(typeof(AudioManager ));
+                m_Instance = (AudioManager)FindObjectOfType(typeof(AudioManager));
                 if (m_Instance == null)
                 {
                     m_Instance = (new GameObject("AudioManager")).AddComponent<AudioManager>();

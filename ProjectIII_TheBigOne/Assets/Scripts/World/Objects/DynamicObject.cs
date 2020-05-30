@@ -93,6 +93,7 @@ namespace World.Objects
         [Header("Hinge Settings", order = 1)] public GameObject HandlePosition;
         public bool applyHandleRotation = false;
         public float openForce = 5f;
+        private Quaternion originalHandleRotation;
         [Range(1f, 15f)] public float maxMouseInput = 3f;
         public bool UseMouseXAxis = false;
         public bool InvertInitialization = false;
@@ -136,6 +137,7 @@ namespace World.Objects
             SetJointsLimit(lockedMode);
             SetInitialPositions();
             OnUnlockEvent.AddListener(OnUnlock);
+            originalHandleRotation = HandlePosition.transform.rotation;
         }
 
         private void SetInitialPositions()
@@ -477,7 +479,7 @@ namespace World.Objects
                 }
             }
 
-            CheckPlayerSide();
+            SetHandleDirection(GameManager.Instance.PlayerController.transform.position);
         }
 
         public override void OnInteracting()
@@ -493,22 +495,21 @@ namespace World.Objects
 
         #endregion
 
-        private void CheckPlayerSide()
+        public void SetHandleDirection(Vector3 position)
         {
-            if(!applyHandleRotation) return;
-            
-            Plane directionPlane = new Plane(gameObject.transform.forward, gameObject.transform.position);
-            bool playerOnSide = directionPlane.GetSide(GameManager.Instance.PlayerController.transform.position);
-            Debug.Log(playerOnSide);
+            if (!applyHandleRotation) return;
 
-            if (playerOnSide)
-            {
-                HandlePosition.transform.localEulerAngles = new Vector3(0f, 180f, 0f);
-            }
-            else
-            {
-                HandlePosition.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
-            }
+            Transform objectTransform = gameObject.transform;
+            Vector3 forwardVector = objectTransform.forward;
+            Plane directionPlane = new Plane(forwardVector, objectTransform.position);
+            bool playerOnSide = directionPlane.GetSide(position);
+
+            HandlePosition.transform.forward = playerOnSide ? -forwardVector : forwardVector;
+        }
+
+        public void ResetHandle()
+        {
+            HandlePosition.transform.rotation = originalHandleRotation;
         }
 
         private float CalculateForce(float forceScale = 1f)
@@ -516,7 +517,7 @@ namespace World.Objects
             float calculatedForce = 1f;
             float mouseAxis = UseMouseXAxis ? Input.GetAxis("Mouse X") : Input.GetAxis("Mouse Y");
             mouseAxis = Mathf.Clamp(mouseAxis, -maxMouseInput, maxMouseInput);
-            calculatedForce = (forceScale * mouseAxis) * OptionsManager.optionsData.sensitivity;
+            calculatedForce = (forceScale * mouseAxis) * FindObjectOfType<OptionsManager>().sensitivity;
 
             return calculatedForce;
         }

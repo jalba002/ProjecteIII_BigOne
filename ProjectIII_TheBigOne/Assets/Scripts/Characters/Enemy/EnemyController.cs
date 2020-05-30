@@ -172,7 +172,7 @@ namespace Enemy
                     currentBrain.archnemesis.gameObject,
                     currentBrain.archnemesis.cameraController.m_PitchControllerTransform,
                     characterProperties.maxDetectionRange,
-                    characterProperties.watchableLayers);
+                    characterProperties.watchableLayers, false, characterProperties.fieldOfVision);
             }
             catch (NullReferenceException)
             {
@@ -213,13 +213,18 @@ namespace Enemy
                 // Check the player distances, if too close, he is heard.
                 // If inside but far, if he moves, he is detected.
                 // Both should transition to the alerted state, then do their thing.
-                
-                // currentBrain.IsHearingPlayer = SensesUtil.IsHearingPlayer();
+
+                currentBrain.IsHearingPlayer = SensesUtil.IsHearingPlayer(this, currentBrain.archnemesis,
+                    characterProperties.hearingMaxRange, characterProperties.layersThatBlockHearing, true);
             }
             catch (NullReferenceException)
             {
-                
             }
+        }
+
+        public void CheckForMeshLink()
+        {
+            currentBrain.IsOnOffMeshLink = NavMeshAgent.isOnOffMeshLink;
         }
 
         public void ChillDown()

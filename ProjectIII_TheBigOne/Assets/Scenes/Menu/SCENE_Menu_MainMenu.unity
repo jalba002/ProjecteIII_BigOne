@@ -1061,7 +1061,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &301378975
 MonoBehaviour:
@@ -1249,7 +1249,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &358146172
 GameObject:
@@ -2671,6 +2671,17 @@ MonoBehaviour:
   cameraPointNormal: {fileID: 1415790276}
   audioMixer: {fileID: 0}
   speed: 3
+  masterVolumeSlider: {fileID: 5610914547566452110}
+  effectsVolumeSlider: {fileID: 5610914547275237167}
+  musicVolumeSlider: {fileID: 5610914548831361556}
+  sensibilitySlider: {fileID: 5610914548454576366}
+  invertToogle: {fileID: 5610914548810663268}
+  brightnessSlider: {fileID: 5610914549177739801}
+  options: {fileID: 5610914548985382921}
+  controls: {fileID: 5610914547392638017}
+  volume: {fileID: 5610914547882112125}
+  mouse: {fileID: 5610914547585442149}
+  screen: {fileID: 5610914547241314643}
 --- !u!4 &698116830
 Transform:
   m_ObjectHideFlags: 0
@@ -4189,7 +4200,7 @@ Transform:
   m_Children:
   - {fileID: 400344539}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 38.436, z: 0}
 --- !u!1 &1019605195
 GameObject:
@@ -4315,7 +4326,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1025990189
 MonoBehaviour:
@@ -5859,7 +5870,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 25.32, y: 2.5, z: 0}
 --- !u!1 &1479559642
 GameObject:
@@ -6957,7 +6968,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1858166878
 GameObject:
@@ -7042,7 +7053,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1858166882
 MonoBehaviour:
@@ -7407,7 +7418,7 @@ Transform:
   - {fileID: 1180339138}
   - {fileID: 146363947}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1942919902 stripped
 Transform:
@@ -7554,7 +7565,7 @@ Transform:
   m_Children:
   - {fileID: 916665713}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: -25.427002, z: 0}
 --- !u!1 &2062259314
 GameObject:
@@ -7709,7 +7720,7 @@ Transform:
   - {fileID: 625134310}
   - {fileID: 1701805963}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2091246429
 PrefabInstance:
@@ -8318,7 +8329,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5610914547728707140}
+      - m_Target: {fileID: 698116829}
         m_MethodName: SetEffectsVolume
         m_Mode: 0
         m_Arguments:
@@ -8632,7 +8643,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5610914547728707141}
+      - m_Target: {fileID: 698116829}
         m_MethodName: ActivateMouse
         m_Mode: 1
         m_Arguments:
@@ -8785,7 +8796,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5610914547728707140}
+      - m_Target: {fileID: 698116829}
         m_MethodName: SetMasterVolume
         m_Mode: 0
         m_Arguments:
@@ -9004,7 +9015,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5610914547728707141}
+      - m_Target: {fileID: 698116829}
         m_MethodName: ActivateScreen
         m_Mode: 1
         m_Arguments:
@@ -9052,8 +9063,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5610914547728707138}
-  - component: {fileID: 5610914547728707141}
-  - component: {fileID: 5610914547728707140}
   m_Layer: 5
   m_Name: OptionsMenu
   m_TagString: Untagged
@@ -9061,36 +9070,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &5610914547728707140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5610914547728707139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9eff12accc3ff504f8e74d8354c9c3ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24100000, guid: cca8d7fd69726e84d93ec477e7805480, type: 2}
---- !u!114 &5610914547728707141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5610914547728707139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9791f6de2e34704e9918b4d98cc53ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  options: {fileID: 5610914548985382921}
-  controls: {fileID: 5610914547392638017}
-  volume: {fileID: 5610914547882112125}
-  mouse: {fileID: 5610914547585442149}
-  screen: {fileID: 5610914547241314643}
 --- !u!1 &5610914547744266020
 GameObject:
   m_ObjectHideFlags: 0
@@ -10419,7 +10398,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5610914547728707140}
+      - m_Target: {fileID: 698116829}
         m_MethodName: SetSensibility
         m_Mode: 0
         m_Arguments:
@@ -10797,7 +10776,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5610914547728707141}
+      - m_Target: {fileID: 698116829}
         m_MethodName: ActivateControls
         m_Mode: 1
         m_Arguments:
@@ -10984,7 +10963,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5610914547728707140}
+      - m_Target: {fileID: 698116829}
         m_MethodName: SetInvertMouse
         m_Mode: 0
         m_Arguments:
@@ -11161,7 +11140,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5610914547728707140}
+      - m_Target: {fileID: 698116829}
         m_MethodName: SetMusicVolume
         m_Mode: 0
         m_Arguments:
@@ -11256,7 +11235,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5610914547728707141}
+      - m_Target: {fileID: 698116829}
         m_MethodName: ActivateVolume
         m_Mode: 1
         m_Arguments:
@@ -12119,12 +12098,23 @@ MonoBehaviour:
   m_HandleRect: {fileID: 5610914549071171823}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 30
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 698116829}
+        m_MethodName: SetBrightness
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5610914549285531816
 GameObject:
   m_ObjectHideFlags: 0
@@ -12198,3 +12188,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5610914549285531816}
   m_CullTransparentMesh: 0
+--- !u!1 &8944422588461700438
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8944422588461700439}
+  - component: {fileID: 8944422588461700440}
+  m_Layer: 0
+  m_Name: OptionsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8944422588461700439
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8944422588461700438}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8944422588461700440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8944422588461700438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eff12accc3ff504f8e74d8354c9c3ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensitivity: 1
+  invertedMouse: 0
+  masterVolume: 0
+  musicVolume: 0
+  effectsVolume: 0
+  brightness: 25

@@ -1,4 +1,7 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using Aura2API;
+using UnityEngine.Rendering.PostProcessing;
 
 public class OptionsManager : MonoBehaviour
 {
@@ -6,90 +9,85 @@ public class OptionsManager : MonoBehaviour
 
     public static OptionsManager Instance
     {
-        get
+        get { return m_Instance; }
+        set { m_Instance = value; }
+    }
+
+    private MainMenuManager mainMenuManager;
+
+    [Header("MOUSE")] [Range(0.1f, 10.0f)] public float sensitivity = 1f;
+    public bool invertedMouse = false;
+
+    [Header("VOLUME")] [Range(-80f, 0f)] public float masterVolume = 1f;
+    [Range(-80f, 0f)] public float musicVolume = 1f;
+    [Range(-80f, 0f)] public float effectsVolume = 1f;
+
+    [Header("SCREEN")] [Range(0f, 30f)] public float brightness = 1f;
+    
+
+
+    public void Awake()
+    {
+        if (m_Instance != null && Instance != this)
         {
-            if (m_Instance == null)
-            {
-                m_Instance = (OptionsManager) FindObjectOfType(typeof(OptionsManager));
-                if (m_Instance == null)
-                {
-                    m_Instance = (new GameObject("PauseManager")).AddComponent<OptionsManager>();
-                }
-
-                DontDestroyOnLoad(m_Instance.gameObject);
-            }
-
-            return m_Instance;
+            Destroy(this.gameObject);
         }
+        else
+        {
+            m_Instance = this;
+        }
+        DontDestroyOnLoad(this.gameObject);
+        mainMenuManager = FindObjectOfType<MainMenuManager>();
     }
     
-    private static OptionsData _optionsData;
-
-    public static OptionsData optionsData
-    {
-        get
-        {
-            if (_optionsData == null)
-            {
-                _optionsData = ScriptableObject.CreateInstance<OptionsData>();
-            }
-
-            return _optionsData;
-        }
-    }
-
-
-    public void Start()
-    {
-        UpdateOptions();
-    }
 
     public void SetMasterVolume(float volume)
     {
-        optionsData.masterVolume = volume;
-        UpdateOptions();
+        masterVolume = volume;
+        //set master volume on FMOD
     }
 
     public void SetMusicVolume(float volume)
     {
-        optionsData.musicVolume = volume;
-        UpdateOptions();
+        musicVolume = volume;
+        //set music volume on FMOD
     }
 
     public void SetEffectsVolume(float volume)
     {
-        optionsData.effectsVolume = volume;
-        UpdateOptions();
+        effectsVolume = volume;
+        //set effects volume on FMOD
     }
 
     public void SetSensibility(float sensibility)
     {
-        optionsData.sensitivity = sensibility;
-        UpdateOptions();
+        sensitivity = sensibility;        
     }
 
     public void SetInvertMouse(bool invert)
     {
-        optionsData.invertedMouse = invert;
-        UpdateOptions();
+        invertedMouse = invert;        
+    }
+
+    public void SetBrightness(float bright)
+    {
+        brightness = bright;
+        FindObjectOfType<PostProcessVolume>().profile.TryGetSettings(out ColorGrading cg);
+        if (cg != null)
+        {
+            cg.brightness.value = brightness;
+        }
     }
 
     public void UpdateOptions()
     {
-        Debug.Log("Updated Options");
-        AudioManager.Instance.audioMixer.SetFloat("MasterVolume", optionsData.masterVolume);
-        AudioManager.Instance.audioMixer.SetFloat("MusicVolume", optionsData.musicVolume);
-        AudioManager.Instance.audioMixer.SetFloat("EffectsVolume", optionsData.effectsVolume);
-        try
-        {
-            GameManager.Instance.PlayerController.cameraController.m_Sensitivity =
-                optionsData.sensitivity;
-            GameManager.Instance.PlayerController.cameraController.invertMouse =
-                optionsData.invertedMouse;
-        }
-        catch (System.Exception)
-        {
-            throw;
-        }
+        mainMenuManager.masterVolumeSlider.value = masterVolume;
+        mainMenuManager.musicVolumeSlider.value = musicVolume;
+        mainMenuManager.effectsVolumeSlider.value = effectsVolume;
+
+        mainMenuManager.sensibilitySlider.value = sensitivity;
+        mainMenuManager.invertToogle.isOn = invertedMouse;
+
+        mainMenuManager.brightnessSlider.value = brightness;       
     }
 }

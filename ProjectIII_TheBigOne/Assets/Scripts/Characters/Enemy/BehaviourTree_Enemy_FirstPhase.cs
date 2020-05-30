@@ -19,6 +19,7 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         // Analyze all possible states.
         if (CheckEnterStunned()) return;
         //if (CheckPlayerKilled()) return;
+        if (CheckIfHearingPlayer()) return;
         if (CheckEnterTraversing()) return;
         if (CheckEnterIdle()) return;
         if (CheckEnterPatrol()) return;
@@ -32,6 +33,18 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
 
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Killing>();
         
+        return true;
+    }
+
+    private bool CheckIfHearingPlayer()
+    {
+        if (!attachedCharacter.currentBrain.IsHearingPlayer) return false;
+
+        if (!attachedCharacter.currentBrain.IsNoticingPlayer) return false;
+
+        if (attachedCharacter.currentBrain.IsChasingPlayer) return false;
+
+        attachedCharacter.stateMachine.SwitchState<State_Enemy_Noticed>();
         return true;
     }
 

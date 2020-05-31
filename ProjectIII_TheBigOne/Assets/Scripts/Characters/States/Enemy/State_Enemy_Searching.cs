@@ -45,14 +45,7 @@ namespace Enemy
                 StopChase();
             }
 
-            //_attachedController.NavMeshAgent.path = forcedPath;
-
-            if (Vector3.Distance(_attachedController.targetPositionDummy.transform.position,
-                    _attachedController.NavMeshAgent.transform.position) <=
-                _attachedController.characterProperties.positionReachedDistance)
-            {
-                currentSearchTime += deltaTime;
-            }
+            currentSearchTime += deltaTime;
         }
 
         public override void OnStateFixedTick(float fixedTime)
@@ -78,7 +71,8 @@ namespace Enemy
             _attachedController.NavMeshAgent.isStopped = false;
 
             trackTime = _attachedController.characterProperties.maxTimeOfPerfectTracking;
-            currentSearchTime = 0f;
+            currentSearchTime = 0f - Vector3.Distance(_attachedController.targetPositionDummy.transform.position,
+                                    _attachedController.NavMeshAgent.transform.position);
             _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
             _attachedController.NavMeshAgent.autoRepath = false;
             //forcedPath = _attachedController.NavMeshAgent.path;

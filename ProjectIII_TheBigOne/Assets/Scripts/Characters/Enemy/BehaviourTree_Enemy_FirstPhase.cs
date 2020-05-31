@@ -18,7 +18,7 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
     {
         // Analyze all possible states.
         if (CheckEnterStunned()) return;
-        //if (CheckPlayerKilled()) return;
+        if (CheckPlayerKilled()) return;
         if (CheckIfHearingPlayer()) return;
         if (CheckEnterTraversing()) return;
         if (CheckEnterIdle()) return;

@@ -34,6 +34,10 @@ namespace Enemy
 
         [Header("Components")] public Collider attachedCollider;
         public Renderer meshRenderer;
+
+        [Tooltip("Position where Raycasts will be casted to and towards.")]
+        public GameObject eyesPosition;
+
         [Header("NavMesh")] public EnemyTargetDummy targetPositionDummy;
         public NavMeshAgent NavMeshAgent;
 
@@ -46,6 +50,8 @@ namespace Enemy
             currentBrain = GetComponent<EnemyBrain>();
 
             NavMeshAgent = GetComponent<NavMeshAgent>();
+
+            SetupEyes();
 
             //SetStartingBehaviourTree();
 
@@ -70,6 +76,16 @@ namespace Enemy
             if (meshRenderer == null)
             {
                 Debug.LogError("Attach a mesh renderer.", this.gameObject);
+            }
+        }
+
+        private void SetupEyes()
+        {
+            if (eyesPosition == null)
+            {
+                eyesPosition = new GameObject("Runtime_DimitryEyes");
+                eyesPosition.transform.parent = this.gameObject.transform;
+                eyesPosition.transform.position = new Vector3(0f, 1f, 0f);
             }
         }
 
@@ -168,7 +184,7 @@ namespace Enemy
         {
             try
             {
-                currentBrain.IsPlayerInSight = SensesUtil.IsInSight(gameObject,
+                currentBrain.IsPlayerInSight = SensesUtil.IsInSight(eyesPosition,
                     currentBrain.archnemesis.gameObject,
                     currentBrain.archnemesis.cameraController.m_PitchControllerTransform,
                     characterProperties.maxDetectionRange,

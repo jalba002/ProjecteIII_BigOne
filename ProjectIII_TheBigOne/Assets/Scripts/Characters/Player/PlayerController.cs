@@ -137,12 +137,12 @@ namespace Player
 
         bool InspectPuzzle()
         {
-            if (puzzleInspector && puzzleInspector.isActiveAndEnabled)
+            if (puzzleInspector)
             {
                 if (currentBrain.Interact && interactablesManager.CurrentInteractable != null)
                 {
                     if (interactablesManager.CurrentInteractable.interactionType ==
-                        InteractableObject.InteractionType.Inspect)
+                        InteractableObject.InteractionType.Puzzle)
                     {
                         return puzzleInspector.Interact(interactablesManager.CurrentInteractable);
                     }

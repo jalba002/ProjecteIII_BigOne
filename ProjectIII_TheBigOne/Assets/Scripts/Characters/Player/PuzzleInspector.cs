@@ -9,7 +9,7 @@ public class PuzzleInspector : MonoBehaviour
     {
         try
         {
-            if (newInteractable.interactionType == InteractableObject.InteractionType.Inspect) return false;
+            if (newInteractable.interactionType != InteractableObject.InteractionType.Puzzle) return false;
         }
         catch (NullReferenceException)
         {

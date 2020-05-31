@@ -79,7 +79,14 @@ public class InteractablePuzzle : InteractableObject, IPuzzle
         GameManager.Instance.PlayerController.cameraController.StartLerpToPos(cameraPosition);
         GameManager.Instance.PlayerController.stateMachine.SwitchState<State_Player_PuzzleInspect>();
 
-        Cursor.SetCursor(puzzleCursor.texture, Vector3.zero, CursorMode.Auto);
+        try
+        {
+            Cursor.SetCursor(puzzleCursor.texture, Vector3.zero, CursorMode.Auto);
+        }
+        catch (UnassignedReferenceException)
+        {
+            Debug.LogWarning("Null cursor texture in " + this.gameObject.name, this);
+        }
 
         IsInteracting = true;
         //playerCameraController.SetNewPosition(attachedPuzzle.gameObject.transform,true);
@@ -131,7 +138,7 @@ public class InteractablePuzzle : InteractableObject, IPuzzle
         // Restore cursor to usual settings.
         // Set IsInteracting to false.
 
-        EndInteractActions();    
+        EndInteractActions();
         attachedPuzzle.EndGame();
     }
 

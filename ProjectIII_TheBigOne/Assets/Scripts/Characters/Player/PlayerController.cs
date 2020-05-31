@@ -42,6 +42,22 @@ namespace Player
         [Header("Physical Materials")] public PhysicMaterial playerMovingMaterial;
         public PhysicMaterial playerStoppedMaterial;
 
+        [Header("Stamina")] private float _currentStamina;
+
+        public float currentStamina
+        {
+            get { return _currentStamina; }
+            set { _currentStamina = Mathf.Clamp(value, 0f, characterProperties.maximumStamina); }
+        }
+
+        private float _currentDelay;
+
+        public float currentDelay
+        {
+            get { return _currentDelay; }
+            set { _currentDelay = Mathf.Clamp(value, 0f, characterProperties.rechargeDelay); }
+        }
+
         public void Awake()
         {
             currentBrain = GetComponent<PlayerBrain>();
@@ -93,8 +109,14 @@ namespace Player
 
         private void Start()
         {
-            // enableAirControl = true;
             stateMachine.SwitchState<State_Player_Walking>();
+            SetupStamina();
+        }
+
+        private void SetupStamina()
+        {
+            currentStamina = characterProperties.maximumStamina;
+            currentDelay = characterProperties.rechargeDelay;
         }
 
         void Update()
@@ -102,23 +124,16 @@ namespace Player
             if (currentBrain.isActiveAndEnabled)
                 currentBrain.GetActions();
 
-            /*if (currentBrain.Shooting && !GameController.Instance.m_GamePaused)
-            {
-                equippedWeapon.MainFire();
-            }*/
-
-            /*if (currentBrain.Aiming && !GameController.Instance.m_GamePaused)
-            {
-                if (equippedWeapon.AltFire())
-                    weaponAnimator.SetTrigger("ChangeColor");
-            }*/
-
             // TODO Disable state machine when game pauses. 
             // Access with events and disable StateMachine.
             // DO NOT REFERENCE GAMEMANAGER FROM HERE.
+            float dt = Time.deltaTime;
+
+            ManageStamina(dt);
+
             if (stateMachine.isActiveAndEnabled)
             {
-                stateMachine.UpdateTick(Time.deltaTime);
+                stateMachine.UpdateTick(dt);
             }
 
             if (InteractCooldown > 0) InteractCooldown -= 1;
@@ -232,6 +247,25 @@ namespace Player
             }
         }
 
+        private void ManageStamina(float deltaTime)
+        {
+            if (currentDelay > 0f)
+            {
+                currentDelay -= deltaTime;
+            }
+            else if (currentStamina < characterProperties.maximumStamina)
+            {
+                currentStamina += characterProperties.staminaRechargePerSecond * deltaTime;
+            }
+
+            // If character is moving, has stamina and is running, deplete stamina and run.
+            if ((currentBrain.Running && currentBrain.Direction != Vector3.zero) && currentStamina > 0f)
+            {
+                currentStamina -= deltaTime;
+                currentDelay = characterProperties.rechargeDelay;
+            }
+        }
+
         private void FixedUpdate()
         {
             // TODO Reenable stop functionality with GameController.
@@ -285,7 +319,7 @@ namespace Player
                 if (attachedCollider.material.dynamicFriction > 0f)
                 {
                     attachedCollider.material = playerMovingMaterial;
-                }   
+                }
             }
         }
 

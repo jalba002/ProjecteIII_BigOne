@@ -215,7 +215,7 @@ namespace Enemy
                 // Both should transition to the alerted state, then do their thing.
 
                 currentBrain.IsHearingPlayer = SensesUtil.IsHearingPlayer(this, currentBrain.archnemesis,
-                    characterProperties.hearingMaxRange, characterProperties.layersThatBlockHearing, true);
+                    characterProperties.hearingMaxRange, characterProperties.layersThatBlockHearing);
             }
             catch (NullReferenceException)
             {

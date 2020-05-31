@@ -36,13 +36,16 @@ public class CanvasController : MonoBehaviour
     private State_Player_Walking playerWalking;
     public PauseManager pauseManager;
 
+    private PlayerController _playerController;
+
     private void Start()
     {
-        flashlight = GameManager.Instance.PlayerController.attachedFlashlight;
-        playerWalking = FindObjectOfType<State_Player_Walking>();
+        _playerController = GameManager.Instance.PlayerController;
 
         if (CrosshairController == null)
             CrosshairController = FindObjectOfType<CrosshairController>();
+
+        flashlight = _playerController.attachedFlashlight;
 
         //_pauseManager = GetComponentInChildren<PauseManager>();
     }
@@ -52,18 +55,18 @@ public class CanvasController : MonoBehaviour
         PlayerLightingUpdate();
         PlayerRunningUpdate();
 
-        if (!GameManager.Instance.PlayerController.IsDead)
+        if (!_playerController.IsDead)
             TooglePauseMenu(false);
 
-        if (playerWalking.currentStamina >= GameManager.Instance.PlayerController.characterProperties.maximumStamina)
+        if (_playerController.currentStamina >= _playerController.characterProperties.maximumStamina)
             runningSlider.gameObject.SetActive(false);
         else
             runningSlider.gameObject.SetActive(true);
 
-        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.PlayerController.playerInventory.inventoryDisplay.gameObject.transform
+        if (Input.GetKeyDown(KeyCode.Escape) && _playerController.playerInventory.inventoryDisplay.gameObject.transform
                 .parent.gameObject.activeSelf)
         {
-            GameManager.Instance.PlayerController.ToggleInventory();
+            _playerController.ToggleInventory();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -90,7 +93,7 @@ public class CanvasController : MonoBehaviour
 
     public void PlayerRunningUpdate()
     {
-        runningSlider.value = playerWalking.currentStamina / GameManager.Instance.PlayerController.characterProperties.maximumStamina;
+        runningSlider.value = _playerController.currentStamina / _playerController.characterProperties.maximumStamina;
     }
 
     public void ChangeCursor(Sprite newCursor, Vector3 newScale)
@@ -103,13 +106,13 @@ public class CanvasController : MonoBehaviour
     {
         if (forceEnable)
         {
-            GameManager.Instance.PlayerController.cameraController.angleLocked = true;
-            GameManager.Instance.PlayerController.cameraController.cursorLock = false;
+            _playerController.cameraController.angleLocked = true;
+            _playerController.cameraController.cursorLock = false;
             Cursor.visible = true;
-            GameManager.Instance.PlayerController.stateMachine.enabled = false;
-            GameManager.Instance.PlayerController.interactablesManager.enabled = false;
-            GameManager.Instance.PlayerController.interactablesManager.ClearInteractable();
-            GameManager.Instance.PlayerController.objectInspector.enabled = false;
+            _playerController.stateMachine.enabled = false;
+            _playerController.interactablesManager.enabled = false;
+            _playerController.interactablesManager.ClearInteractable();
+            _playerController.objectInspector.enabled = false;
 
             //Something about enemy?
             pauseManager.ActivateResumeButton(false);
@@ -117,15 +120,15 @@ public class CanvasController : MonoBehaviour
             pauseManager.DesactivateOptions();
             return;
         }
-        else if (!pauseManager.isActiveAndEnabled && GameManager.Instance.PlayerController.currentBrain.ShowPause)//(GameManager.Instance.PlayerController.currentBrain.ShowPause && GameManager.Instance.PlayerController.stateMachine.lastState is State_Player_Interacting)
+        else if (!pauseManager.isActiveAndEnabled && _playerController.currentBrain.ShowPause)//(GameManager.Instance.PlayerController.currentBrain.ShowPause && GameManager.Instance.PlayerController.stateMachine.lastState is State_Player_Interacting)
         {
-            GameManager.Instance.PlayerController.cameraController.angleLocked = true;
-            GameManager.Instance.PlayerController.cameraController.cursorLock = false;
+            _playerController.cameraController.angleLocked = true;
+            _playerController.cameraController.cursorLock = false;
             Cursor.visible = true;
-            GameManager.Instance.PlayerController.stateMachine.enabled = false;
-            GameManager.Instance.PlayerController.interactablesManager.enabled = false;
-            GameManager.Instance.PlayerController.interactablesManager.ClearInteractable();
-            GameManager.Instance.PlayerController.objectInspector.enabled = false;
+            _playerController.stateMachine.enabled = false;
+            _playerController.interactablesManager.enabled = false;
+            _playerController.interactablesManager.ClearInteractable();
+            _playerController.objectInspector.enabled = false;
 
             //Something about enemy?
             pauseManager.ActivateResumeButton(true);
@@ -133,15 +136,15 @@ public class CanvasController : MonoBehaviour
             pauseManager.DesactivateOptions();
             return;
         }
-        else if (pauseManager.isActiveAndEnabled && GameManager.Instance.PlayerController.currentBrain.ShowPause)//(GameManager.Instance.PlayerController.currentBrain.ShowPause /*|| forceEnable*/)
+        else if (pauseManager.isActiveAndEnabled && _playerController.currentBrain.ShowPause)//(GameManager.Instance.PlayerController.currentBrain.ShowPause /*|| forceEnable*/)
         {
-            GameManager.Instance.PlayerController.cameraController.angleLocked = false;
-            GameManager.Instance.PlayerController.cameraController.cursorLock = true;
+            _playerController.cameraController.angleLocked = false;
+            _playerController.cameraController.cursorLock = true;
             Cursor.visible = false;
-            GameManager.Instance.PlayerController.stateMachine.enabled = true;
-            GameManager.Instance.PlayerController.interactablesManager.enabled = true;
-            GameManager.Instance.PlayerController.interactablesManager.ClearInteractable();
-            GameManager.Instance.PlayerController.objectInspector.enabled = true;
+            _playerController.stateMachine.enabled = true;
+            _playerController.interactablesManager.enabled = true;
+            _playerController.interactablesManager.ClearInteractable();
+            _playerController.objectInspector.enabled = true;
 
             //Something about enemy?
             //pauseManager.ActivateResumeButton(true);
@@ -170,12 +173,12 @@ public class CanvasController : MonoBehaviour
     public void ResumeGame()
     {
         var enabled = true;
-        GameManager.Instance.PlayerController.cameraController.angleLocked = !enabled;
-        GameManager.Instance.PlayerController.cameraController.cursorLock = enabled;
+        _playerController.cameraController.angleLocked = !enabled;
+        _playerController.cameraController.cursorLock = enabled;
         Cursor.visible = !enabled;
-        GameManager.Instance.PlayerController.stateMachine.enabled = enabled;
-        GameManager.Instance.PlayerController.interactablesManager.enabled = enabled;
-        GameManager.Instance.PlayerController.objectInspector.enabled = enabled;
+        _playerController.stateMachine.enabled = enabled;
+        _playerController.interactablesManager.enabled = enabled;
+        _playerController.objectInspector.enabled = enabled;
 
         //Something about enemy?
 

@@ -7,7 +7,6 @@ namespace Player
 {
     public class State_Player_Walking : State
     {
-        private float _currentStamina;
         private PlayerController _attachedController;
 
         [Header("Sound setting")]
@@ -16,25 +15,7 @@ namespace Player
         private float stepTimeRange;
         private float stepTime = 0.0f;
 
-        public float currentStamina
-        {
-            get { return _currentStamina; }
-            set
-            {
-                _currentStamina = Mathf.Clamp(value, 0f, _attachedController.characterProperties.maximumStamina);
-            }
-        }
-
-        private float _currentDelay;
-
-        public float currentDelay
-        {
-            get { return _currentDelay; }
-            set
-            {
-                _currentDelay = Mathf.Clamp(value, 0f, _attachedController.characterProperties.rechargeDelay);
-            }
-        }
+       
         /*private float _staminaRechargeDelay;
         private float _maxStamina;
         private float _staminaRechargePerSecond;*/
@@ -46,8 +27,6 @@ namespace Player
         {
             base.OnStateInitialize(machine);
             _attachedController = ((PlayerController)Machine.characterController);
-            currentStamina = _attachedController.characterProperties.maximumStamina;
-
         }
 
         public override void OnStateTick(float deltaTime)
@@ -55,21 +34,10 @@ namespace Player
             base.OnStateTick(deltaTime);
 
             // Start recharging stamina if enough time has passed. 
-            if (currentDelay > 0f)
-            {
-                currentDelay -= deltaTime;
-            }
-            else if (currentStamina < _attachedController.characterProperties.maximumStamina)
-            {
-                currentStamina += _attachedController.characterProperties.staminaRechargePerSecond * deltaTime;
-            }
-
             // If character is moving, has stamina and is running, deplete stamina and run.
-            if ((_attachedController.currentBrain.Running && _attachedController.currentBrain.Direction != Vector3.zero) && currentStamina > 0f)
+            if ((_attachedController.currentBrain.Running && _attachedController.currentBrain.Direction != Vector3.zero) && _attachedController.currentStamina > 0f)
             {
                 _movementSpeed = _attachedController.characterProperties.RunSpeed;
-                currentStamina -= deltaTime;
-                currentDelay = _attachedController.characterProperties.rechargeDelay;
                 stepTimeRange = stepTimeRunning;
             }
             else
@@ -107,7 +75,6 @@ namespace Player
             _attachedRigidbody = _attachedController.rigidbody;
 
             _movementSpeed = _attachedController.characterProperties.WalkSpeed;
-            currentDelay = _attachedController.characterProperties.rechargeDelay;
 
             stepTime = Time.time + stepTimeRange;
             stepTimeRange = stepTimeWalking;

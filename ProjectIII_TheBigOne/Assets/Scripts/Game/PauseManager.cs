@@ -22,6 +22,16 @@ public class PauseManager : MonoBehaviour
     public Toggle invertToogle; 
     public Slider brightnessSlider;
 
+    [Header("Buttons")]
+    public Button resumeButton;
+    public Button restartButton;
+    public Button optionsButton;
+    public Button exitButton;
+    public Button controlsButton;
+    public Button volumeButton;
+    public Button mouseButton;
+    public Button screenButton;
+
     private void Awake()
     {
         canvasController = FindObjectOfType<CanvasController>();
@@ -35,6 +45,10 @@ public class PauseManager : MonoBehaviour
         {
             canvasController = FindObjectOfType<CanvasController>();
         }
+        
+    }
+    private void Update()
+    {
         
     }
 
@@ -134,5 +148,10 @@ public class PauseManager : MonoBehaviour
         invertToogle.isOn = OptionsManager.Instance.invertedMouse;
 
         brightnessSlider.value = OptionsManager.Instance.brightness;       
+    }
+
+    public void ActivateResumeButton(bool enabled)
+    {
+        resumeButton.gameObject.SetActive(enabled);
     }
 }

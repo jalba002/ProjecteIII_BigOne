@@ -9,7 +9,19 @@ public class OptionsManager : MonoBehaviour
 
     public static OptionsManager Instance
     {
-        get { return m_Instance; }
+        get
+        {
+            if (m_Instance == null)
+            {
+                m_Instance = FindObjectOfType<OptionsManager>();
+                if (m_Instance == null)
+                {
+                    m_Instance = new GameObject("OptionsManager").AddComponent<OptionsManager>();
+                    DontDestroyOnLoad(m_Instance);
+                }
+            }
+            return m_Instance;
+        }
         set { m_Instance = value; }
     }
 
@@ -23,10 +35,8 @@ public class OptionsManager : MonoBehaviour
     [Range(-80f, 0f)] public float effectsVolume = 1f;
 
     [Header("SCREEN")] [Range(0f, 30f)] public float brightness = 1f;
-    
 
-
-    public void Awake()
+    private void InstantiateElement()
     {
         if (m_Instance != null && Instance != this)
         {
@@ -37,6 +47,11 @@ public class OptionsManager : MonoBehaviour
             m_Instance = this;
         }
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    public void Awake()
+    {
+        InstantiateElement();
         mainMenuManager = FindObjectOfType<MainMenuManager>();
     }
     

@@ -10,7 +10,7 @@ public class InteractableObject : MonoBehaviour
         Drag,
         Pick,
         Inspect,
-        Interact
+        Puzzle
     }
 
     [Header("Debug")] public bool showLogDebug = false;
@@ -34,6 +34,8 @@ public class InteractableObject : MonoBehaviour
 
     public virtual bool Interact(bool enableInteraction)
     {
+        if (showLogDebug)
+            Debug.Log("Interacting with " + this.gameObject.name, this);
         return false;
     }
 

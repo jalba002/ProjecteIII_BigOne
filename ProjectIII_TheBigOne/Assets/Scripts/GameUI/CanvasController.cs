@@ -33,14 +33,12 @@ public class CanvasController : MonoBehaviour
     public Image blackFade;
 
     private FlashlightController flashlight;
-    private PlayerController playerController;
     private State_Player_Walking playerWalking;
     public PauseManager pauseManager;
 
     private void Start()
     {
-        playerController = FindObjectOfType<PlayerController>();
-        flashlight = playerController.attachedFlashlight;
+        flashlight = GameManager.Instance.PlayerController.attachedFlashlight;
         playerWalking = FindObjectOfType<State_Player_Walking>();
 
         if (CrosshairController == null)
@@ -57,15 +55,15 @@ public class CanvasController : MonoBehaviour
         if (!GameManager.Instance.PlayerController.IsDead)
             TooglePauseMenu(false);
 
-        if (playerWalking.currentStamina >= playerController.characterProperties.maximumStamina)
+        if (playerWalking.currentStamina >= GameManager.Instance.PlayerController.characterProperties.maximumStamina)
             runningSlider.gameObject.SetActive(false);
         else
             runningSlider.gameObject.SetActive(true);
 
-        if (Input.GetKeyDown(KeyCode.Escape) && playerController.playerInventory.inventoryDisplay.gameObject.transform
+        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.PlayerController.playerInventory.inventoryDisplay.gameObject.transform
                 .parent.gameObject.activeSelf)
         {
-            playerController.ToggleInventory();
+            GameManager.Instance.PlayerController.ToggleInventory();
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -92,7 +90,7 @@ public class CanvasController : MonoBehaviour
 
     public void PlayerRunningUpdate()
     {
-        runningSlider.value = playerWalking.currentStamina / playerController.characterProperties.maximumStamina;
+        runningSlider.value = playerWalking.currentStamina / GameManager.Instance.PlayerController.characterProperties.maximumStamina;
     }
 
     public void ChangeCursor(Sprite newCursor, Vector3 newScale)
@@ -103,34 +101,81 @@ public class CanvasController : MonoBehaviour
 
     public void TooglePauseMenu(bool forceEnable)
     {
-        if (playerController.currentBrain.ShowPause || forceEnable)
+        if (forceEnable)
         {
-            var enabled = pauseMenu.activeInHierarchy;
-            playerController.cameraController.angleLocked = !enabled;
-            playerController.cameraController.cursorLock = enabled;
-            Cursor.visible = !enabled;
-            playerController.stateMachine.enabled = enabled;
-            playerController.interactablesManager.enabled = enabled;
-            playerController.interactablesManager.ClearInteractable();
-            playerController.objectInspector.enabled = enabled;
+            GameManager.Instance.PlayerController.cameraController.angleLocked = true;
+            GameManager.Instance.PlayerController.cameraController.cursorLock = false;
+            Cursor.visible = true;
+            GameManager.Instance.PlayerController.stateMachine.enabled = false;
+            GameManager.Instance.PlayerController.interactablesManager.enabled = false;
+            GameManager.Instance.PlayerController.interactablesManager.ClearInteractable();
+            GameManager.Instance.PlayerController.objectInspector.enabled = false;
 
             //Something about enemy?
-
-            pauseMenu.SetActive(!enabled);
-
+            pauseManager.ActivateResumeButton(false);
+            pauseMenu.SetActive(true);
             pauseManager.DesactivateOptions();
+            return;
         }
+        else if (!pauseManager.isActiveAndEnabled && GameManager.Instance.PlayerController.currentBrain.ShowPause)//(GameManager.Instance.PlayerController.currentBrain.ShowPause && GameManager.Instance.PlayerController.stateMachine.lastState is State_Player_Interacting)
+        {
+            GameManager.Instance.PlayerController.cameraController.angleLocked = true;
+            GameManager.Instance.PlayerController.cameraController.cursorLock = false;
+            Cursor.visible = true;
+            GameManager.Instance.PlayerController.stateMachine.enabled = false;
+            GameManager.Instance.PlayerController.interactablesManager.enabled = false;
+            GameManager.Instance.PlayerController.interactablesManager.ClearInteractable();
+            GameManager.Instance.PlayerController.objectInspector.enabled = false;
+
+            //Something about enemy?
+            pauseManager.ActivateResumeButton(true);
+            pauseMenu.SetActive(true);
+            pauseManager.DesactivateOptions();
+            return;
+        }
+        else if (pauseManager.isActiveAndEnabled && GameManager.Instance.PlayerController.currentBrain.ShowPause)//(GameManager.Instance.PlayerController.currentBrain.ShowPause /*|| forceEnable*/)
+        {
+            GameManager.Instance.PlayerController.cameraController.angleLocked = false;
+            GameManager.Instance.PlayerController.cameraController.cursorLock = true;
+            Cursor.visible = false;
+            GameManager.Instance.PlayerController.stateMachine.enabled = true;
+            GameManager.Instance.PlayerController.interactablesManager.enabled = true;
+            GameManager.Instance.PlayerController.interactablesManager.ClearInteractable();
+            GameManager.Instance.PlayerController.objectInspector.enabled = true;
+
+            //Something about enemy?
+            //pauseManager.ActivateResumeButton(true);
+            pauseMenu.SetActive(false);
+            pauseManager.DesactivateOptions();
+            return;
+            /*
+            var enabled = pauseMenu.activeInHierarchy;
+            GameManager.Instance.PlayerController.cameraController.angleLocked = !enabled;
+            GameManager.Instance.PlayerController.cameraController.cursorLock = enabled;
+            Cursor.visible = !enabled;
+            GameManager.Instance.PlayerController.stateMachine.enabled = enabled;
+            GameManager.Instance.PlayerController.interactablesManager.enabled = enabled;
+            GameManager.Instance.PlayerController.interactablesManager.ClearInteractable();
+            GameManager.Instance.PlayerController.objectInspector.enabled = enabled;
+
+            //Something about enemy?
+            pauseManager.ActivateResumeButton(true);
+            pauseMenu.SetActive(!enabled);
+            pauseManager.DesactivateOptions();
+            */
+        }
+        
     }
 
     public void ResumeGame()
     {
         var enabled = true;
-        playerController.cameraController.angleLocked = !enabled;
-        playerController.cameraController.cursorLock = enabled;
+        GameManager.Instance.PlayerController.cameraController.angleLocked = !enabled;
+        GameManager.Instance.PlayerController.cameraController.cursorLock = enabled;
         Cursor.visible = !enabled;
-        playerController.stateMachine.enabled = enabled;
-        playerController.interactablesManager.enabled = enabled;
-        playerController.objectInspector.enabled = enabled;
+        GameManager.Instance.PlayerController.stateMachine.enabled = enabled;
+        GameManager.Instance.PlayerController.interactablesManager.enabled = enabled;
+        GameManager.Instance.PlayerController.objectInspector.enabled = enabled;
 
         //Something about enemy?
 

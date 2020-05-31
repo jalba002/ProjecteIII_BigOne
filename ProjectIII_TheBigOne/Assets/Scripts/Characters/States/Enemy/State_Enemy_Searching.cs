@@ -35,6 +35,8 @@ namespace Enemy
             _attachedController.CheckForPlayerOnSight();
             _attachedController.CheckForEnemyVisibility();
             _attachedController.HearPlayerAround();
+            _attachedController.currentBrain.IsNoticingPlayer = _attachedController.currentBrain.IsHearingPlayer;
+            _attachedController.CheckForMeshLink();
 
             if (trackTime > 0f)
             {

@@ -47,17 +47,7 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Noticed>();
         return true;
     }
-
-
-    /// All states for Enemy first phase listed below. ///
-    private bool CheckEnterDisable()
-    {
-        // TODO Add Conditions.
-
-        return true;
-    }
-
-
+    
     private bool CheckEnterIdle()
     {
         // TODO Add conditions

@@ -32,6 +32,7 @@ namespace Enemy
             _attachedController.CheckForPlayerOnSight();
             _attachedController.CheckForEnemyVisibility();
             _attachedController.HearPlayerAround();
+            _attachedController.CheckForMeshLink();
 
             if (trackTime > 0f)
             {
@@ -40,6 +41,7 @@ namespace Enemy
             else if (trackTime <= 0f)
             {
                 _attachedController.currentBrain.IsNoticingPlayer = false;
+                _attachedController.currentBrain.IsTrackingPlayer = true;
             }
         }
 
@@ -56,8 +58,12 @@ namespace Enemy
         protected override void OnStateEnter()
         {
             base.OnStateEnter();
-            trackTime = 2f;
+            trackTime = 0.5f;
             _attachedController.NavMeshAgent.isStopped = true;
+
+            _attachedController.gameObject.transform.forward =
+                (_attachedController.currentBrain.archnemesis.transform.position -
+                 _attachedController.gameObject.transform.position).normalized;
 
             _attachedController.targetPositionDummy.transform.position =
                 _attachedController.currentBrain.archnemesis.transform.position;

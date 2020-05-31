@@ -103,7 +103,37 @@ public class CanvasController : MonoBehaviour
 
     public void TooglePauseMenu(bool forceEnable)
     {
-        if (playerController.currentBrain.ShowPause || forceEnable)
+        if (forceEnable)
+        {
+            playerController.cameraController.angleLocked = true;
+            playerController.cameraController.cursorLock = false;
+            Cursor.visible = true;
+            playerController.stateMachine.enabled = false;
+            playerController.interactablesManager.enabled = false;
+            playerController.interactablesManager.ClearInteractable();
+            playerController.objectInspector.enabled = false;
+
+            //Something about enemy?
+            pauseManager.ActivateResumeButton(false);
+            pauseMenu.SetActive(true);
+            pauseManager.DesactivateOptions();
+        }
+        else if (playerController.currentBrain.ShowPause && playerController.gameObject.GetComponent<State_Player_PuzzleInspect>().isActiveAndEnabled)
+        {
+            playerController.cameraController.angleLocked = true;
+            playerController.cameraController.cursorLock = false;
+            Cursor.visible = true;
+            playerController.stateMachine.enabled = false;
+            playerController.interactablesManager.enabled = false;
+            playerController.interactablesManager.ClearInteractable();
+            playerController.objectInspector.enabled = false;
+
+            //Something about enemy?
+            pauseManager.ActivateResumeButton(true);
+            pauseMenu.SetActive(true);
+            pauseManager.DesactivateOptions();
+        }
+        else if (playerController.currentBrain.ShowPause /*|| forceEnable*/)
         {
             var enabled = pauseMenu.activeInHierarchy;
             playerController.cameraController.angleLocked = !enabled;
@@ -115,11 +145,11 @@ public class CanvasController : MonoBehaviour
             playerController.objectInspector.enabled = enabled;
 
             //Something about enemy?
-
+            pauseManager.ActivateResumeButton(true);
             pauseMenu.SetActive(!enabled);
-
             pauseManager.DesactivateOptions();
         }
+        
     }
 
     public void ResumeGame()

@@ -22,11 +22,6 @@ namespace Enemy
             {
                 killTime -= deltaTime;
             }
-            else if (killTime <= 0f)
-            {
-                // do stuff.
-                //Maybe disable killing stuff.
-            }
         }
 
         public override void OnStateFixedTick(float fixedTime)
@@ -42,10 +37,16 @@ namespace Enemy
         protected override void OnStateEnter()
         {
             base.OnStateEnter();
-            Debug.Log("TIME TO KILLLLLLLLL");
-            _attachedController.NavMeshAgent.isStopped = true;
-            killTime = 3f;
-            GameManager.Instance.EndGame();
+            if (!GameManager.Instance.GameSettings.isPlayerInvincible)
+            {
+                _attachedController.NavMeshAgent.isStopped = true;
+                killTime = 3f;
+                GameManager.Instance.EndGame();
+            }
+            else
+            {
+                killTime = 0f;
+            }
         }
 
         protected override void OnStateExit()

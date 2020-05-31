@@ -41,6 +41,10 @@ public class GameManager : MonoBehaviour
         {
             GameSettings = ScriptableObject.CreateInstance<GameSettings>();
         }
+        else
+        {
+            GameSettings = Instantiate(GameSettings);
+        }
      
         if (PlayerController == null)
         {

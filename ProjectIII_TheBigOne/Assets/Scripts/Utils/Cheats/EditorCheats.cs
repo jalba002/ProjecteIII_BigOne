@@ -31,6 +31,20 @@ namespace Cheats
             }
         }*/
 
+        [MenuItem("Cheats/Player/God Mode Toggle #%G")]
+        public static void ToggleGodMode()
+        {
+            if (Application.isPlaying)
+            {
+                GameManager.Instance.GameSettings.isPlayerInvincible =
+                    !GameManager.Instance.GameSettings.isPlayerInvincible;
+            }
+            else
+            {
+                Debug.LogWarning("Only in Play Mode!");
+            }
+        }
+
         [MenuItem("Cheats/Level/Destroy Wall %E")]
         public static void DestroyWall()
         {

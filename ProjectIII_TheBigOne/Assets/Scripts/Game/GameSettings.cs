@@ -9,4 +9,6 @@ public class GameSettings : ScriptableObject
     public LayerMask DetectionLayers;
 
     [Header("Puzzles")] public LayerMask PuzzleElementsLayers;
+
+    [Header("Player")] public bool isPlayerInvincible = false;
 }

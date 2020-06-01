@@ -29,6 +29,8 @@ namespace Enemy
         public new EnemyBrain currentBrain { get; private set; }
 
         public BehaviourTree currentBehaviourTree { get; set; }
+        [Header("Sound")]
+        public string terrorRadiusPath;
 
         [Header("Enemy Settings")] public new EnemyProperties characterProperties;
 
@@ -46,8 +48,8 @@ namespace Enemy
             currentBrain = GetComponent<EnemyBrain>();
 
             NavMeshAgent = GetComponent<NavMeshAgent>();
-
-            //SetStartingBehaviourTree();
+            SoundManager.Instance.PlayEvent(terrorRadiusPath, transform);
+            //SetStartingBehaviourTree();            
 
             if (stateMachine == null)
                 stateMachine = GetComponent<StateMachine>();

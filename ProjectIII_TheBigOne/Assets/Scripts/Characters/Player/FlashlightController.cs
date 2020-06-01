@@ -26,6 +26,10 @@ public class FlashlightController : MonoBehaviour
     private float _initLightRange;
     private float _currentLightRange;
 
+    [Header("Sound settings")]
+    public string toggleFlashlightPath;
+    public string replaceBatteryPath;
+
     public void Start()
     {
         _isattachedLightNull = attachedLight == null;
@@ -73,6 +77,7 @@ public class FlashlightController : MonoBehaviour
 
     private void SetFlashlight(bool enable)
     {
+        SoundManager.Instance.PlaySound2D(toggleFlashlightPath);
         IsFlashlightEnabled = enable;
         if (_isfeedbackVisualNotNull)
         {
@@ -91,6 +96,7 @@ public class FlashlightController : MonoBehaviour
 
     public bool Recharge(float amount)
     {
+        SoundManager.Instance.PlaySound2D(replaceBatteryPath);
         if (currentCharge < maxCharge)
         {
             currentCharge += amount;

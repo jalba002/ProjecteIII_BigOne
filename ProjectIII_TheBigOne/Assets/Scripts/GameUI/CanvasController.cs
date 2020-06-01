@@ -106,14 +106,14 @@ public class CanvasController : MonoBehaviour
     {
         if (forceEnable)
         {
-           
+            Debug.Log("1");
+            _playerController.cameraController.angleLocked = true;
+            _playerController.cameraController.cursorLock = false;
             Cursor.visible = true;
             _playerController.stateMachine.enabled = false;
             _playerController.interactablesManager.enabled = false;
             _playerController.interactablesManager.ClearInteractable();
             _playerController.objectInspector.enabled = false;
-            _playerController.cameraController.angleLocked = true;
-            _playerController.cameraController.cursorLock = false;
 
             //Something about enemy?
             pauseManager.ActivateResumeButton(false);
@@ -123,6 +123,7 @@ public class CanvasController : MonoBehaviour
         }
         else if (!pauseManager.isActiveAndEnabled && _playerController.currentBrain.ShowPause)//(GameManager.Instance.PlayerController.currentBrain.ShowPause && GameManager.Instance.PlayerController.stateMachine.lastState is State_Player_Interacting)
         {
+            Debug.Log("2");
             _playerController.cameraController.angleLocked = true;
             _playerController.cameraController.cursorLock = false;
             Cursor.visible = true;
@@ -139,6 +140,7 @@ public class CanvasController : MonoBehaviour
         }
         else if (pauseManager.isActiveAndEnabled && _playerController.currentBrain.ShowPause)//(GameManager.Instance.PlayerController.currentBrain.ShowPause /*|| forceEnable*/)
         {
+            Debug.Log("3");
             _playerController.cameraController.angleLocked = false;
             _playerController.cameraController.cursorLock = true;
             Cursor.visible = false;

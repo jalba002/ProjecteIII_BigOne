@@ -170,11 +170,22 @@ public class CameraController : MonoBehaviour
     public void RestorePosition()
     {
         Debug.Log("Restoring Pos");
+        
         m_PitchControllerTransform.localPosition = new Vector3(0, 0.72f, 0);
         this.gameObject.transform.parent = m_PitchControllerTransform;
         this.gameObject.transform.localPosition = Vector3.zero;
         this.gameObject.transform.localRotation = originalRotation;
-        angleLocked = false;
+        if (GameManager.Instance.CanvasController.pauseMenu.activeInHierarchy)
+        {
+            angleLocked = true;
+            Debug.Log("aaa");
+        }
+        else
+        {
+            angleLocked = false;
+            Debug.Log("bbb");
+        }
+
         this.enabled = true;
         _lerping = false;
         _initPos = null;

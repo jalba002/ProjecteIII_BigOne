@@ -107,13 +107,14 @@ public class CanvasController : MonoBehaviour
         if (forceEnable)
         {
             Debug.Log("1");
-            _playerController.cameraController.angleLocked = true;
-            _playerController.cameraController.cursorLock = false;
+           
             Cursor.visible = true;
             _playerController.stateMachine.enabled = false;
             _playerController.interactablesManager.enabled = false;
             _playerController.interactablesManager.ClearInteractable();
             _playerController.objectInspector.enabled = false;
+            _playerController.cameraController.angleLocked = true;
+            _playerController.cameraController.cursorLock = false;
 
             //Something about enemy?
             pauseManager.ActivateResumeButton(false);

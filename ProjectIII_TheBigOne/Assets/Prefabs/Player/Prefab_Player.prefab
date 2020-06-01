@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4287271704942058497}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -393,11 +393,8 @@ MonoBehaviour:
     type: 2}
   interactablesManager: {fileID: 0}
   stateMachine: {fileID: 0}
-  footstepSounds:
-  - {fileID: 8300000, guid: 43f8400c80a3a1342bb4e2804640066d, type: 3}
-  - {fileID: 8300000, guid: e6147dbf1f309dc419cb2171721dacd2, type: 3}
-  - {fileID: 8300000, guid: 31b935b80b229ee4fb119d5371993bbf, type: 3}
-  - {fileID: 8300000, guid: fbfe71d7b29121a478f10df9b9096706, type: 3}
+  footstepPath: event:/SFX/Player/Concrete
+  playerDeathPath: event:/SFX/Player/Die
   InteractCooldown: 5
   playerMovingMaterial: {fileID: 13400000, guid: 47dd254b4b66cdd4fb14363990b07674,
     type: 2}
@@ -446,7 +443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7741257326dd4fc4fa691ee53615ebd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infiniteCharge: 0
+  infiniteCharge: 1
   maxCharge: 20
   attachedLight: {fileID: 4463343755746808869}
   feedbackVisual: {fileID: 0}
@@ -651,7 +648,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7166994841743022858}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 3
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}

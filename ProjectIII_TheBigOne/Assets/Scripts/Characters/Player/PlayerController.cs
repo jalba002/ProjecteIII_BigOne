@@ -36,8 +36,11 @@ namespace Player
 
         [Header("Sound settings")] 
         public string footstepPath;
+        [Range(0, 1)] public float footstepVolume = 1f;
+
         public string playerDeathPath;
-        
+        [Range(0, 1)] public float playerDeathVolume = 1f;
+
 
         public int InteractCooldown = 5;
 
@@ -336,7 +339,7 @@ namespace Player
 
         public void PlayFootStepAudio()
         {
-            SoundManager.Instance.PlaySound2D(footstepPath, 0.2f);
+            SoundManager.Instance.PlaySound2D(footstepPath, footstepVolume);
 
             /*
             int i = Random.Range(1, footstepSounds.Length);
@@ -363,7 +366,7 @@ namespace Player
 
             interactablesManager.ClearInteractable();
 
-            SoundManager.Instance.PlaySound2D(playerDeathPath);
+            SoundManager.Instance.PlaySound2D(playerDeathPath, playerDeathVolume);
 
             FailproofEnabling(interactablesManager, false);
             FailproofEnabling(puzzleInspector, false);

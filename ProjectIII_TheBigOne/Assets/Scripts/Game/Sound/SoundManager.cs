@@ -140,12 +140,13 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    public void PlaySound2D(string path)
+    public void PlaySound2D(string path, float volume = 1)
     {
         EventInstance soundEvent = RuntimeManager.CreateInstance(path);
         if (!soundEvent.Equals(null))
         {
             soundEvent.start();
+            soundEvent.setVolume(volume);
             SoundManagerMovingSound movingSound = new SoundManagerMovingSound(transform, soundEvent);
             eventsList.Add(soundEvent);
         }

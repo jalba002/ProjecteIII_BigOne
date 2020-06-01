@@ -336,7 +336,7 @@ namespace Player
 
         public void PlayFootStepAudio()
         {
-            SoundManager.Instance.PlaySound2D(footstepPath);
+            SoundManager.Instance.PlaySound2D(footstepPath, 0.2f);
 
             /*
             int i = Random.Range(1, footstepSounds.Length);

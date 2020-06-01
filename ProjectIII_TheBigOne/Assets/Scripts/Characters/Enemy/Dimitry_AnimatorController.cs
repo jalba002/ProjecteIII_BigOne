@@ -23,6 +23,8 @@ public class Dimitry_AnimatorController : MonoBehaviour
 
     public void Update()
     {
+        enemyAnimator.SetBool("IsLighted", EnemyController.stateMachine.GetCurrentState is State_Enemy_Idle);
+
         if (Vector3.Magnitude(EnemyController.NavMeshAgent.velocity) > 0f)
         {
             enemyAnimator.SetBool("IsWalking", true);

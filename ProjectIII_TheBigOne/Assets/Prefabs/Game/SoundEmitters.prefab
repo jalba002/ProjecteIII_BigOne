@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1010390895454692301
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8166049245492596222}
+  m_Layer: 0
+  m_Name: PanelLatchSoundEmitter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8166049245492596222
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010390895454692301}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -36.98, y: -0.58, z: -30.029999}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3307149991140760430}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3307149991140760431
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,6 +61,7 @@ Transform:
   - {fileID: 3307149992676133758}
   - {fileID: 3307149991143143100}
   - {fileID: 3307149992731367650}
+  - {fileID: 8166049245492596222}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49,9 +80,11 @@ MonoBehaviour:
   doorPos: {fileID: 3307149991143143100}
   wallPos: {fileID: 3307149992676133758}
   scarejumpPos: {fileID: 3307149992731367650}
+  latchPanelDoorPos: {fileID: 8166049245492596222}
   doorSlamPath: event:/SFX/Environment/Interactable/DoorCloseHeavy
   breakingWallPath: event:/SFX/Environment/Breakable/ConcreteBreaking
   scarejumpPath: event:/SFX/Enemy/GroanSlam
+  latchPath: event:/SFX/Environment/Interactable/Latch
 --- !u!1 &3307149991143143101
 GameObject:
   m_ObjectHideFlags: 0

@@ -175,17 +175,7 @@ public class CameraController : MonoBehaviour
         this.gameObject.transform.parent = m_PitchControllerTransform;
         this.gameObject.transform.localPosition = Vector3.zero;
         this.gameObject.transform.localRotation = originalRotation;
-        if (GameManager.Instance.CanvasController.pauseMenu.activeInHierarchy)
-        {
-            angleLocked = true;
-            Debug.Log("aaa");
-        }
-        else
-        {
-            angleLocked = false;
-            Debug.Log("bbb");
-        }
-
+        angleLocked = false;   
         this.enabled = true;
         _lerping = false;
         _initPos = null;

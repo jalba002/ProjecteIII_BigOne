@@ -105,9 +105,7 @@ public class CanvasController : MonoBehaviour
     public void TooglePauseMenu(bool forceEnable)
     {
         if (forceEnable)
-        {
-            Debug.Log("1");           
-           
+        {          
             _playerController.stateMachine.enabled = false;
             _playerController.interactablesManager.enabled = false;
             _playerController.interactablesManager.ClearInteractable();
@@ -123,9 +121,7 @@ public class CanvasController : MonoBehaviour
             return;
         }
         else if (!pauseManager.isActiveAndEnabled && _playerController.currentBrain.ShowPause)//(GameManager.Instance.PlayerController.currentBrain.ShowPause && GameManager.Instance.PlayerController.stateMachine.lastState is State_Player_Interacting)
-        {
-            Debug.Log("2");            
-            
+        {           
             _playerController.stateMachine.enabled = false;
             _playerController.interactablesManager.enabled = false;
             _playerController.interactablesManager.ClearInteractable();
@@ -141,10 +137,7 @@ public class CanvasController : MonoBehaviour
             return;
         }
         else if (pauseManager.isActiveAndEnabled && _playerController.currentBrain.ShowPause)//(GameManager.Instance.PlayerController.currentBrain.ShowPause /*|| forceEnable*/)
-        {
-            Debug.Log("3");
-           
-          
+        {          
             _playerController.stateMachine.enabled = true;
             _playerController.interactablesManager.enabled = true;
             _playerController.interactablesManager.ClearInteractable();

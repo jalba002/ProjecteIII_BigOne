@@ -34,8 +34,13 @@ namespace Player
 
         public StateMachine stateMachine;
 
-        [Header("Sound settings")] public AudioClip[] footstepSounds;
-        private AudioSource audioSource;
+        [Header("Sound settings")] 
+        public string footstepPath;
+        [Range(0, 1)] public float footstepVolume = 1f;
+
+        public string playerDeathPath;
+        [Range(0, 1)] public float playerDeathVolume = 1f;
+
 
         public int InteractCooldown = 5;
 
@@ -85,8 +90,7 @@ namespace Player
 
             if (attachedCollider == null)
                 attachedCollider = GetComponent<Collider>();
-
-            audioSource = GetComponent<AudioSource>();
+            
 
             if (attachedFlashlight == null)
                 attachedFlashlight = GetComponent<FlashlightController>();
@@ -335,11 +339,15 @@ namespace Player
 
         public void PlayFootStepAudio()
         {
+            SoundManager.Instance.PlaySound2D(footstepPath, footstepVolume);
+
+            /*
             int i = Random.Range(1, footstepSounds.Length);
             audioSource.clip = footstepSounds[i];
             audioSource.PlayOneShot(audioSource.clip);
             footstepSounds[i] = footstepSounds[0];
             footstepSounds[0] = audioSource.clip;
+            */
         }
 
         public Transform ReturnSelf()
@@ -357,6 +365,8 @@ namespace Player
             stateMachine.SwitchState<State_Player_Dying>();
 
             interactablesManager.ClearInteractable();
+
+            SoundManager.Instance.PlaySound2D(playerDeathPath, playerDeathVolume);
 
             FailproofEnabling(interactablesManager, false);
             FailproofEnabling(puzzleInspector, false);

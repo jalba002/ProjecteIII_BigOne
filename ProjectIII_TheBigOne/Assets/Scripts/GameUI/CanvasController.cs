@@ -105,14 +105,14 @@ public class CanvasController : MonoBehaviour
     public void TooglePauseMenu(bool forceEnable)
     {
         if (forceEnable)
-        {
-            _playerController.cameraController.angleLocked = true;
-            _playerController.cameraController.cursorLock = false;
-            Cursor.visible = true;
+        {          
             _playerController.stateMachine.enabled = false;
             _playerController.interactablesManager.enabled = false;
             _playerController.interactablesManager.ClearInteractable();
             _playerController.objectInspector.enabled = false;
+            _playerController.cameraController.angleLocked = true;
+            _playerController.cameraController.cursorLock = false;
+            Cursor.visible = true;
 
             //Something about enemy?
             pauseManager.ActivateResumeButton(false);
@@ -121,14 +121,14 @@ public class CanvasController : MonoBehaviour
             return;
         }
         else if (!pauseManager.isActiveAndEnabled && _playerController.currentBrain.ShowPause)//(GameManager.Instance.PlayerController.currentBrain.ShowPause && GameManager.Instance.PlayerController.stateMachine.lastState is State_Player_Interacting)
-        {
-            _playerController.cameraController.angleLocked = true;
-            _playerController.cameraController.cursorLock = false;
-            Cursor.visible = true;
+        {           
             _playerController.stateMachine.enabled = false;
             _playerController.interactablesManager.enabled = false;
             _playerController.interactablesManager.ClearInteractable();
             _playerController.objectInspector.enabled = false;
+            _playerController.cameraController.angleLocked = true;
+            _playerController.cameraController.cursorLock = false;
+            Cursor.visible = true;
 
             //Something about enemy?
             pauseManager.ActivateResumeButton(true);
@@ -137,14 +137,14 @@ public class CanvasController : MonoBehaviour
             return;
         }
         else if (pauseManager.isActiveAndEnabled && _playerController.currentBrain.ShowPause)//(GameManager.Instance.PlayerController.currentBrain.ShowPause /*|| forceEnable*/)
-        {
-            _playerController.cameraController.angleLocked = false;
-            _playerController.cameraController.cursorLock = true;
-            Cursor.visible = false;
+        {          
             _playerController.stateMachine.enabled = true;
             _playerController.interactablesManager.enabled = true;
             _playerController.interactablesManager.ClearInteractable();
             _playerController.objectInspector.enabled = true;
+            _playerController.cameraController.angleLocked = false;
+            _playerController.cameraController.cursorLock = true;
+            Cursor.visible = false;
 
             //Something about enemy?
             //pauseManager.ActivateResumeButton(true);

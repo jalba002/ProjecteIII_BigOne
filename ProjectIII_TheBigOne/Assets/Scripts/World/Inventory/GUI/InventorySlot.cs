@@ -114,6 +114,8 @@ public class InventorySlot : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     public void SelectThisSlot()
     {
+        SoundManager.Instance.PlaySound2D("event:/SFX/UI/Inventory/SelectItem");
+
         if (inventoryDisplayRef.selectedSlot == this)
         {
             UnselectThisSlot();

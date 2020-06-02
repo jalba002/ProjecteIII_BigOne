@@ -23,13 +23,15 @@ public class Dimitry_AnimatorController : MonoBehaviour
 
     public void Update()
     {
-        /*if (EnemyController.stateMachine.GetCurrentState is State_Enemy_Killing)
+        if (EnemyController.stateMachine.GetCurrentState is State_Enemy_Killing)
         {
             enemyAnimator.SetTrigger("Attack");
-        }*/
+        }
 
         enemyAnimator.SetBool("IsLighted", EnemyController.stateMachine.GetCurrentState is State_Enemy_Idle);
 
+        enemyAnimator.SetFloat("Speed", EnemyController.NavMeshAgent.speed);        
+        
         if (Vector3.Magnitude(EnemyController.NavMeshAgent.velocity) > 0f)
         {
             enemyAnimator.SetBool("IsWalking", true);

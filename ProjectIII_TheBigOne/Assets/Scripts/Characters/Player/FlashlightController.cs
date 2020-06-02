@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Runtime.CompilerServices;
+using FMOD;
+using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class FlashlightController : MonoBehaviour
 {
@@ -26,8 +30,7 @@ public class FlashlightController : MonoBehaviour
     private float _initLightRange;
     private float _currentLightRange;
 
-    [Header("Sound settings")]
-    public string toggleFlashlightPath;
+    [Header("Sound settings")] public string toggleFlashlightPath;
     public string replaceBatteryPath;
 
     public void Start()
@@ -77,7 +80,15 @@ public class FlashlightController : MonoBehaviour
 
     private void SetFlashlight(bool enable)
     {
-        SoundManager.Instance.PlaySound2D(toggleFlashlightPath);
+        try
+        {
+            SoundManager.Instance.PlaySound2D(toggleFlashlightPath);
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning(e.Message, this);
+        }
+
         IsFlashlightEnabled = enable;
         if (_isfeedbackVisualNotNull)
         {
@@ -96,7 +107,15 @@ public class FlashlightController : MonoBehaviour
 
     public bool Recharge(float amount)
     {
-        SoundManager.Instance.PlaySound2D(replaceBatteryPath);
+        try
+        {
+            SoundManager.Instance.PlaySound2D(replaceBatteryPath);
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning(e.Message, this);
+        }
+
         if (currentCharge < maxCharge)
         {
             currentCharge += amount;

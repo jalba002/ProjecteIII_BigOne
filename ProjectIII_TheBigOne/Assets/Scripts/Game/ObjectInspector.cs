@@ -71,8 +71,6 @@ public class ObjectInspector : MonoBehaviour
         {
             return false;
         }
-
-        return false;
     }
 
     public bool StartInspect(IInspectable inspectable)

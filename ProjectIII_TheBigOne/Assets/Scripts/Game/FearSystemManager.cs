@@ -68,7 +68,7 @@ public class FearSystemManager : MonoBehaviour
         currentAberrationMaxValue = 0f;
         currentVignetteMaxValue = 0f;
         ApplyVisuals();
-        RestartCoroutine(resetEffects, ReduceValues());
+        resetEffects = RestartCoroutine(resetEffects, ReduceValues());
     }
 
     private void Update()

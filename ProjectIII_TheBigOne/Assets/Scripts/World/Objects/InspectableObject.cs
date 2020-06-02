@@ -39,7 +39,7 @@ public class InspectableObject : InteractableObject, IInspectable
                 }
             }
         }
-        catch (Exception e)
+        catch (NullReferenceException)
         {
             Debug.LogWarning("Ignored colliders generated wrongly in ", this.gameObject);
             return false;

@@ -347,7 +347,7 @@ namespace World.Objects
                     }
                 }
             }
-            catch (Exception e)
+            catch (NullReferenceException)
             {
                 Debug.LogWarning("Ignored colliders generated wrongly in ", this.gameObject);
                 return false;

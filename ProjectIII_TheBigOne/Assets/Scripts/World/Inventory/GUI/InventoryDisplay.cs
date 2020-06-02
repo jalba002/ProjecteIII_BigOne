@@ -168,12 +168,12 @@ public class InventoryDisplay : MonoBehaviour
 
     public void RemoveButton()
     {
-        Debug.Log("Removing button.");
         if (selectedSlot != null)
         {
             Debug.Log("Removing item is not null.");
             if (!selectedSlot.item.isUnique)
             {
+                SoundManager.Instance.PlaySound2D("event:/SFX/UI/Inventory/DiscardItem");
                 RemoveItem(selectedSlot.item);
                 inventoryRef.RemoveItem(selectedSlot.item.itemName);
 

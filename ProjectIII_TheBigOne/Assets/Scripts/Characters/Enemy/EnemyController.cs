@@ -34,7 +34,6 @@ namespace Enemy
         [Header("Enemy Settings")] public new EnemyProperties characterProperties;
 
         [Header("Components")] public Collider attachedCollider;
-        public Renderer meshRenderer;
         [Header("NavMesh")] public EnemyTargetDummy targetPositionDummy;
         public NavMeshAgent NavMeshAgent;
 
@@ -76,11 +75,6 @@ namespace Enemy
 
             if (!attachedCollider)
                 attachedCollider = GetComponent<Collider>();
-
-            if (meshRenderer == null)
-            {
-                Debug.LogError("Attach a mesh renderer.", this.gameObject);
-            }
         }
 
         private void SetStartingBehaviourTree()

@@ -44,6 +44,8 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
 
         if (attachedCharacter.currentBrain.IsChasingPlayer) return false;
 
+        if (attachedCharacter.currentBrain.IsTrackingPlayer) return false;
+
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Noticed>();
         return true;
     }

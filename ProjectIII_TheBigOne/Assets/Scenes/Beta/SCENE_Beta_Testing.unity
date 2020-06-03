@@ -5,11 +5,11 @@ OcclusionCullingSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_OcclusionBakeSettings:
-    smallestOccluder: 0.5
-    smallestHole: 0.25
+    smallestOccluder: 0.1
+    smallestHole: 0.1
     backfaceThreshold: 100
-  m_SceneGUID: 900239afcac6ce648ac96e8c347e42e3
-  m_OcclusionCullingData: {fileID: 36300000, guid: 99f0b4c61cd673345b62ae1ef21bf687,
+  m_SceneGUID: 1a8661fd1d87fcb42a0143350d970ed4
+  m_OcclusionCullingData: {fileID: 36300000, guid: 5dcaaeb3b90d41b448fc191456272b94,
     type: 2}
 --- !u!104 &2
 RenderSettings:
@@ -112,7 +112,7 @@ NavMeshSettings:
     agentRadius: 0.4
     agentHeight: 2
     agentSlope: 45
-    agentClimb: 0.4
+    agentClimb: 0.25
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
@@ -123,7 +123,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 87a0dfa58b5ba914596d1d650954b95b, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 855a7cb89076afc409a9b9195f7b9a07, type: 2}
 --- !u!4 &19202587 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3262639412637377472, guid: 3307a31eaf8e4c14483fea22daf1d08d,
@@ -401,6 +401,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1055836356983717877, guid: e0cbcf60bef618e439c477ec7bdb9837,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2490116465629680767, guid: e0cbcf60bef618e439c477ec7bdb9837,
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
@@ -843,41 +848,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -248891898472155366, guid: 01657b027402b644688d46f85a8d5651, type: 3}
---- !u!84 &177057079
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'Flashlight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &183361673 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6288579761402143790, guid: 1c18d9e9586bd3d44807e824d40ed48a,
@@ -2090,10 +2060,20 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: -9.050392
       objectReference: {fileID: 0}
+    - target: {fileID: 7512245702310604422, guid: c7f552ad3bca409438a0c1a753869494,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7997018215467370890, guid: c7f552ad3bca409438a0c1a753869494,
         type: 3}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8267387530040553440, guid: c7f552ad3bca409438a0c1a753869494,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8934519423307336127, guid: c7f552ad3bca409438a0c1a753869494,
         type: 3}
@@ -2214,6 +2194,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: -9.067
+      objectReference: {fileID: 0}
+    - target: {fileID: 1059972851187430841, guid: 7eb636a07aab19c44930e273650942e4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3469018945256840842, guid: 7eb636a07aab19c44930e273650942e4,
         type: 3}
@@ -3351,7 +3336,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 712410856}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 27.66, y: 4.0192, z: -45.44}
+  m_LocalPosition: {x: 31.72, y: 4.0192, z: -41.854}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 730197878}
@@ -3763,6 +3748,7 @@ GameObject:
   - component: {fileID: 785924893}
   - component: {fileID: 785924892}
   - component: {fileID: 785924891}
+  - component: {fileID: 785924894}
   m_Layer: 0
   m_Name: BreakableWall
   m_TagString: Untagged
@@ -3847,6 +3833,22 @@ MonoBehaviour:
   destroyedVersion: {fileID: 1458889148}
   explosionOrigin: {fileID: 1028075775}
   mesh: {fileID: 785924889}
+--- !u!208 &785924894
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785924889}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.5000001, y: 1.5000001, z: 0.05}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -1.5000001, y: 1.5000001, z: 0.05}
+  m_TimeToStationary: 0.5
 --- !u!1 &786951509 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3660676500059193832, guid: 1c18d9e9586bd3d44807e824d40ed48a,
@@ -8356,7 +8358,7 @@ PrefabInstance:
     - target: {fileID: 7833216041826480846, guid: e8f2e2115bdbeac4c8395e112706c5bf,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7833216041826480847, guid: e8f2e2115bdbeac4c8395e112706c5bf,
         type: 3}
@@ -9213,6 +9215,16 @@ PrefabInstance:
         type: 3}
       propertyPath: lockedMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2365384205361161531, guid: dd0235bdfcbd4b24f85235b5c4ff7667,
+        type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2365384205361161531, guid: dd0235bdfcbd4b24f85235b5c4ff7667,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967263
       objectReference: {fileID: 0}
     - target: {fileID: 2628268063535337188, guid: dd0235bdfcbd4b24f85235b5c4ff7667,
         type: 3}
@@ -11646,6 +11658,41 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 8835491837878356591, guid: a89c27d4d9437a547b49825d02ea6409, type: 3}
+--- !u!84 &1895335747
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Flashlight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1900484852 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3303010896994502460, guid: 1c18d9e9586bd3d44807e824d40ed48a,
@@ -12737,12 +12784,7 @@ PrefabInstance:
     - target: {fileID: 4766131684604721934, guid: 0a21826cb7823ee4bab4f91bd6261b68,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4766131684604721940, guid: 0a21826cb7823ee4bab4f91bd6261b68,
-        type: 3}
-      propertyPath: m_Acceleration
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4766131684604721941, guid: 0a21826cb7823ee4bab4f91bd6261b68,
         type: 3}
@@ -12799,6 +12841,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8237190868232077996, guid: 0a21826cb7823ee4bab4f91bd6261b68,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 81fb72b77b40daf44baf15b2d58cc93c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a21826cb7823ee4bab4f91bd6261b68, type: 3}
 --- !u!4 &1952578605 stripped
@@ -13699,6 +13746,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5561349426305759274, guid: 3ba0c4c6e548e9142b83fd51577f94ff,
         type: 3}
+    - target: {fileID: 6071164509827119598, guid: 1c18d9e9586bd3d44807e824d40ed48a,
+        type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6071164509827119598, guid: 1c18d9e9586bd3d44807e824d40ed48a,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967263
+      objectReference: {fileID: 0}
     - target: {fileID: 6119182269027966426, guid: 1c18d9e9586bd3d44807e824d40ed48a,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -14233,6 +14290,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6807ae9b9b1ad349bdc007a0e931b80, type: 3}
+--- !u!1 &2096060352 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 412971363489253072, guid: dd0235bdfcbd4b24f85235b5c4ff7667,
+    type: 3}
+  m_PrefabInstance: {fileID: 1393740461}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &2096060353
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096060352}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.6655248, y: 0.6537389, z: 1.1090541}
+  m_Center: {x: 0.0000000038594834, y: 0, z: -0.10197017}
 --- !u!1001 &2122686092
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14309,6 +14385,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Trigger_ScareJump
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833216041826480846, guid: e8f2e2115bdbeac4c8395e112706c5bf,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7833216041826480847, guid: e8f2e2115bdbeac4c8395e112706c5bf,
         type: 3}

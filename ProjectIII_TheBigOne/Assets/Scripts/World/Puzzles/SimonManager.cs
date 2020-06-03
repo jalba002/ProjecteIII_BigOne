@@ -8,24 +8,35 @@ public class SimonManager : Puzzle
     public int startingColorCount = 5;
     public float delayBetweenColors = .1f;
     public float colorLasting = 1f;
-    public int roundsToSucceed = 3;
+    public int roundsToSucceed = 3;    
 
-    public GameObject[] inactive;
-    public GameObject[] active;
+    public Material[] materials;
+    public string[] paths;
+
+    public Renderer pantalla;
+    private Material _initMat;
+
+    public Renderer bulb;
+    public Material bulbOn;
+    private Material _initBulbMat;
+
+    
 
     private int currentAnswer;
 
     public int[] colors;
 
-    private int currentColorCount;    
+    private int _currentColorCount;    
 
     public bool answering = false;
     //llista de materials a canviar del simon
 
     void Start()
     {
-        currentColorCount = startingColorCount;
+        _currentColorCount = startingColorCount;
         answering = false;
+        _initMat = pantalla.material;
+        _initBulbMat = bulb.material;
     }
 
 #if UNITY_EDITOR
@@ -67,7 +78,7 @@ public class SimonManager : Puzzle
         //Acercar el item y poner al player en modo puzle
 
         //Conseguir el patron de colores
-        colors = GetRandomNumers(currentColorCount);
+        colors = GetRandomNumers(_currentColorCount);
 
         //Iniciar la primera secuencia
         StartCoroutine(PlayColorSequence(true));
@@ -86,7 +97,7 @@ public class SimonManager : Puzzle
 
     public override void EndGame()
     {
-        currentColorCount = startingColorCount;
+        _currentColorCount = startingColorCount;
         StopAllCoroutines();
         ResetColors();
         this.GetComponentInParent<InteractablePuzzle>().EndInteractActions();
@@ -95,11 +106,7 @@ public class SimonManager : Puzzle
     private void ResetColors()
     {
         colors = null;
-        for(int i = 0; i<active.Length; i++)
-        {
-            active[i].SetActive(false);
-            inactive[i].SetActive(true);
-        }
+        pantalla.material = _initMat;        
     }
 
 
@@ -139,23 +146,19 @@ public class SimonManager : Puzzle
     }
 
     public IEnumerator HighlightColor(int i, bool answering = false)
-    {
-        
-        active[i].SetActive(true);
-        inactive[i].SetActive(false);
-
+    {        
+        pantalla.material = materials[i];
+        SoundManager.Instance.PlayOneShotSound(paths[i], transform.position);
         if (!answering)
-        {
-            AudioManager.PlaySound2D("Sound/Simon/Simon" + i.ToString());
+        {            
             yield return new WaitForSeconds(colorLasting);
         }
         else
         {
             yield return new WaitForSeconds(colorLasting / 2);
         }
-
-        active[i].SetActive(false);
-        inactive[i].SetActive(true);
+        
+        pantalla.material = _initMat;
     }
 
 
@@ -167,14 +170,14 @@ public class SimonManager : Puzzle
 
             if (i == colors[currentAnswer])
             {
-                AudioManager.PlaySound2D("Sound/Simon/Simon" + i.ToString());
+                
                 Debug.Log("Acertaste");
                 currentAnswer++;
                 if (currentAnswer >= colors.Length)
                 {
                     answering = false;
                     Debug.Log("Todo bien, todo correcto, y yo que me alegro.");
-                    if (currentColorCount - startingColorCount >= roundsToSucceed)
+                    if (_currentColorCount - startingColorCount >= roundsToSucceed)
                     {
                         PuzzleWon();
                     }
@@ -199,8 +202,8 @@ public class SimonManager : Puzzle
         //Start coroutine de acertaste
         yield return new WaitForSeconds(2);
         answering = false;
-        currentColorCount++;
-        colors = GetRandomNumers(currentColorCount);
+        _currentColorCount++;
+        colors = GetRandomNumers(_currentColorCount);
         StartCoroutine(PlayColorSequence());
     }
 }

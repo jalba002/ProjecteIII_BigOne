@@ -128,10 +128,12 @@ namespace Characters.Player
                 }
             }
 
-            if (textDebug)
+            /*if (textDebug)
             {
                 textDebug.text = CurrentInteractable != null ? CurrentInteractable.displayName : "";
-            }
+            }*/
+            if (CurrentInteractable != null)
+                GameManager.Instance.CanvasController.ShowHint(CurrentInteractable.displayName, true, .5f, UIFade.FadeOutAfter.Time);
         }
 
 

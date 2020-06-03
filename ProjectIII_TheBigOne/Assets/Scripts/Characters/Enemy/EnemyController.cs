@@ -34,6 +34,7 @@ namespace Enemy
         [Header("Enemy Settings")] public new EnemyProperties characterProperties;
 
         [Header("Components")] public Collider attachedCollider;
+        public GameObject dimitryEyes;
         [Header("NavMesh")] public EnemyTargetDummy targetPositionDummy;
         public NavMeshAgent NavMeshAgent;
 
@@ -75,6 +76,19 @@ namespace Enemy
 
             if (!attachedCollider)
                 attachedCollider = GetComponent<Collider>();
+            
+            SetupEyes();
+        }
+
+        private void SetupEyes()
+        {
+            if (dimitryEyes == null)
+            {
+                dimitryEyes = new GameObject("DimitryEyes");
+                dimitryEyes.transform.parent = this.transform;
+                dimitryEyes.transform.position = new Vector3(0f, 1f, 0f);
+                dimitryEyes.transform.eulerAngles = Vector3.zero;
+            }
         }
 
         private void SetStartingBehaviourTree()
@@ -172,7 +186,7 @@ namespace Enemy
         {
             try
             {
-                currentBrain.IsPlayerInSight = SensesUtil.IsInSight(gameObject,
+                currentBrain.IsPlayerInSight = SensesUtil.IsInSight(dimitryEyes,
                     currentBrain.archnemesis.gameObject,
                     currentBrain.archnemesis.cameraController.m_PitchControllerTransform,
                     characterProperties.maxDetectionRange,

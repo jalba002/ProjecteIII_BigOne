@@ -69,10 +69,10 @@ public class CanvasController : MonoBehaviour
             _playerController.ToggleInventory();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        /*if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             ShowHint("metas are your friends", true); // true = upper
-        }
+        }*/
     }
 
     public void AddPickupMessage(string itemName)
@@ -105,7 +105,7 @@ public class CanvasController : MonoBehaviour
     public void TooglePauseMenu(bool forceEnable)
     {
         if (forceEnable)
-        {          
+        {
             _playerController.stateMachine.enabled = false;
             _playerController.interactablesManager.enabled = false;
             _playerController.interactablesManager.ClearInteractable();
@@ -120,8 +120,9 @@ public class CanvasController : MonoBehaviour
             pauseManager.DesactivateOptions();
             return;
         }
-        else if (!pauseManager.isActiveAndEnabled && _playerController.currentBrain.ShowPause)//(GameManager.Instance.PlayerController.currentBrain.ShowPause && GameManager.Instance.PlayerController.stateMachine.lastState is State_Player_Interacting)
-        {           
+        else if (!pauseManager.isActiveAndEnabled && _playerController.currentBrain.ShowPause
+        ) //(GameManager.Instance.PlayerController.currentBrain.ShowPause && GameManager.Instance.PlayerController.stateMachine.lastState is State_Player_Interacting)
+        {
             _playerController.stateMachine.enabled = false;
             _playerController.interactablesManager.enabled = false;
             _playerController.interactablesManager.ClearInteractable();
@@ -136,8 +137,9 @@ public class CanvasController : MonoBehaviour
             pauseManager.DesactivateOptions();
             return;
         }
-        else if (pauseManager.isActiveAndEnabled && _playerController.currentBrain.ShowPause)//(GameManager.Instance.PlayerController.currentBrain.ShowPause /*|| forceEnable*/)
-        {          
+        else if (pauseManager.isActiveAndEnabled && _playerController.currentBrain.ShowPause
+        ) //(GameManager.Instance.PlayerController.currentBrain.ShowPause /*|| forceEnable*/)
+        {
             _playerController.stateMachine.enabled = true;
             _playerController.interactablesManager.enabled = true;
             _playerController.interactablesManager.ClearInteractable();
@@ -167,7 +169,6 @@ public class CanvasController : MonoBehaviour
             pauseManager.DesactivateOptions();
             */
         }
-        
     }
 
     public void ResumeGame()
@@ -220,19 +221,22 @@ public class CanvasController : MonoBehaviour
         obj.GetComponent<Notification>().SetMessage(quest.objectiveText + " completed", 3, upper: false);
     }
 
-    public void ShowHint(string text, bool upper)
+    public void ShowHint(string text, bool upper, float fadeTime = 3f,
+        UIFade.FadeOutAfter fadeType = UIFade.FadeOutAfter.Time)
     {
         HintNotification.SetActive(true);
 
+        Text hintNotificationText = HintNotification.transform.GetChild(0).GetComponent<Text>();
+        
         if (upper)
-            HintNotification.transform.GetChild(0).GetComponent<Text>().text = text.ToUpper();
+            hintNotificationText.text = text.ToUpper();
         else
-            HintNotification.transform.GetChild(0).GetComponent<Text>().text = text;
+            hintNotificationText.text = text;
 
         UIFade uIFade = UIFade.CreateInstance(HintNotification, "[UIFader] HintNotification");
         uIFade.ResetGraphicsColor();
         uIFade.ImageTextAlpha(0.8f, 1f);
-        uIFade.FadeInOut(fadeOutTime: 3, fadeOutAfter: UIFade.FadeOutAfter.Time);
+        uIFade.FadeInOut(fadeOutTime: fadeTime, fadeOutAfter: fadeType);
     }
 
     public bool CheckObjectiveIDList(int questID)
@@ -242,6 +246,7 @@ public class CanvasController : MonoBehaviour
             if (obj.identifier == questID)
                 return true;
         }
+
         return false;
     }
 
@@ -272,5 +277,7 @@ public class ObjectiveModel
         objectiveText = "";
     }
 
-    public ObjectiveModel() { }
+    public ObjectiveModel()
+    {
+    }
 }

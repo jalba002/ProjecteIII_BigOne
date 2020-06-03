@@ -73,6 +73,7 @@ public class FearSystemManager : MonoBehaviour
 
     private void Update()
     {
+        if (!enableSystem) return;
         if (enemyBrain.IsHearingPlayer || enemyBrain.IsChasingPlayer)
         {
             UpdateVisuals();

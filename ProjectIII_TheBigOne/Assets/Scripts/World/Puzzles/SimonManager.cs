@@ -106,7 +106,8 @@ public class SimonManager : Puzzle
     private void ResetColors()
     {
         colors = null;
-        pantalla.material = _initMat;        
+        pantalla.material = _initMat;
+        bulb.material = _initBulbMat;
     }
 
 

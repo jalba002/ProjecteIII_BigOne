@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredItemID: 
-  lockedDoor: {fileID: 5475619198805593603}
+  lockedDoor: {fileID: 0}
 --- !u!1001 &693325321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2750,6 +2750,11 @@ PrefabInstance:
       propertyPath: m_Activated
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5003375951993377004, guid: 2c734906a254bfb4da97d30438a9c696,
+        type: 3}
+      propertyPath: lockedMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8089218479784260222, guid: 2c734906a254bfb4da97d30438a9c696,
         type: 3}
       propertyPath: OnUnlockEvent.m_PersistentCalls.m_Calls.Array.size
@@ -2764,7 +2769,7 @@ PrefabInstance:
         type: 3}
       propertyPath: OnUnlockEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2850585038245371492}
+      objectReference: {fileID: 0}
     - target: {fileID: 8089218479784260222, guid: 2c734906a254bfb4da97d30438a9c696,
         type: 3}
       propertyPath: OnUnlockEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -2867,24 +2872,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c734906a254bfb4da97d30438a9c696, type: 3}
---- !u!191 &2850585038245371492 stripped
-OffMeshLink:
-  m_CorrespondingSourceObject: {fileID: 2031312556645523993, guid: 2c734906a254bfb4da97d30438a9c696,
-    type: 3}
-  m_PrefabInstance: {fileID: 4305410454086040701}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5475619198805593603 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8089218479784260222, guid: 2c734906a254bfb4da97d30438a9c696,
-    type: 3}
-  m_PrefabInstance: {fileID: 4305410454086040701}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5561689701369807830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8e4330ca1cf13545a0976beb5c491f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &5561689701369807831 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8543597528817713066, guid: 2c734906a254bfb4da97d30438a9c696,

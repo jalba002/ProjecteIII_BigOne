@@ -1850,6 +1850,41 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7eb636a07aab19c44930e273650942e4, type: 3}
+--- !u!84 &413902820
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Flashlight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!4 &428559861 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2056461003369360682, guid: aea984b64a1e60e41937b61e1d2aa283,
@@ -2108,6 +2143,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 16.841
       objectReference: {fileID: 0}
+    - target: {fileID: 4208230047496456797, guid: 95824cf095ce77644b854508ea9661c8,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 17.976
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208230047496456797, guid: 95824cf095ce77644b854508ea9661c8,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 4.9747715
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208230047496456797, guid: 95824cf095ce77644b854508ea9661c8,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: -34.917393
+      objectReference: {fileID: 0}
     - target: {fileID: 6752482778064901256, guid: 95824cf095ce77644b854508ea9661c8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2167,6 +2217,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 14_Officer2_Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 6858011691511109389, guid: 95824cf095ce77644b854508ea9661c8,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 17.976
+      objectReference: {fileID: 0}
+    - target: {fileID: 6858011691511109389, guid: 95824cf095ce77644b854508ea9661c8,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 4.9747715
+      objectReference: {fileID: 0}
+    - target: {fileID: 6858011691511109389, guid: 95824cf095ce77644b854508ea9661c8,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: -35.78739
       objectReference: {fileID: 0}
     - target: {fileID: 7147794467738870326, guid: 95824cf095ce77644b854508ea9661c8,
         type: 3}
@@ -2251,41 +2316,6 @@ RenderTexture:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 'Spotlight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
---- !u!84 &672210970
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'Flashlight : Cookie Map Render Texture'
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
@@ -2781,7 +2811,7 @@ PrefabInstance:
         type: 3}
       propertyPath: puzzleWon.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1325924484}
+      objectReference: {fileID: 0}
     - target: {fileID: 4924446755762042596, guid: 98b64957638962f42a4a1897db563460,
         type: 3}
       propertyPath: puzzleWon.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -6937,18 +6967,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 0
---- !u!114 &1325924484 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7147794467738870326, guid: 95824cf095ce77644b854508ea9661c8,
-    type: 3}
-  m_PrefabInstance: {fileID: 490622602}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8e4330ca1cf13545a0976beb5c491f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1340264706
 GameObject:
   m_ObjectHideFlags: 0
@@ -9114,19 +9132,7 @@ AudioSource:
     type: 3}
   m_PrefabInstance: {fileID: 1952578604}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1737408356 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4287271706014648176, guid: 310c655bc510cdc4ea7a4790e96ea657,
-    type: 3}
-  m_PrefabInstance: {fileID: 1206655522}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dc41bf03a0c3924384ae7e4185896a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1763079934
+--- !u!114 &1733426582
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9152,6 +9158,18 @@ MonoBehaviour:
   tintStrength: 1
   useExtinction: 0
   extinction: 0.75
+--- !u!114 &1737408356 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4287271706014648176, guid: 310c655bc510cdc4ea7a4790e96ea657,
+    type: 3}
+  m_PrefabInstance: {fileID: 1206655522}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dc41bf03a0c3924384ae7e4185896a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!84 &1784313733
 RenderTexture:
   m_ObjectHideFlags: 0

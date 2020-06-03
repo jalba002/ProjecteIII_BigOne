@@ -6,6 +6,7 @@ using Player;
 using Properties;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using CharacterController = Characters.Generic.CharacterController;
 
 namespace Enemy
@@ -41,6 +42,8 @@ namespace Enemy
         [Header("Components from Thirds")] private FlashlightController playerFlashlight;
 
         public List<PatrolPoint> patrolPoints = new List<PatrolPoint>();
+
+        public UnityEvent OnPhaseChange = new UnityEvent();
 
         public void Awake()
         {
@@ -124,6 +127,7 @@ namespace Enemy
             {
                 patrolPoints = ObjectTracker.PatrolPointsSecondPhase;
             }
+            OnPhaseChange.Invoke();
         }
 
         private void Start()

@@ -1,11 +1,16 @@
 ﻿using Enemy;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class Dimitry_AnimatorController : MonoBehaviour
 {
-    public EnemyController EnemyController;
+    [Header("Components")] public EnemyController EnemyController;
 
     public Animator enemyAnimator;
+    public GameObject enemyHammer;
+
+    [Header("Animator Controllers")] public AnimatorController firstPhaseAnimatorController;
+    public AnimatorController secondPhaseAnimatorController;
 
     private void Start()
     {
@@ -14,19 +19,49 @@ public class Dimitry_AnimatorController : MonoBehaviour
             EnemyController = FindObjectOfType<EnemyController>();
         }
 
+        if (enemyHammer == null)
+        {
+            Debug.LogError("No Hammer attached in Dimitry.", this);
+        }
+
         if (enemyAnimator == null)
         {
             enemyAnimator = EnemyController.GetComponentInChildren<Animator>();
+        }
+
+        if (EnemyController != null)
+        {
+            EnemyController.OnPhaseChange.AddListener(LoadNewPhase);
+        }
+    }
+
+    public void LoadNewPhase()
+    {
+        if (EnemyController.currentBehaviourTree is BehaviourTree_Enemy_FirstPhase)
+        {
+            enemyAnimator.runtimeAnimatorController = firstPhaseAnimatorController;
+            enemyHammer.SetActive(false);
+        }
+        else if (EnemyController.currentBehaviourTree is BehaviourTree_Enemy_SecondPhase)
+        {
+            enemyAnimator.runtimeAnimatorController = secondPhaseAnimatorController;
+            enemyHammer.SetActive(true);
         }
     }
 
     public void Update()
     {
-        if (EnemyController.stateMachine.GetCurrentState is State_Enemy_Killing)
+        if (EnemyController.stateMachine.GetCurrentState is State_Enemy_Killing || EnemyController.stateMachine.GetCurrentState is State_Enemy_DestructionTraversing
+            || EnemyController.stateMachine.GetCurrentState is State_Enemy_Traversing)
         {
-            enemyAnimator.SetTrigger("Attack");
+            //if(enemyAnimator.)
+            enemyAnimator.SetBool("Attack", true);
         }
-        
+        else
+        {
+            enemyAnimator.SetBool("Attack", false);
+        }
+
         enemyAnimator.SetFloat("Speed", EnemyController.NavMeshAgent.speed);
 
         enemyAnimator.SetBool("IsLighted", EnemyController.stateMachine.GetCurrentState is State_Enemy_Idle);

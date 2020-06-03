@@ -140,8 +140,12 @@ public class SimonManager : Puzzle
 
             yield return new WaitForSeconds(delayBetweenColors);
 
-            answering = true;
-            currentAnswer = 0;
+            if(i == colors.Length - 1)
+            {
+                answering = true;
+                bulb.material = bulbOn;
+                currentAnswer = 0;
+            }            
         }
     }
 
@@ -176,10 +180,11 @@ public class SimonManager : Puzzle
                 if (currentAnswer >= colors.Length)
                 {
                     answering = false;
+                    bulb.material = _initBulbMat;
                     Debug.Log("Todo bien, todo correcto, y yo que me alegro.");
                     if (_currentColorCount - startingColorCount >= roundsToSucceed)
                     {
-                        PuzzleWon();
+                        StartCoroutine(WaitAndPuzzleWon());
                     }
                     else
                         StartCoroutine(IncreasePhase());
@@ -197,10 +202,17 @@ public class SimonManager : Puzzle
         }
     }
 
+    public IEnumerator WaitAndPuzzleWon()
+    {
+        yield return new WaitForSeconds(0.5f);
+        PuzzleWon();
+    }
+
     private IEnumerator IncreasePhase()
     {
         //Start coroutine de acertaste
         yield return new WaitForSeconds(2);
+        bulb.material = _initBulbMat;
         answering = false;
         _currentColorCount++;
         colors = GetRandomNumers(_currentColorCount);

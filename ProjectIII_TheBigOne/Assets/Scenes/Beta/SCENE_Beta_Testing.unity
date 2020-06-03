@@ -1965,6 +1965,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7eb636a07aab19c44930e273650942e4, type: 3}
+--- !u!23 &395832283 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1943662638437996668, guid: fdf54fee5f69869488d164e98364378e,
+    type: 3}
+  m_PrefabInstance: {fileID: 966605992}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &427517864
 GameObject:
   m_ObjectHideFlags: 0
@@ -2776,6 +2782,41 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.1, y: 3.000001, z: 3.1}
   m_Center: {x: 0.049999952, y: 1.4999995, z: 1.5}
+--- !u!84 &569238914
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Flashlight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &613161493
 GameObject:
   m_ObjectHideFlags: 0
@@ -3196,41 +3237,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!84 &764747284
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'Flashlight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &785924889
 GameObject:
   m_ObjectHideFlags: 0
@@ -4929,6 +4935,31 @@ PrefabInstance:
       propertyPath: paths.Array.data[3]
       value: event:/SFX/Environment/Puzzle/SimonYellow
       objectReference: {fileID: 0}
+    - target: {fileID: 1386346232684702202, guid: fdf54fee5f69869488d164e98364378e,
+        type: 3}
+      propertyPath: bulb
+      value: 
+      objectReference: {fileID: 395832283}
+    - target: {fileID: 1386346232684702202, guid: fdf54fee5f69869488d164e98364378e,
+        type: 3}
+      propertyPath: bulbOn
+      value: 
+      objectReference: {fileID: 2100000, guid: 967e0d9fccaeb7c4f9902641198f9e36, type: 2}
+    - target: {fileID: 1386346232684702202, guid: fdf54fee5f69869488d164e98364378e,
+        type: 3}
+      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 2129949663}
+    - target: {fileID: 1386346232684702202, guid: fdf54fee5f69869488d164e98364378e,
+        type: 3}
+      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: set_layer
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386346232684702202, guid: fdf54fee5f69869488d164e98364378e,
+        type: 3}
+      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1386346233430028754, guid: fdf54fee5f69869488d164e98364378e,
         type: 3}
       propertyPath: m_IsActive
@@ -5525,6 +5556,32 @@ Transform:
   m_Father: {fileID: 1785963015}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1010261931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59306422a2ca4454aabce3daa79c3334, type: 3}
+  m_Name: New Aura Base Settings
+  m_EditorClassIdentifier: 
+  useDensity: 1
+  density: 0.25
+  useScattering: 1
+  scattering: 0.5
+  useAmbientLighting: 1
+  ambientLightingStrength: 1
+  useColor: 0
+  color: {r: 0, g: 0.5, b: 0.5, a: 0.5}
+  colorStrength: 1
+  useTint: 0
+  tint: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  tintStrength: 1
+  useExtinction: 0
+  extinction: 0.75
 --- !u!1001 &1011276324
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6129,32 +6186,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1927427782}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1068763099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59306422a2ca4454aabce3daa79c3334, type: 3}
-  m_Name: New Aura Base Settings
-  m_EditorClassIdentifier: 
-  useDensity: 1
-  density: 0.25
-  useScattering: 1
-  scattering: 0.5
-  useAmbientLighting: 1
-  ambientLightingStrength: 1
-  useColor: 0
-  color: {r: 0, g: 0.5, b: 0.5, a: 0.5}
-  colorStrength: 1
-  useTint: 0
-  tint: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  tintStrength: 1
-  useExtinction: 0
-  extinction: 0.75
 --- !u!1 &1069666167 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5930173227298003040, guid: 1c18d9e9586bd3d44807e824d40ed48a,
@@ -11445,6 +11476,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7833216041826480841, guid: e8f2e2115bdbeac4c8395e112706c5bf,
     type: 3}
   m_PrefabInstance: {fileID: 2122686092}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2129949663 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4407223417220213961, guid: fdf54fee5f69869488d164e98364378e,
+    type: 3}
+  m_PrefabInstance: {fileID: 966605992}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2141100211 stripped
 GameObject:

@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartWholeGame()
     {
+        SoundManager.Instance.StopAllEvents(true);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         //StartGame();
     }

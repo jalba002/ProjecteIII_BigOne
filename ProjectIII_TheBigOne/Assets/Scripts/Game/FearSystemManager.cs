@@ -37,26 +37,20 @@ public class FearSystemManager : MonoBehaviour
     private Vignette Vignette;
     private EnemyBrain enemyBrain;
 
-    private bool enableSystem = false;
     private Coroutine resetEffects;
 
     private void Start()
     {
         enemyBrain = FindObjectOfType<EnemyBrain>();
-        if (enemyBrain == null) enableSystem = false;
+        
         PostProcessVolume.profile.TryGetSettings(out chromaticAberration);
         PostProcessVolume.profile.TryGetSettings(out Vignette);
+        
         Setup();
     }
 
     private void Setup()
     {
-        if (enableSystem == false)
-        {
-            Debug.LogWarning("Fear System not enabled. Enemy not in scene.");
-            return;
-        }
-
         if (chromaticAberration == null || Vignette == null)
         {
             Debug.LogError("Some of the effects are missing! Cancelling visual feedback.");
@@ -68,12 +62,11 @@ public class FearSystemManager : MonoBehaviour
         currentAberrationMaxValue = 0f;
         currentVignetteMaxValue = 0f;
         ApplyVisuals();
-        resetEffects = RestartCoroutine(resetEffects, ReduceValues());
+        //resetEffects = RestartCoroutine(resetEffects, ReduceValues());
     }
 
     private void Update()
     {
-        if (!enableSystem) return;
         if (enemyBrain.IsHearingPlayer || enemyBrain.IsChasingPlayer)
         {
             UpdateVisuals();

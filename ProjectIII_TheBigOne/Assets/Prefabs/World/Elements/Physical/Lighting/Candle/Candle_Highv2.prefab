@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 4473750535639555450}
   - component: {fileID: 4475993414841792112}
   - component: {fileID: 4580258631011449741}
+  - component: {fileID: 254185368075127594}
   m_Layer: 0
   m_Name: CandleLight
   m_TagString: Untagged
@@ -255,6 +256,29 @@ MonoBehaviour:
   customCookieDistanceFalloffPower: 2
   customAngularFalloffThreshold: 0.8
   customAngularFalloffPower: 2
+--- !u!114 &254185368075127594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4580258631011449740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/SFX/Environment/Room/CandleFlame
+  PlayEvent: 1
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 0.5
+  OverrideMaxDistance: 1
 --- !u!1 &4580277955834445212
 GameObject:
   m_ObjectHideFlags: 0

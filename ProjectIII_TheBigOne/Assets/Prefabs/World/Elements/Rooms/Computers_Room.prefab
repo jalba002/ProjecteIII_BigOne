@@ -536,6 +536,19 @@ Transform:
   m_Father: {fileID: 6899028909299908001}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &843905758
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6785789264956731210}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.3669176, y: 0.76688933, z: 1.2432686}
+  m_Center: {x: 0.0000019073486, y: -0.75757074, z: -0.0000038146973}
 --- !u!1 &6899028909299908000
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,100 +672,120 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6899028909582941679}
     m_Modifications:
-    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
+    - target: {fileID: 1386346232184048649, guid: 72ce877cc4b20e946bc4e8279ec73528,
         type: 3}
-      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
-        type: 3}
-      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
-        type: 3}
-      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
-        type: 3}
-      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
-        type: 3}
-      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: AddPickupMessage
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
-        type: 3}
-      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
-        type: 3}
-      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
-        type: 3}
-      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
-        type: 3}
-      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
-        type: 3}
-      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: GiveItem
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
-        type: 3}
-      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
-        type: 3}
-      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: Key_AirFilterRoom
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
-        type: 3}
-      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Key Collected.
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
-        type: 3}
-      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
-        type: 3}
-      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
-        type: 3}
-      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 4407223417220213962}
-    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
-        type: 3}
-      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: set_enabled
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
-        type: 3}
-      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
-        type: 3}
-      propertyPath: OnPuzzleWin.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_BoolArgument
+      propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386346232262040685, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386346232412346295, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: materials.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: paths.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52b7743bb319b8d49bf5e08ae1838084, type: 2}
+    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: cb474974f3aa46b4c9b9c2603fa962ce, type: 2}
+    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: e5724b5522de6b942a43d326150526ac, type: 2}
+    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: a41d2b94f1a78d24b8df37a16fa5050c, type: 2}
+    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: paths.Array.data[0]
+      value: event:/SFX/Environment/Puzzle/SimonGreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: paths.Array.data[1]
+      value: event:/SFX/Environment/Puzzle/SimonRed
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: paths.Array.data[2]
+      value: event:/SFX/Environment/Puzzle/SimonBlue
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: paths.Array.data[3]
+      value: event:/SFX/Environment/Puzzle/SimonYellow
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: pantalla
+      value: 
+      objectReference: {fileID: 8512417459552483281}
+    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: bulb
+      value: 
+      objectReference: {fileID: 1943662638437996668}
+    - target: {fileID: 1386346232544849595, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: bulbOn
+      value: 
+      objectReference: {fileID: 2100000, guid: 967e0d9fccaeb7c4f9902641198f9e36, type: 2}
+    - target: {fileID: 1386346232701849098, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120568058422144269, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.3399998
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120568058422144269, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.1999987
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120568058422144269, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.02879608
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407223417133697305, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.9903347
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407223417133697305, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.90986633
+      objectReference: {fileID: 0}
+    - target: {fileID: 4407223417133697305, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.358
       objectReference: {fileID: 0}
     - target: {fileID: 4407223417357970312, guid: 72ce877cc4b20e946bc4e8279ec73528,
         type: 3}
@@ -762,17 +795,17 @@ PrefabInstance:
     - target: {fileID: 4407223417357970319, guid: 72ce877cc4b20e946bc4e8279ec73528,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -41.973
+      value: -47.091858
       objectReference: {fileID: 0}
     - target: {fileID: 4407223417357970319, guid: 72ce877cc4b20e946bc4e8279ec73528,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.893
+      value: -1.9182171
       objectReference: {fileID: 0}
     - target: {fileID: 4407223417357970319, guid: 72ce877cc4b20e946bc4e8279ec73528,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20.82
+      value: -18.397608
       objectReference: {fileID: 0}
     - target: {fileID: 4407223417357970319, guid: 72ce877cc4b20e946bc4e8279ec73528,
         type: 3}
@@ -814,6 +847,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4545401511440538616, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.17974216
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545401511440538616, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.25565854
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545401511440538616, guid: 72ce877cc4b20e946bc4e8279ec73528,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.057418965
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72ce877cc4b20e946bc4e8279ec73528, type: 3}
 --- !u!4 &4407223417220213966 stripped
@@ -822,18 +870,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 139855681}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4407223417220213962 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4407223417357970315, guid: 72ce877cc4b20e946bc4e8279ec73528,
-    type: 3}
-  m_PrefabInstance: {fileID: 139855681}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7effcbd914737934eb15cbf06518db53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1434928918
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1253,6 +1289,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6899028909299908001}
     m_Modifications:
+    - target: {fileID: 5548659887804341950, guid: edadaeeed40284d4c97f597531e4b448,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1694623d8006b4b4db106009a5b61b17, type: 2}
     - target: {fileID: 6003945828082611254, guid: edadaeeed40284d4c97f597531e4b448,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1315,6 +1356,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: edadaeeed40284d4c97f597531e4b448, type: 3}
+--- !u!23 &8512417459552483281 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5548659887804341950, guid: edadaeeed40284d4c97f597531e4b448,
+    type: 3}
+  m_PrefabInstance: {fileID: 4261217035779582319}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1943662638437996668 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2439724553333092627, guid: edadaeeed40284d4c97f597531e4b448,
+    type: 3}
+  m_PrefabInstance: {fileID: 4261217035779582319}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6785789264956731210 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7280373583323039269, guid: edadaeeed40284d4c97f597531e4b448,
+    type: 3}
+  m_PrefabInstance: {fileID: 4261217035779582319}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7525707094141525337 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6003945828082611254, guid: edadaeeed40284d4c97f597531e4b448,

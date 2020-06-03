@@ -11,8 +11,12 @@ public class ItemRequirements : MonoBehaviour
     {
         if (playerInventory == null)
             playerInventory = GameObject.FindObjectOfType<Inventory>();
-        
-        lockedDoor = gameObject.GetComponentInChildren<DynamicObject>();
+
+        if (lockedDoor == null)
+        {
+            lockedDoor = gameObject.GetComponentInChildren<DynamicObject>();
+        }
+
         lockedDoor.OnStartInteracting.AddListener(Unlock);
     }
 

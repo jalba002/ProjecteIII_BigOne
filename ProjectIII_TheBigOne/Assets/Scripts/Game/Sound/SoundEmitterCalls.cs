@@ -11,6 +11,7 @@ public class SoundEmitterCalls : MonoBehaviour
 
     public string doorSlamPath;
     public string breakingWallPath;
+    public string hammerSlamPath;
     public string scarejumpPath;
     public string latchPath;
 
@@ -37,11 +38,12 @@ public class SoundEmitterCalls : MonoBehaviour
     }
     public void PlayBreakingWallSound()
     {
-        SoundManager.Instance.PlaySoundAtLocation(breakingWallPath, wallPos.position, 1, 1, 20);
+        SoundManager.Instance.PlayOneShotSound(breakingWallPath, wallPos.position);
+        SoundManager.Instance.PlayOneShotSound(hammerSlamPath, wallPos.position);
     }
     public void PlayScarejumpSound()
     {
-        SoundManager.Instance.PlaySoundAtLocation(scarejumpPath, scarejumpPos.position, 1, 1, 20);
+        SoundManager.Instance.PlayOneShotSound(scarejumpPath, scarejumpPos.position);
     }
     public void PlayPanelLatchSound()
     {

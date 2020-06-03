@@ -22,6 +22,10 @@ namespace Enemy
             _attachedController.CheckForPlayerNearLight();
             _attachedController.CheckForPlayerOnSight();
             _attachedController.CheckForEnemyVisibility();
+            _attachedController.HearPlayerAround();
+            
+            _attachedController.targetPositionDummy.transform.position =
+                _attachedController.currentBrain.archnemesis.transform.position;
         }
 
         public override void OnStateFixedTick(float fixedTime)
@@ -39,6 +43,7 @@ namespace Enemy
             base.OnStateEnter();
 
             _attachedController.NavMeshAgent.isStopped = true;
+            
         }
 
         protected override void OnStateExit()

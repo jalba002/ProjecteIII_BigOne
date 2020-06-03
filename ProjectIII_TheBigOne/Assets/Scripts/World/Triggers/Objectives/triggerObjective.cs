@@ -12,13 +12,13 @@ public class triggerObjective : MonoBehaviour
     public string questObjective;
     bool isTriggered;
 
-    Renderer rend;
+    /*Renderer rend;
 
     private void Start()
     {
         rend = GetComponent<Renderer>();
         rend.enabled = false;
-    }
+    }*/
 
     void OnTriggerEnter(Collider other)
     {

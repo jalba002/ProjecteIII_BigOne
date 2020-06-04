@@ -21,7 +21,6 @@ public class CanvasController : MonoBehaviour
 
     [Header("PauseMenu")] public GameObject pauseMenu;
     public GameObject inventory;
-    public GameObject pauseBlur;
 
     [Header("Sliders")] public Slider lightingSlider;
     public Image lightBulb;
@@ -121,7 +120,6 @@ public class CanvasController : MonoBehaviour
             Cursor.visible = true;
 
             //Something about enemy?
-
             pauseManager.ActivateResumeButton(false);
             pauseMenu.SetActive(true);
             pauseManager.DesactivateOptions();
@@ -138,16 +136,7 @@ public class CanvasController : MonoBehaviour
             _playerController.cameraController.cursorLock = false;
             Cursor.visible = true;
 
-            if (inventory.activeInHierarchy)
-            {
-                pauseBlur.SetActive(false);
-            }
-            else
-            {
-                pauseBlur.SetActive(true);
-            }
             //Something about enemy?
-
             pauseManager.ActivateResumeButton(true);
             pauseMenu.SetActive(true);
             pauseManager.DesactivateOptions();
@@ -157,20 +146,14 @@ public class CanvasController : MonoBehaviour
         ) //(GameManager.Instance.PlayerController.currentBrain.ShowPause /*|| forceEnable*/)
         {
             _playerController.stateMachine.enabled = true;
-
-            if (!inventory.activeInHierarchy)
-            {
-                _playerController.interactablesManager.enabled = true;
-                _playerController.interactablesManager.ClearInteractable();
-                _playerController.objectInspector.enabled = true;
-                _playerController.cameraController.angleLocked = false;
-                _playerController.cameraController.cursorLock = true;
-                Cursor.visible = false;
-            }
-
+            _playerController.interactablesManager.enabled = true;
+            _playerController.interactablesManager.ClearInteractable();
+            _playerController.objectInspector.enabled = true;
+            _playerController.cameraController.angleLocked = false;
+            _playerController.cameraController.cursorLock = true;
+            Cursor.visible = false;
 
             //Something about enemy?
-
             //pauseManager.ActivateResumeButton(true);
             pauseMenu.SetActive(false);
             pauseManager.DesactivateOptions();
@@ -196,17 +179,12 @@ public class CanvasController : MonoBehaviour
     public void ResumeGame()
     {
         var enabled = true;
+        _playerController.cameraController.angleLocked = !enabled;
+        _playerController.cameraController.cursorLock = enabled;
+        Cursor.visible = !enabled;
         _playerController.stateMachine.enabled = enabled;
-        if (!inventory.activeInHierarchy)
-        {
-            _playerController.cameraController.angleLocked = !enabled;
-            _playerController.cameraController.cursorLock = enabled;
-            Cursor.visible = !enabled;
-
-            _playerController.interactablesManager.enabled = enabled;
-            _playerController.objectInspector.enabled = enabled;
-        }
-
+        _playerController.interactablesManager.enabled = enabled;
+        _playerController.objectInspector.enabled = enabled;
 
         //Something about enemy?
 

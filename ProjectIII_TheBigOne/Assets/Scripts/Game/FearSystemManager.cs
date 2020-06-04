@@ -42,10 +42,10 @@ public class FearSystemManager : MonoBehaviour
     private void Start()
     {
         enemyBrain = FindObjectOfType<EnemyBrain>();
-        
+
         PostProcessVolume.profile.TryGetSettings(out chromaticAberration);
         PostProcessVolume.profile.TryGetSettings(out Vignette);
-        
+
         Setup();
     }
 
@@ -67,12 +67,26 @@ public class FearSystemManager : MonoBehaviour
 
     private void Update()
     {
-        if (enemyBrain.IsHearingPlayer || enemyBrain.IsChasingPlayer)
+        if (enemyBrain.IsHearingPlayer || enemyBrain.IsChasingPlayer || enemyBrain.IsPlayerCloseEnoughForDeath)
         {
             UpdateVisuals();
         }
+        else
+        {
+            ReduceVisuals();
+        }
     }
-    
+
+    private void ReduceVisuals()
+    {
+        chromaticAberration.intensity.value -=
+            chromaticSettings.chromaticVariationPerSecond * Time.deltaTime;
+        
+        Vignette.intensity.value -= vignetteSettings.vignetteVariationPerSecond * Time.deltaTime;
+        
+        chromaticAberration.intensity.value = Mathf.Max(0f, chromaticAberration.intensity.value);
+        Vignette.intensity.value = Mathf.Max(0f, Vignette.intensity.value);
+    }
 
     public void UpdateVisuals()
     {
@@ -98,7 +112,10 @@ public class FearSystemManager : MonoBehaviour
     private void ApplyVisuals()
     {
         chromaticAberration.intensity.value = currentAberrationMaxValue;
-        Vignette.intensity.value = currentVignetteMaxValue;
+        Vignette.intensity.value += vignetteSettings.vignetteVariationPerSecond * Time.deltaTime;
+        
+        chromaticAberration.intensity.value = Mathf.Max(0f, chromaticAberration.intensity.value);
+        Vignette.intensity.value = Mathf.Clamp(Vignette.intensity.value, Vignette.intensity.value >= vignetteSettings.minimumVignette ? 0f : vignetteSettings.minimumVignette, vignetteSettings.maximumVignette);
     }
 
     private Coroutine RestartCoroutine(Coroutine coroutineHolder, IEnumerator newCoroutine)
@@ -108,23 +125,23 @@ public class FearSystemManager : MonoBehaviour
         return StartCoroutine(newCoroutine);
     }
 
-    private IEnumerator ReduceValues()
-    {
-        while (true)
-        {
-            if (!enemyBrain.IsHearingPlayer)
-            {
-                yield return new WaitForSeconds(2.0f);
-                while (chromaticAberration.intensity.value > 0f || Vignette.intensity.value > 0f)
-                {
-                    chromaticAberration.intensity.value -=
-                        chromaticSettings.chromaticVariationPerSecond * Time.deltaTime;
-                    Vignette.intensity.value -= vignetteSettings.vignetteVariationPerSecond * Time.deltaTime;
-
-                    chromaticAberration.intensity.value = Mathf.Max(0f, chromaticAberration.intensity.value);
-                    Vignette.intensity.value = Mathf.Max(0f, Vignette.intensity.value);
-                }
-            }
-        }
-    }
+    /*  private IEnumerator ReduceValues()
+      {
+          while (true)
+          {
+              if (!enemyBrain.IsHearingPlayer)
+              {
+                  yield return new WaitForSeconds(2.0f);
+                  while (chromaticAberration.intensity.value > 0f || Vignette.intensity.value > 0f)
+                  {
+                      chromaticAberration.intensity.value -=
+                          chromaticSettings.chromaticVariationPerSecond * Time.deltaTime;
+                      Vignette.intensity.value -= vignetteSettings.vignetteVariationPerSecond * Time.deltaTime;
+  
+                      chromaticAberration.intensity.value = Mathf.Max(0f, chromaticAberration.intensity.value);
+                      Vignette.intensity.value = Mathf.Max(0f, Vignette.intensity.value);
+                  }
+              }
+          }
+      }*/
 }

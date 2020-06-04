@@ -38,10 +38,12 @@ public class FearSystemManager : MonoBehaviour
     private EnemyBrain enemyBrain;
 
     private Coroutine resetEffects;
+    private bool _isenemyBrainNull;
 
     private void Start()
     {
         enemyBrain = FindObjectOfType<EnemyBrain>();
+        _isenemyBrainNull = enemyBrain == null;
 
         PostProcessVolume.profile.TryGetSettings(out chromaticAberration);
         PostProcessVolume.profile.TryGetSettings(out Vignette);
@@ -67,6 +69,8 @@ public class FearSystemManager : MonoBehaviour
 
     private void Update()
     {
+        if (_isenemyBrainNull) return;
+        
         if (enemyBrain.IsHearingPlayer || enemyBrain.IsChasingPlayer || enemyBrain.IsPlayerCloseEnoughForDeath)
         {
             UpdateVisuals();

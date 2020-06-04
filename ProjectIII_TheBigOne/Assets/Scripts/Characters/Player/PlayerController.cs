@@ -175,7 +175,7 @@ namespace Player
         {
             if (objectInspector && objectInspector.isActiveAndEnabled)
             {
-                if (currentBrain.Interact)
+                if (currentBrain.Interact && interactablesManager.CurrentInteractable != null)
                 {
                     if (interactablesManager.CurrentInteractable.interactionType ==
                         InteractableObject.InteractionType.Inspect)

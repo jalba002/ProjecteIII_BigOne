@@ -1,5 +1,84 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1816542807
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5941266920680339487}
+    m_Modifications:
+    - target: {fileID: -8889676279505257129, guid: 0206d902c267d134ca109e933580212f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 59d0270c08269904c9be8ad129aaa708, type: 2}
+    - target: {fileID: -4216859302048453862, guid: 0206d902c267d134ca109e933580212f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 0206d902c267d134ca109e933580212f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 0206d902c267d134ca109e933580212f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 0206d902c267d134ca109e933580212f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.00000008146034
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 0206d902c267d134ca109e933580212f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 0206d902c267d134ca109e933580212f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 0206d902c267d134ca109e933580212f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 0206d902c267d134ca109e933580212f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 0206d902c267d134ca109e933580212f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 0206d902c267d134ca109e933580212f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 0206d902c267d134ca109e933580212f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 0206d902c267d134ca109e933580212f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a3074cf3a2f7bf843be2beec8777f43f, type: 2}
+    - target: {fileID: -927199367670048503, guid: 0206d902c267d134ca109e933580212f,
+        type: 3}
+      propertyPath: m_Name
+      value: Mesh_9VBattery
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0206d902c267d134ca109e933580212f, type: 3}
 --- !u!1001 &8292937450967673665
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10,22 +89,22 @@ PrefabInstance:
     - target: {fileID: 2406593893548692317, guid: 82f5d6c86be3e854a8f308599873ac1a,
         type: 3}
       propertyPath: m_Name
-      value: Battery
+      value: Prefab_Battery (1)
       objectReference: {fileID: 0}
     - target: {fileID: 2406593893548692318, guid: 82f5d6c86be3e854a8f308599873ac1a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.340458
+      value: 7.685585
       objectReference: {fileID: 0}
     - target: {fileID: 2406593893548692318, guid: 82f5d6c86be3e854a8f308599873ac1a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.12
+      value: 1.675
       objectReference: {fileID: 0}
     - target: {fileID: 2406593893548692318, guid: 82f5d6c86be3e854a8f308599873ac1a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.016308
+      value: -25.637299
       objectReference: {fileID: 0}
     - target: {fileID: 2406593893548692318, guid: 82f5d6c86be3e854a8f308599873ac1a,
         type: 3}
@@ -69,13 +148,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2406593893548692319, guid: 82f5d6c86be3e854a8f308599873ac1a,
         type: 3}
-      propertyPath: itemID
-      value: Battery
+      propertyPath: displayName
+      value: Pickup battery
       objectReference: {fileID: 0}
     - target: {fileID: 2406593893548692319, guid: 82f5d6c86be3e854a8f308599873ac1a,
         type: 3}
-      propertyPath: displayName
-      value: Pickup battery
+      propertyPath: itemID
+      value: Battery
       objectReference: {fileID: 0}
     - target: {fileID: 2406593893805499408, guid: 82f5d6c86be3e854a8f308599873ac1a,
         type: 3}
@@ -97,6 +176,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mesh_Battery
       objectReference: {fileID: 0}
+    - target: {fileID: 2406593893805499409, guid: 82f5d6c86be3e854a8f308599873ac1a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2406593893805499410, guid: 82f5d6c86be3e854a8f308599873ac1a,
         type: 3}
       propertyPath: m_Mesh
@@ -109,3 +193,9 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: e5724b5522de6b942a43d326150526ac, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82f5d6c86be3e854a8f308599873ac1a, type: 3}
+--- !u!4 &5941266920680339487 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2406593893548692318, guid: 82f5d6c86be3e854a8f308599873ac1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8292937450967673665}
+  m_PrefabAsset: {fileID: 0}

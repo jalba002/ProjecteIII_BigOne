@@ -16,6 +16,7 @@ public class BehaviourTree_Enemy_SecondPhase : BehaviourTree
         // Analyze all possible states.
         if (CheckEnterStunned()) return;
         if (CheckPlayerKilled()) return;
+        if (CheckIfHearingPlayer()) return;
         if (CheckEnterTraversing()) return;
         if (CheckEnterPatrol()) return;
         if (CheckEnterChasing()) return;
@@ -23,6 +24,22 @@ public class BehaviourTree_Enemy_SecondPhase : BehaviourTree
     }
 
     /// All states for Enemy first phase listed below. ///
+    ///
+    /// 
+    private bool CheckIfHearingPlayer()
+    {
+        if (!attachedCharacter.currentBrain.IsHearingPlayer) return false;
+
+        if (!attachedCharacter.currentBrain.IsNoticingPlayer) return false;
+
+        if (attachedCharacter.currentBrain.IsChasingPlayer) return false;
+
+        if (attachedCharacter.currentBrain.IsTrackingPlayer) return false;
+
+        attachedCharacter.stateMachine.SwitchState<State_Enemy_Noticed>();
+        return true;
+    }
+    
     private bool CheckPlayerKilled()
     {
         if (!attachedCharacter.currentBrain.IsPlayerCloseEnoughForDeath) return false;
@@ -32,37 +49,13 @@ public class BehaviourTree_Enemy_SecondPhase : BehaviourTree
         return true;
     }
 
-    private bool CheckEnterDisable()
-    {
-        // TODO Add Conditions.
-
-        return true;
-    }
-
-
-   /* private bool CheckEnterIdle()
-    {
-        // TODO Add conditions
-        // If player is looking at the enemy.
-        // If player has the light turned off.
-
-        if (!attachedCharacter.currentBrain.IsVisible) return false;
-        
-        if (!attachedCharacter.currentBrain.IsPlayerNearLight) return false;
-
-        attachedCharacter.stateMachine.SwitchState<State_Enemy_Idle>();
-        return true;
-    }*/
-
     private bool CheckEnterPatrol()
     {
-        // TODO Add conditions.
-        // If player is not in safe zone.
-        // 
-        
         if (attachedCharacter.currentBrain.IsPlayerInSight) return false;
 
         if (attachedCharacter.currentBrain.IsChasingPlayer) return false;
+
+        if (attachedCharacter.currentBrain.IsTrackingPlayer) return false;
 
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Patrolling>();
         return true;
@@ -70,9 +63,6 @@ public class BehaviourTree_Enemy_SecondPhase : BehaviourTree
     
     private bool CheckEnterChasing()
     {
-        // TODO Add conditions.
-        // 
-        
         if (!attachedCharacter.currentBrain.IsPlayerInSight) return false;
         
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Chasing>();

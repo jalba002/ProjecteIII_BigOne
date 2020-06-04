@@ -255,9 +255,13 @@ MonoBehaviour:
   characterProperties: {fileID: 11400000, guid: 23391344cdad25a40ab813c80e3c4d62,
     type: 2}
   attachedCollider: {fileID: 1207250025}
+  dimitryEyes: {fileID: 4582003537256085148}
   targetPositionDummy: {fileID: 0}
   NavMeshAgent: {fileID: 4766131684604721940}
   patrolPoints: []
+  OnPhaseChange:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!195 &4766131684604721940
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -343,6 +347,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyController: {fileID: 4766131684604721933}
   enemyAnimator: {fileID: 757327272073037581}
+  enemyHammer: {fileID: 187823050156589475}
+  firstPhaseAnimatorController: {fileID: 9100000, guid: 56581376555cb84418a023381ef9ce28,
+    type: 2}
+  secondPhaseAnimatorController: {fileID: 9100000, guid: 1c68fd8bccfee044cb52df3b28d43d00,
+    type: 2}
 --- !u!1001 &27746874432381623
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -431,6 +440,12 @@ GameObject:
 --- !u!4 &4978772733466954157 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 97d3a563585b331439c18e9b9a106aa9,
+    type: 3}
+  m_PrefabInstance: {fileID: 27746874432381623}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &187823050156589475 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 214444019308929812, guid: 97d3a563585b331439c18e9b9a106aa9,
     type: 3}
   m_PrefabInstance: {fileID: 27746874432381623}
   m_PrefabAsset: {fileID: 0}

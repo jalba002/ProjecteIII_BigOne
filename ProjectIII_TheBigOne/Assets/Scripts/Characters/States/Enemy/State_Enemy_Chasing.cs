@@ -9,6 +9,8 @@ namespace Enemy
         private EnemyController _attachedController;
         private float _movementSpeed;
 
+        private float originalVision;
+
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
@@ -23,6 +25,8 @@ namespace Enemy
             _attachedController.CheckForPlayerNearLight();
             _attachedController.CheckForPlayerOnSight();
             _attachedController.HearPlayerAround();
+            _attachedController.CheckForMeshLink();
+            _attachedController.CheckForPlayerKilling();
             
             _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
         }
@@ -56,6 +60,9 @@ namespace Enemy
             _attachedController.NavMeshAgent.speed = _attachedController.characterProperties.WalkSpeed;
             
             _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
+
+            originalVision = _attachedController.characterProperties.fieldOfVision;
+            _attachedController.characterProperties.fieldOfVision = 360f;
         }
 
         protected override void OnStateExit()
@@ -63,6 +70,7 @@ namespace Enemy
             base.OnStateExit();
             //_attachedController.targetPositionDummy.transform.parent = null;
             _attachedController.currentBrain.IsChasingPlayer = false;
+            _attachedController.characterProperties.fieldOfVision = originalVision;
         }
     }
 }

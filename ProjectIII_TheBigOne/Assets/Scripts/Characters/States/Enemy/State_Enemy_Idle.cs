@@ -18,10 +18,16 @@ namespace Enemy
         public override void OnStateTick(float deltaTime)
         {
             base.OnStateTick(deltaTime);
-            
+
             _attachedController.CheckForPlayerNearLight();
+
             _attachedController.CheckForPlayerOnSight();
             _attachedController.CheckForEnemyVisibility();
+            _attachedController.HearPlayerAround();
+            //_attachedController.CheckForPlayerKilling();
+
+            _attachedController.targetPositionDummy.transform.position =
+                _attachedController.currentBrain.archnemesis.transform.position;
         }
 
         public override void OnStateFixedTick(float fixedTime)
@@ -44,6 +50,7 @@ namespace Enemy
         protected override void OnStateExit()
         {
             base.OnStateExit();
+            _attachedController.NavMeshAgent.isStopped = false;
             /*_attachedController.targetPositionDummy.transform.position =
                 _attachedController.currentBrain.archnemesis.transform.position;
             _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);*/

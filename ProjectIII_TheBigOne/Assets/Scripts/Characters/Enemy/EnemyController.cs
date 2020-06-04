@@ -6,6 +6,7 @@ using Player;
 using Properties;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using CharacterController = Characters.Generic.CharacterController;
 
 namespace Enemy
@@ -34,12 +35,15 @@ namespace Enemy
         [Header("Enemy Settings")] public new EnemyProperties characterProperties;
 
         [Header("Components")] public Collider attachedCollider;
+        public GameObject dimitryEyes;
         [Header("NavMesh")] public EnemyTargetDummy targetPositionDummy;
         public NavMeshAgent NavMeshAgent;
 
         [Header("Components from Thirds")] private FlashlightController playerFlashlight;
 
         public List<PatrolPoint> patrolPoints = new List<PatrolPoint>();
+
+        public UnityEvent OnPhaseChange = new UnityEvent();
 
         public void Awake()
         {
@@ -55,8 +59,8 @@ namespace Enemy
             {
                 Debug.LogWarning(e.Message);
             }
-            
-            SetStartingBehaviourTree();            
+
+            SetStartingBehaviourTree();
 
             if (stateMachine == null)
                 stateMachine = GetComponent<StateMachine>();
@@ -68,13 +72,23 @@ namespace Enemy
             {
                 characterProperties = ScriptableObject.CreateInstance<EnemyProperties>();
             }
-            else
-            {
-                characterProperties = Instantiate(characterProperties);
-            }
+            characterProperties = Instantiate(characterProperties);
 
             if (!attachedCollider)
                 attachedCollider = GetComponent<Collider>();
+
+            SetupEyes();
+        }
+
+        private void SetupEyes()
+        {
+            if (dimitryEyes == null)
+            {
+                dimitryEyes = new GameObject("DimitryEyes");
+                dimitryEyes.transform.parent = this.transform;
+                dimitryEyes.transform.position = new Vector3(0f, 1f, 0f);
+                dimitryEyes.transform.eulerAngles = Vector3.zero;
+            }
         }
 
         private void SetStartingBehaviourTree()
@@ -110,6 +124,8 @@ namespace Enemy
             {
                 patrolPoints = ObjectTracker.PatrolPointsSecondPhase;
             }
+
+            OnPhaseChange.Invoke();
         }
 
         private void Start()
@@ -172,7 +188,7 @@ namespace Enemy
         {
             try
             {
-                currentBrain.IsPlayerInSight = SensesUtil.IsInSight(gameObject,
+                currentBrain.IsPlayerInSight = SensesUtil.IsInSight(dimitryEyes,
                     currentBrain.archnemesis.gameObject,
                     currentBrain.archnemesis.cameraController.m_PitchControllerTransform,
                     characterProperties.maxDetectionRange,
@@ -219,7 +235,23 @@ namespace Enemy
                 // Both should transition to the alerted state, then do their thing.
 
                 currentBrain.IsHearingPlayer = SensesUtil.IsHearingPlayer(this, currentBrain.archnemesis,
-                    characterProperties.hearingMaxRange, characterProperties.layersThatBlockHearing);
+                                                   characterProperties.hearingMaxRange,
+                                                   characterProperties.layersThatBlockHearing) &&
+                                               currentBrain.archnemesis.currentBrain.Direction != Vector3.zero;
+            }
+            catch (NullReferenceException)
+            {
+            }
+        }
+
+        public void CheckForPlayerKilling()
+        {
+            try
+            {
+                currentBrain.IsPlayerCloseEnoughForDeath = currentBrain.IsPlayerInSight &&
+                                                           currentBrain.DistanceToPlayer <=
+                                                           characterProperties.tooCloseRange
+                                                           && !currentBrain.archnemesis.IsDead;
             }
             catch (NullReferenceException)
             {

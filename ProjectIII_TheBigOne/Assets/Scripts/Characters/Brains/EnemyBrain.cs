@@ -68,9 +68,7 @@ public class EnemyBrain : Brain
 
         DistanceToPlayer = Vector3.Distance(archnemesis.transform.position, this.gameObject.transform.position);
 
-        IsPlayerCloseEnoughForDeath = IsPlayerInSight &&
-                                      DistanceToPlayer <= selfCharacter.characterProperties.tooCloseRange
-                                      && !archnemesis.IsDead;
+       
     }
 
     public void SetBrainDead()

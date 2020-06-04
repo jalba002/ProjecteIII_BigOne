@@ -1,8 +1,12 @@
 ﻿using Player;
+using UnityEngine.Events;
 
 public class SceneItem : InteractableObject, IPickable
 {
     public string itemID;
+
+    public UnityEvent OnItemPickup = new UnityEvent();
+    
     private bool alreadyUsed = false;
     
     private void Start()
@@ -12,13 +16,13 @@ public class SceneItem : InteractableObject, IPickable
     
     public override bool Interact(bool interactEnable)
     {
-       
         if (alreadyUsed || IsInteracting || !interactEnable) return false;
         if (FindObjectOfType<PlayerController>().playerInventory.AddItem(itemID))
         {
             SoundManager.Instance.PlaySound2D("event:/SFX/Environment/Interactable/ItemPickUp");
             this.gameObject.SetActive(false);
             alreadyUsed = true;
+            OnItemPickup.Invoke();
         }
         return true;
     }

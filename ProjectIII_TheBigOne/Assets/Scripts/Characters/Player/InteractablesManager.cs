@@ -32,6 +32,9 @@ namespace Characters.Player
         public float raycastCooldownPerCheck = 0.1f;
         private float currentRaycastCooldown;
 
+        private List<InteractableObject.InteractionType> interactedTypes =
+            new List<InteractableObject.InteractionType>();
+
         public void Start()
         {
             attachedPlayer = GetComponent<PlayerController>();
@@ -128,12 +131,26 @@ namespace Characters.Player
                 }
             }
 
-            if (textDebug)
+            /*if (textDebug)
             {
                 textDebug.text = CurrentInteractable != null ? CurrentInteractable.displayName : "";
+            }*/
+            if (CurrentInteractable != null)
+            {
+                ShowTuto();
             }
         }
 
+        private void ShowTuto()
+        {
+            if (!interactedTypes.Contains(CurrentInteractable.interactionType))
+            {
+                GameManager.Instance.CanvasController.ShowHint(CurrentInteractable.displayName, true, 4f,
+                    UIFade.FadeOutAfter.Time);
+                if (CurrentInteractable.interactionType != InteractableObject.InteractionType.Pick)
+                    interactedTypes.Add(CurrentInteractable.interactionType);
+            }
+        }
 
         private GameObject DetectElement()
         {

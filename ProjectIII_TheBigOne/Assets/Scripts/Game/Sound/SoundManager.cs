@@ -151,6 +151,18 @@ public class SoundManager : MonoBehaviour
             eventsList.Add(soundEvent);
         }
     }
+    public void PlaySound2D(string path)
+    {
+        EventInstance soundEvent = RuntimeManager.CreateInstance(path);
+        if (!soundEvent.Equals(null))
+        {
+            Debug.Log("CallingSound");
+            soundEvent.start();
+            //soundEvent.setVolume(volume);
+            SoundManagerMovingSound movingSound = new SoundManagerMovingSound(transform, soundEvent);
+            eventsList.Add(soundEvent);
+        }
+    }
 
     public void PlaySoundAtLocation(string path, Vector3 position, float volume = 1, float minRange = 1f, float maxRange = 20f)
     {
@@ -179,6 +191,12 @@ public class SoundManager : MonoBehaviour
     {
         for (int i = 0; i < parameters.Count; i++)
             soundEvent.setParameterByName(parameters[i].GetName(), parameters[i].GetValue());
+    }
+
+    public void StopEventFromPath(string path, bool fadeout = true)
+    {
+        EventInstance soundEvent = RuntimeManager.CreateInstance(path);
+        StopEvent(soundEvent, fadeout);
     }
 
     public void StopEvent(EventInstance soundEvent, bool fadeout = true)

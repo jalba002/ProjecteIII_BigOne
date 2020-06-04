@@ -7,21 +7,23 @@ namespace Enemy
     public class State_Enemy_Killing : State
     {
         private EnemyController _attachedController;
-        private float killTime;
+
+        private Animator enemyAnimator;
 
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
             _attachedController = (EnemyController) Machine.characterController;
+            enemyAnimator = _attachedController.GetComponentInChildren<Animator>();
+
         }
 
         public override void OnStateTick(float deltaTime)
         {
             base.OnStateTick(deltaTime);
-            if (killTime > 0f)
-            {
-                killTime -= deltaTime;
-            }
+            _attachedController.CheckForEnemyVisibility();
+            _attachedController.CheckForPlayerNearLight();
+            _attachedController.CheckForPlayerOnSight();
         }
 
         public override void OnStateFixedTick(float fixedTime)
@@ -37,21 +39,22 @@ namespace Enemy
         protected override void OnStateEnter()
         {
             base.OnStateEnter();
-            if (!GameManager.Instance.GameSettings.isPlayerInvincible)
+            _attachedController.NavMeshAgent.isStopped = true;
+            
+            // TODO Change to animation kill.
+            /*if (!GameManager.Instance.GameSettings.isPlayerInvincible)
             {
-                _attachedController.NavMeshAgent.isStopped = true;
-                killTime = 3f;
                 GameManager.Instance.EndGame();
-            }
-            else
-            {
-                killTime = 0f;
-            }
+            }*/
+            enemyAnimator.SetBool("Attack", true);
         }
 
         protected override void OnStateExit()
         {
             base.OnStateExit();
+            _attachedController.currentBrain.IsPlayerCloseEnoughForDeath = false;
+            _attachedController.NavMeshAgent.isStopped = false;
+            enemyAnimator.SetBool("Attack", false);
         }
     }
 }

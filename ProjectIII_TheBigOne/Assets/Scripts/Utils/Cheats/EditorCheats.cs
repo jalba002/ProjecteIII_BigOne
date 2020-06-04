@@ -132,7 +132,7 @@ namespace Cheats
             }
         }
 
-        [MenuItem("Cheats/Enemy/Load First Phase %B")]
+        [MenuItem("Cheats/Enemy/Load First Phase #%B")]
         public static void LoadFirstPhase()
         {
             try
@@ -154,7 +154,7 @@ namespace Cheats
             }
         }
 
-        [MenuItem("Cheats/Enemy/Load Second Phase %N")]
+        [MenuItem("Cheats/Enemy/Load Second Phase #%N")]
         public static void LoadSecondPhase()
         {
             try

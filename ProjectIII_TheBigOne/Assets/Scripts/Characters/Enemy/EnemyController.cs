@@ -59,8 +59,8 @@ namespace Enemy
             {
                 Debug.LogWarning(e.Message);
             }
-            
-            SetStartingBehaviourTree();            
+
+            SetStartingBehaviourTree();
 
             if (stateMachine == null)
                 stateMachine = GetComponent<StateMachine>();
@@ -72,14 +72,11 @@ namespace Enemy
             {
                 characterProperties = ScriptableObject.CreateInstance<EnemyProperties>();
             }
-            else
-            {
-                characterProperties = Instantiate(characterProperties);
-            }
+            characterProperties = Instantiate(characterProperties);
 
             if (!attachedCollider)
                 attachedCollider = GetComponent<Collider>();
-            
+
             SetupEyes();
         }
 
@@ -127,6 +124,7 @@ namespace Enemy
             {
                 patrolPoints = ObjectTracker.PatrolPointsSecondPhase;
             }
+
             OnPhaseChange.Invoke();
         }
 
@@ -237,7 +235,23 @@ namespace Enemy
                 // Both should transition to the alerted state, then do their thing.
 
                 currentBrain.IsHearingPlayer = SensesUtil.IsHearingPlayer(this, currentBrain.archnemesis,
-                    characterProperties.hearingMaxRange, characterProperties.layersThatBlockHearing) && currentBrain.archnemesis.currentBrain.Direction != Vector3.zero;
+                                                   characterProperties.hearingMaxRange,
+                                                   characterProperties.layersThatBlockHearing) &&
+                                               currentBrain.archnemesis.currentBrain.Direction != Vector3.zero;
+            }
+            catch (NullReferenceException)
+            {
+            }
+        }
+
+        public void CheckForPlayerKilling()
+        {
+            try
+            {
+                currentBrain.IsPlayerCloseEnoughForDeath = currentBrain.IsPlayerInSight &&
+                                                           currentBrain.DistanceToPlayer <=
+                                                           characterProperties.tooCloseRange
+                                                           && !currentBrain.archnemesis.IsDead;
             }
             catch (NullReferenceException)
             {

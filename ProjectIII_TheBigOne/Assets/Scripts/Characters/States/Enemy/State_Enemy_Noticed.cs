@@ -33,6 +33,7 @@ namespace Enemy
             _attachedController.CheckForEnemyVisibility();
             _attachedController.HearPlayerAround();
             _attachedController.CheckForMeshLink();
+            _attachedController.CheckForPlayerKilling();
 
             if (trackTime > 0f)
             {

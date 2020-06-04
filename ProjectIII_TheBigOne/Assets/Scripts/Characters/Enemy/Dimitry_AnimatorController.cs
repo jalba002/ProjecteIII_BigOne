@@ -51,7 +51,7 @@ public class Dimitry_AnimatorController : MonoBehaviour
 
     public void Update()
     {
-        if (EnemyController.stateMachine.GetCurrentState is State_Enemy_Killing || EnemyController.stateMachine.GetCurrentState is State_Enemy_DestructionTraversing
+        /*if (EnemyController.stateMachine.GetCurrentState is State_Enemy_Killing || EnemyController.stateMachine.GetCurrentState is State_Enemy_DestructionTraversing
             || EnemyController.stateMachine.GetCurrentState is State_Enemy_Traversing)
         {
             //if(enemyAnimator.)
@@ -60,13 +60,13 @@ public class Dimitry_AnimatorController : MonoBehaviour
         else
         {
             enemyAnimator.SetBool("Attack", false);
-        }
+        }*/
 
         enemyAnimator.SetFloat("Speed", EnemyController.NavMeshAgent.speed);
 
         enemyAnimator.SetBool("IsLighted", EnemyController.stateMachine.GetCurrentState is State_Enemy_Idle);
 
-        if (Vector3.Magnitude(EnemyController.NavMeshAgent.velocity) > 0f)
+        if (Vector3.Magnitude(EnemyController.NavMeshAgent.velocity) > 0.5f)
         {
             enemyAnimator.SetBool("IsWalking", true);
         }

@@ -27,14 +27,23 @@ public class OptionsManager : MonoBehaviour
 
     private MainMenuManager mainMenuManager;
 
-    [Header("MOUSE")] [Range(0.1f, 10.0f)] public float sensitivity = 1f;
+    [Header("MOUSE")]
+    public float minSensibility = 0.2f;
+    public float maxSensibility = 4f;
+    [Range(0.2f, 4f)] public float sensibility = 1f;
     public bool invertedMouse = false;
 
-    [Header("VOLUME")] [Range(-80f, 0f)] public float masterVolume = 1f;
+    [Header("VOLUME")]
+    public float minVolume = -80f;
+    public float maxVolume = 0f;
+    [Range(-80f, 0f)] public float masterVolume = 1f;
     [Range(-80f, 0f)] public float musicVolume = 1f;
     [Range(-80f, 0f)] public float effectsVolume = 1f;
 
-    [Header("SCREEN")] [Range(0f, 30f)] public float brightness = 1f;
+    [Header("SCREEN")]
+    public float minBrightness = -25f;
+    public float maxBrightness = 50f;
+    [Range(-25f, 50f)] public float brightness = 1f;
 
     private void InstantiateElement()
     {
@@ -61,11 +70,37 @@ public class OptionsManager : MonoBehaviour
         masterVolume = volume;
         //set master volume on FMOD
     }
+    public void SetMasterVolume(string vol)
+    {
+        float.TryParse(vol, out float a);
+        if(a < minVolume)
+        {
+            a = minVolume;
+        }
+        else if (a > maxVolume)
+        {
+            a = maxVolume;
+        }
+        masterVolume = a;
+    }
 
     public void SetMusicVolume(float volume)
     {
         musicVolume = volume;
         //set music volume on FMOD
+    }
+    public void SetMusicVolume(string vol)
+    {
+        float.TryParse(vol, out float a);
+        if (a < minVolume)
+        {
+            a = minVolume;
+        }
+        else if (a > maxVolume)
+        {
+            a = maxVolume;
+        }
+        musicVolume = a;
     }
 
     public void SetEffectsVolume(float volume)
@@ -73,10 +108,36 @@ public class OptionsManager : MonoBehaviour
         effectsVolume = volume;
         //set effects volume on FMOD
     }
-
-    public void SetSensibility(float sensibility)
+    public void SetEffectsVolume(string vol)
     {
-        sensitivity = sensibility;        
+        float.TryParse(vol, out float a);
+        if (a < minVolume)
+        {
+            a = minVolume;
+        }
+        else if (a > maxVolume)
+        {
+            a = maxVolume;
+        }
+        effectsVolume = a;
+    }
+
+    public void SetSensibility(float sens)
+    {
+        sensibility = sens;        
+    }
+    public void SetSensibility(string sens)
+    {
+        float.TryParse(sens, out float a);
+        if (a < minSensibility)
+        {
+            a = minSensibility;
+        }
+        else if (a > maxSensibility)
+        {
+            a = maxSensibility;
+        }
+        sensibility = a;
     }
 
     public void SetInvertMouse(bool invert)
@@ -93,6 +154,19 @@ public class OptionsManager : MonoBehaviour
             cg.brightness.value = brightness;
         }
     }
+    public void SetBrightness(string bright)
+    {
+        float.TryParse(bright, out float a);
+        if (a < minBrightness)
+        {
+            a = minBrightness;
+        }
+        else if (a > maxBrightness)
+        {
+            a = maxBrightness;
+        }
+        SetBrightness(a);
+    }
 
     public void UpdateOptions()
     {
@@ -100,7 +174,7 @@ public class OptionsManager : MonoBehaviour
         mainMenuManager.musicVolumeSlider.value = musicVolume;
         mainMenuManager.effectsVolumeSlider.value = effectsVolume;
 
-        mainMenuManager.sensibilitySlider.value = sensitivity;
+        mainMenuManager.sensibilitySlider.value = sensibility;
         mainMenuManager.invertToogle.isOn = invertedMouse;
 
         mainMenuManager.brightnessSlider.value = brightness;       

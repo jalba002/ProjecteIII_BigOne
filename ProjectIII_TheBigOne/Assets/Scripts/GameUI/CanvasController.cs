@@ -23,6 +23,7 @@ public class CanvasController : MonoBehaviour
     public GameObject inventory;
 
     [Header("Sliders")] public Slider lightingSlider;
+    public Image lightBulb;
     public Slider runningSlider;
 
     [Header("Crosshair")] public Sprite inspectCrosshair;
@@ -88,7 +89,8 @@ public class CanvasController : MonoBehaviour
 
     public void PlayerLightingUpdate()
     {
-        lightingSlider.value = flashlight.currentCharge / flashlight.maxCharge;
+        //lightingSlider.value = flashlight.currentCharge / flashlight.maxCharge;
+        lightBulb.fillAmount = flashlight.currentCharge / flashlight.maxCharge;
     }
 
     public void PlayerRunningUpdate()

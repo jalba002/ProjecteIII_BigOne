@@ -1,5 +1,4 @@
 ﻿using Enemy;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class Dimitry_AnimatorController : MonoBehaviour
@@ -8,9 +7,6 @@ public class Dimitry_AnimatorController : MonoBehaviour
 
     public Animator enemyAnimator;
     public GameObject enemyHammer;
-
-    [Header("Animator Controllers")] public AnimatorController firstPhaseAnimatorController;
-    public AnimatorController secondPhaseAnimatorController;
 
     private void Start()
     {
@@ -39,12 +35,12 @@ public class Dimitry_AnimatorController : MonoBehaviour
     {
         if (EnemyController.currentBehaviourTree is BehaviourTree_Enemy_FirstPhase)
         {
-            enemyAnimator.runtimeAnimatorController = firstPhaseAnimatorController;
+            enemyAnimator.runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load("Animations/Dimitry_Animator_FirstPhase");
             enemyHammer.SetActive(false);
         }
         else if (EnemyController.currentBehaviourTree is BehaviourTree_Enemy_SecondPhase)
         {
-            enemyAnimator.runtimeAnimatorController = secondPhaseAnimatorController;
+            enemyAnimator.runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load("Animations/Dimitry_Animator_SecondPhase");
             enemyHammer.SetActive(true);
         }
     }

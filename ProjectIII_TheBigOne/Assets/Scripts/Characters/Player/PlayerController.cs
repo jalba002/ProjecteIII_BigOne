@@ -49,6 +49,8 @@ namespace Player
 
         [Header("Stamina")] private float _currentStamina;
 
+        [Header("Pause Menu")] public GameObject pauseMenu;
+
         public float currentStamina
         {
             get { return _currentStamina; }
@@ -286,20 +288,24 @@ namespace Player
             if (playerInventory && playerInventory.isActiveAndEnabled)
             {
                 var enabled = playerInventory.ToggleInventory();
-                cameraController.angleLocked = enabled;
-                cameraController.cursorLock = !enabled;
-                Cursor.visible = enabled;
+                if (!pauseMenu.activeInHierarchy)
+                {
+                    cameraController.angleLocked = enabled;
+                    cameraController.cursorLock = !enabled;
+                    Cursor.visible = enabled;
 
-                if (enabled)
-                {
-                    //SHOW CURSOR
-                    Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
+                    if (enabled)
+                    {
+                        //SHOW CURSOR
+                        Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
+                    }
+                    else
+                    {
+                        //HIDE CURSOR
+                        Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
+                    }
                 }
-                else
-                {
-                    //HIDE CURSOR
-                    Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
-                }
+                
             }
         }
 

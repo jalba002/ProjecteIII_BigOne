@@ -31,6 +31,7 @@ namespace Enemy
 
         public BehaviourTree currentBehaviourTree { get; set; }
         [Header("Sound")] public string terrorRadiusPath;
+        [Range(0,50)]public float maxRadius = 15f;
 
         [Header("Enemy Settings")] public new EnemyProperties characterProperties;
 
@@ -53,7 +54,7 @@ namespace Enemy
 
             try
             {
-                SoundManager.Instance.PlayEvent(terrorRadiusPath, transform);
+                SoundManager.Instance.PlayEvent(terrorRadiusPath, transform, 0, maxRadius);
             }
             catch (Exception e)
             {

@@ -32,6 +32,14 @@ public class PauseManager : MonoBehaviour
     public Button mouseButton;
     public Button screenButton;
 
+    [Header("Text Inputs")]
+    public InputField masterVolumeInput;
+    public InputField musicVolumeInput;
+    public InputField effectsVolumeInput;
+    public InputField sensibilityInput;
+    public InputField brightnessInput;
+
+
     private void Awake()
     {
         canvasController = FindObjectOfType<CanvasController>();
@@ -49,7 +57,6 @@ public class PauseManager : MonoBehaviour
     }
     private void Update()
     {
-        
     }
 
     public void ResumeGame()
@@ -110,22 +117,47 @@ public class PauseManager : MonoBehaviour
     public void SetMasterVolume(float volume)
     {
         OptionsManager.Instance.SetMasterVolume(volume);
+        masterVolumeInput.text = OptionsManager.Instance.masterVolume.ToString();
+    }
+    public void SetMasterVolume(string volume)
+    {
+        OptionsManager.Instance.SetMasterVolume(volume);
+        masterVolumeSlider.value = OptionsManager.Instance.masterVolume;
     }
 
     public void SetMusicVolume(float volume)
     {
         OptionsManager.Instance.SetMusicVolume(volume);
+        musicVolumeInput.text = OptionsManager.Instance.musicVolume.ToString();
+    }
+    public void SetMusicVolume(string volume)
+    {
+        OptionsManager.Instance.SetMusicVolume(volume);
+        musicVolumeSlider.value = OptionsManager.Instance.musicVolume;
     }
 
     public void SetEffectsVolume(float volume)
     {
         OptionsManager.Instance.SetEffectsVolume(volume);
+        effectsVolumeInput.text = OptionsManager.Instance.effectsVolume.ToString();
+    }
+    public void SetEffectsVolume(string volume)
+    {
+        OptionsManager.Instance.SetEffectsVolume(volume);
+        effectsVolumeSlider.value = OptionsManager.Instance.effectsVolume;
     }
 
     public void SetSensibility(float sensibility)
     {
         OptionsManager.Instance.SetSensibility(sensibility);
-        GameManager.Instance.PlayerController.cameraController.m_Sensitivity = OptionsManager.Instance.sensitivity;
+        GameManager.Instance.PlayerController.cameraController.m_Sensitivity = OptionsManager.Instance.sensibility;
+        sensibilityInput.text = OptionsManager.Instance.sensibility.ToString();
+    }
+    public void SetSensibility(string sensibility)
+    {
+        OptionsManager.Instance.SetSensibility(sensibility);
+        GameManager.Instance.PlayerController.cameraController.m_Sensitivity = OptionsManager.Instance.sensibility;
+        sensibilitySlider.value = OptionsManager.Instance.sensibility;
     }
 
     public void SetInvertMouse(bool invert)
@@ -137,6 +169,12 @@ public class PauseManager : MonoBehaviour
     public void SetBrightness(float bright)
     {
         OptionsManager.Instance.SetBrightness(bright);
+        brightnessInput.text = OptionsManager.Instance.brightness.ToString();
+    }
+    public void SetBrightness(string bright)
+    {
+        OptionsManager.Instance.SetBrightness(bright);
+        brightnessSlider.value = OptionsManager.Instance.brightness;
     }
     public void UpdateOptions()
     {
@@ -144,7 +182,7 @@ public class PauseManager : MonoBehaviour
         musicVolumeSlider.value = OptionsManager.Instance.musicVolume;
         effectsVolumeSlider.value = OptionsManager.Instance.effectsVolume;
 
-        sensibilitySlider.value = OptionsManager.Instance.sensitivity;
+        sensibilitySlider.value = OptionsManager.Instance.sensibility;
         invertToogle.isOn = OptionsManager.Instance.invertedMouse;
 
         brightnessSlider.value = OptionsManager.Instance.brightness;       

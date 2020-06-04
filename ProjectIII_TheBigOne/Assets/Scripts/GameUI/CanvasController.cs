@@ -21,6 +21,7 @@ public class CanvasController : MonoBehaviour
 
     [Header("PauseMenu")] public GameObject pauseMenu;
     public GameObject inventory;
+    public GameObject pauseBlur;
 
     [Header("Sliders")] public Slider lightingSlider;
     public Image lightBulb;
@@ -38,9 +39,11 @@ public class CanvasController : MonoBehaviour
     public PauseManager pauseManager;
 
     private PlayerController _playerController;
+    private bool _islightBulbNotNull;
 
     private void Start()
     {
+        _islightBulbNotNull = lightBulb != null;
         _playerController = GameManager.Instance.PlayerController;
 
         if (CrosshairController == null)
@@ -90,7 +93,8 @@ public class CanvasController : MonoBehaviour
     public void PlayerLightingUpdate()
     {
         //lightingSlider.value = flashlight.currentCharge / flashlight.maxCharge;
-        lightBulb.fillAmount = flashlight.currentCharge / flashlight.maxCharge;
+        if (_islightBulbNotNull)
+            lightBulb.fillAmount = flashlight.currentCharge / flashlight.maxCharge;
     }
 
     public void PlayerRunningUpdate()
@@ -117,6 +121,7 @@ public class CanvasController : MonoBehaviour
             Cursor.visible = true;
 
             //Something about enemy?
+
             pauseManager.ActivateResumeButton(false);
             pauseMenu.SetActive(true);
             pauseManager.DesactivateOptions();
@@ -133,7 +138,16 @@ public class CanvasController : MonoBehaviour
             _playerController.cameraController.cursorLock = false;
             Cursor.visible = true;
 
+            if (inventory.activeInHierarchy)
+            {
+                pauseBlur.SetActive(false);
+            }
+            else
+            {
+                pauseBlur.SetActive(true);
+            }
             //Something about enemy?
+
             pauseManager.ActivateResumeButton(true);
             pauseMenu.SetActive(true);
             pauseManager.DesactivateOptions();
@@ -143,14 +157,20 @@ public class CanvasController : MonoBehaviour
         ) //(GameManager.Instance.PlayerController.currentBrain.ShowPause /*|| forceEnable*/)
         {
             _playerController.stateMachine.enabled = true;
-            _playerController.interactablesManager.enabled = true;
-            _playerController.interactablesManager.ClearInteractable();
-            _playerController.objectInspector.enabled = true;
-            _playerController.cameraController.angleLocked = false;
-            _playerController.cameraController.cursorLock = true;
-            Cursor.visible = false;
+
+            if (!inventory.activeInHierarchy)
+            {
+                _playerController.interactablesManager.enabled = true;
+                _playerController.interactablesManager.ClearInteractable();
+                _playerController.objectInspector.enabled = true;
+                _playerController.cameraController.angleLocked = false;
+                _playerController.cameraController.cursorLock = true;
+                Cursor.visible = false;
+            }
+
 
             //Something about enemy?
+
             //pauseManager.ActivateResumeButton(true);
             pauseMenu.SetActive(false);
             pauseManager.DesactivateOptions();
@@ -176,12 +196,17 @@ public class CanvasController : MonoBehaviour
     public void ResumeGame()
     {
         var enabled = true;
-        _playerController.cameraController.angleLocked = !enabled;
-        _playerController.cameraController.cursorLock = enabled;
-        Cursor.visible = !enabled;
         _playerController.stateMachine.enabled = enabled;
-        _playerController.interactablesManager.enabled = enabled;
-        _playerController.objectInspector.enabled = enabled;
+        if (!inventory.activeInHierarchy)
+        {
+            _playerController.cameraController.angleLocked = !enabled;
+            _playerController.cameraController.cursorLock = enabled;
+            Cursor.visible = !enabled;
+
+            _playerController.interactablesManager.enabled = enabled;
+            _playerController.objectInspector.enabled = enabled;
+        }
+
 
         //Something about enemy?
 
@@ -229,7 +254,7 @@ public class CanvasController : MonoBehaviour
         HintNotification.SetActive(true);
 
         Text hintNotificationText = HintNotification.transform.GetChild(0).GetComponent<Text>();
-        
+
         if (upper)
             hintNotificationText.text = text.ToUpper();
         else

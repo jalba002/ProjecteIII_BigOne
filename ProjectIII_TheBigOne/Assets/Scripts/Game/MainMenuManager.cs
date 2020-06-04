@@ -258,7 +258,7 @@ public class MainMenuManager : MonoBehaviour
         musicVolumeSlider.value = OptionsManager.Instance.musicVolume;
         effectsVolumeSlider.value = OptionsManager.Instance.effectsVolume;
 
-        sensibilitySlider.value = OptionsManager.Instance.sensitivity;
+        sensibilitySlider.value = OptionsManager.Instance.sensibility;
         invertToogle.isOn = OptionsManager.Instance.invertedMouse;
 
         brightnessSlider.value = OptionsManager.Instance.brightness;

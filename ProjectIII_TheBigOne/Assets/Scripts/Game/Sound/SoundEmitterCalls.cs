@@ -39,12 +39,12 @@ public class SoundEmitterCalls : MonoBehaviour
 
     public void PlayDoorSlamSound()
     {
-        SoundManager.Instance.PlaySoundAtLocation(doorSlamPath, doorPos.position, 1, 1, 20);
+        SoundManager.Instance.PlaySound2D(doorSlamPath);
     }
     public void PlayBreakingWallSound()
     {
-        SoundManager.Instance.PlayOneShotSound(breakingWallPath, wallPos.position);
-        SoundManager.Instance.PlayOneShotSound(hammerSlamPath, wallPos.position);
+        SoundManager.Instance.PlayOneShotSound(breakingWallPath, wallPos.position, 1, 25);
+        SoundManager.Instance.PlayOneShotSound(hammerSlamPath, wallPos.position, 1, 25);
     }
     public void PlayScarejumpSound()
     {

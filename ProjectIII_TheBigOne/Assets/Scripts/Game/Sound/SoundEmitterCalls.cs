@@ -49,11 +49,12 @@ public class SoundEmitterCalls : MonoBehaviour
     public void PlayScarejumpSound()
     {
         SoundManager.Instance.PlayEvent(scarejumpPath, GameManager.Instance.PlayerController.transform);
-        SoundManager.Instance.PlaySoundAtLocation(playerBreathingPath, GameManager.Instance.PlayerController.transform.position);
+        SoundManager.Instance.PlayOneShotSound(playerBreathingPath, GameManager.Instance.PlayerController.transform);
     }
     public void PlayPanelLatchSound()
     {
-        SoundManager.Instance.PlaySoundAtLocation(latchPath, latchPanelDoorPos.position, 1, 1, 20);
+        Debug.Log("Hello team i Go B cyka blyat");
+        SoundManager.Instance.PlayOneShotSound(latchPath, GameManager.Instance.PlayerController.transform);
     }
 
 

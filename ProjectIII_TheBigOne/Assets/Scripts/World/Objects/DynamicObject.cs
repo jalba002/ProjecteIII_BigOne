@@ -517,7 +517,7 @@ namespace World.Objects
             float calculatedForce = 1f;
             float mouseAxis = UseMouseXAxis ? Input.GetAxis("Mouse X") : Input.GetAxis("Mouse Y");
             mouseAxis = Mathf.Clamp(mouseAxis, -maxMouseInput, maxMouseInput);
-            calculatedForce = (forceScale * mouseAxis) * OptionsManager.Instance.sensitivity;
+            calculatedForce = (forceScale * mouseAxis) * OptionsManager.Instance.sensibility;
 
             return calculatedForce;
         }

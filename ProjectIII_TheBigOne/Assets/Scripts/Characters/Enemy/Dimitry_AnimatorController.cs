@@ -75,4 +75,9 @@ public class Dimitry_AnimatorController : MonoBehaviour
             enemyAnimator.SetBool("IsWalking", false);
         }
     }
+
+    public void EndGame()
+    {
+        GameManager.Instance.EndGame();
+    }
 }

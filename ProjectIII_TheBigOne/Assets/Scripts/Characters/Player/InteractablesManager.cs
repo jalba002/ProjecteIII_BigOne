@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Aura2API;
+﻿using System.Collections.Generic;
 using Player;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.GameCenter;
-using UnityEngine.UI;
 
 namespace Characters.Player
 {

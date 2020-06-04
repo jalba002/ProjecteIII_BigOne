@@ -22,14 +22,10 @@ public class CanvasController : MonoBehaviour
     [Header("PauseMenu")] public GameObject pauseMenu;
     public GameObject inventory;
 
-    [Header("Sliders")] public Slider lightingSlider;
+    [Header("Sliders")]
     public Image lightBulb;
     public Slider runningSlider;
-
-    [Header("Crosshair")] public Sprite inspectCrosshair;
-    public Sprite grabCrosshair;
-    public Sprite draggingCrosshair;
-
+    
     [Header("Components")] public CrosshairController CrosshairController;
     public Image blackFade;
 

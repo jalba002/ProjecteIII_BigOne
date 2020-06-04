@@ -2523,7 +2523,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: -0.0000000088996615}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 7e-45}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -2665,7 +2665,7 @@ MonoBehaviour:
   b_play: {fileID: 1060906626}
   b_exit: {fileID: 979640940}
   optionsmenu: {fileID: 146363946}
-  sceneName: SceneLighting
+  sceneIDToLoad: 1
   camera: {fileID: 1858166878}
   cameraPointOptions: {fileID: 1828140780}
   cameraPointNormal: {fileID: 1415790276}
@@ -12231,9 +12231,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eff12accc3ff504f8e74d8354c9c3ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 1
+  minSensibility: 0.2
+  maxSensibility: 4
+  sensibility: 1
   invertedMouse: 0
+  minVolume: -80
+  maxVolume: 0
   masterVolume: 0
   musicVolume: 0
   effectsVolume: 0
+  minBrightness: -25
+  maxBrightness: 50
   brightness: 25

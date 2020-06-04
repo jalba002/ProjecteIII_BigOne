@@ -13,10 +13,15 @@ public class SoundEmitterCalls : MonoBehaviour
     public string breakingWallPath;
     public string hammerSlamPath;
     public string scarejumpPath;
+    public string playerBreathingPath;
+
     public string latchPath;
 
     private void Start()
     {
+        SoundManager.Instance.PlayEvent("event:/SFX/Environment/Room/VoidAmbient", GameManager.Instance.PlayerController.transform, 0.3f);
+
+
         if(doorPos == null)
         {
             GameObject.Find("DoorSlamSoundEmitter");
@@ -34,16 +39,17 @@ public class SoundEmitterCalls : MonoBehaviour
 
     public void PlayDoorSlamSound()
     {
-        SoundManager.Instance.PlaySoundAtLocation(doorSlamPath, doorPos.position, 1, 1, 20);
+        SoundManager.Instance.PlaySound2D(doorSlamPath);
     }
     public void PlayBreakingWallSound()
     {
-        SoundManager.Instance.PlayOneShotSound(breakingWallPath, wallPos.position);
-        SoundManager.Instance.PlayOneShotSound(hammerSlamPath, wallPos.position);
+        SoundManager.Instance.PlayOneShotSound(breakingWallPath, wallPos.position, 1, 25);
+        SoundManager.Instance.PlayOneShotSound(hammerSlamPath, wallPos.position, 1, 25);
     }
     public void PlayScarejumpSound()
     {
-        SoundManager.Instance.PlayOneShotSound(scarejumpPath, scarejumpPos.position);
+        SoundManager.Instance.PlayEvent(scarejumpPath, GameManager.Instance.PlayerController.transform);
+        SoundManager.Instance.PlaySoundAtLocation(playerBreathingPath, GameManager.Instance.PlayerController.transform.position);
     }
     public void PlayPanelLatchSound()
     {

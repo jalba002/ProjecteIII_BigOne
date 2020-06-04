@@ -19,7 +19,7 @@ public class MainMenuManager : MonoBehaviour
 
     private GameObject selectedOption;
 
-    public string sceneName;
+    public int sceneIDToLoad = 1;
 
     public GameObject camera;
     public GameObject cameraPointOptions;
@@ -153,7 +153,7 @@ public class MainMenuManager : MonoBehaviour
     }
     public void PlayGame()
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneIDToLoad);
     }
     public void ChangeOptions(bool b)
     {

@@ -83,7 +83,22 @@ public class SoundManager : MonoBehaviour
     #region Events
 
     // Usamos esta para objetos con parámetros
-    public void PlayOneShotSound(string path, Vector3 pos, List<SoundManagerParameter> parameters = null)
+    public void PlayOneShotSound(string path, Vector3 pos,List<SoundManagerParameter> parameters = null)
+    {
+        EventInstance soundEvent = RuntimeManager.CreateInstance(path);
+        if (!soundEvent.Equals(null))
+        {
+            if (parameters != null)
+                for (int i = 0; i < parameters.Count; i++)
+                    soundEvent.setParameterByName(parameters[i].GetName(), parameters[i].GetValue());
+           
+            soundEvent.set3DAttributes(RuntimeUtils.To3DAttributes(pos));
+            soundEvent.start();
+            soundEvent.release();
+        }
+    }
+
+    public void PlayOneShotSound(string path, Vector3 pos, float minRange , float maxRange, List<SoundManagerParameter> parameters = null)
     {
         EventInstance soundEvent = RuntimeManager.CreateInstance(path);
         if (!soundEvent.Equals(null))
@@ -92,11 +107,15 @@ public class SoundManager : MonoBehaviour
                 for (int i = 0; i < parameters.Count; i++)
                     soundEvent.setParameterByName(parameters[i].GetName(), parameters[i].GetValue());
 
+
+            soundEvent.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, maxRange);
+            soundEvent.setProperty(EVENT_PROPERTY.MINIMUM_DISTANCE, minRange);
             soundEvent.set3DAttributes(RuntimeUtils.To3DAttributes(pos));
             soundEvent.start();
             soundEvent.release();
         }
     }
+
 
     // Usamos esta para objetos en movimiento que actualizan la posición del sonido
     public void PlayOneShotSound(string path, Transform transform)
@@ -125,13 +144,14 @@ public class SoundManager : MonoBehaviour
     }
 
     // Usamos esta para objetos en movimiento que actualizan la posición del sonido
-    public EventInstance PlayEvent(string path, Transform transform)
+    public EventInstance PlayEvent(string path, Transform transform, float volume = 1)
     {
         EventInstance soundEvent = RuntimeManager.CreateInstance(path);
         if (!soundEvent.Equals(null))
         {
             soundEvent.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
             soundEvent.start();
+            soundEvent.setVolume(volume);
             SoundManagerMovingSound movingSound = new SoundManagerMovingSound(transform, soundEvent);
             positionEvents.Add(movingSound);
             eventsList.Add(soundEvent);
@@ -142,7 +162,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySound2D(string path, float volume = 1)
     {
-        EventInstance soundEvent = RuntimeManager.CreateInstance(path);
+        /*EventInstance soundEvent = RuntimeManager.CreateInstance(path);
         if (!soundEvent.Equals(null))
         {
             soundEvent.start();            
@@ -150,10 +170,21 @@ public class SoundManager : MonoBehaviour
             SoundManagerMovingSound movingSound = new SoundManagerMovingSound(transform, soundEvent);
             eventsList.Add(soundEvent);
         }
+        */
+        EventInstance soundEvent = RuntimeManager.CreateInstance(path);
+        if (!soundEvent.Equals(null))
+        {
+            soundEvent.set3DAttributes(RuntimeUtils.To3DAttributes(GameManager.Instance.PlayerController.transform.position));
+            soundEvent.start();
+            SoundManagerMovingSound movingSound = new SoundManagerMovingSound(GameManager.Instance.PlayerController.transform, soundEvent);
+            positionEvents.Add(movingSound);
+            soundEvent.release();
+        }
+
     }
     public void PlaySound2D(string path)
     {
-        EventInstance soundEvent = RuntimeManager.CreateInstance(path);
+        /*EventInstance soundEvent = RuntimeManager.CreateInstance(path);
         if (!soundEvent.Equals(null))
         {
             Debug.Log("CallingSound");
@@ -162,6 +193,17 @@ public class SoundManager : MonoBehaviour
             SoundManagerMovingSound movingSound = new SoundManagerMovingSound(transform, soundEvent);
             eventsList.Add(soundEvent);
         }
+        */
+        EventInstance soundEvent = RuntimeManager.CreateInstance(path);
+        if (!soundEvent.Equals(null))
+        {
+            soundEvent.set3DAttributes(RuntimeUtils.To3DAttributes(GameManager.Instance.PlayerController.transform.position));
+            soundEvent.start();
+            SoundManagerMovingSound movingSound = new SoundManagerMovingSound(GameManager.Instance.PlayerController.transform, soundEvent);
+            positionEvents.Add(movingSound);
+            soundEvent.release();
+        }
+
     }
 
     public void PlaySoundAtLocation(string path, Vector3 position, float volume = 1, float minRange = 1f, float maxRange = 20f)

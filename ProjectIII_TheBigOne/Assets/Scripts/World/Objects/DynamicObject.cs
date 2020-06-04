@@ -405,7 +405,7 @@ namespace World.Objects
         private void OnUnlock()
         {
             // TODO Play sound depending on the type? 
-            SoundManager.Instance.PlayOneShotSound("event:/SFX/Environment/Interactable/Latch", transform.position);
+            SoundManager.Instance.PlayOneShotSound("event:/SFX/Environment/Interactable/DoorUnlocked", transform.position);
         }
 
         public void BreakJoint()
@@ -460,13 +460,15 @@ namespace World.Objects
             switch (objectType)
             {
                 case ObjectType.Door:
-                    //Play door sound
-                    AudioManager.PlaySoundAtLocation("Sound/Door/DoorOpen_07", transform.position);
+                    //Play door sound   
+                    Debug.Log("Should play sound");
+                    SoundManager.Instance.PlaySound2D("event:/SFX/Environment/Interactable/DoorLockedTry");
                     break;
                 case ObjectType.Drawer:
                     //Play drawer sound
                     break;
                 case ObjectType.Pallet:
+                    SoundManager.Instance.PlaySound2D("event:/SFX/Player/LiftingWardrobeEffortIntro");
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

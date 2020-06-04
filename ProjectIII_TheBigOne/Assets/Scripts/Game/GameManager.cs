@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     public PlayerController PlayerController;
     public CanvasController CanvasController;
 
+    public string voidAmbientPath;
+
     public void Awake()
     {
         if (GameSettings == null)
@@ -69,6 +71,7 @@ public class GameManager : MonoBehaviour
         // Hide all menus. (Inventory, Run, Pause Menu)
         // Resurrect player.
         // Set initial parameters?
+        //SoundManager.Instance.PlayEvent(voidAmbientPath, PlayerController.transform, .2f);
         HideAllMenus();
         CanvasController.blackFade.gameObject.SetActive(false);
 

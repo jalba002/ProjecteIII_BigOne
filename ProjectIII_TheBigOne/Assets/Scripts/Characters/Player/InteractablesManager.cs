@@ -147,7 +147,8 @@ namespace Characters.Player
             {
                 GameManager.Instance.CanvasController.ShowHint(CurrentInteractable.displayName, true, 4f,
                     UIFade.FadeOutAfter.Time);
-                interactedTypes.Add(CurrentInteractable.interactionType);
+                if (CurrentInteractable.interactionType != InteractableObject.InteractionType.Pick)
+                    interactedTypes.Add(CurrentInteractable.interactionType);
             }
         }
 

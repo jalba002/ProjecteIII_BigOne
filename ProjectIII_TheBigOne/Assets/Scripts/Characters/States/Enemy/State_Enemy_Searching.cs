@@ -1,7 +1,4 @@
-﻿using System;
-using Assets.Scripts.Game;
-using UnityEditorInternal;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 using Random = System.Random;
 using State = Player.State;

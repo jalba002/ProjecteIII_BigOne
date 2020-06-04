@@ -5,7 +5,6 @@ using Characters.Player;
 using Properties;
 using UnityEngine;
 using CharacterController = Characters.Generic.CharacterController;
-using Random = UnityEngine.Random;
 
 namespace Player
 {

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
-using FMOD;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 

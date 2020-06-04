@@ -392,7 +392,7 @@ namespace World.Objects
 
         public bool Unlock()
         {
-            SetJointsLimit(LockedMode.Unlocked);
+            SetJointsLimit(LockedMode.Unlocked);           
             OnUnlockEvent.Invoke();
             return true;
         }
@@ -405,7 +405,7 @@ namespace World.Objects
         private void OnUnlock()
         {
             // TODO Play sound depending on the type? 
-            AudioManager.PlaySound2D("Sound/Door/Unlock01");
+            SoundManager.Instance.PlayOneShotSound("event:/SFX/Environment/Interactable/Latch", transform.position);
         }
 
         public void BreakJoint()

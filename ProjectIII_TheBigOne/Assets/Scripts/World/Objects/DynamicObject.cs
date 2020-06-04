@@ -16,6 +16,8 @@ namespace World.Objects
         {
             public float maximumAngle;
             public float minimumAngle;
+            public float minimumLockedAngle;
+            public float maximumLockedAngle;
             [Range(0f, 100f)] public float friction;
         }
 
@@ -73,6 +75,8 @@ namespace World.Objects
             friction = 1f,
             maximumAngle = 90f,
             minimumAngle = 0f,
+            minimumLockedAngle = -2f,
+            maximumLockedAngle = 2f,
         };
 
         public DrawerHingeConfiguration drawerConfiguration = new DrawerHingeConfiguration()
@@ -255,8 +259,8 @@ namespace World.Objects
                             if (HingeJoint == null) return;
                             HingeJoint.limits = new JointLimits()
                             {
-                                max = 2f,
-                                min = -2f
+                                max = doorConfiguration.maximumLockedAngle,
+                                min = doorConfiguration.minimumLockedAngle
                             };
                             break;
                         case ObjectType.Drawer:

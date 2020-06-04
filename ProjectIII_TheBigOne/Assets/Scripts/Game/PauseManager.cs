@@ -53,7 +53,7 @@ public class PauseManager : MonoBehaviour
         {
             canvasController = FindObjectOfType<CanvasController>();
         }
-        
+        this.gameObject.SetActive(false);
     }
     private void Update()
     {

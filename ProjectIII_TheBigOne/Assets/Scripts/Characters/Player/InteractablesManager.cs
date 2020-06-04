@@ -22,7 +22,6 @@ namespace Characters.Player
         [Header("Settings")] public LayerMask detectedLayers;
 
         [Header("Components")] public PlayerController attachedPlayer;
-        public Text textDebug;
 
         public GameObject aimedObject;
         public InteractableObject CurrentInteractable { get; set; }
@@ -174,8 +173,6 @@ namespace Characters.Player
                 CurrentInteractable.OnEndInteract();
 
             CurrentInteractable = null;
-            if (textDebug)
-                textDebug.text = "";
         }
 
         public List<InteractableObject> CheckForItems(Transform castPosition, float castRange, LayerMask castLayer)

@@ -83,16 +83,16 @@ public class InteractablePuzzle : InteractableObject, IPuzzle
         {
             Cursor.SetCursor(puzzleCursor.texture, Vector3.zero, CursorMode.Auto);
         }
-        catch (UnassignedReferenceException)
+        catch (Exception e)
         {
-            Debug.LogWarning("Null cursor texture in " + this.gameObject.name, this);
+            Debug.LogWarning(e.Message, this);
         }
 
-        IsInteracting = true;
         //playerCameraController.SetNewPosition(attachedPuzzle.gameObject.transform,true);
-        attachedPuzzle.StartGame();
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        IsInteracting = true;
+        attachedPuzzle.StartGame();
     }
 
     public override void OnInteracting()

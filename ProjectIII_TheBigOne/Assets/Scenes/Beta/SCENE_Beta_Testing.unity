@@ -2886,32 +2886,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.1, y: 3.000001, z: 3.1}
   m_Center: {x: 0.049999952, y: 1.4999995, z: 1.5}
---- !u!114 &578313079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59306422a2ca4454aabce3daa79c3334, type: 3}
-  m_Name: New Aura Base Settings
-  m_EditorClassIdentifier: 
-  useDensity: 1
-  density: 0.25
-  useScattering: 1
-  scattering: 0.5
-  useAmbientLighting: 1
-  ambientLightingStrength: 1
-  useColor: 0
-  color: {r: 0, g: 0.5, b: 0.5, a: 0.5}
-  colorStrength: 1
-  useTint: 0
-  tint: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  tintStrength: 1
-  useExtinction: 0
-  extinction: 0.75
 --- !u!84 &609683076
 RenderTexture:
   m_ObjectHideFlags: 0
@@ -5590,6 +5564,41 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!84 &990480788
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'SpotLight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1000019866
 GameObject:
   m_ObjectHideFlags: 0
@@ -6303,6 +6312,41 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1926677526}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &1037901584
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Flashlight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1001 &1039481686
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6720,41 +6764,6 @@ Transform:
   m_Father: {fileID: 1522503775}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!84 &1159183790
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'SpotLight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!114 &1160241691 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4202791364004799662, guid: 178d6527a3360844d823f83e48030ff9,
@@ -6852,6 +6861,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 10_Gas_Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 1869959401821536532, guid: fc3b804bc1cb4474fad7a79a9a3c93c4,
+        type: 3}
+      propertyPath: ignoredColliders.Array.data[0]
+      value: 
+      objectReference: {fileID: 1901530592}
+    - target: {fileID: 2151559214149378879, guid: fc3b804bc1cb4474fad7a79a9a3c93c4,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 14.049858
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151559214149378879, guid: fc3b804bc1cb4474fad7a79a9a3c93c4,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 5.175217
+      objectReference: {fileID: 0}
+    - target: {fileID: 2151559214149378879, guid: fc3b804bc1cb4474fad7a79a9a3c93c4,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: -45.09339
+      objectReference: {fileID: 0}
+    - target: {fileID: 4252969418283835160, guid: fc3b804bc1cb4474fad7a79a9a3c93c4,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 25.97386
+      objectReference: {fileID: 0}
+    - target: {fileID: 4252969418283835160, guid: fc3b804bc1cb4474fad7a79a9a3c93c4,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 5.176017
+      objectReference: {fileID: 0}
+    - target: {fileID: 4252969418283835160, guid: fc3b804bc1cb4474fad7a79a9a3c93c4,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: -43.95539
       objectReference: {fileID: 0}
     - target: {fileID: 8292887577455063861, guid: fc3b804bc1cb4474fad7a79a9a3c93c4,
         type: 3}
@@ -7754,6 +7798,21 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 2410667437421870702, guid: 50a38f06b742c924c967ecc3a82b458c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410667437421870702, guid: 50a38f06b742c924c967ecc3a82b458c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.000027657
+      objectReference: {fileID: 0}
+    - target: {fileID: 2410667437421870702, guid: 50a38f06b742c924c967ecc3a82b458c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.021
+      objectReference: {fileID: 0}
     - target: {fileID: 2896623348096577416, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -7864,6 +7923,16 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: -24.083393
       objectReference: {fileID: 0}
+    - target: {fileID: 5356563896121213238, guid: 50a38f06b742c924c967ecc3a82b458c,
+        type: 3}
+      propertyPath: ignoredColliders.Array.data[0]
+      value: 
+      objectReference: {fileID: 1678386296}
+    - target: {fileID: 5356563896121213238, guid: 50a38f06b742c924c967ecc3a82b458c,
+        type: 3}
+      propertyPath: ignoredColliders.Array.data[1]
+      value: 
+      objectReference: {fileID: 1962745109}
     - target: {fileID: 5559955424575660103, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
       propertyPath: m_RootOrder
@@ -7872,12 +7941,12 @@ PrefabInstance:
     - target: {fileID: 5656213149092864797, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -12.991142
+      value: -13.012142
       objectReference: {fileID: 0}
     - target: {fileID: 5656213149092864797, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -2.059383
+      value: -2.0593553
       objectReference: {fileID: 0}
     - target: {fileID: 5656213149092864797, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
@@ -9890,41 +9959,6 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!84 &1637148840
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'Flashlight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1001 &1673533482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9994,6 +10028,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27c6fc9ac05055742982b377625529a9, type: 3}
+--- !u!64 &1678386296 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 4023031068737747125, guid: 1c18d9e9586bd3d44807e824d40ed48a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1972367085}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1685682771
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10116,6 +10156,32 @@ RenderTexture:
     m_WrapW: 1
   m_Dimension: 2
   m_VolumeDepth: 1
+--- !u!114 &1725852321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59306422a2ca4454aabce3daa79c3334, type: 3}
+  m_Name: New Aura Base Settings
+  m_EditorClassIdentifier: 
+  useDensity: 1
+  density: 0.25
+  useScattering: 1
+  scattering: 0.5
+  useAmbientLighting: 1
+  ambientLightingStrength: 1
+  useColor: 0
+  color: {r: 0, g: 0.5, b: 0.5, a: 0.5}
+  colorStrength: 1
+  useTint: 0
+  tint: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  tintStrength: 1
+  useExtinction: 0
+  extinction: 0.75
 --- !u!82 &1727358612 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 8903080738719793638, guid: 0a21826cb7823ee4bab4f91bd6261b68,
@@ -10349,6 +10415,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11fc439a7943ab349bff7a027fab9c32, type: 3}
+--- !u!64 &1901530592 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 1903517013, guid: 1c18d9e9586bd3d44807e824d40ed48a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1972367085}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1923849535
 GameObject:
   m_ObjectHideFlags: 0
@@ -11222,6 +11294,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4766131684604721941, guid: 0a21826cb7823ee4bab4f91bd6261b68,
     type: 3}
   m_PrefabInstance: {fileID: 1952578604}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1962745109 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 1545422904811135956, guid: 1c18d9e9586bd3d44807e824d40ed48a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1972367085}
   m_PrefabAsset: {fileID: 0}
 --- !u!20 &1967304809 stripped
 Camera:

@@ -91,7 +91,8 @@ public class SoundManager : MonoBehaviour
             if (parameters != null)
                 for (int i = 0; i < parameters.Count; i++)
                     soundEvent.setParameterByName(parameters[i].GetName(), parameters[i].GetValue());
-           
+            soundEvent.setProperty(EVENT_PROPERTY.MINIMUM_DISTANCE, 0);
+            soundEvent.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, 25);
             soundEvent.set3DAttributes(RuntimeUtils.To3DAttributes(pos));
             soundEvent.start();
             soundEvent.release();
@@ -124,6 +125,8 @@ public class SoundManager : MonoBehaviour
         if (!soundEvent.Equals(null))
         {
             soundEvent.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
+            soundEvent.setProperty(EVENT_PROPERTY.MINIMUM_DISTANCE, 0);
+            soundEvent.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, 25);
             soundEvent.start();
             SoundManagerMovingSound movingSound = new SoundManagerMovingSound(transform, soundEvent);
             positionEvents.Add(movingSound);
@@ -138,6 +141,8 @@ public class SoundManager : MonoBehaviour
         {            
             soundEvent.set3DAttributes(RuntimeUtils.To3DAttributes(pos));
             soundEvent.start();
+            soundEvent.setProperty(EVENT_PROPERTY.MINIMUM_DISTANCE, 0);
+            soundEvent.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, 25);
             eventsList.Add(soundEvent);
         }
         return soundEvent;
@@ -152,6 +157,24 @@ public class SoundManager : MonoBehaviour
             soundEvent.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
             soundEvent.start();
             soundEvent.setVolume(volume);
+            soundEvent.setProperty(EVENT_PROPERTY.MINIMUM_DISTANCE, 0);
+            soundEvent.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, 25);
+            SoundManagerMovingSound movingSound = new SoundManagerMovingSound(transform, soundEvent);
+            positionEvents.Add(movingSound);
+            eventsList.Add(soundEvent);
+        }
+        return soundEvent;
+    }
+    public EventInstance PlayEvent(string path, Transform transform, float minRange, float maxRange, float volume = 1)
+    {
+        EventInstance soundEvent = RuntimeManager.CreateInstance(path);
+        if (!soundEvent.Equals(null))
+        {
+            soundEvent.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
+            soundEvent.start();
+            soundEvent.setVolume(volume);
+            soundEvent.setProperty(EVENT_PROPERTY.MINIMUM_DISTANCE, minRange);
+            soundEvent.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, maxRange);
             SoundManagerMovingSound movingSound = new SoundManagerMovingSound(transform, soundEvent);
             positionEvents.Add(movingSound);
             eventsList.Add(soundEvent);
@@ -176,6 +199,8 @@ public class SoundManager : MonoBehaviour
         {
             soundEvent.set3DAttributes(RuntimeUtils.To3DAttributes(GameManager.Instance.PlayerController.transform.position));
             soundEvent.start();
+            soundEvent.setProperty(EVENT_PROPERTY.MINIMUM_DISTANCE, 0);
+            soundEvent.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, 25);
             SoundManagerMovingSound movingSound = new SoundManagerMovingSound(GameManager.Instance.PlayerController.transform, soundEvent);
             positionEvents.Add(movingSound);
             soundEvent.release();
@@ -206,7 +231,7 @@ public class SoundManager : MonoBehaviour
 
     }
 
-    public void PlaySoundAtLocation(string path, Vector3 position, float volume = 1, float minRange = 1f, float maxRange = 20f)
+    public void PlaySoundAtLocation(string path, Vector3 position, float volume = 1, float minRange = 1f, float maxRange = 25f)
     {
         EventInstance soundEvent = RuntimeManager.CreateInstance(path);
         if (!soundEvent.Equals(null))

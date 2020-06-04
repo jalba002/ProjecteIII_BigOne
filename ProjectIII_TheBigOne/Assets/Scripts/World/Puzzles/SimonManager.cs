@@ -153,7 +153,7 @@ public class SimonManager : Puzzle
     public IEnumerator HighlightColor(int i, bool answering = false)
     {        
         pantalla.material = materials[i];
-        SoundManager.Instance.PlayOneShotSound(paths[i], transform.position);
+        SoundManager.Instance.PlayEvent(paths[i], transform, 1);
         if (!answering)
         {            
             yield return new WaitForSeconds(colorLasting);

@@ -349,10 +349,6 @@ MonoBehaviour:
   EnemyController: {fileID: 4766131684604721933}
   enemyAnimator: {fileID: 757327272073037581}
   enemyHammer: {fileID: 187823050156589475}
-  firstPhaseAnimatorController: {fileID: 9100000, guid: 56581376555cb84418a023381ef9ce28,
-    type: 2}
-  secondPhaseAnimatorController: {fileID: 9100000, guid: 1c68fd8bccfee044cb52df3b28d43d00,
-    type: 2}
 --- !u!1001 &27746874432381623
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -360,6 +356,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4766131684604721941}
     m_Modifications:
+    - target: {fileID: -8261048401821479250, guid: 97d3a563585b331439c18e9b9a106aa9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 35e7faf20439111488490f97c949c4ba, type: 2}
     - target: {fileID: -4216859302048453862, guid: 97d3a563585b331439c18e9b9a106aa9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -433,7 +434,7 @@ PrefabInstance:
     - target: {fileID: 214444019308929812, guid: 97d3a563585b331439c18e9b9a106aa9,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97d3a563585b331439c18e9b9a106aa9, type: 3}

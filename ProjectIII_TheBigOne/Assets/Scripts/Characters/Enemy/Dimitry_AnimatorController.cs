@@ -74,6 +74,8 @@ public class Dimitry_AnimatorController : MonoBehaviour
 
     public void EndGame()
     {
+        if (GameManager.Instance.GameSettings.isPlayerInvincible) return;
+        
         GameManager.Instance.EndGame();
     }
 }

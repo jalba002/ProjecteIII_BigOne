@@ -512,21 +512,23 @@ namespace World.Objects
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
-            try
+            if (fmodSoundOverride != "null")
             {
-                SoundManager.Instance.PlaySound2D(eventLocation);
-            }
-            catch (Exception e)
-            {
-                Debug.LogWarning("Could not play FMOD sound. Playing default sound. (Missing variable or event).", this.gameObject);
                 try
                 {
-                    SoundManager.Instance.PlaySound2D(defaultSoundLocation);
+                    SoundManager.Instance.PlaySound2D(eventLocation);
                 }
-                catch (Exception error)
+                catch (Exception e)
                 {
-                    Debug.LogWarning("Could not play DEFAULT FMOD Sound. Missing variable or event.", this.gameObject);
+                    Debug.LogWarning("Could not play FMOD sound. Playing default sound. (Missing variable or event).", this.gameObject);
+                    try
+                    {
+                        SoundManager.Instance.PlaySound2D(defaultSoundLocation);
+                    }
+                    catch (Exception error)
+                    {
+                        Debug.LogWarning("Could not play DEFAULT FMOD Sound. Missing variable or event.", this.gameObject);
+                    }
                 }
             }
         }

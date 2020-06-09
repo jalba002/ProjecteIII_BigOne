@@ -39,6 +39,8 @@ public class PauseManager : MonoBehaviour
     public InputField sensibilityInput;
     public InputField brightnessInput;
 
+    [Header("Scenes")]
+    public int sceneIDExitGame;
 
     private void Awake()
     {
@@ -191,5 +193,14 @@ public class PauseManager : MonoBehaviour
     public void ActivateResumeButton(bool enabled)
     {
         resumeButton.gameObject.SetActive(enabled);
+    }
+
+    public void RestartGame()
+    {
+        GameManager.Instance.RestartWholeGame();
+    }
+    public void ExitGame()
+    {
+        GameManager.Instance.ExitGame(sceneIDExitGame);
     }
 }

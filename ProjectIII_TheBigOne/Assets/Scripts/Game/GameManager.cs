@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     public CanvasController CanvasController;
 
     public string voidAmbientPath;
+    ObjectTracker _objTracker;
 
     public void Awake()
     {
@@ -57,13 +58,19 @@ public class GameManager : MonoBehaviour
         {
             CanvasController = FindObjectOfType<CanvasController>();
         }
+
+        if (_objTracker == null)
+        {
+            _objTracker = FindObjectOfType<ObjectTracker>();
+            _objTracker.StartObjectTracker();
+        }
     }
 
     public void RestartWholeGame()
     {
         SoundManager.Instance.StopAllEvents(true);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        //StartGame();
+        StartGame();
     }
 
     public void StartGame()
@@ -76,6 +83,9 @@ public class GameManager : MonoBehaviour
         CanvasController.blackFade.gameObject.SetActive(false);
 
         PlayerController.Resurrect();
+
+        //Object Tracker
+        _objTracker.StartObjectTracker();
     }
 
     public void EndGame()
@@ -104,5 +114,9 @@ public class GameManager : MonoBehaviour
     public void ExitGame(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+    }
+    public void ExitGame(int sceneID)
+    {
+        SceneManager.LoadScene(sceneID);
     }
 }

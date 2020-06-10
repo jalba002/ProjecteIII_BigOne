@@ -5,13 +5,17 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class InspectableObject : InteractableObject, IInspectable
 {
-    public Vector2 maxLimits;
-    private MeshRenderer _meshRenderer;
+    [Header("Settings")] public Vector2 maxLimits;
+
+    [Space(5)] [Tooltip("Description shown when inspected")] [TextArea(5, 10)]
+    public string objectInformation;
+
+    [Header("Components")] private MeshRenderer _meshRenderer;
     private MeshFilter _meshFilter;
     public InspectableInfo InspectInfo { get; set; }
     public bool IsBeingInspected { get; set; }
 
-    public List<Collider> ignoredColliders;
+    [Header("Collision")] public List<Collider> ignoredColliders;
     private Collider selfCollider;
 
     private void Start()
@@ -73,7 +77,7 @@ public class InspectableObject : InteractableObject, IInspectable
         {
             _meshFilter = GetComponentInChildren<MeshFilter>();
             _meshRenderer = GetComponentInChildren<MeshRenderer>();
-            InspectInfo = new InspectableInfo(_meshFilter.mesh, _meshRenderer.materials, transform, maxLimits);
+            InspectInfo = new InspectableInfo(_meshFilter.mesh, _meshRenderer.materials, transform, maxLimits, objectInformation);
         }
     }
 
@@ -83,7 +87,7 @@ public class InspectableObject : InteractableObject, IInspectable
         OnEndInteract();
         return false;
     }
-    
+
     public override bool Interact(bool interactEnable)
     {
         //

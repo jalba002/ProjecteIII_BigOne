@@ -18,8 +18,9 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
     {
         // Analyze all possible states.
         if (CheckEnterStunned()) return;
-        if (CheckPlayerKilled()) return;
-        if (CheckIfHearingPlayer()) return;
+        if (CheckKillingPlayer()) return;
+        if (CheckEnterNotice()) return;
+        if (CheckEnterFailedNotice()) return;
         if (CheckEnterTraversing()) return;
         if (CheckEnterIdle()) return;
         if (CheckEnterPatrol()) return;
@@ -27,7 +28,7 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         if (CheckEnterSearching()) return;
     }
 
-    private bool CheckPlayerKilled()
+    private bool CheckKillingPlayer()
     {
         if (!attachedCharacter.currentBrain.IsPlayerCloseEnoughForDeath) return false;
 
@@ -36,7 +37,7 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         return true;
     }
 
-    private bool CheckIfHearingPlayer()
+    private bool CheckEnterNotice()
     {
         if (!attachedCharacter.currentBrain.IsHearingPlayer) return false;
 
@@ -47,6 +48,18 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         if (attachedCharacter.currentBrain.IsTrackingPlayer) return false;
 
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Noticed>();
+        return true;
+    }
+
+    private bool CheckEnterFailedNotice()
+    {
+        if (!attachedCharacter.currentBrain.HasFailedToNotice) return false;
+
+        if (attachedCharacter.currentBrain.IsChasingPlayer) return false;
+
+        if (attachedCharacter.currentBrain.IsTrackingPlayer) return false;
+        
+        attachedCharacter.stateMachine.SwitchState<State_Enemy_NoticedFailed>();
         return true;
     }
     

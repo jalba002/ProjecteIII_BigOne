@@ -21,6 +21,12 @@ public class ObjectTracker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+        
+    }
+
+    public void StartObjectTracker()
+    {
         PrepareLists(FindObjectsOfType<DynamicObject>());
         PrepareObjectList(out palletList, FindObjectsOfType<TraversableBlockage>());
         PrepareObjectList(out interactablesList);

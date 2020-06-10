@@ -648,6 +648,7 @@ MonoBehaviour:
   effectsVolumeInput: {fileID: 4770667192072704371}
   sensibilityInput: {fileID: 2337844857148473346}
   brightnessInput: {fileID: 5144871839744614240}
+  sceneIDExitGame: 0
 --- !u!1 &1636189939438783204
 GameObject:
   m_ObjectHideFlags: 0
@@ -2435,9 +2436,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1624887841772648192}
-        m_MethodName: 
-        m_Mode: 5
+      - m_Target: {fileID: 3605305147087036459}
+        m_MethodName: ExitGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3570,8 +3571,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 5f01d0a1d9f64ff44989651f0c3240a8, type: 3}
-        m_MethodName: 
+      - m_Target: {fileID: 3605305147087036459}
+        m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

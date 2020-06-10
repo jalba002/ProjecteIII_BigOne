@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -43,6 +44,27 @@ public class MainMenuManager : MonoBehaviour
     public GameObject volume;
     public GameObject mouse;
     public GameObject screen;
+
+    [Header("Text Inputs")]
+    public InputField masterVolumeInput;
+    public InputField musicVolumeInput;
+    public InputField effectsVolumeInput;
+    public InputField sensibilityInput;
+    public InputField brightnessInput;
+
+    [Header("Buttons")]
+    public Button controlsButton;
+    public Button volumeButton;
+    public Button mouseButton;
+    public Button screenButton;
+
+    [Header("Others")]
+    public GameObject computer;
+    public Material closedComputer;
+    public Material openingComputer;
+    public Material openedComputer;
+    private float cooldown;
+    private float maxCooldown = 0.2f;
 
     // Start is called before the first frame update
     void Start()
@@ -92,6 +114,24 @@ public class MainMenuManager : MonoBehaviour
             if (Vector3.Distance(cameraPointOptions.transform.position, camera.transform.position) > 0.05f)
             {
                 camera.transform.position += forward * singleStep_2;
+                if (computer.GetComponent<MeshRenderer>().material != openingComputer && cooldown > maxCooldown)
+                {
+                    computer.GetComponent<MeshRenderer>().material = openingComputer;
+                }
+                else if (cooldown <= maxCooldown)
+                {
+                    cooldown += Time.deltaTime;
+                }
+
+            }
+            else
+            {
+                if (computer.GetComponent<MeshRenderer>().material != openedComputer)
+                {
+                    computer.GetComponent<MeshRenderer>().material = openedComputer;
+                    optionsmenu.SetActive(true);
+                    ActivateOptions();
+                }
             }
             
         }
@@ -103,6 +143,21 @@ public class MainMenuManager : MonoBehaviour
             if (Vector3.Distance(cameraPointNormal.transform.position, camera.transform.position) > 0.05f)
             {
                 camera.transform.position += forward * singleStep_2;
+                if (cooldown < maxCooldown)
+                {
+                    computer.GetComponent<MeshRenderer>().material = openingComputer;
+                }
+                else
+                {
+                    computer.GetComponent<MeshRenderer>().material = closedComputer;
+                }
+            }
+            else
+            {
+                if (computer.GetComponent<MeshRenderer>().material != closedComputer)
+                {
+                    computer.GetComponent<MeshRenderer>().material = closedComputer;
+                }
             }
         }
         
@@ -159,15 +214,18 @@ public class MainMenuManager : MonoBehaviour
     {
         if (b)
         {
-            optionsmenu.SetActive(true);
+            //optionsmenu.SetActive(true);
+            //ActivateOptions();
             b_options.SetActive(false);
             selectedOption = optionsmenu;
+            cooldown = 0;
         }
         else
         {
             optionsmenu.SetActive(false);
             b_options.SetActive(true);
             selectedOption = b_options;
+            cooldown = 0;
         }
     }
 
@@ -178,6 +236,8 @@ public class MainMenuManager : MonoBehaviour
         volume.SetActive(false);
         mouse.SetActive(false);
         screen.SetActive(false);
+
+        controlsButton.Select();
     }
     public void DesactivateOptions()
     {
@@ -224,22 +284,47 @@ public class MainMenuManager : MonoBehaviour
     public void SetMasterVolume(float volume)
     {
         OptionsManager.Instance.SetMasterVolume(volume);
+        masterVolumeInput.text = OptionsManager.Instance.masterVolume.ToString();
+    }
+    public void SetMasterVolume(string volume)
+    {
+        OptionsManager.Instance.SetMasterVolume(volume);
+        masterVolumeSlider.value = OptionsManager.Instance.masterVolume;
     }
 
     public void SetMusicVolume(float volume)
     {
         OptionsManager.Instance.SetMusicVolume(volume);
+        musicVolumeInput.text = OptionsManager.Instance.musicVolume.ToString();
+    }
+    public void SetMusicVolume(string volume)
+    {
+        OptionsManager.Instance.SetMusicVolume(volume);
+        musicVolumeSlider.value = OptionsManager.Instance.musicVolume;
     }
 
     public void SetEffectsVolume(float volume)
     {
         OptionsManager.Instance.SetEffectsVolume(volume);
+        effectsVolumeInput.text = OptionsManager.Instance.effectsVolume.ToString();
+    }
+    public void SetEffectsVolume(string volume)
+    {
+        OptionsManager.Instance.SetEffectsVolume(volume);
+        effectsVolumeSlider.value = OptionsManager.Instance.effectsVolume;
     }
 
     public void SetSensibility(float sensibility)
     {
         OptionsManager.Instance.SetSensibility(sensibility);
+        sensibilityInput.text = OptionsManager.Instance.sensibility.ToString();
         //GameManager.Instance.PlayerController.cameraController.m_Sensitivity = OptionsManager.Instance.sensitivity;
+    }
+    public void SetSensibility(string sensibility)
+    {
+        OptionsManager.Instance.SetSensibility(sensibility);
+        //GameManager.Instance.PlayerController.cameraController.m_Sensitivity = OptionsManager.Instance.sensibility;
+        sensibilitySlider.value = OptionsManager.Instance.sensibility;
     }
 
     public void SetInvertMouse(bool invert)
@@ -251,7 +336,14 @@ public class MainMenuManager : MonoBehaviour
     public void SetBrightness(float bright)
     {
         OptionsManager.Instance.SetBrightness(bright);
+        brightnessInput.text = OptionsManager.Instance.brightness.ToString();
     }
+    public void SetBrightness(string bright)
+    {
+        OptionsManager.Instance.SetBrightness(bright);
+        brightnessSlider.value = OptionsManager.Instance.brightness;
+    }
+
     public void UpdateOptions()
     {
         masterVolumeSlider.value = OptionsManager.Instance.masterVolume;

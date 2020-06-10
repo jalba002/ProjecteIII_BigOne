@@ -118,6 +118,7 @@ public class CanvasController : MonoBehaviour
             //Something about enemy?
             pauseManager.ActivateResumeButton(false);
             pauseMenu.SetActive(true);
+            pauseManager.resumeButton.Select();
             pauseManager.DesactivateOptions();
             return;
         }
@@ -135,6 +136,7 @@ public class CanvasController : MonoBehaviour
             //Something about enemy?
             pauseManager.ActivateResumeButton(true);
             pauseMenu.SetActive(true);
+            pauseManager.resumeButton.Select();
             pauseManager.DesactivateOptions();
             return;
         }

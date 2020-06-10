@@ -10,8 +10,6 @@ namespace Enemy
         private float _movementSpeed;
         private float trackTime;
 
-        private Vector3 originalPosition;
-
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
@@ -66,13 +64,11 @@ namespace Enemy
             Debug.Log("Track time: " + trackTime);
             if (trackTime >= _attachedController.characterProperties.timeToChasePlayer)
             {
-                //_attachedController.currentBrain.IsNoticingPlayer = false;
                 Debug.Log("Noticed to chase.");
                 _attachedController.currentBrain.IsChasingPlayer = true;
             }
             else if (trackTime >= _attachedController.characterProperties.timeToSearchPlayer)
             {
-                //_attachedController.currentBrain.IsNoticingPlayer = false;
                 _attachedController.targetPositionDummy.transform.position =
                     _attachedController.currentBrain.archnemesis.transform.position;
                 _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform

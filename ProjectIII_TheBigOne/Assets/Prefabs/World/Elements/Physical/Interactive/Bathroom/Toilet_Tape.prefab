@@ -60,14 +60,19 @@ MonoBehaviour:
   doorConfiguration:
     maximumAngle: 0
     minimumAngle: -100
+    minimumLockedAngle: -2
+    maximumLockedAngle: 2
     friction: 1
+    fmodPath: event:/SFX/Environment/Interactable/DoorLockedTry
   drawerConfiguration:
     maximumDistance: 0.25
     friction: 10
     maximumForce: 5
+    fmodPath: 
   palletConfiguration:
     forceToThrow: 100
     forceScaleApplied: 5
+    fmodPath: event:/SFX/Player/LiftingWardrobeEffortIntro
   HandlePosition: {fileID: 9057918045314587745}
   applyHandleRotation: 0
   openForce: 4
@@ -76,6 +81,7 @@ MonoBehaviour:
   InvertInitialization: 0
   StartupClosePercentage: 0.96
   useGravity: 1
+  fmodSoundOverride: event:/SFX/Environment/Interactable/WCOpen
   ignorePlayerCollider: 0
   ignoredColliders:
   - {fileID: 6087229289957238714}

@@ -19,6 +19,7 @@ namespace World.Objects
             public float minimumLockedAngle;
             public float maximumLockedAngle;
             [Range(0f, 100f)] public float friction;
+            public string fmodPath;
         }
 
         [System.Serializable]
@@ -27,6 +28,7 @@ namespace World.Objects
             public float maximumDistance;
             [Range(0f, 100f)] public float friction;
             public float maximumForce;
+            public string fmodPath;
         }
 
         [System.Serializable]
@@ -34,6 +36,7 @@ namespace World.Objects
         {
             public float forceToThrow;
             public float forceScaleApplied;
+            public string fmodPath;
         }
 
         // Object type.
@@ -77,19 +80,22 @@ namespace World.Objects
             minimumAngle = 0f,
             minimumLockedAngle = -2f,
             maximumLockedAngle = 2f,
+            fmodPath = "event:/SFX/Environment/Interactable/DoorLockedTry"
         };
 
         public DrawerHingeConfiguration drawerConfiguration = new DrawerHingeConfiguration()
         {
             friction = 10f,
             maximumDistance = 0.25f,
-            maximumForce = 5f
+            maximumForce = 5f,
+            fmodPath = ""
         };
 
         public PalletConfiguration palletConfiguration = new PalletConfiguration()
         {
             forceToThrow = 100f,
-            forceScaleApplied = 5f
+            forceScaleApplied = 5f,
+            fmodPath = "event:/SFX/Player/LiftingWardrobeEffortIntro"
         };
 
         #endregion
@@ -104,6 +110,10 @@ namespace World.Objects
         [Range(0f, 1f)] public float StartupClosePercentage = 0.96f;
 
         [Header("Rigidbody Settings")] public bool useGravity = false;
+
+        [Header("Sound")]
+        [Tooltip("If this is not null or void, this sound will be played instead of the default one.")]
+        public string fmodSoundOverride = "";
 
         [Space(2)] [Header("Collision Settings")]
         public bool ignorePlayerCollider = false;
@@ -392,7 +402,7 @@ namespace World.Objects
 
         public bool Unlock()
         {
-            SetJointsLimit(LockedMode.Unlocked);           
+            SetJointsLimit(LockedMode.Unlocked);
             OnUnlockEvent.Invoke();
             return true;
         }
@@ -405,7 +415,8 @@ namespace World.Objects
         private void OnUnlock()
         {
             // TODO Play sound depending on the type? 
-            SoundManager.Instance.PlayOneShotSound("event:/SFX/Environment/Interactable/DoorUnlocked", transform.position);
+            SoundManager.Instance.PlayOneShotSound("event:/SFX/Environment/Interactable/DoorUnlocked",
+                transform.position);
         }
 
         public void BreakJoint()
@@ -457,22 +468,7 @@ namespace World.Objects
             base.OnStartInteract();
             OnStartInteracting.Invoke();
 
-            switch (objectType)
-            {
-                case ObjectType.Door:
-                    //Play door sound   
-                    Debug.Log("Should play sound");
-                    SoundManager.Instance.PlaySound2D("event:/SFX/Environment/Interactable/DoorLockedTry");
-                    break;
-                case ObjectType.Drawer:
-                    //Play drawer sound
-                    break;
-                case ObjectType.Pallet:
-                    SoundManager.Instance.PlaySound2D("event:/SFX/Player/LiftingWardrobeEffortIntro");
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            PlayOpenSound();
 
             if (Rigidbody == null)
             {
@@ -487,6 +483,56 @@ namespace World.Objects
 
             SetHandleDirection(GameManager.Instance.PlayerController.transform.position);
         }
+
+        public void PlayOpenSound()
+        {
+            string eventLocation = fmodSoundOverride;
+            string defaultSoundLocation = "";
+
+            switch (objectType)
+            {
+                case ObjectType.Door:
+                    defaultSoundLocation = doorConfiguration.fmodPath;
+
+                    /*SoundManager.Instance.PlaySound2D(doorConfiguration
+                        .fModPath); //event:/SFX/Environment/Interactable/DoorLockedTry*/
+                    break;
+                case ObjectType.Drawer:
+                    defaultSoundLocation = drawerConfiguration.fmodPath;
+
+                    /*SoundManager.Instance.PlaySound2D(drawerConfiguration
+                        .fModPath); //event:/SFX/Environment/Interactable/..*/
+                    break;
+                case ObjectType.Pallet:
+                    defaultSoundLocation = palletConfiguration.fmodPath;
+
+                    /* SoundManager.Instance.PlaySound2D(palletConfiguration
+                         .fModPath); //event:/SFX/Player/LiftingWardrobeEffortIntro*/
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            if (fmodSoundOverride != "null")
+            {
+                try
+                {
+                    SoundManager.Instance.PlaySound2D(eventLocation);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogWarning("Could not play FMOD sound. Playing default sound. (Missing variable or event).", this.gameObject);
+                    try
+                    {
+                        SoundManager.Instance.PlaySound2D(defaultSoundLocation);
+                    }
+                    catch (Exception error)
+                    {
+                        Debug.LogWarning("Could not play DEFAULT FMOD Sound. Missing variable or event.", this.gameObject);
+                    }
+                }
+            }
+        }
+
 
         public override void OnInteracting()
         {

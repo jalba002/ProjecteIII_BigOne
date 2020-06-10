@@ -36,8 +36,9 @@ namespace Cheats
         {
             if (Application.isPlaying)
             {
-                GameManager.Instance.GameSettings.isPlayerInvincible =
-                    !GameManager.Instance.GameSettings.isPlayerInvincible;
+                bool newState = !GameManager.Instance.GameSettings.isPlayerInvincible;
+                GameManager.Instance.GameSettings.isPlayerInvincible = newState;
+                Debug.Log("GodMode has been " + (newState ? "activated" : "deactivated") + "!");
             }
             else
             {
@@ -64,7 +65,7 @@ namespace Cheats
                 Debug.LogWarning("Only in Play Mode!");
             }
         }
-        
+
         [MenuItem("Cheats/Level/Activate Selected Trigger")]
         public static void ActivateTrigger()
         {

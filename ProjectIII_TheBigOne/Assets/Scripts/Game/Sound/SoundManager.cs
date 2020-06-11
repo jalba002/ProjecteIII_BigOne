@@ -43,6 +43,7 @@ public class SoundManager : MonoBehaviour
         else
         {
             instance = this;
+            this.gameObject.transform.parent = null;
             DontDestroyOnLoad(this);
             Init();
         }

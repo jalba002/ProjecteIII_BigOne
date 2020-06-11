@@ -1122,6 +1122,41 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 375586870}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &389539610
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'SpotLight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &400344538
 GameObject:
   m_ObjectHideFlags: 0
@@ -3149,7 +3184,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 590229106754606527, guid: eb86b77577c561f40bbfe0311cdba8f6, type: 3}
+    - {fileID: 1512282337061039245, guid: eb86b77577c561f40bbfe0311cdba8f6, type: 3}
+    - {fileID: 8734370524499211584, guid: eb86b77577c561f40bbfe0311cdba8f6, type: 3}
+    - {fileID: 2588662206434128552, guid: eb86b77577c561f40bbfe0311cdba8f6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: eb86b77577c561f40bbfe0311cdba8f6, type: 3}
 --- !u!4 &998941097 stripped
 Transform:
@@ -5038,41 +5077,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1652957389}
   m_PrefabAsset: {fileID: 0}
---- !u!84 &1659673447
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'SpotLight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!4 &1672516072 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9019209529715344796, guid: 744c1b3614047394eaf63331dbbf1ab1,
@@ -7235,8 +7239,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 6671863512916551661}
   m_HandleRect: {fileID: 3517925372724312169}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 30
+  m_MinValue: -25
+  m_MaxValue: 25
   m_WholeNumbers: 0
   m_Value: 25
   m_OnValueChanged:
@@ -11895,7 +11899,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8316350201511770902
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12378,6 +12382,7 @@ MonoBehaviour:
   minBrightness: -25
   maxBrightness: 50
   brightness: 25
+  brightnessMainMenu: 1
 --- !u!1 &8951617831881603504
 GameObject:
   m_ObjectHideFlags: 0

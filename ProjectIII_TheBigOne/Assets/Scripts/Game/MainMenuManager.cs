@@ -129,8 +129,13 @@ public class MainMenuManager : MonoBehaviour
                 if (computer.GetComponent<MeshRenderer>().material != openedComputer)
                 {
                     computer.GetComponent<MeshRenderer>().material = openedComputer;
-                    optionsmenu.SetActive(true);
-                    ActivateOptions();
+                    if (!optionsmenu.activeInHierarchy)
+                    {
+                        ActivateOptions();
+                        optionsmenu.SetActive(true);
+                    }
+                    
+                    
                 }
             }
             

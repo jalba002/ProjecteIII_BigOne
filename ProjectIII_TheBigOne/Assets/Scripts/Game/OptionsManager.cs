@@ -42,8 +42,9 @@ public class OptionsManager : MonoBehaviour
 
     [Header("SCREEN")]
     public float minBrightness = -25f;
-    public float maxBrightness = 50f;
-    [Range(-25f, 50f)] public float brightness = 1f;
+    public float maxBrightness = 25f;
+    [Range(-25f, 25f)] public float brightness = -25f;
+    public float brightnessMainMenu = -75f;
 
     private void InstantiateElement()
     {
@@ -148,10 +149,18 @@ public class OptionsManager : MonoBehaviour
     public void SetBrightness(float bright)
     {
         brightness = bright;
+        brightnessMainMenu = bright - 50f;
         FindObjectOfType<PostProcessVolume>().profile.TryGetSettings(out ColorGrading cg);
         if (cg != null)
         {
-            cg.brightness.value = brightness;
+            if (FindObjectOfType<MainMenuManager>() != null)
+            {
+                cg.brightness.value = brightnessMainMenu;
+            }
+            else
+            {
+                cg.brightness.value = brightness;
+            }
         }
     }
     public void SetBrightness(string bright)

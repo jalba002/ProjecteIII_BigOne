@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PauseManager : MonoBehaviour
 {
@@ -73,6 +74,8 @@ public class PauseManager : MonoBehaviour
         volume.SetActive(false);
         mouse.SetActive(false);
         screen.SetActive(false);
+
+        controlsButton.Select();
     }
     public void DesactivateOptions()
     {

@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
     public void RestartWholeGame()
     {
         SoundManager.Instance.StopAllEvents(true);
+        SoundManager.Instance.StopAllMovingEvents(true);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         StartGame();
     }
@@ -113,10 +114,14 @@ public class GameManager : MonoBehaviour
 
     public void ExitGame(string sceneName)
     {
+        SoundManager.Instance.StopAllEvents(true);
+        SoundManager.Instance.StopAllMovingEvents(true);
         SceneManager.LoadScene(sceneName);
     }
     public void ExitGame(int sceneID)
     {
+        SoundManager.Instance.StopAllEvents(true);
+        SoundManager.Instance.StopAllMovingEvents(true);
         SceneManager.LoadScene(sceneID);
     }
 }

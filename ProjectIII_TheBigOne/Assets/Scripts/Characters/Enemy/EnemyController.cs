@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Assets.Scripts.Game;
 using Characters.Generic;
 using Player;
@@ -31,7 +32,6 @@ namespace Enemy
 
         public BehaviourTree currentBehaviourTree { get; set; }
         [Header("Sound")] public string terrorRadiusPath;
-        [Range(0,50)]public float maxRadius = 15f;
 
         [Header("Enemy Settings")] public new EnemyProperties characterProperties;
 
@@ -52,15 +52,6 @@ namespace Enemy
 
             NavMeshAgent = GetComponent<NavMeshAgent>();
 
-            try
-            {
-                SoundManager.Instance.PlayEvent(terrorRadiusPath, transform, 0, maxRadius);
-            }
-            catch (Exception e)
-            {
-                Debug.LogWarning(e.Message);
-            }
-
             SetStartingBehaviourTree();
 
             if (stateMachine == null)
@@ -73,6 +64,7 @@ namespace Enemy
             {
                 characterProperties = ScriptableObject.CreateInstance<EnemyProperties>();
             }
+
             characterProperties = Instantiate(characterProperties);
 
             if (!attachedCollider)
@@ -80,6 +72,21 @@ namespace Enemy
 
             SetupEyes();
         }
+
+        private void Start()
+        {
+            SetStartingBehaviourTree();
+
+            stateMachine.SwitchState<State_Enemy_Idle>();
+
+            NavMeshAgent.speed = characterProperties.WalkSpeed;
+
+            playerFlashlight = FindObjectOfType<FlashlightController>();
+
+            targetPositionDummy = FindObjectOfType<EnemyTargetDummy>();
+        }
+
+        #region Setup
 
         private void SetupEyes()
         {
@@ -129,18 +136,7 @@ namespace Enemy
             OnPhaseChange.Invoke();
         }
 
-        private void Start()
-        {
-            SetStartingBehaviourTree();
-
-            stateMachine.SwitchState<State_Enemy_Idle>();
-
-            NavMeshAgent.speed = characterProperties.WalkSpeed;
-
-            playerFlashlight = FindObjectOfType<FlashlightController>();
-
-            targetPositionDummy = FindObjectOfType<EnemyTargetDummy>();
-        }
+        #endregion
 
         void Update()
         {
@@ -184,6 +180,8 @@ namespace Enemy
             // TODO Add kill functionality?
             return false;
         }
+
+        #region Sense
 
         public void CheckForPlayerOnSight()
         {
@@ -263,6 +261,8 @@ namespace Enemy
         {
             currentBrain.IsOnOffMeshLink = NavMeshAgent.isOnOffMeshLink;
         }
+
+        #endregion
 
         public void ChillDown()
         {

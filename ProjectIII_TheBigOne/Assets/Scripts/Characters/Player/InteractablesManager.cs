@@ -132,19 +132,28 @@ namespace Characters.Player
             }*/
             if (CurrentInteractable != null)
             {
-                ShowTuto();
+                if (!ShowTuto())
+                {
+                    GameManager.Instance.CanvasController.HideInteractableHint();
+                }
+            }
+            else
+            {
+                GameManager.Instance.CanvasController.HideInteractableHint();
             }
         }
 
-        private void ShowTuto()
+        private bool ShowTuto()
         {
             if (!interactedTypes.Contains(CurrentInteractable.interactionType))
             {
-                GameManager.Instance.CanvasController.ShowHint(CurrentInteractable.displayName, true, 4f,
-                    UIFade.FadeOutAfter.Time);
+                GameManager.Instance.CanvasController.DisplayInteractableHint(CurrentInteractable.displayName, 0.5f);
                 if (CurrentInteractable.interactionType != InteractableObject.InteractionType.Pick)
                     interactedTypes.Add(CurrentInteractable.interactionType);
+                return true;
             }
+
+            return false;
         }
 
         private GameObject DetectElement()

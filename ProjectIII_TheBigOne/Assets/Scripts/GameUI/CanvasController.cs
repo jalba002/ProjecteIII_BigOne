@@ -22,10 +22,9 @@ public class CanvasController : MonoBehaviour
     [Header("PauseMenu")] public GameObject pauseMenu;
     public GameObject inventory;
 
-    [Header("Sliders")]
-    public Image lightBulb;
+    [Header("Sliders")] public Image lightBulb;
     public Slider runningSlider;
-    
+
     [Header("Components")] public CrosshairController CrosshairController;
     public Image blackFade;
 
@@ -238,6 +237,28 @@ public class CanvasController : MonoBehaviour
         uIFade.ResetGraphicsColor();
         uIFade.ImageTextAlpha(0.8f, 1f);
         uIFade.FadeInOut(fadeOutTime: fadeTime, fadeOutAfter: fadeType);
+    }
+
+    public void DisplayInteractableHint(string text, float fadeTime = 1f)
+    {
+        Text hintNotificationText = HintNotification.transform.GetChild(0).GetComponent<Text>();
+
+        hintNotificationText.text = text.ToUpper();
+
+        UIFade uIFade = UIFade.CreateInstance(HintNotification, "[UIFader] HintNotification",false);
+        uIFade.ResetGraphicsColor();
+        uIFade.ImageTextAlpha(0.8f, 1f);
+        uIFade.FadeInOut(fadeOutTime: fadeTime, fadeOutAfter: UIFade.FadeOutAfter.Bool);
+    }
+
+    public void HideInteractableHint()
+    {
+        UIFade currentUIFade = UIFade.FindUIFader(HintNotification);
+        if (currentUIFade != null)
+        {
+            currentUIFade.fadeOut = true; 
+            return; 
+        }
     }
 
     public bool CheckObjectiveIDList(int questID)

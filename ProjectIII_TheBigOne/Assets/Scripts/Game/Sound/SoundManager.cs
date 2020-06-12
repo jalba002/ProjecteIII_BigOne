@@ -353,6 +353,16 @@ public class SoundManager : MonoBehaviour
         eventsList.Clear();
     }
 
+    public void StopAllMovingEvents(bool fadeout = true)
+    {
+        for (int i = 0; i < positionEvents.Count; i++)
+        {
+            StopMovingSound(positionEvents[i], fadeout);
+        }
+
+        positionEvents.Clear();
+    }
+
     public void PauseAllEvents()
     {
         for (int i = 0; i < eventsList.Count; i++)

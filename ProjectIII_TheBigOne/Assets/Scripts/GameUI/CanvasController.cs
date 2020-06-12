@@ -26,6 +26,8 @@ public class CanvasController : MonoBehaviour
     public Slider runningSlider;
 
     [Header("Components")] public CrosshairController CrosshairController;
+    public RectTransform UILight;
+    public RectTransform UIRun;
     public Image blackFade;
 
     private FlashlightController flashlight;
@@ -45,6 +47,7 @@ public class CanvasController : MonoBehaviour
 
         flashlight = _playerController.attachedFlashlight;
 
+        ToggleHud(false);
         //_pauseManager = GetComponentInChildren<PauseManager>();
     }
 
@@ -56,10 +59,7 @@ public class CanvasController : MonoBehaviour
         if (!_playerController.IsDead)
             TooglePauseMenu(false);
 
-        if (_playerController.currentStamina >= _playerController.characterProperties.maximumStamina)
-            runningSlider.gameObject.SetActive(false);
-        else
-            runningSlider.gameObject.SetActive(true);
+        
 
         if (Input.GetKeyDown(KeyCode.Escape) && _playerController.playerInventory.inventoryDisplay.gameObject.transform
                 .parent.gameObject.activeSelf)
@@ -93,6 +93,13 @@ public class CanvasController : MonoBehaviour
 
     public void PlayerRunningUpdate()
     {
+        if (!GameManager.Instance.GameSettings.showHud) return;
+        
+        if (_playerController.currentStamina >= _playerController.characterProperties.maximumStamina)
+            runningSlider.gameObject.SetActive(false);
+        else
+            runningSlider.gameObject.SetActive(true);
+        
         runningSlider.value = _playerController.currentStamina / _playerController.characterProperties.maximumStamina;
     }
 
@@ -247,7 +254,7 @@ public class CanvasController : MonoBehaviour
 
         hintNotificationText.text = text.ToUpper();
 
-        UIFade uIFade = UIFade.CreateInstance(HintNotification, "[UIFader] HintNotification",false);
+        UIFade uIFade = UIFade.CreateInstance(HintNotification, "[UIFader] HintNotification", false);
         uIFade.ResetGraphicsColor();
         uIFade.ImageTextAlpha(0.8f, 1f);
         uIFade.FadeInOut(fadeOutTime: fadeTime, fadeOutAfter: UIFade.FadeOutAfter.Bool);
@@ -258,8 +265,8 @@ public class CanvasController : MonoBehaviour
         UIFade currentUIFade = UIFade.FindUIFader(HintNotification);
         if (currentUIFade != null)
         {
-            currentUIFade.fadeOut = true; 
-            return; 
+            currentUIFade.fadeOut = true;
+            return;
         }
     }
 
@@ -278,6 +285,23 @@ public class CanvasController : MonoBehaviour
     {
         return objectives.Count == 0;
     }
+
+    #region HUD
+
+    public void ToggleHud(bool enableHud)
+    {
+        if (UILight != null)
+        {
+            UILight.gameObject.SetActive(enableHud);
+        }
+
+        if (UIRun != null)
+        {
+            UIRun.gameObject.SetActive(enableHud);
+        }
+    }
+
+    #endregion
 }
 
 public class ObjectiveModel

@@ -78,6 +78,7 @@ public class FlashlightController : MonoBehaviour
 
     private void SetFlashlight(bool enable)
     {
+        
         try
         {
             SoundManager.Instance.PlaySound2D(toggleFlashlightPath);
@@ -88,7 +89,7 @@ public class FlashlightController : MonoBehaviour
         }
 
         IsFlashlightEnabled = enable;
-        if (_isfeedbackVisualNotNull)
+        if (_isfeedbackVisualNotNull && GameManager.Instance.GameSettings.showHud)
         {
             feedbackVisual.SetActive(enable);
         }

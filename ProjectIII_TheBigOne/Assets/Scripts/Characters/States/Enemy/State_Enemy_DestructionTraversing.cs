@@ -115,7 +115,7 @@ namespace Enemy
             {
                 case DynamicObject.ObjectType.Door:
                     // Nothing yet.
-                    _currentBlockage.attachedDynamicObject.BreakJoint();
+                    _currentBlockage.attachedDynamicObject.BreakJoint(_attachedController.attachedCollider);
                     _currentBlockage.attachedDynamicObject.BreakOpening(Machine.characterController.transform.forward,
                         5f);
                     _currentBlockage.DisableLink(4f);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor.Experimental.TerrainAPI;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
@@ -332,6 +333,20 @@ namespace World.Objects
             lockedMode = lockMode;
         }
 
+        public void BreakJoint(Collider instigator = null)
+        {
+            Destroy(HingeJoint);
+            Destroy(GetComponent<NavMeshObstacle>());
+            Rigidbody.drag = 0f;
+            Rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            if (instigator != null)
+            {
+                Physics.IgnoreCollision(this.gameObject.GetComponent<Collider>(), instigator, true);
+            }
+
+            this.gameObject.layer = 0;
+        }
+
         #endregion
 
         #region IgnoreColliders
@@ -419,13 +434,6 @@ namespace World.Objects
                 transform.position);
         }
 
-        public void BreakJoint()
-        {
-            Destroy(HingeJoint);
-            Destroy(GetComponent<NavMeshObstacle>());
-            Rigidbody.drag = 0f;
-            this.gameObject.layer = 0;
-        }
 
         public bool Lock()
         {
@@ -512,6 +520,7 @@ namespace World.Objects
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
             if (fmodSoundOverride != "null")
             {
                 try
@@ -520,14 +529,16 @@ namespace World.Objects
                 }
                 catch (Exception e)
                 {
-                    Debug.LogWarning("Could not play FMOD sound. Playing default sound. (Missing variable or event).", this.gameObject);
+                    Debug.LogWarning("Could not play FMOD sound. Playing default sound. (Missing variable or event).",
+                        this.gameObject);
                     try
                     {
                         SoundManager.Instance.PlaySound2D(defaultSoundLocation);
                     }
                     catch (Exception error)
                     {
-                        Debug.LogWarning("Could not play DEFAULT FMOD Sound. Missing variable or event.", this.gameObject);
+                        Debug.LogWarning("Could not play DEFAULT FMOD Sound. Missing variable or event.",
+                            this.gameObject);
                     }
                 }
             }
@@ -547,6 +558,8 @@ namespace World.Objects
 
         #endregion
 
+        #region Handles
+
         public void SetHandleDirection(Vector3 position)
         {
             if (!applyHandleRotation) return;
@@ -563,6 +576,8 @@ namespace World.Objects
         {
             HandlePosition.transform.rotation = originalHandleRotation;
         }
+
+        #endregion
 
         private float CalculateForce(float forceScale = 1f)
         {

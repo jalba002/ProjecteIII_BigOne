@@ -6,6 +6,7 @@ public class GameSettings : ScriptableObject
     [Header("General Settings")]
     public bool isPlayerInvincible = false;
     public bool showHints = true;
+    public bool showHud = true;
     
     [Header("Player")] 
     public int PlayerViewAngle = 94;

@@ -3,12 +3,15 @@
 [CreateAssetMenu(fileName = "Game Settings", menuName = "Data/Game/Game Settings")]
 public class GameSettings : ScriptableObject
 {
+    [Header("General Settings")]
+    public bool isPlayerInvincible = false;
+    public bool showHints = true;
+    
+    [Header("Player")] 
     public int PlayerViewAngle = 94;
-    public float PlayerViewRange = 25f;
-    public float EnemyViewRange = 100f;
+    
+    [Header("Enemy")]
     public LayerMask DetectionLayers;
-
+    
     [Header("Puzzles")] public LayerMask PuzzleElementsLayers;
-
-    [Header("Player")] public bool isPlayerInvincible = false;
 }

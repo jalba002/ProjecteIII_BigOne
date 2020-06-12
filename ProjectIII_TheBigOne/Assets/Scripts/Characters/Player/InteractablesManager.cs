@@ -48,13 +48,11 @@ namespace Characters.Player
             registeredInteractables = CheckForItems(sphereCastPosition, sphereCastRange, sphereCastLayerMask);
             CanInteract = registeredInteractables.Count > 0 && CurrentInteractable != null;
 
-            // Debug.Log(CurrentInteractable?.DisplayName ?? "No current interactable.");
             if (currentRaycastCooldown > 0f)
             {
                 currentRaycastCooldown -= Time.deltaTime;
             }
 
-            aimedObject = DetectElement();
             TreatInteractables();
         }
 
@@ -78,6 +76,7 @@ namespace Characters.Player
 
                 if (currentRaycastCooldown <= 0f)
                 {
+                    aimedObject = DetectElement();
                     InteractableObject collidedInteractable;
                     collidedInteractable = registeredInteractables.Find(x => x.gameObject == aimedObject);
 
@@ -98,8 +97,8 @@ namespace Characters.Player
 
         private void AnalyzeElement(InteractableObject detectedElement)
         {
-            //Debug.Log("Detected element is: " + detectedElement);
             if (detectedElement == CurrentInteractable) return;
+            if (CurrentInteractable != null && CurrentInteractable.IsInteracting) return;
 
             if (detectedElement != null)
             {
@@ -126,34 +125,28 @@ namespace Characters.Player
                 }
             }
 
-            /*if (textDebug)
-            {
-                textDebug.text = CurrentInteractable != null ? CurrentInteractable.displayName : "";
-            }*/
+            ShowHint();
+        }
+
+        private void ShowHint()
+        {
+            if (!GameManager.Instance.GameSettings.showHints) return;
+
             if (CurrentInteractable != null)
             {
-                if (!ShowTuto())
-                {
-                    GameManager.Instance.CanvasController.HideInteractableHint();
-                }
+                ShowTuto();
             }
             else
             {
+                // Clear hint.
                 GameManager.Instance.CanvasController.HideInteractableHint();
             }
         }
 
         private bool ShowTuto()
         {
-            if (!interactedTypes.Contains(CurrentInteractable.interactionType))
-            {
-                GameManager.Instance.CanvasController.DisplayInteractableHint(CurrentInteractable.displayName, 0.5f);
-                if (CurrentInteractable.interactionType != InteractableObject.InteractionType.Pick)
-                    interactedTypes.Add(CurrentInteractable.interactionType);
-                return true;
-            }
-
-            return false;
+            GameManager.Instance.CanvasController.DisplayInteractableHint(CurrentInteractable.displayName, 0.5f);
+            return true;
         }
 
         private GameObject DetectElement()

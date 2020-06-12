@@ -29,6 +29,7 @@ public class SoundManager : MonoBehaviour
                 instance = go.AddComponent<SoundManager>();
                 instance.name = "SoundManager";
             }
+
             return instance;
         }
     }
@@ -84,7 +85,7 @@ public class SoundManager : MonoBehaviour
     #region Events
 
     // Usamos esta para objetos con parámetros
-    public void PlayOneShotSound(string path, Vector3 pos,List<SoundManagerParameter> parameters = null)
+    public void PlayOneShotSound(string path, Vector3 pos, List<SoundManagerParameter> parameters = null)
     {
         EventInstance soundEvent = RuntimeManager.CreateInstance(path);
         if (!soundEvent.Equals(null))
@@ -100,7 +101,8 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void PlayOneShotSound(string path, Vector3 pos, float minRange , float maxRange, List<SoundManagerParameter> parameters = null)
+    public void PlayOneShotSound(string path, Vector3 pos, float minRange, float maxRange,
+        List<SoundManagerParameter> parameters = null)
     {
         EventInstance soundEvent = RuntimeManager.CreateInstance(path);
         if (!soundEvent.Equals(null))
@@ -139,13 +141,14 @@ public class SoundManager : MonoBehaviour
     {
         EventInstance soundEvent = RuntimeManager.CreateInstance(path);
         if (!soundEvent.Equals(null))
-        {            
+        {
             soundEvent.set3DAttributes(RuntimeUtils.To3DAttributes(pos));
             soundEvent.start();
             soundEvent.setProperty(EVENT_PROPERTY.MINIMUM_DISTANCE, 0);
             soundEvent.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, 25);
             eventsList.Add(soundEvent);
         }
+
         return soundEvent;
     }
 
@@ -164,8 +167,10 @@ public class SoundManager : MonoBehaviour
             positionEvents.Add(movingSound);
             eventsList.Add(soundEvent);
         }
+
         return soundEvent;
     }
+
     public EventInstance PlayEvent(string path, Transform transform, float minRange, float maxRange, float volume = 1)
     {
         EventInstance soundEvent = RuntimeManager.CreateInstance(path);
@@ -180,6 +185,30 @@ public class SoundManager : MonoBehaviour
             positionEvents.Add(movingSound);
             eventsList.Add(soundEvent);
         }
+
+        return soundEvent;
+    }
+
+    public EventInstance PlayEvent(string path, Transform transform, float minRange, float maxRange,
+        out SoundManagerMovingSound movingSound, float volume = 1)
+    {
+        EventInstance soundEvent = RuntimeManager.CreateInstance(path);
+        if (!soundEvent.Equals(null))
+        {
+            soundEvent.set3DAttributes(RuntimeUtils.To3DAttributes(transform.position));
+            soundEvent.start();
+            soundEvent.setVolume(volume);
+            soundEvent.setProperty(EVENT_PROPERTY.MINIMUM_DISTANCE, minRange);
+            soundEvent.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, maxRange);
+            movingSound = new SoundManagerMovingSound(transform, soundEvent);
+            positionEvents.Add(movingSound);
+            eventsList.Add(soundEvent);
+        }
+        else
+        {
+            movingSound = null;
+        }
+
         return soundEvent;
     }
 
@@ -198,16 +227,18 @@ public class SoundManager : MonoBehaviour
         EventInstance soundEvent = RuntimeManager.CreateInstance(path);
         if (!soundEvent.Equals(null))
         {
-            soundEvent.set3DAttributes(RuntimeUtils.To3DAttributes(GameManager.Instance.PlayerController.transform.position));
+            soundEvent.set3DAttributes(
+                RuntimeUtils.To3DAttributes(GameManager.Instance.PlayerController.transform.position));
             soundEvent.start();
             soundEvent.setProperty(EVENT_PROPERTY.MINIMUM_DISTANCE, 0);
             soundEvent.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, 25);
-            SoundManagerMovingSound movingSound = new SoundManagerMovingSound(GameManager.Instance.PlayerController.transform, soundEvent);
+            SoundManagerMovingSound movingSound =
+                new SoundManagerMovingSound(GameManager.Instance.PlayerController.transform, soundEvent);
             positionEvents.Add(movingSound);
             soundEvent.release();
         }
-
     }
+
     public void PlaySound2D(string path)
     {
         /*EventInstance soundEvent = RuntimeManager.CreateInstance(path);
@@ -223,16 +254,18 @@ public class SoundManager : MonoBehaviour
         EventInstance soundEvent = RuntimeManager.CreateInstance(path);
         if (!soundEvent.Equals(null))
         {
-            soundEvent.set3DAttributes(RuntimeUtils.To3DAttributes(GameManager.Instance.PlayerController.transform.position));
+            soundEvent.set3DAttributes(
+                RuntimeUtils.To3DAttributes(GameManager.Instance.PlayerController.transform.position));
             soundEvent.start();
-            SoundManagerMovingSound movingSound = new SoundManagerMovingSound(GameManager.Instance.PlayerController.transform, soundEvent);
+            SoundManagerMovingSound movingSound =
+                new SoundManagerMovingSound(GameManager.Instance.PlayerController.transform, soundEvent);
             positionEvents.Add(movingSound);
             soundEvent.release();
         }
-
     }
 
-    public void PlaySoundAtLocation(string path, Vector3 position, float volume = 1, float minRange = 1f, float maxRange = 25f)
+    public void PlaySoundAtLocation(string path, Vector3 position, float volume = 1, float minRange = 1f,
+        float maxRange = 25f)
     {
         EventInstance soundEvent = RuntimeManager.CreateInstance(path);
         if (!soundEvent.Equals(null))
@@ -248,7 +281,6 @@ public class SoundManager : MonoBehaviour
             eventsList.Add(soundEvent);
         }
     }
-
 
     public void UpdateEventParameter(EventInstance soundEvent, SoundManagerParameter parameter)
     {
@@ -276,6 +308,19 @@ public class SoundManager : MonoBehaviour
                 soundEvent.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             else
                 soundEvent.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        }
+    }
+
+    public void StopMovingSound(SoundManagerMovingSound soundEvent, bool fadeout = false)
+    {
+        soundEvent.GetEventInstance().clearHandle();
+        
+        if(positionEvents.Remove(soundEvent))
+        {
+            if (fadeout)
+                soundEvent.GetEventInstance().stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            else
+                soundEvent.GetEventInstance().stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         }
     }
 
@@ -374,7 +419,7 @@ public class SoundManagerParameter
 }
 
 //Parametro genérico de FMOD para pasar a los eventos
-class SoundManagerMovingSound
+public class SoundManagerMovingSound
 {
     Transform transform;
     EventInstance eventIns;

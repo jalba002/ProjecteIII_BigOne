@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using Characters.Player;
 using UnityEditor;
 using UnityEngine;
+using World.Objects;
 
 namespace Cheats
 {
@@ -30,6 +32,26 @@ namespace Cheats
                 Debug.LogWarning("Only in Play Mode!");
             }
         }*/
+        [MenuItem("Cheats/Game/Unlock Door #%Q")]
+        public static void UnlockCurrentDoor()
+        {
+            if (Application.isPlaying)
+            {
+                try
+                {
+                    GameManager.Instance.PlayerController.interactablesManager.CurrentInteractable
+                        .GetComponent<DynamicObject>()?.SetUnlock();
+                }
+                catch (NullReferenceException)
+                {
+                    Debug.LogWarning("Select a door to unlock it!");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Only in Play Mode!");
+            }
+        }
 
         [MenuItem("Cheats/Player/God Mode Toggle #%G")]
         public static void ToggleGodMode()

@@ -110,6 +110,11 @@ namespace Player
             interactablesManager = GetComponent<InteractablesManager>();
 
             Cursor.visible = false;
+            cameraController.angleLocked = true;
+            currentBrain.enabled = false;
+
+            stateMachine.enabled = false;
+            
         }
 
         private void Start()
@@ -414,6 +419,11 @@ namespace Player
             {
                 Debug.LogError(e.Message, this.gameObject);
             }
+        }
+
+        public void EnableStateMachine()
+        {
+            stateMachine.enabled = true;
         }
     }
 }

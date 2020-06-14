@@ -29,6 +29,7 @@ public class CameraController : MonoBehaviour
     private bool _endedLerp = false;
     private Transform _initPitchControllerTransform;
 
+    private Quaternion _initRot;
 
     private void Start()
     {
@@ -63,6 +64,7 @@ public class CameraController : MonoBehaviour
     {
         character = GetComponentInParent<PlayerController>();
         attachedCamera = GetComponentInChildren<Camera>();
+        _initRot = character.transform.rotation;
     }
 
     void Update()
@@ -125,7 +127,7 @@ public class CameraController : MonoBehaviour
     public void ApplyRotation()
     {
         m_PitchControllerTransform.localRotation = Quaternion.AngleAxis(-1f * -m_MouseLook.y, Vector3.right);
-        character.transform.localRotation = Quaternion.AngleAxis(m_MouseLook.x, character.transform.up);
+        character.transform.localRotation = Quaternion.AngleAxis(m_MouseLook.x + _initRot.eulerAngles.y, character.transform.up);
     }
 
     public void ApplyExternalRotation(Quaternion rotation)

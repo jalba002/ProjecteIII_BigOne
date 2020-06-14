@@ -24,7 +24,7 @@ namespace Enemy
             _attachedController.CheckForPlayerOnSight();
             _attachedController.CheckForEnemyVisibility();
             _attachedController.HearPlayerAround();
-            //_attachedController.CheckForPlayerKilling();
+            _attachedController.CheckForPlayerKilling();
 
             _attachedController.targetPositionDummy.transform.position =
                 _attachedController.currentBrain.archnemesis.transform.position;

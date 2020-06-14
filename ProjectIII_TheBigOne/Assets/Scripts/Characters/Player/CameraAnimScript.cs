@@ -10,7 +10,6 @@ public class CameraAnimScript : MonoBehaviour
         GameManager.Instance.PlayerController.EnableStateMachine();
         GameManager.Instance.PlayerController.cameraController.angleLocked = false;
         GameManager.Instance.PlayerController.currentBrain.enabled = true;
-
+        GameManager.Instance.PlayerController.interactablesManager.enabled = true;
     }
-
 }

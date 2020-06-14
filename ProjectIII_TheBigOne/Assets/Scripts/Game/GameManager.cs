@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         {
             GameSettings = Instantiate(GameSettings);
         }
-     
+
         if (PlayerController == null)
         {
             PlayerController = FindObjectOfType<PlayerController>();
@@ -63,6 +63,29 @@ public class GameManager : MonoBehaviour
         {
             _objTracker = FindObjectOfType<ObjectTracker>();
             _objTracker.StartObjectTracker();
+        }
+    }
+
+    public void Start()
+    {
+        PlayStartupAnimation();
+    }
+
+    private void PlayStartupAnimation()
+    {
+        if (!GameSettings.playStartupAnimation) return;
+
+        try
+        {
+            PlayerController.cameraController.attachedCamera.GetComponent<Animation>().Play();
+            PlayerController.interactablesManager.enabled = false;
+            PlayerController.cameraController.angleLocked = true;
+            PlayerController.currentBrain.enabled = false;
+            PlayerController.stateMachine.enabled = false;
+        }
+        catch (NullReferenceException)
+        {
+            Debug.LogWarning("Not playing startup Animation.");
         }
     }
 
@@ -118,6 +141,7 @@ public class GameManager : MonoBehaviour
         SoundManager.Instance.StopAllMovingEvents(true);
         SceneManager.LoadScene(sceneName);
     }
+
     public void ExitGame(int sceneID)
     {
         SoundManager.Instance.StopAllEvents(true);

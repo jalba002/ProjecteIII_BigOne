@@ -110,10 +110,7 @@ namespace Player
             interactablesManager = GetComponent<InteractablesManager>();
 
             Cursor.visible = false;
-            cameraController.angleLocked = true;
-            currentBrain.enabled = false;
-
-            stateMachine.enabled = false;
+           
             
         }
 

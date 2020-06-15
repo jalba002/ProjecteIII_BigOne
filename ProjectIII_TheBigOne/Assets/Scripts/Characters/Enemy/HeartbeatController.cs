@@ -58,4 +58,15 @@ public class HeartbeatController : MonoBehaviour
             enemyController.transform, 0f,
             enemyController.characterProperties.terrorRadiusRange, out movingSound);
     }
+
+    public void StopHeartbeat()
+    {
+        try
+        {
+            SoundManager.Instance.StopMovingSound(movingSound, true);
+        }
+        catch (Exception e)
+        {
+        }
+    }
 }

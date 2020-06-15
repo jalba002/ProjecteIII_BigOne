@@ -127,6 +127,9 @@ public class ParanormalManager : MonoBehaviour
     public void TriggerEndgame()
     {
         // Play Sound, move dimitry, disable state. Ready it for the hunt.
+        if (Dimitry.currentBrain.IsChasingPlayer || Dimitry.currentBrain.IsPlayerInSight ||
+            Dimitry.currentBrain.IsVisible) return;
+
         try
         {
             endgameElements.dimitryActivator.GetComponent<Collider>().enabled = true;
@@ -137,7 +140,7 @@ public class ParanormalManager : MonoBehaviour
 
         SetEnemyPosition(endgameElements.endPosition);
         endgameElements.doorToClose.StrongClosing();
-        Dimitry.currentBehaviourTree = new BehaviourTree_Enemy_Halted(Dimitry);
+        Dimitry.SetNewPhase(new BehaviourTree_Enemy_Halted(Dimitry));
         //Dimitry.stateMachine.SwitchState<State_Enemy_Halt>();
         // Play SOUND
     }
@@ -155,7 +158,7 @@ public class ParanormalManager : MonoBehaviour
 
     public void EndgameChase()
     {
-        Dimitry.currentBehaviourTree = new BehaviourTree_Enemy_SecondPhase(Dimitry);
+        Dimitry.SetNewPhase(new BehaviourTree_Enemy_SecondPhase(Dimitry));
         SetDummyPosition(GameManager.Instance.PlayerController.transform);
         Dimitry.NavMeshAgent.SetDestination(enemyTargetDummy.transform.position);
     }

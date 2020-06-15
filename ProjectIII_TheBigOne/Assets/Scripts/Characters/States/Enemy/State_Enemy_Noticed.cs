@@ -10,6 +10,8 @@ namespace Enemy
         private float _movementSpeed;
         private float trackTime;
 
+        private Vector3 playerDirection;
+
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
@@ -45,16 +47,19 @@ namespace Enemy
         public override void OnStateCheckTransition()
         {
             base.OnStateCheckTransition();
+            _attachedController.transform.forward = Vector3.Slerp(_attachedController.transform.forward,
+                playerDirection, trackTime / _attachedController.characterProperties.timeToChasePlayer);
         }
 
         protected override void OnStateEnter()
         {
             base.OnStateEnter();
             _attachedController.NavMeshAgent.isStopped = true;
+            _attachedController.NavMeshAgent.updateRotation = false;
 
             trackTime = 0f;
 
-            _attachedController.gameObject.transform.forward =
+            playerDirection =
                 (_attachedController.currentBrain.archnemesis.transform.position -
                  _attachedController.gameObject.transform.position).normalized;
         }
@@ -87,7 +92,7 @@ namespace Enemy
         {
             base.OnStateExit();
             ResolveState();
-            _attachedController.NavMeshAgent.updatePosition = true;
+            _attachedController.NavMeshAgent.updateRotation = true;
             _attachedController.NavMeshAgent.isStopped = false;
         }
     }

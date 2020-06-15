@@ -30,7 +30,7 @@ public class HeartbeatController : MonoBehaviour
         try
         {
             if ((enemyController.currentBrain.IsChasingPlayer || enemyController.currentBrain.IsTrackingPlayer ||
-                 enemyController.currentBrain.IsHearingPlayer) && !alreadyPlaying)
+                 enemyController.currentBrain.IsHearingPlayer || enemyController.currentBrain.IsPlayerCloseEnoughForDeath) && !alreadyPlaying)
             {
                 PlayNewSound();
                 alreadyPlaying = true;

@@ -63,6 +63,7 @@ public class MainMenuManager : MonoBehaviour
     public Material closedComputer;
     public Material openingComputer;
     public Material openedComputer;
+    public GameObject lightComputer;
     private float cooldown;
     private float maxCooldown = 0.2f;
 
@@ -117,6 +118,7 @@ public class MainMenuManager : MonoBehaviour
                 if (computer.GetComponent<MeshRenderer>().material != openingComputer && cooldown > maxCooldown)
                 {
                     computer.GetComponent<MeshRenderer>().material = openingComputer;
+                    lightComputer.SetActive(true);
                 }
                 else if (cooldown <= maxCooldown)
                 {
@@ -133,10 +135,18 @@ public class MainMenuManager : MonoBehaviour
                     {
                         ActivateOptions();
                         optionsmenu.SetActive(true);
+                        lightComputer.SetActive(true);
                     }
-                    
-                    
+
+
                 }
+            }
+
+            //escape
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                ChangeOptions(false);
             }
             
         }
@@ -155,6 +165,7 @@ public class MainMenuManager : MonoBehaviour
                 else
                 {
                     computer.GetComponent<MeshRenderer>().material = closedComputer;
+                    lightComputer.SetActive(false);
                 }
             }
             else
@@ -162,10 +173,52 @@ public class MainMenuManager : MonoBehaviour
                 if (computer.GetComponent<MeshRenderer>().material != closedComputer)
                 {
                     computer.GetComponent<MeshRenderer>().material = closedComputer;
+                    lightComputer.SetActive(false);
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                if (selectedOption == b_play)
+                {
+                    PlayGame();
+                }
+                else if (selectedOption == b_options)
+                {
+                    ChangeOptions(true);
+                }
+                else
+                {
+
                 }
             }
         }
         
+    }
+
+    public void SelectOptionWithButton(int option)
+    {
+        if (option == 0)
+        {
+            selectedOption = buttons[0];
+            buttons[1].SetActive(false);
+            buttons[2].SetActive(false);
+            buttons[0].SetActive(true);
+        }
+        else if (option == 1)
+        {
+            selectedOption = buttons[1];
+            buttons[2].SetActive(false);
+            buttons[0].SetActive(false);
+            buttons[1].SetActive(true);
+        }
+        else
+        {
+            selectedOption = buttons[2];
+            buttons[0].SetActive(false);
+            buttons[1].SetActive(false);
+            buttons[2].SetActive(true);
+        }
     }
 
     public void MoveLeft()
@@ -229,6 +282,8 @@ public class MainMenuManager : MonoBehaviour
         {
             optionsmenu.SetActive(false);
             b_options.SetActive(true);
+            b_play.SetActive(false);
+            b_exit.SetActive(false);
             selectedOption = b_options;
             cooldown = 0;
         }

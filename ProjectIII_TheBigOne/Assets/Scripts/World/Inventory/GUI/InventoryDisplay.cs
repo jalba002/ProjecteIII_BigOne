@@ -242,6 +242,16 @@ public class InventoryDisplay : MonoBehaviour
         }
 
         GameManager.Instance.PlayerController.interactablesManager.enabled = inventoryParent.activeSelf;
+        if (inventoryParent.activeSelf)
+        {
+            //play sound of closing
+            SoundManager.Instance.PlaySound2D("event:/SFX/UI/Inventory/Close");
+        }
+        else
+        {
+            //play sound of opening
+            SoundManager.Instance.PlaySound2D("event:/SFX/UI/Inventory/Open");
+        }
         
         inventoryParent.SetActive(!inventoryParent.activeSelf);
         return inventoryParent.activeSelf;

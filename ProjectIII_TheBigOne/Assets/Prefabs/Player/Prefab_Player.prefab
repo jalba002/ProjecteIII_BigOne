@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4287271704942058500}
   - component: {fileID: 4453402422754140881}
   - component: {fileID: 617454051092443606}
+  - component: {fileID: 8271204603720973746}
+  - component: {fileID: 725118374944361030}
   m_Layer: 0
   m_Name: PlayerMainCamera
   m_TagString: Untagged
@@ -160,6 +162,34 @@ MonoBehaviour:
   frustumSettings:
     baseSettings: {fileID: 0}
     qualitySettings: {fileID: 0}
+--- !u!111 &8271204603720973746
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287271704942058497}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: f695b6353adc0204686a16e941bd73c9, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: f695b6353adc0204686a16e941bd73c9, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &725118374944361030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287271704942058497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccb283fa10f9dee46874dc65e8484c4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4287271705035785156
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,6 +432,7 @@ MonoBehaviour:
     type: 2}
   playerStoppedMaterial: {fileID: 13400000, guid: ecfe8242e3cfab24496b4a4737959687,
     type: 2}
+  pauseMenu: {fileID: 0}
 --- !u!114 &4287271706014648179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,6 +462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectRenderer: {fileID: 7698896559584102530}
   renderCamera: {fileID: 473544106632521736}
+  inspectedObjectTextOutput: {fileID: 0}
   distances: {x: 1.5, y: 2}
   rotationSpeed: {x: 0.5, y: 0.5}
 --- !u!114 &6592646240077006143
@@ -585,7 +617,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 513
   attachedPlayer: {fileID: 4287271706014648176}
-  textDebug: {fileID: 0}
   aimedObject: {fileID: 0}
   CanInteract: 0
   raycastCooldownPerCheck: 0.1
@@ -790,6 +821,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2412450940626286961}
   - component: {fileID: 2999368691099895388}
+  - component: {fileID: 6107948559760286449}
   m_Layer: 0
   m_Name: CameraManager
   m_TagString: Untagged
@@ -835,6 +867,19 @@ MonoBehaviour:
   debugLockAngleKeyCode: 108
   debugLockKeyCode: 111
   angleLocked: 0
+--- !u!114 &6107948559760286449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8198954406779212493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ListenerNumber: -1
 --- !u!1 &8828257249991790483
 GameObject:
   m_ObjectHideFlags: 0

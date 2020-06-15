@@ -7,6 +7,16 @@ using Random = System.Random;
 // Also known as the cunt that always tries to scare you.
 public class ParanormalManager : MonoBehaviour
 {
+    [System.Serializable]
+    public struct ElementsList
+    {
+        public ParanormalTrigger dimitryActivator;
+        public Transform endPosition;
+        public DynamicObject doorToClose;
+    }
+
+    public ElementsList endgameElements;
+
     [Header("Spawn points.")] public Transform firstSpawnPoint;
     public Transform secondSpawnPoint;
     public Transform relocationSpawnPoint;
@@ -102,16 +112,34 @@ public class ParanormalManager : MonoBehaviour
         //SetDummyParent(Dimitry.currentBrain.archnemesis.transform);
 
         //SetDummyLocalPosition(Vector3.zero);
-        
+
         PalletsSetDestructible(true);
-        
+
         SetDummyPosition(Dimitry.currentBrain.archnemesis.transform);
 
         Dimitry.stateMachine.SwitchState<State_Enemy_Chasing>();
-        
+
         SetEnemyPosition(secondSpawnPoint);
 
         Dimitry.SetNewPhase(new BehaviourTree_Enemy_SecondPhase(Dimitry));
+    }
+
+    public void TriggerEndgame()
+    {
+        // Play Sound, move dimitry, disable state. Ready it for the hunt.
+        try
+        {
+            endgameElements.dimitryActivator.GetComponent<Collider>().enabled = true;
+        }
+        catch (Exception e)
+        {
+        }
+
+        SetEnemyPosition(endgameElements.endPosition);
+        endgameElements.doorToClose.StrongClosing();
+        Dimitry.currentBehaviourTree = new BehaviourTree_Enemy_Halted(Dimitry);
+        //Dimitry.stateMachine.SwitchState<State_Enemy_Halt>();
+        // Play SOUND
     }
 
     private void SetEnemyPosition(Transform newPosition)
@@ -123,6 +151,13 @@ public class ParanormalManager : MonoBehaviour
         }
 
         Dimitry.NavMeshAgent.Warp(newPosition.position);
+    }
+
+    public void EndgameChase()
+    {
+        Dimitry.currentBehaviourTree = new BehaviourTree_Enemy_SecondPhase(Dimitry);
+        SetDummyPosition(GameManager.Instance.PlayerController.transform);
+        Dimitry.NavMeshAgent.SetDestination(enemyTargetDummy.transform.position);
     }
 
     public void SetDummyPosition(Transform newPosition)

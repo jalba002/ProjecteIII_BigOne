@@ -42,7 +42,7 @@ public class OptionsManager : MonoBehaviour
     [Header("SCREEN")] public float minBrightness = -100f;
     public float maxBrightness = 100f;
     [Range(-25f, 25f)] public float brightness = 0f;
-    public float brightnessMainMenu = -25;
+    public float brightnessMainMenu = 0;
 
     private void InstantiateElement()
     {

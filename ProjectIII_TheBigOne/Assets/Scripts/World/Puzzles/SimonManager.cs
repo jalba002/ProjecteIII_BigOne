@@ -20,6 +20,8 @@ public class SimonManager : Puzzle
     public Material bulbOn;
     private Material _initBulbMat;
 
+    public Animator computerAnim;
+
     
 
     private int currentAnswer;
@@ -37,6 +39,7 @@ public class SimonManager : Puzzle
         answering = false;
         _initMat = pantalla.material;
         _initBulbMat = bulb.material;
+        
     }
 
 #if UNITY_EDITOR
@@ -91,6 +94,7 @@ public class SimonManager : Puzzle
     public override void PuzzleWon()
     {
         OnPuzzleWin.Invoke();
+        computerAnim.SetTrigger("Open");
         //GameManager.Instance.CanvasController.ShowHint("You won!!", true);
         EndGame();
     }
@@ -151,8 +155,10 @@ public class SimonManager : Puzzle
     }
 
     public IEnumerator HighlightColor(int i, bool answering = false)
-    {        
+    {
+        Debug.Log("Doing this");
         pantalla.material = materials[i];
+        pantalla.material.color = Color.white;
         SoundManager.Instance.PlayEvent(paths[i], transform, 1);
         if (!answering)
         {            

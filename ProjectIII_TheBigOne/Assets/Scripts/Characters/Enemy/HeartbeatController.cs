@@ -30,7 +30,7 @@ public class HeartbeatController : MonoBehaviour
         try
         {
             if ((enemyController.currentBrain.IsChasingPlayer || enemyController.currentBrain.IsTrackingPlayer ||
-                 enemyController.currentBrain.IsHearingPlayer) && !alreadyPlaying)
+                 enemyController.currentBrain.IsHearingPlayer || enemyController.currentBrain.IsPlayerCloseEnoughForDeath) && !alreadyPlaying)
             {
                 PlayNewSound();
                 alreadyPlaying = true;
@@ -57,5 +57,16 @@ public class HeartbeatController : MonoBehaviour
         SoundManager.Instance.PlayEvent(enemyController.terrorRadiusPath,
             enemyController.transform, 0f,
             enemyController.characterProperties.terrorRadiusRange, out movingSound);
+    }
+
+    public void StopHeartbeat()
+    {
+        try
+        {
+            SoundManager.Instance.StopMovingSound(movingSound, true);
+        }
+        catch (Exception e)
+        {
+        }
     }
 }

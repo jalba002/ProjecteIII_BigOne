@@ -37,16 +37,42 @@ namespace Aura2API
         private float _targetFactor;
         private Vector3 _targetPos;
         private float _initialFactor;
+        private Color _initialMaterialcolor;
+        private float _initialFactorEmissor;
         private float _time;
         private float _timeLeft;
 
+        public Material m_StatusMaterial;
+        private const string c_EmissionColor = "_EmissionColor";
+        private Material[] m_StatusMaterials;
+
         private void Start()
         {
+            var renderers = GetComponentsInChildren<Renderer>();
+            for (int i = 0; i < renderers.Length; ++i)
+            {
+                var materials = renderers[i].sharedMaterials;
+                for (int j = 0; j < materials.Length; ++j)
+                {
+                    if (materials[j] != m_StatusMaterial)
+                        continue;
+
+                    if (m_StatusMaterials == null)
+                        m_StatusMaterials = new Material[1];
+                    else
+                        System.Array.Resize(ref m_StatusMaterials, m_StatusMaterials.Length + 1);
+
+                    m_StatusMaterials[m_StatusMaterials.Length - 1] = renderers[i].materials[j];
+                }
+            }
+
+
             Random.InitState((int)transform.position.x + (int)transform.position.y);
-            _initialFactor = GetComponent<Light>().intensity;
+            _initialFactor = GetComponentInChildren<Light>().intensity;
+
+            _initialMaterialcolor = m_StatusMaterials[0].GetColor("_EmissionColor");
         }
 
-        //
 
         private void OnEnable()
         {
@@ -54,14 +80,12 @@ namespace Aura2API
             _currentPos = _initPos;
         }
 
-        //
 
         private void OnDisable()
         {
             transform.localPosition = _initPos;
         }
 
-        //
 
 #if !UNITY_EDITOR
     private void Update()
@@ -85,7 +109,10 @@ namespace Aura2API
             {
                 float weight = _deltaTime / _timeLeft;
                 _currentFactor = Mathf.Lerp(_currentFactor, _targetFactor, weight);
-                GetComponent<Light>().intensity = _initialFactor * _currentFactor;
+                GetComponentInChildren<Light>().intensity = _initialFactor * _currentFactor;
+
+                m_StatusMaterials[0].SetColor("_EmissionColor", _initialMaterialcolor * _currentFactor);
+
                 _currentPos = Vector3.Lerp(_currentPos, _targetPos, weight);
                 transform.localPosition = _currentPos;
                 _timeLeft -= _deltaTime;

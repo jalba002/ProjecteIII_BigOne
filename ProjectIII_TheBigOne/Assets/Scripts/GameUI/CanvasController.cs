@@ -197,6 +197,9 @@ public class CanvasController : MonoBehaviour
 
     public void PushObjectiveText(string text, float time, bool upper, int id)
     {
+        //play new objective sound
+        SoundManager.Instance.PlaySound2D("event:/SFX/UI/Inventory/NewQuest");
+
         ObjectiveModel objModel = new ObjectiveModel(id, text);
 
         GameObject objObject = Instantiate(ObjectivePrefab, ObjectivesUI.transform);
@@ -217,6 +220,8 @@ public class CanvasController : MonoBehaviour
         {
             if (obj.identifier == id)
             {
+                //Play objective completed sound
+                SoundManager.Instance.PlaySound2D("event:/SFX/UI/Inventory/CompletedQuest");
                 obj.isCompleted = true;
                 PushObjectiveCompleted(id, obj);
                 Destroy(obj.objective);

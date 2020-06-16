@@ -47,28 +47,30 @@ public class Dimitry_AnimatorController : MonoBehaviour
 
     public void Update()
     {
-        /*if (EnemyController.stateMachine.GetCurrentState is State_Enemy_Killing || EnemyController.stateMachine.GetCurrentState is State_Enemy_DestructionTraversing
+        float enemySpeed = EnemyController.NavMeshAgent.velocity.magnitude;
+        
+        if (EnemyController.stateMachine.GetCurrentState is State_Enemy_DestructionTraversing
             || EnemyController.stateMachine.GetCurrentState is State_Enemy_Traversing)
         {
             //if(enemyAnimator.)
-            enemyAnimator.SetBool("Attack", true);
+            enemyAnimator.SetBool("Kicking", true);
         }
         else
         {
-            enemyAnimator.SetBool("Attack", false);
-        }*/
+            enemyAnimator.SetBool("Kicking", false);
+        }
 
-        enemyAnimator.SetFloat("Speed", EnemyController.NavMeshAgent.speed);
+        enemyAnimator.SetFloat("Speed", enemySpeed);
 
         enemyAnimator.SetBool("IsLighted", EnemyController.stateMachine.GetCurrentState is State_Enemy_Idle);
 
-        if (Vector3.Magnitude(EnemyController.NavMeshAgent.velocity) > 0.5f)
+        if (enemySpeed > 0f)
         {
-            enemyAnimator.SetBool("IsWalking", true);
+            enemyAnimator.SetBool("IsMoving", true);
         }
-        else if (enemyAnimator.GetBool("IsWalking"))
+        else if (enemyAnimator.GetBool("IsMoving"))
         {
-            enemyAnimator.SetBool("IsWalking", false);
+            enemyAnimator.SetBool("IsMoving", false);
         }
     }
 

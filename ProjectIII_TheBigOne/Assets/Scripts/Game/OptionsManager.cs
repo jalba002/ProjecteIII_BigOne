@@ -36,13 +36,14 @@ public class OptionsManager : MonoBehaviour
     [Header("VOLUME")] public float minVolume = 0f;
     public float maxVolume = 100f;
     [Range(0f, 100f)] public float masterVolume = 100f;
-    [Range(0, 100f)] public float musicVolume = 100f;
+    [Range(0f, 100f)] public float musicVolume = 100f;
     [Range(0f, 100f)] public float effectsVolume = 100f;
 
     [Header("SCREEN")] public float minBrightness = -100f;
     public float maxBrightness = 100f;
     [Range(-25f, 25f)] public float brightness = 0f;
     public float brightnessMainMenu = 0;
+
 
     private void InstantiateElement()
     {

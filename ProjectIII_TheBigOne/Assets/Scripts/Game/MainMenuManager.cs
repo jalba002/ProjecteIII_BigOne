@@ -70,7 +70,7 @@ public class MainMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UpdateOptions();
+        UpdateOptions();       
     }
 
     private void Awake()
@@ -87,7 +87,11 @@ public class MainMenuManager : MonoBehaviour
         b_exit.SetActive(false);
 
         selectedOption.SetActive(true);
+
+        
     }
+
+   
 
     // Update is called once per frame
     void Update()
@@ -344,7 +348,13 @@ public class MainMenuManager : MonoBehaviour
     public void SetMasterVolume(float volume)
     {
         OptionsManager.Instance.SetMasterVolume(volume);
-        masterVolumeInput.text = OptionsManager.Instance.masterVolume.ToString();
+        //Cambiar a un valor entre 0 y 1
+        masterVolumeInput.text = masterVolumeSlider.value.ToString();
+
+        masterVolumeInput.text = ((OptionsManager.Instance.masterVolume - OptionsManager.Instance.minVolume) / (OptionsManager.Instance.maxVolume - OptionsManager.Instance.minVolume)).ToString();
+
+        
+        //masterVolumeInput.text = OptionsManager.Instance.masterVolume.ToString();
     }
     public void SetMasterVolume(string volume)
     {
@@ -355,7 +365,7 @@ public class MainMenuManager : MonoBehaviour
     public void SetMusicVolume(float volume)
     {
         OptionsManager.Instance.SetMusicVolume(volume);
-        musicVolumeInput.text = OptionsManager.Instance.musicVolume.ToString();
+        musicVolumeInput.text = ((OptionsManager.Instance.musicVolume - OptionsManager.Instance.minVolume) / (OptionsManager.Instance.maxVolume - OptionsManager.Instance.minVolume)).ToString();
     }
     public void SetMusicVolume(string volume)
     {
@@ -366,7 +376,7 @@ public class MainMenuManager : MonoBehaviour
     public void SetEffectsVolume(float volume)
     {
         OptionsManager.Instance.SetEffectsVolume(volume);
-        effectsVolumeInput.text = OptionsManager.Instance.effectsVolume.ToString();
+        effectsVolumeInput.text = ((OptionsManager.Instance.effectsVolume - OptionsManager.Instance.minVolume) / (OptionsManager.Instance.maxVolume - OptionsManager.Instance.minVolume)).ToString();
     }
     public void SetEffectsVolume(string volume)
     {
@@ -396,7 +406,12 @@ public class MainMenuManager : MonoBehaviour
     public void SetBrightness(float bright)
     {
         OptionsManager.Instance.SetBrightness(bright);
-        brightnessInput.text = OptionsManager.Instance.brightness.ToString();
+        
+        string t = ((OptionsManager.Instance.brightness - OptionsManager.Instance.minBrightness) / (OptionsManager.Instance.maxBrightness - OptionsManager.Instance.minBrightness)).ToString();
+        Debug.Log(t);
+
+
+        brightnessInput.text = t;
     }
     public void SetBrightness(string bright)
     {
@@ -415,5 +430,6 @@ public class MainMenuManager : MonoBehaviour
 
         brightnessSlider.value = OptionsManager.Instance.brightness;
     }
-
+    
+   
 }

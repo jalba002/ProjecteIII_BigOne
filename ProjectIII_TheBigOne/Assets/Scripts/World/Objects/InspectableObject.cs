@@ -18,6 +18,8 @@ public class InspectableObject : InteractableObject, IInspectable
     [Header("Collision")] public List<Collider> ignoredColliders;
     private Collider selfCollider;
 
+    public bool isPaper = true;
+
     private void Start()
     {
         selfCollider = gameObject.GetComponent<Collider>();
@@ -97,7 +99,9 @@ public class InspectableObject : InteractableObject, IInspectable
 
     public override void OnStartInteract()
     {
-        //
+        //        
+        if(isPaper)
+            SoundManager.Instance.PlaySound2D("event:/SFX/UI/Inventory/PaperGrab");
         base.OnStartInteract();
         IsInteracting = true;
     }
@@ -111,6 +115,8 @@ public class InspectableObject : InteractableObject, IInspectable
     public override void OnEndInteract()
     {
         //
+        if(isPaper)
+            SoundManager.Instance.PlaySound2D("event:/SFX/UI/Inventory/PaperLeft");
         base.OnEndInteract();
         IsInteracting = false;
     }

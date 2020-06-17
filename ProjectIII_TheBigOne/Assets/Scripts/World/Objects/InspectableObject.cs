@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
 public class InspectableObject : InteractableObject, IInspectable
@@ -19,6 +21,9 @@ public class InspectableObject : InteractableObject, IInspectable
     private Collider selfCollider;
 
     public bool isPaper = true;
+
+    private float timeToEnsureGoodReading;
+    [Space(5)] public UnityEvent OnItemEndInteract = new UnityEvent();
 
     private void Start()
     {
@@ -79,7 +84,8 @@ public class InspectableObject : InteractableObject, IInspectable
         {
             _meshFilter = GetComponentInChildren<MeshFilter>();
             _meshRenderer = GetComponentInChildren<MeshRenderer>();
-            InspectInfo = new InspectableInfo(_meshFilter.mesh, _meshRenderer.materials, transform, maxLimits, objectInformation);
+            InspectInfo = new InspectableInfo(_meshFilter.mesh, _meshRenderer.materials, transform, maxLimits,
+                objectInformation);
         }
     }
 
@@ -100,24 +106,47 @@ public class InspectableObject : InteractableObject, IInspectable
     public override void OnStartInteract()
     {
         //        
-        if(isPaper)
+        if (isPaper)
             SoundManager.Instance.PlaySound2D("event:/SFX/UI/Inventory/PaperGrab");
         base.OnStartInteract();
         IsInteracting = true;
+        timeToEnsureGoodReading = Time.time + 0.5f;
+        SwapImages(true);
     }
 
     public override void OnInteracting()
     {
-        //
-        base.OnInteracting();
+        /*GameManager.Instance.CanvasController.ChangeCursor(
+            GameManager.Instance.CanvasController.CrosshairController.defaultCrosshair,
+            new Vector3(0.1f, 0.1f, 1f));*/
     }
 
     public override void OnEndInteract()
     {
         //
-        if(isPaper)
+        if (isPaper)
             SoundManager.Instance.PlaySound2D("event:/SFX/UI/Inventory/PaperLeft");
         base.OnEndInteract();
+
+        if (Time.time >= timeToEnsureGoodReading)
+            OnItemEndInteract.Invoke();
+        SwapImages(false);
         IsInteracting = false;
+    }
+
+    private void SwapImages(bool enable)
+    {
+        if (enable)
+        {
+            var tempImage = previewImage;
+            previewImage = displayImage;
+            displayImage = tempImage;
+        }
+        else
+        {
+            var tempImage = displayImage;
+            displayImage = previewImage;
+            previewImage = tempImage;
+        }
     }
 }

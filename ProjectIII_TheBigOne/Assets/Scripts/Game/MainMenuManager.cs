@@ -406,12 +406,14 @@ public class MainMenuManager : MonoBehaviour
     public void SetBrightness(float bright)
     {
         OptionsManager.Instance.SetBrightness(bright);
-        
+        /*
         string t = ((OptionsManager.Instance.brightness - OptionsManager.Instance.minBrightness) / (OptionsManager.Instance.maxBrightness - OptionsManager.Instance.minBrightness)).ToString();
         Debug.Log(t);
 
 
         brightnessInput.text = t;
+        */
+        brightnessInput.text = bright.ToString();
     }
     public void SetBrightness(string bright)
     {

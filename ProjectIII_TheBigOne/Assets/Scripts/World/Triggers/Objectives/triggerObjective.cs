@@ -28,6 +28,8 @@ public class triggerObjective : MonoBehaviour
 
     public void OnTrigger()
     {
+        if (isTriggered) return;
+        
         if (triggerType == TriggerType.Completed && !GameManager.Instance.CanvasController.CheckEmtpyObjectiveList())
         {
             if (GameManager.Instance.CanvasController.CheckObjectiveIDList(questID)) //if quest has been received

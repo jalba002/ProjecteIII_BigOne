@@ -30,6 +30,8 @@ public class Dimitry_AnimatorController : MonoBehaviour
         {
             EnemyController.OnPhaseChange.AddListener(LoadNewPhase);
         }
+        
+        EnemyController.stateMachine.OnStateChange.AddListener(UpdateAnimation);
     }
 
     public void LoadNewPhase()
@@ -48,7 +50,23 @@ public class Dimitry_AnimatorController : MonoBehaviour
 
     public void Update()
     {
-        UpdateAnimation();
+        AnimationVariablesUpdate();
+    }
+
+    private void AnimationVariablesUpdate()
+    {        
+        float enemySpeed = EnemyController.NavMeshAgent.velocity.magnitude;
+
+        enemyAnimator.SetFloat("Speed", enemySpeed);
+        
+        if (enemySpeed > 0f)
+        {
+            enemyAnimator.SetBool("IsMoving", true);
+        }
+        else if (enemyAnimator.GetBool("IsMoving"))
+        {
+            enemyAnimator.SetBool("IsMoving", false);
+        }
     }
 
     private void UpdateAnimation()
@@ -68,8 +86,6 @@ public class Dimitry_AnimatorController : MonoBehaviour
 
     private void UpdateFirstPhase()
     {
-        float enemySpeed = EnemyController.NavMeshAgent.velocity.magnitude;
-        
         if (EnemyController.stateMachine.GetCurrentState is State_Enemy_DestructionTraversing
             || EnemyController.stateMachine.GetCurrentState is State_Enemy_Traversing)
         {
@@ -81,27 +97,12 @@ public class Dimitry_AnimatorController : MonoBehaviour
             enemyAnimator.SetBool("Kicking", false);
         }
 
-        enemyAnimator.SetFloat("Speed", enemySpeed);
+        enemyAnimator.SetBool("IsLighted", EnemyController.stateMachine.GetCurrentState is State_Enemy_Lighted);
 
-        enemyAnimator.SetBool("IsLighted", EnemyController.stateMachine.GetCurrentState is State_Enemy_Idle);
-
-        if (enemySpeed > 0f)
-        {
-            enemyAnimator.SetBool("IsMoving", true);
-        }
-        else if (enemyAnimator.GetBool("IsMoving"))
-        {
-            enemyAnimator.SetBool("IsMoving", false);
-        }
-
-        if (EnemyController.stateMachine.GetCurrentState is State_Enemy_Noticed)
+        /*if (EnemyController.stateMachine.GetCurrentState is State_Enemy_Noticed)
         {
             enemyAnimator.SetBool("IsNoticing", true);
-        }
-        else if (EnemyController.stateMachine.GetCurrentState is State_Enemy_NoticedFailed)
-        {
-            enemyAnimator.SetTrigger("NoticedFailed");
-        }
+        }*/
     }
 
     private void UpdateSecondPhase()

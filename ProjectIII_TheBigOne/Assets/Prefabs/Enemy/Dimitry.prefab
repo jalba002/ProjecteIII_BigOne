@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &525177708454411844
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5025795509615245809}
+  m_Layer: 0
+  m_Name: DmitryEyes_HeadBone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5025795509615245809
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525177708454411844}
+  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4203823581385667403}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
 --- !u!1 &4058235251113824868
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,6 +144,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterController: {fileID: 0}
   enableDebug: 1
+  OnStateChange:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4766131684604721938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,7 +190,7 @@ MonoBehaviour:
   characterProperties: {fileID: 11400000, guid: 23391344cdad25a40ab813c80e3c4d62,
     type: 2}
   attachedCollider: {fileID: 1207250025}
-  dimitryEyes: {fileID: 4582003537256085148}
+  dimitryEyes: {fileID: 525177708454411844}
   targetPositionDummy: {fileID: 0}
   NavMeshAgent: {fileID: 4766131684604721940}
   patrolPoints: []
@@ -348,6 +381,12 @@ GameObject:
 --- !u!4 &4894331160273288818 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: d56be92576457e146b20d0189a79ba79,
+    type: 3}
+  m_PrefabInstance: {fileID: 474738939277563240}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4203823581385667403 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4377612957472286243, guid: d56be92576457e146b20d0189a79ba79,
     type: 3}
   m_PrefabInstance: {fileID: 474738939277563240}
   m_PrefabAsset: {fileID: 0}

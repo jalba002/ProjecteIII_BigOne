@@ -10,12 +10,15 @@ namespace Enemy
         private float _movementSpeed;
         private float trackTime;
 
+        private Dimitry_AnimatorController enemyAnimator;
+
         private Vector3 playerDirection;
 
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
             _attachedController = (EnemyController) Machine.characterController;
+            enemyAnimator = _attachedController.GetComponentInChildren<Dimitry_AnimatorController>();
         }
 
         public override void OnStateTick(float deltaTime)
@@ -23,19 +26,23 @@ namespace Enemy
             base.OnStateTick(deltaTime);
 
             // Move target point to closest patrol point, or a point that has not been visited BUT is near the player.
-            //_attachedController.CheckForPlayerNearLight();
+            _attachedController.CheckForPlayerNearLight();
             _attachedController.CheckForPlayerOnSight();
-            //_attachedController.CheckForEnemyVisibility();
-            //_attachedController.HearPlayerAround();
+            _attachedController.CheckForEnemyVisibility();
+            _attachedController.HearPlayerAround();
             //_attachedController.CheckForMeshLink();
-            //_attachedController.CheckForPlayerKilling();
+            _attachedController.CheckForPlayerKilling();
 
-            trackTime += deltaTime;
 
-            if (!_attachedController.currentBrain.IsPlayerInSight ||
-                trackTime >= _attachedController.characterProperties.timeToChasePlayer)
+            if (!_attachedController.currentBrain.IsHearingPlayer)
             {
+                ResolveState();
+            }
+            else if (_attachedController.currentBrain.IsPlayerInSight)
+            {
+                trackTime = _attachedController.characterProperties.timeToChasePlayer;
                 _attachedController.currentBrain.IsNoticingPlayer = false;
+                ResolveState();
             }
         }
 
@@ -47,8 +54,8 @@ namespace Enemy
         public override void OnStateCheckTransition()
         {
             base.OnStateCheckTransition();
-            _attachedController.transform.forward = Vector3.Slerp(_attachedController.transform.forward,
-                playerDirection, trackTime / _attachedController.characterProperties.timeToChasePlayer);
+            /*_attachedController.transform.forward = Vector3.Slerp(_attachedController.transform.forward,
+                playerDirection, trackTime / _attachedController.characterProperties.timeToChasePlayer);*/
         }
 
         protected override void OnStateEnter()
@@ -58,6 +65,8 @@ namespace Enemy
             _attachedController.NavMeshAgent.updateRotation = false;
 
             trackTime = 0f;
+            
+            enemyAnimator.enemyAnimator.SetBool("IsNoticing", true);
 
             playerDirection =
                 (_attachedController.currentBrain.archnemesis.transform.position -
@@ -66,21 +75,9 @@ namespace Enemy
 
         private void ResolveState()
         {
-            Debug.Log("Track time: " + trackTime);
             if (trackTime >= _attachedController.characterProperties.timeToChasePlayer)
             {
-                Debug.Log("Noticed to chase.");
-                _attachedController.currentBrain.IsChasingPlayer = true;
-            }
-            else if (trackTime >= _attachedController.characterProperties.timeToSearchPlayer)
-            {
-                _attachedController.targetPositionDummy.transform.position =
-                    _attachedController.currentBrain.archnemesis.transform.position;
-                _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform
-                    .position);
-
-                Debug.Log("Noticed to track.");
-                _attachedController.currentBrain.IsTrackingPlayer = true;
+                _attachedController.currentBrain.HasSucceededToNotice = true;
             }
             else
             {
@@ -91,9 +88,9 @@ namespace Enemy
         protected override void OnStateExit()
         {
             base.OnStateExit();
-            ResolveState();
             _attachedController.NavMeshAgent.updateRotation = true;
             _attachedController.NavMeshAgent.isStopped = false;
+            enemyAnimator.enemyAnimator.SetBool("IsNoticing", false);
         }
     }
 }

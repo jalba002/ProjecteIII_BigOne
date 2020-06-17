@@ -24,12 +24,10 @@ public class EnemyBrain : Brain
 
     public StunArea StunSource { get; set; }
 
-    public bool IsBeingRendered { get; set; }
-
     public bool IsPlayerInSight { get; set; }
 
     public bool IsPlayerNearLight { get; set; }
-
+    
     public bool IsChasingPlayer { get; set; }
 
     public bool IsTrackingPlayer { get; set; }
@@ -39,13 +37,11 @@ public class EnemyBrain : Brain
     public bool IsNoticingPlayer { get; set; }
     
     public bool HasFailedToNotice { get; set; }
+    
+    public bool HasSucceededToNotice { get; set; }
 
     public bool IsOnOffMeshLink { get; set; }
-
-    public bool IsCurrentlyBreaking { get; set; }
-
-    public bool UpdateRotation { get; set; }
-
+    
     public float DistanceToPlayer { get; set; }
 
     public bool IsPlayerCloseEnoughForDeath { get; set; }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Player;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Characters.Generic
 {
@@ -16,6 +17,9 @@ namespace Characters.Generic
 
         public CharacterController characterController;
         [Header("Debug Options")] public bool enableDebug = false;
+
+        [Space(5)]
+        public UnityEvent OnStateChange = new UnityEvent();
 
         private void Awake()
         {
@@ -58,6 +62,15 @@ namespace Characters.Generic
                     {
                         Debug.Log($"{currentState.GetType()}");
                     }
+                }
+
+                try
+                {
+                    OnStateChange.Invoke();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"Could not Invoke OnStateChange! {e.Message}", this.gameObject);
                 }
 
                 return currentState;

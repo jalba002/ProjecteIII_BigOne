@@ -77,7 +77,7 @@ namespace Enemy
         {
             SetStartingBehaviourTree();
 
-            stateMachine.SwitchState<State_Enemy_Idle>();
+            stateMachine.SwitchState<State_Enemy_Halt>();
 
             NavMeshAgent.speed = characterProperties.WalkSpeed;
 
@@ -267,17 +267,6 @@ namespace Enemy
         public void ChillDown()
         {
             currentBehaviourTree = new BehaviourTree_Enemy_Halted(this);
-        }
-
-        // Invisiblity Enabled.
-        private void OnBecameInvisible()
-        {
-            currentBrain.IsBeingRendered = false;
-        }
-
-        private void OnBecameVisible()
-        {
-            currentBrain.IsBeingRendered = true;
         }
     }
 }

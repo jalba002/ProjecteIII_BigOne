@@ -11,20 +11,28 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         base.Setup(characterController);
         attachedCharacter = (EnemyController) characterController;
         attachedCharacter.NavMeshAgent.autoTraverseOffMeshLink = false;
-        
     }
 
     public override void CalculateNextState(bool forceExitState)
     {
         // Analyze all possible states.
         if (CheckEnterStunned()) return;
+
         if (CheckKillingPlayer()) return;
-        if (CheckEnterNotice()) return;
-        if (CheckEnterFailedNotice()) return;
-        if (CheckEnterTraversing()) return;
+
         if (CheckEnterIdle()) return;
-        if (CheckEnterPatrol()) return;
+        
+        if (CheckEnterTraversing()) return;
+            
+        if (CheckEnterFailedNotice()) return;
+        if (CheckEnterSucceededNotice()) return;
+        
         if (CheckEnterChasing()) return;
+        
+        if (CheckEnterNotice()) return;
+
+        if (CheckEnterPatrol()) return;
+
         if (CheckEnterSearching()) return;
     }
 
@@ -33,7 +41,7 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         if (!attachedCharacter.currentBrain.IsPlayerCloseEnoughForDeath) return false;
 
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Killing>();
-        
+
         return true;
     }
 
@@ -43,9 +51,16 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
 
         if (!attachedCharacter.currentBrain.IsNoticingPlayer) return false;
 
+        if (attachedCharacter.currentBrain.IsPlayerInSight) return false;
+        
         if (attachedCharacter.currentBrain.IsChasingPlayer) return false;
 
-        if (attachedCharacter.currentBrain.IsTrackingPlayer) return false;
+        //if (attachedCharacter.currentBrain.IsTrackingPlayer) return false;
+
+        if (attachedCharacter.currentBrain.HasSucceededToNotice ||
+            attachedCharacter.currentBrain.HasFailedToNotice) return false;
+
+        //if (attachedCharacter.stateMachine.GetCurrentState is State_Enemy_Chasing) return false;
 
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Noticed>();
         return true;
@@ -55,14 +70,26 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
     {
         if (!attachedCharacter.currentBrain.HasFailedToNotice) return false;
 
-        if (attachedCharacter.currentBrain.IsChasingPlayer) return false;
+        // if (attachedCharacter.currentBrain.IsChasingPlayer) return false;
 
-        if (attachedCharacter.currentBrain.IsTrackingPlayer) return false;
-        
+        // if (attachedCharacter.currentBrain.IsTrackingPlayer) return false;
+
+        // (!(attachedCharacter.stateMachine.GetCurrentState is State_Enemy_Noticed)) return false;
+
         attachedCharacter.stateMachine.SwitchState<State_Enemy_NoticedFailed>();
         return true;
     }
-    
+
+    private bool CheckEnterSucceededNotice()
+    {
+        if (!attachedCharacter.currentBrain.HasSucceededToNotice) return false;
+
+        //if (!(attachedCharacter.stateMachine.GetCurrentState is State_Enemy_Noticed)) return false;
+
+        attachedCharacter.stateMachine.SwitchState<State_Enemy_NoticedSucceeded>();
+        return true;
+    }
+
     private bool CheckEnterIdle()
     {
         // TODO Add conditions
@@ -72,10 +99,10 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         if (!attachedCharacter.currentBrain.IsPlayerInSight) return false;
 
         if (!attachedCharacter.currentBrain.IsVisible) return false;
-        
+
         if (!attachedCharacter.currentBrain.IsPlayerNearLight) return false;
 
-        attachedCharacter.stateMachine.SwitchState<State_Enemy_Idle>();
+        attachedCharacter.stateMachine.SwitchState<State_Enemy_Lighted>();
         return true;
     }
 
@@ -90,11 +117,11 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Patrolling>();
         return true;
     }
-    
+
     private bool CheckEnterChasing()
     {
         if (!attachedCharacter.currentBrain.IsPlayerInSight) return false;
-        
+
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Chasing>();
         return true;
     }
@@ -104,7 +131,7 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         //if (attachedCharacter.currentBrain.IsChasingPlayer) return false;
 
         //if (!attachedCharacter.currentBrain.IsTrackingPlayer) return false;
-        
+
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Searching>();
         return true;
     }
@@ -112,9 +139,9 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
     private bool CheckEnterStunned()
     {
         if (!attachedCharacter.currentBrain.IsStunned) return false;
-        
+
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Stunned>();
-        
+
         return true;
     }
 

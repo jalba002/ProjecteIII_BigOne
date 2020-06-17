@@ -1,13 +1,15 @@
-﻿using System;
-using Characters.Generic;
-using Player;
-using UnityEngine;
+﻿using UnityEngine;
+using State = Player.State;
+using StateMachine = Characters.Generic.StateMachine;
 
 namespace Enemy
 {
-    public class State_Enemy_Idle : State
+    public class State_Enemy_NoticedSucceeded : State
     {
         private EnemyController _attachedController;
+        private float _movementSpeed;
+
+        private Vector3 playerDirection;
 
         protected override void OnStateInitialize(StateMachine machine)
         {
@@ -19,15 +21,13 @@ namespace Enemy
         {
             base.OnStateTick(deltaTime);
 
+            // Move target point to closest patrol point, or a point that has not been visited BUT is near the player.
             _attachedController.CheckForPlayerNearLight();
-
             _attachedController.CheckForPlayerOnSight();
             _attachedController.CheckForEnemyVisibility();
             _attachedController.HearPlayerAround();
+            //_attachedController.CheckForMeshLink();
             _attachedController.CheckForPlayerKilling();
-
-            _attachedController.targetPositionDummy.transform.position =
-                _attachedController.currentBrain.archnemesis.transform.position;
         }
 
         public override void OnStateFixedTick(float fixedTime)
@@ -43,17 +43,21 @@ namespace Enemy
         protected override void OnStateEnter()
         {
             base.OnStateEnter();
-
             _attachedController.NavMeshAgent.isStopped = true;
+            _attachedController.NavMeshAgent.updateRotation = false;
+
+            playerDirection =
+                (_attachedController.currentBrain.archnemesis.transform.position -
+                 _attachedController.gameObject.transform.position).normalized;
         }
 
         protected override void OnStateExit()
         {
             base.OnStateExit();
+            _attachedController.NavMeshAgent.updateRotation = true;
+            _attachedController.currentBrain.IsChasingPlayer = true;
+            _attachedController.transform.forward = playerDirection;
             _attachedController.NavMeshAgent.isStopped = false;
-            /*_attachedController.targetPositionDummy.transform.position =
-                _attachedController.currentBrain.archnemesis.transform.position;
-            _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);*/
         }
     }
 }

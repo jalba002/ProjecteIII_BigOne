@@ -36,13 +36,14 @@ public class OptionsManager : MonoBehaviour
     [Header("VOLUME")] public float minVolume = 0f;
     public float maxVolume = 100f;
     [Range(0f, 100f)] public float masterVolume = 100f;
-    [Range(0, 100f)] public float musicVolume = 100f;
+    [Range(0f, 100f)] public float musicVolume = 100f;
     [Range(0f, 100f)] public float effectsVolume = 100f;
 
-    [Header("SCREEN")] public float minBrightness = -100f;
-    public float maxBrightness = 100f;
-    [Range(-25f, 25f)] public float brightness = 0f;
-    public float brightnessMainMenu = 0;
+    [Header("SCREEN")] public float minBrightness = 0;
+    public float maxBrightness = 1;
+    [Range(0, 1f)] public float brightness = 0.5f;
+    public float brightnessMainMenu = 0.5f;
+
 
     private void InstantiateElement()
     {
@@ -156,17 +157,17 @@ public class OptionsManager : MonoBehaviour
     public void SetBrightness(float bright)
     {
         brightness = bright;
-        brightnessMainMenu = bright - 50f;
+        brightnessMainMenu = bright;
         FindObjectOfType<PostProcessVolume>().profile.TryGetSettings(out ColorGrading cg);
         if (cg != null)
         {
             if (FindObjectOfType<MainMenuManager>() != null)
             {
-                cg.brightness.value = brightnessMainMenu;
+                cg.brightness.value = brightnessMainMenu * 25;
             }
             else
             {
-                cg.brightness.value = brightness;
+                cg.brightness.value = brightness * 25;
             }
         }
     }

@@ -12,15 +12,20 @@ public class TweakShininess : MonoBehaviour
     [SerializeField]private float _currentShininess;
     private bool _increasing;
 
+    private Renderer attachedRenderer;
+
     public bool taken = false;
 
     private void Start()
     {        
         _currentShininess = minShininess;
         _increasing = true;
-        Material matInstance = new Material(GetComponent<Renderer>().material);
-        GetComponent<Renderer>().material = matInstance;
-        this.GetComponent<Renderer>().sharedMaterial.SetFloat("_Shininess", minShininess);
+        attachedRenderer = GetComponentInChildren<Renderer>();
+        
+        Material matInstance = new Material(attachedRenderer.material);
+        attachedRenderer.material = matInstance;
+        this.attachedRenderer.sharedMaterial.SetFloat("_Shininess", minShininess);
+        
         taken = false;
     }
     // Update is called once per frame
@@ -34,7 +39,7 @@ public class TweakShininess : MonoBehaviour
 
     public void TakePostcard()
     {
-        this.GetComponent<Renderer>().sharedMaterial.SetFloat("_Shininess", 0);
+        this.attachedRenderer.sharedMaterial.SetFloat("_Shininess", 0);
         taken = true;
     }
 
@@ -42,21 +47,21 @@ public class TweakShininess : MonoBehaviour
     {        
         if (_increasing)
         {
-            this.GetComponent<Renderer>().sharedMaterial.SetFloat("_Shininess", this.GetComponent<Renderer>().sharedMaterial.GetFloat("_Shininess") + shininessIncreasePerSecond * Time.deltaTime);
+            this.attachedRenderer.sharedMaterial.SetFloat("_Shininess", this.attachedRenderer.sharedMaterial.GetFloat("_Shininess") + shininessIncreasePerSecond * Time.deltaTime);
         }
         else
         {
-            this.GetComponent<Renderer>().sharedMaterial.SetFloat("_Shininess", this.GetComponent<Renderer>().sharedMaterial.GetFloat("_Shininess") - shininessIncreasePerSecond * Time.deltaTime);
+            this.attachedRenderer.sharedMaterial.SetFloat("_Shininess", this.attachedRenderer.sharedMaterial.GetFloat("_Shininess") - shininessIncreasePerSecond * Time.deltaTime);
         }
 
-        if (this.GetComponent<Renderer>().sharedMaterial.GetFloat("_Shininess") > maxShininess)
+        if (this.attachedRenderer.sharedMaterial.GetFloat("_Shininess") > maxShininess)
         {
             _increasing = false;
         }
-        if (this.GetComponent<Renderer>().sharedMaterial.GetFloat("_Shininess") < minShininess)
+        if (this.attachedRenderer.sharedMaterial.GetFloat("_Shininess") < minShininess)
         {
             _increasing = true;
         }
-        _currentShininess = this.GetComponent<Renderer>().sharedMaterial.GetFloat("_Shininess");
+        _currentShininess = this.attachedRenderer.sharedMaterial.GetFloat("_Shininess");
     }
 }

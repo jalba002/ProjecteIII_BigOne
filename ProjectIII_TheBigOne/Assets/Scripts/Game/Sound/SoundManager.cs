@@ -396,7 +396,7 @@ public class SoundManager : MonoBehaviour
         if (RuntimeManager.StudioSystem.getVCA("vca:/" + channel, out vca) != FMOD.RESULT.OK)
             return;
         
-        vca.setVolume(Mathf.Pow(10.0f, channelVolume / 20.0f));
+        vca.setVolume(OptionsManager.Instance.maxVolume * channelVolume / 100);
     }
 
     #endregion Mixer

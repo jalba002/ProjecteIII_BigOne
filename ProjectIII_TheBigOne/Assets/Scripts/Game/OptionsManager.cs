@@ -112,6 +112,7 @@ public class OptionsManager : MonoBehaviour
     public void SetEffectsVolume(float volume)
     {
         effectsVolume = volume;
+        Debug.Log(volume);
         SoundManager.Instance.SetChannelVolume("Sound", volume);
         //set effects volume on FMOD
     }

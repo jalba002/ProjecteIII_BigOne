@@ -111,7 +111,8 @@ namespace Aura2API
                 _currentFactor = Mathf.Lerp(_currentFactor, _targetFactor, weight);
                 GetComponentInChildren<Light>().intensity = _initialFactor * _currentFactor;
 
-                m_StatusMaterials[0].SetColor("_EmissionColor", _initialMaterialcolor * _currentFactor);
+                if (m_StatusMaterials[0] != null)
+                    m_StatusMaterials[0].SetColor("_EmissionColor", _initialMaterialcolor * _currentFactor);
 
                 _currentPos = Vector3.Lerp(_currentPos, _targetPos, weight);
                 transform.localPosition = _currentPos;

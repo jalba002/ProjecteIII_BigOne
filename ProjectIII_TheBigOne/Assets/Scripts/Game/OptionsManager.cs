@@ -69,6 +69,7 @@ public class OptionsManager : MonoBehaviour
     public void SetMasterVolume(float volume)
     {
         masterVolume = volume;
+        SoundManager.Instance.SetChannelVolume("General", volume);
         //set master volume on FMOD
     }
 
@@ -90,6 +91,7 @@ public class OptionsManager : MonoBehaviour
     public void SetMusicVolume(float volume)
     {
         musicVolume = volume;
+        SoundManager.Instance.SetChannelVolume("Music", volume);
         //set music volume on FMOD
     }
 
@@ -111,6 +113,8 @@ public class OptionsManager : MonoBehaviour
     public void SetEffectsVolume(float volume)
     {
         effectsVolume = volume;
+        Debug.Log(volume);
+        SoundManager.Instance.SetChannelVolume("Sound", volume);
         //set effects volume on FMOD
     }
 

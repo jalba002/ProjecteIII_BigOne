@@ -37,6 +37,8 @@ public class CanvasController : MonoBehaviour
     private PlayerController _playerController;
     private bool _islightBulbNotNull;
 
+    private static UIFade currentUIFade;
+
     private void Start()
     {
         _islightBulbNotNull = lightBulb != null;
@@ -59,7 +61,6 @@ public class CanvasController : MonoBehaviour
         if (!_playerController.IsDead)
             TooglePauseMenu(false);
 
-        
 
         if (Input.GetKeyDown(KeyCode.Escape) && _playerController.playerInventory.inventoryDisplay.gameObject.transform
                 .parent.gameObject.activeSelf)
@@ -94,12 +95,12 @@ public class CanvasController : MonoBehaviour
     public void PlayerRunningUpdate()
     {
         if (!GameManager.Instance.GameSettings.showHud) return;
-        
+
         if (_playerController.currentStamina >= _playerController.characterProperties.maximumStamina)
             runningSlider.gameObject.SetActive(false);
         else
             runningSlider.gameObject.SetActive(true);
-        
+
         runningSlider.value = _playerController.currentStamina / _playerController.characterProperties.maximumStamina;
     }
 
@@ -259,10 +260,18 @@ public class CanvasController : MonoBehaviour
 
         hintNotificationText.text = text.ToUpper();
 
-        UIFade uIFade = UIFade.CreateInstance(HintNotification, "[UIFader] HintNotification", false);
-        uIFade.ResetGraphicsColor();
-        uIFade.ImageTextAlpha(0.8f, 1f);
-        uIFade.FadeInOut(fadeOutTime: fadeTime, fadeOutAfter: UIFade.FadeOutAfter.Bool);
+        if (currentUIFade == null)
+        {
+            currentUIFade = UIFade.CreateInstance(HintNotification, "[UIFader] HintNotification", false);
+            currentUIFade.ResetGraphicsColor();
+            currentUIFade.ImageTextAlpha(0.8f, 1f);
+            currentUIFade.FadeInOut(fadeOutTime: fadeTime, fadeOutAfter: UIFade.FadeOutAfter.Bool);
+        }
+        else
+        {
+            currentUIFade.fadeOut = false;
+            currentUIFade.FadeInOut(fadeOutTime: fadeTime, fadeOutAfter: UIFade.FadeOutAfter.Bool);
+        }
     }
 
     public void HideInteractableHint()

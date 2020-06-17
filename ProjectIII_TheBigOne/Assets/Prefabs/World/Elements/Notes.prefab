@@ -1,22 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &5471441068446509654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 157488350506592273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dab098a70786b28468d9d431a9388cc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxShininess: 0.2
-  minShininess: 0.05
-  shininessIncreasePerSecond: 0.03
-  _currentShininess: 0
-  taken: 0
 --- !u!114 &358167951452521741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34,7 +17,24 @@ MonoBehaviour:
   shininessIncreasePerSecond: 0.03
   _currentShininess: 0
   taken: 0
---- !u!114 &7946189994657605749
+--- !u!114 &5471441068446509654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157488350506592273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab098a70786b28468d9d431a9388cc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxShininess: 0.2
+  minShininess: 0.05
+  shininessIncreasePerSecond: 0.03
+  _currentShininess: 0
+  taken: 0
+--- !u!114 &2829747231045878934
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -51,7 +51,7 @@ MonoBehaviour:
   shininessIncreasePerSecond: 0.03
   _currentShininess: 0
   taken: 0
---- !u!114 &2829747231045878934
+--- !u!114 &7946189994657605749
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,6 +185,23 @@ MonoBehaviour:
   shininessIncreasePerSecond: 0.03
   _currentShininess: 0
   taken: 0
+--- !u!114 &4712350061211614187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157488351616772706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab098a70786b28468d9d431a9388cc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxShininess: 0.2
+  minShininess: 0.05
+  shininessIncreasePerSecond: 0.03
+  _currentShininess: 0
+  taken: 0
 --- !u!114 &5802880512677028384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,13 +219,13 @@ MonoBehaviour:
   shininessIncreasePerSecond: 0.03
   _currentShininess: 0
   taken: 0
---- !u!114 &4712350061211614187
+--- !u!114 &228998189163425737
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 157488351616772706}
+  m_GameObject: {fileID: 157488352583246845}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dab098a70786b28468d9d431a9388cc5, type: 3}
@@ -251,23 +268,6 @@ MonoBehaviour:
   triggerType: 0
   questID: 1
   questObjective: Find the main hall
---- !u!114 &228998189163425737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 157488352583246845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dab098a70786b28468d9d431a9388cc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxShininess: 0.2
-  minShininess: 0.05
-  shininessIncreasePerSecond: 0.03
-  _currentShininess: 0
-  taken: 0
 --- !u!1 &5074917565642713542
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,11 +434,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Note2
       objectReference: {fileID: 0}
+    - target: {fileID: 5845052826044425215, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8b22be93250a58f4a96048a4c12f4098, type: 2}
+    - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38236fd6ecd30d14ea95e9ef9653638d, type: 3}
 --- !u!4 &9213010218964504349 stripped
@@ -583,11 +603,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Note1
       objectReference: {fileID: 0}
+    - target: {fileID: 5845052826044425215, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8b22be93250a58f4a96048a4c12f4098, type: 2}
+    - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38236fd6ecd30d14ea95e9ef9653638d, type: 3}
 --- !u!1 &157488351554262131 stripped
@@ -720,7 +760,7 @@ PrefabInstance:
     - target: {fileID: 5845052826044425215, guid: 38236fd6ecd30d14ea95e9ef9653638d,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 4294967294
       objectReference: {fileID: 0}
     - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
         type: 3}
@@ -732,6 +772,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8b22be93250a58f4a96048a4c12f4098, type: 2}
+    - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38236fd6ecd30d14ea95e9ef9653638d, type: 3}
 --- !u!4 &9213010219895948930 stripped
@@ -846,11 +896,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Note5
       objectReference: {fileID: 0}
+    - target: {fileID: 5845052826044425215, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8b22be93250a58f4a96048a4c12f4098, type: 2}
+    - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38236fd6ecd30d14ea95e9ef9653638d, type: 3}
 --- !u!1 &157488350714743930 stripped
@@ -964,11 +1034,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Note7
       objectReference: {fileID: 0}
+    - target: {fileID: 5845052826044425215, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8b22be93250a58f4a96048a4c12f4098, type: 2}
+    - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38236fd6ecd30d14ea95e9ef9653638d, type: 3}
 --- !u!1 &157488350829699225 stripped
@@ -1083,11 +1173,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Note3
       objectReference: {fileID: 0}
+    - target: {fileID: 5845052826044425215, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8b22be93250a58f4a96048a4c12f4098, type: 2}
+    - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38236fd6ecd30d14ea95e9ef9653638d, type: 3}
 --- !u!4 &9213010218851218102 stripped
@@ -1202,11 +1312,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Note6
       objectReference: {fileID: 0}
+    - target: {fileID: 5845052826044425215, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8b22be93250a58f4a96048a4c12f4098, type: 2}
+    - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480250292193641621, guid: 38236fd6ecd30d14ea95e9ef9653638d,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38236fd6ecd30d14ea95e9ef9653638d, type: 3}
 --- !u!1 &157488350506592273 stripped

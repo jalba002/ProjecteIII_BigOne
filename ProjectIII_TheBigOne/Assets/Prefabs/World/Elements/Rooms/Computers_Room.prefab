@@ -252,19 +252,6 @@ MonoBehaviour:
   customCookieDistanceFalloffPower: 2
   customAngularFalloffThreshold: 0.8
   customAngularFalloffPower: 2
---- !u!65 &8210386745641197529
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4933081225060763076}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.010000042, y: 0.006432243, z: 0.01000008}
-  m_Center: {x: 0, y: 0.0025594565, z: 0.005139934}
 --- !u!1 &1905965919
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,6 +619,19 @@ Transform:
   m_Father: {fileID: 6899028910815046968}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8210386745641197529
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4933081225060763076}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.010000042, y: 0.006432243, z: 0.01000008}
+  m_Center: {x: 0, y: 0.0025594565, z: 0.005139934}
 --- !u!65 &843905758
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2984,7 +2984,7 @@ PrefabInstance:
     - target: {fileID: 5003375951993377004, guid: 2c734906a254bfb4da97d30438a9c696,
         type: 3}
       propertyPath: ignoredColliders.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5003375951993377004, guid: 2c734906a254bfb4da97d30438a9c696,
         type: 3}

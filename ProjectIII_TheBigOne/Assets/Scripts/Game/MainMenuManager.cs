@@ -350,10 +350,8 @@ public class MainMenuManager : MonoBehaviour
         //Cambiar a un valor entre 0 y 1
         masterVolumeInput.text = masterVolumeSlider.value.ToString();
 
-        masterVolumeInput.text = ((OptionsManager.Instance.masterVolume - OptionsManager.Instance.minVolume) / (OptionsManager.Instance.maxVolume - OptionsManager.Instance.minVolume)).ToString();
-
-
-        //masterVolumeInput.text = OptionsManager.Instance.masterVolume.ToString();
+        //masterVolumeInput.text = ((OptionsManager.Instance.masterVolume - OptionsManager.Instance.minVolume) / (OptionsManager.Instance.maxVolume - OptionsManager.Instance.minVolume)).ToString();
+        masterVolumeInput.text = OptionsManager.Instance.masterVolume.ToString();
     }
     public void SetMasterVolume(string volume)
     {
@@ -364,7 +362,8 @@ public class MainMenuManager : MonoBehaviour
     public void SetMusicVolume(float volume)
     {
         OptionsManager.Instance.SetMusicVolume(volume);
-        musicVolumeInput.text = ((OptionsManager.Instance.musicVolume - OptionsManager.Instance.minVolume) / (OptionsManager.Instance.maxVolume - OptionsManager.Instance.minVolume)).ToString();
+        //musicVolumeInput.text = ((OptionsManager.Instance.musicVolume - OptionsManager.Instance.minVolume) / (OptionsManager.Instance.maxVolume - OptionsManager.Instance.minVolume)).ToString();
+        musicVolumeInput.text = OptionsManager.Instance.musicVolume.ToString();
     }
     public void SetMusicVolume(string volume)
     {
@@ -375,7 +374,8 @@ public class MainMenuManager : MonoBehaviour
     public void SetEffectsVolume(float volume)
     {
         OptionsManager.Instance.SetEffectsVolume(volume);
-        effectsVolumeInput.text = ((OptionsManager.Instance.effectsVolume - OptionsManager.Instance.minVolume) / (OptionsManager.Instance.maxVolume - OptionsManager.Instance.minVolume)).ToString();
+        //effectsVolumeInput.text = ((OptionsManager.Instance.effectsVolume - OptionsManager.Instance.minVolume) / (OptionsManager.Instance.maxVolume - OptionsManager.Instance.minVolume)).ToString();
+        effectsVolumeInput.text = OptionsManager.Instance.effectsVolume.ToString();
     }
     public void SetEffectsVolume(string volume)
     {

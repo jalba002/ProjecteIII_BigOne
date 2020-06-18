@@ -48,6 +48,8 @@ public class InteractableObject : MonoBehaviour
 
     public virtual void OnInteracting()
     {
+        if (GameManager.Instance.CanvasController.pauseMenu.activeInHierarchy) return;
+        
         if (showLogDebug)
             Debug.Log("Interacting with " + this.gameObject.name, this);
         try

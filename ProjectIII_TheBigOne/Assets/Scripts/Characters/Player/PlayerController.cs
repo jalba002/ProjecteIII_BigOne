@@ -33,8 +33,7 @@ namespace Player
 
         public StateMachine stateMachine;
 
-        [Header("Sound settings")] 
-        public string footstepPath;
+        [Header("Sound settings")] public string footstepPath;
         [Range(0, 1)] public float footstepVolume = 1f;
 
         public string playerDeathPath;
@@ -91,7 +90,7 @@ namespace Player
 
             if (attachedCollider == null)
                 attachedCollider = GetComponent<Collider>();
-            
+
 
             if (attachedFlashlight == null)
                 attachedFlashlight = GetComponent<FlashlightController>();
@@ -110,8 +109,6 @@ namespace Player
             interactablesManager = GetComponent<InteractablesManager>();
 
             Cursor.visible = false;
-           
-            
         }
 
         private void Start()
@@ -152,9 +149,13 @@ namespace Player
 
             UseFlashlight();
 
-            if (InspectPuzzle()) return;
-            InspectObjects();
-            InteractDynamics();
+            if (interactablesManager.enabled)
+            {
+                interactablesManager.Tick();
+                if (InspectPuzzle()) return;
+                InspectObjects();
+                InteractDynamics();
+            }
         }
 
         bool InspectPuzzle()
@@ -226,24 +227,6 @@ namespace Player
                     }
                 }
             }
-
-            /*
-            if (_dynamicObjectActivator && _dynamicObjectActivator.isActiveAndEnabled)
-            {
-                if (currentBrain.MouseInteract)
-                {
-                    if (_dynamicObjectActivator.Activate(interactablesManager.CurrentInteractable))
-                        cameraController.angleLocked = true;
-                }
-                else if (currentBrain.MouseInteractRelease)
-                {
-                    if (_dynamicObjectActivator.Deactivate())
-                        cameraController.angleLocked = false;
-                }
-
-                return true;
-            }
-            return false;*/
         }
 
         private void UseFlashlight()
@@ -286,12 +269,26 @@ namespace Player
 
         public void ToggleInventory()
         {
+            try
+            {
+                if (interactablesManager.CurrentInteractable.IsInteracting) return;
+            }
+            catch (NullReferenceException)
+            {
+                if (!playerInventory.isActiveAndEnabled)
+                {
+                    return;
+                }
+            }
+
             if (playerInventory && playerInventory.isActiveAndEnabled)
             {
                 var enabled = playerInventory.ToggleInventory();
                 if (!pauseMenu.activeInHierarchy)
                 {
-                    cameraController.angleLocked = enabled;
+                    if (!(stateMachine.GetCurrentState is State_Player_Inspecting))
+                        cameraController.angleLocked = enabled;
+
                     cameraController.cursorLock = !enabled;
                     Cursor.visible = enabled;
 
@@ -306,7 +303,6 @@ namespace Player
                         Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
                     }
                 }
-                
             }
         }
 

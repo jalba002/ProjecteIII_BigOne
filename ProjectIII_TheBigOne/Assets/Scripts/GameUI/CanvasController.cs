@@ -116,7 +116,13 @@ public class CanvasController : MonoBehaviour
         {
             _playerController.stateMachine.enabled = false;
             _playerController.interactablesManager.enabled = false;
-            _playerController.interactablesManager.ClearInteractable();
+
+            if (_playerController.interactablesManager.CurrentInteractable.interactionType !=
+                InteractableObject.InteractionType.Inspect)
+            {
+                _playerController.interactablesManager.ClearInteractable();
+            }
+
             _playerController.objectInspector.enabled = false;
             _playerController.cameraController.angleLocked = true;
             _playerController.cameraController.cursorLock = false;
@@ -134,7 +140,13 @@ public class CanvasController : MonoBehaviour
         {
             _playerController.stateMachine.enabled = false;
             _playerController.interactablesManager.enabled = false;
-            _playerController.interactablesManager.ClearInteractable();
+
+            if (_playerController.interactablesManager.CurrentInteractable.interactionType !=
+                InteractableObject.InteractionType.Inspect)
+            {
+                _playerController.interactablesManager.ClearInteractable();
+            }
+
             _playerController.objectInspector.enabled = false;
             _playerController.cameraController.angleLocked = true;
             _playerController.cameraController.cursorLock = false;
@@ -152,9 +164,24 @@ public class CanvasController : MonoBehaviour
         {
             _playerController.stateMachine.enabled = true;
             _playerController.interactablesManager.enabled = true;
-            _playerController.interactablesManager.ClearInteractable();
+
+            try
+            {
+                if (_playerController.interactablesManager.CurrentInteractable.interactionType !=
+                    InteractableObject.InteractionType.Inspect)
+                {
+                    _playerController.interactablesManager.ClearInteractable();
+                }
+            }
+            catch (NullReferenceException)
+            {
+            }
+
             _playerController.objectInspector.enabled = true;
-            _playerController.cameraController.angleLocked = false;
+
+            if (!(_playerController.stateMachine.GetCurrentState is State_Player_Inspecting))
+                _playerController.cameraController.angleLocked = false;
+
             _playerController.cameraController.cursorLock = true;
             Cursor.visible = false;
 

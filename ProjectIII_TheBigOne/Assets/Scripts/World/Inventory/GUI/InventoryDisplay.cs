@@ -9,14 +9,13 @@ using TMPro;
 using Characters.Player;
 
 public class InventoryDisplay : MonoBehaviour
-{    
-    
-    public  InventoryDisplay Instance;
-    
-    [Header("Gameobjects")] public  Inventory inventoryRef;
+{
+    public InventoryDisplay Instance;
+
+    [Header("Gameobjects")] public Inventory inventoryRef;
 
     public GameObject inventoryParent;
-    [Header("Settings")] public  List<InventorySlot> inventorySlotList = new List<InventorySlot>();
+    [Header("Settings")] public List<InventorySlot> inventorySlotList = new List<InventorySlot>();
     public GameObject slotPrefab;
     public Transform slotGrid;
     public int numberOfSlots = 12;
@@ -61,7 +60,7 @@ public class InventoryDisplay : MonoBehaviour
         {
             Destroy(this);
         }
-        
+
         for (int i = 0; i < numberOfSlots; i++)
         {
             GameObject instance = Instantiate(slotPrefab);
@@ -87,19 +86,18 @@ public class InventoryDisplay : MonoBehaviour
             contextMenu.SetActive(false);
             return;
         }
+
         if (!selectedSlot.item.isUnique)
         {
             contextMenu.transform.SetParent(selectedSlot.transform);
             contextMenu.SetActive(true);
             contextMenu.GetComponent<RectTransform>().anchoredPosition =
-            new Vector3(0 - selectedSlot.gameObject.GetComponent<RectTransform>().rect.size.x, 0, 0);
+                new Vector3(0 - selectedSlot.gameObject.GetComponent<RectTransform>().rect.size.x, 0, 0);
         }
         else
         {
             contextMenu.SetActive(false);
         }
-        
-        
     }
 
     public void SetupSlot(int slot, InventoryItem item)
@@ -110,7 +108,7 @@ public class InventoryDisplay : MonoBehaviour
         if (item == null)
             RemoveText();
     }
-    
+
     public void CopySlot(InventorySlot origin, InventorySlot copy)
     {
         if (origin.item != null)
@@ -128,7 +126,6 @@ public class InventoryDisplay : MonoBehaviour
         var index = inventorySlotList.FindIndex(i => i.item == null);
         Debug.Log(index);
         SetupSlot(index, item);
-
     }
 
     public void RemoveItem(InventoryItem item)
@@ -144,13 +141,11 @@ public class InventoryDisplay : MonoBehaviour
             int a = item.GetActualQuantity();
             if (a == 0)
             {
-               Debug.Log(inventorySlotList.Count);
-               var index = inventorySlotList.FindIndex(i => i.item == item);
-               SetupSlot(index, null);
-                
-               //Only works on Inventory. BRUH.
-               
-                
+                Debug.Log(inventorySlotList.Count);
+                var index = inventorySlotList.FindIndex(i => i.item == item);
+                SetupSlot(index, null);
+
+                //Only works on Inventory. BRUH.
             }
             else
             {
@@ -179,7 +174,7 @@ public class InventoryDisplay : MonoBehaviour
 
                 selectedItem = null;
                 RemoveText();
-                if(selectedSlot != null)
+                if (selectedSlot != null)
                     selectedSlot.background.color = Color.white;
                 selectedSlot = null;
             }
@@ -206,10 +201,9 @@ public class InventoryDisplay : MonoBehaviour
             if (selectedSlot.item.destroyOnUse)
             {
                 RemoveItem(selectedSlot.item);
-                inventoryRef.RemoveItem(selectedSlot.item.itemName);                  
+                inventoryRef.RemoveItem(selectedSlot.item.itemName);
                 selectedSlot = null;
             }
-            
         }
     }
 
@@ -232,13 +226,22 @@ public class InventoryDisplay : MonoBehaviour
 
     public bool ToggleInventoryUI()
     {
-        if(selectedSlot != null)
+        if (selectedSlot != null)
             selectedSlot.UnselectThisSlot();
         //selectedSlot = null;        
         contextMenu.SetActive(false);
+
         if (!inventoryParent.activeSelf)
         {
-            GameManager.Instance.PlayerController.interactablesManager.ClearInteractable();
+            try
+            {
+                if (GameManager.Instance.PlayerController.interactablesManager.CurrentInteractable.interactionType !=
+                    InteractableObject.InteractionType.Inspect)
+                    GameManager.Instance.PlayerController.interactablesManager.ClearInteractable();
+            }
+            catch (NullReferenceException)
+            {
+            }
         }
 
         GameManager.Instance.PlayerController.interactablesManager.enabled = inventoryParent.activeSelf;
@@ -252,7 +255,7 @@ public class InventoryDisplay : MonoBehaviour
             //play sound of opening
             SoundManager.Instance.PlaySound2D("event:/SFX/UI/Inventory/Open");
         }
-        
+
         inventoryParent.SetActive(!inventoryParent.activeSelf);
         return inventoryParent.activeSelf;
     }

@@ -37,7 +37,7 @@ namespace Characters.Player
             currentRaycastCooldown = raycastCooldownPerCheck;
         }
 
-        public void Update()
+        public void Tick()
         {
             if (!enabled)
             {

@@ -137,4 +137,9 @@ public class Dimitry_AnimatorController : MonoBehaviour
             EnemyController.currentBrain.CurrentBlockage = null;
         }
     }
+
+    public void Footstep()
+    {
+        // Play sound of footsteps?
+    }
 }

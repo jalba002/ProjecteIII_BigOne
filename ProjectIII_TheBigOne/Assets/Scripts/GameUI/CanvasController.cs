@@ -116,11 +116,17 @@ public class CanvasController : MonoBehaviour
         {
             _playerController.stateMachine.enabled = false;
             _playerController.interactablesManager.enabled = false;
-
-            if (_playerController.interactablesManager.CurrentInteractable.interactionType !=
-                InteractableObject.InteractionType.Inspect)
+            
+            try
             {
-                _playerController.interactablesManager.ClearInteractable();
+                if (_playerController.interactablesManager.CurrentInteractable.interactionType !=
+                    InteractableObject.InteractionType.Inspect)
+                {
+                    _playerController.interactablesManager.ClearInteractable();
+                }
+            }
+            catch (NullReferenceException)
+            {
             }
 
             _playerController.objectInspector.enabled = false;

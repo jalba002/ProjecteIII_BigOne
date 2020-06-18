@@ -36,16 +36,16 @@ public class BehaviourTree_Enemy_SecondPhase : BehaviourTree
 
         if (attachedCharacter.currentBrain.IsTrackingPlayer) return false;
 
-        attachedCharacter.stateMachine.SwitchState<State_Enemy_Noticed>();
+        attachedCharacter.stateMachine.SwitchState<State_Enemy_NoticedSecondPhase>();
         return true;
     }
-    
+
     private bool CheckPlayerKilled()
     {
         if (!attachedCharacter.currentBrain.IsPlayerCloseEnoughForDeath) return false;
 
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Killing>();
-        
+
         return true;
     }
 
@@ -60,11 +60,11 @@ public class BehaviourTree_Enemy_SecondPhase : BehaviourTree
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Patrolling>();
         return true;
     }
-    
+
     private bool CheckEnterChasing()
     {
         if (!attachedCharacter.currentBrain.IsPlayerInSight) return false;
-        
+
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Chasing>();
         return true;
     }
@@ -74,7 +74,7 @@ public class BehaviourTree_Enemy_SecondPhase : BehaviourTree
         //if (attachedCharacter.currentBrain.IsChasingPlayer) return false;
 
         //if (attachedCharacter.currentBrain.IsPlayerInSight) return false;
-        
+
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Searching>();
         return true;
     }
@@ -82,9 +82,9 @@ public class BehaviourTree_Enemy_SecondPhase : BehaviourTree
     private bool CheckEnterStunned()
     {
         if (!attachedCharacter.currentBrain.IsStunned) return false;
-        
+
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Stunned>();
-        
+
         return true;
     }
 
@@ -93,7 +93,7 @@ public class BehaviourTree_Enemy_SecondPhase : BehaviourTree
         if (!attachedCharacter.currentBrain.IsOnOffMeshLink) return false;
 
         //if (attachedCharacter.currentBrain.IsCurrentlyBreaking) return false;
-        
+
         attachedCharacter.stateMachine.SwitchState<State_Enemy_DestructionTraversing>();
 
         return true;

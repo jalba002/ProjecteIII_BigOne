@@ -1,5 +1,4 @@
-﻿
-/***************************************************************************
+﻿/***************************************************************************
 *                                                                          *
 *  Copyright (c) Raphaël Ernaelsten (@RaphErnaelsten)                      *
 *  All Rights Reserved.                                                    *
@@ -15,9 +14,9 @@
 ***************************************************************************/
 
 using UnityEngine;
-
 #if UNITY_EDITOR
 using UnityEditor;
+
 #endif
 
 namespace Aura2API
@@ -67,10 +66,11 @@ namespace Aura2API
             }
 
 
-            Random.InitState((int)transform.position.x + (int)transform.position.y);
+            Random.InitState((int) transform.position.x + (int) transform.position.y);
             _initialFactor = GetComponentInChildren<Light>().intensity;
-
-            _initialMaterialcolor = m_StatusMaterials[0].GetColor("_EmissionColor");
+            
+            if (m_StatusMaterials != null)
+                _initialMaterialcolor = m_StatusMaterials[0].GetColor("_EmissionColor");
         }
 
 
@@ -94,7 +94,7 @@ namespace Aura2API
 #else
         void OnRenderObject()
         {
-            float currentTime = (float)EditorApplication.timeSinceStartup;
+            float currentTime = (float) EditorApplication.timeSinceStartup;
             _deltaTime = currentTime - _time;
             _time = currentTime;
 #endif
@@ -111,7 +111,7 @@ namespace Aura2API
                 _currentFactor = Mathf.Lerp(_currentFactor, _targetFactor, weight);
                 GetComponentInChildren<Light>().intensity = _initialFactor * _currentFactor;
 
-                if (m_StatusMaterials[0] != null)
+                if (m_StatusMaterials != null)
                     m_StatusMaterials[0].SetColor("_EmissionColor", _initialMaterialcolor * _currentFactor);
 
                 _currentPos = Vector3.Lerp(_currentPos, _targetPos, weight);

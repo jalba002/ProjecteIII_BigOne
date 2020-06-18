@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2406593893548692318}
   - component: {fileID: 2406593893548692319}
   - component: {fileID: 2406593893548692316}
+  - component: {fileID: 4333658554524566092}
   m_Layer: 9
   m_Name: Prefab_PickableItem
   m_TagString: Untagged
@@ -67,6 +68,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4333658554524566092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2406593893548692317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab098a70786b28468d9d431a9388cc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxShininess: 1
+  minShininess: 0.05
+  shininessIncreasePerSecond: 1
+  _currentShininess: 0
+  taken: 0
 --- !u!1 &2406593893805499409
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,7 +143,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ca49a25b14b2937419de2bdcd5495e81, type: 2}
+  - {fileID: 2100000, guid: 491033015eaf3cb41846d1935b35e0a0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -11,7 +11,10 @@ GameObject:
   - component: {fileID: 3797439380813218239}
   - component: {fileID: 5325559612206529417}
   - component: {fileID: 1933373734911428464}
-  m_Layer: 0
+  - component: {fileID: 2456698256388075262}
+  - component: {fileID: 774163165926857894}
+  - component: {fileID: 5518289571704844320}
+  m_Layer: 9
   m_Name: Sickle_Puzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,3 +82,54 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &2456698256388075262
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 209539598834299820}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.28820318, y: 2.149146, z: 0.9241896}
+  m_Center: {x: 3.3483437e-15, y: -0.00000011920929, z: 0.000000074505806}
+--- !u!114 &774163165926857894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 209539598834299820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a1435f60337f94ab3fbeeba8c2e642, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showLogDebug: 0
+  interactionType: 1
+  displayName: Take the sickle
+  previewImage: {fileID: 21300000, guid: 8744cef0b8d07824eb45013147cd4cae, type: 3}
+  displayImage: {fileID: 0}
+  itemID: Sickle_Quest
+  OnItemPickup:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &5518289571704844320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 209539598834299820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dab098a70786b28468d9d431a9388cc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxShininess: 1
+  minShininess: 0.05
+  shininessIncreasePerSecond: 1
+  _currentShininess: 0
+  taken: 0

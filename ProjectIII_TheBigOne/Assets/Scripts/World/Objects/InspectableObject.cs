@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,6 +7,9 @@ using UnityEngine.Events;
 public class InspectableObject : InteractableObject, IInspectable
 {
     [Header("Settings")] public Vector2 maxLimits;
+
+    [Tooltip("If this is not null, the materials used will be these instead of the ones in game.")]
+    public Material[] displayMaterials;
 
     [Space(5)] [Tooltip("Description shown when inspected")] [TextArea(5, 10)]
     public string objectInformation;
@@ -84,7 +86,12 @@ public class InspectableObject : InteractableObject, IInspectable
         {
             _meshFilter = GetComponentInChildren<MeshFilter>();
             _meshRenderer = GetComponentInChildren<MeshRenderer>();
-            InspectInfo = new InspectableInfo(_meshFilter.mesh, _meshRenderer.materials, transform, maxLimits,
+            
+            // Override materials with the ones chosen.
+            // Done to solve the shininess on the face of the player.
+            var selectedMaterials = displayMaterials.Length > 0 ? displayMaterials : _meshRenderer.materials;
+            
+            InspectInfo = new InspectableInfo(_meshFilter.mesh, selectedMaterials, transform, maxLimits,
                 objectInformation);
         }
     }

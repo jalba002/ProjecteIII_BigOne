@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEditor.Experimental.TerrainAPI;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
-using UnityEngine.Rendering.PostProcessing;
-using UnityEngine.XR;
 
 namespace World.Objects
 {
@@ -626,7 +623,7 @@ namespace World.Objects
 
         public void StrongOpening()
         {
-            var useForce = HandlePosition.transform.forward * (Rigidbody.mass * openForce);
+            var useForce = HandlePosition.transform.forward * (Rigidbody.mass * 50f);
             Rigidbody.AddForceAtPosition(useForce, HandlePosition.transform.position, ForceMode.Impulse);
         }
 
@@ -638,7 +635,7 @@ namespace World.Objects
 
         public void StrongClosing()
         {
-            var useForce = HandlePosition.transform.forward * (Rigidbody.mass * openForce);
+            var useForce = HandlePosition.transform.forward * (Rigidbody.mass * 50f);
             Rigidbody.AddForceAtPosition(-useForce, HandlePosition.transform.position, ForceMode.Impulse);
         }
 

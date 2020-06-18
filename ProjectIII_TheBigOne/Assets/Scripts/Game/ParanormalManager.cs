@@ -21,9 +21,6 @@ public class ParanormalManager : MonoBehaviour
     public Transform secondSpawnPoint;
     public Transform relocationSpawnPoint;
 
-    [Header("Audio Settings")] public AudioClip killerLaugh;
-    public AudioSource ParanormalSoundEmitter;
-
     [Header("Enemy")] public EnemyController Dimitry;
     public EnemyTargetDummy enemyTargetDummy;
 
@@ -97,16 +94,6 @@ public class ParanormalManager : MonoBehaviour
             return;
         }
 
-        try
-        {
-            ParanormalSoundEmitter.Play();
-        }
-        catch (Exception error)
-        {
-            Debug.LogWarning(error.Message);
-        }
-
-
         //Dimitry.gameObject.SetActive(true);
 
         //SetDummyParent(Dimitry.currentBrain.archnemesis.transform);
@@ -127,8 +114,11 @@ public class ParanormalManager : MonoBehaviour
     public void TriggerEndgame()
     {
         // Play Sound, move dimitry, disable state. Ready it for the hunt.
-        if (Dimitry.currentBrain.IsChasingPlayer || Dimitry.currentBrain.IsPlayerInSight ||
-            Dimitry.currentBrain.IsVisible) return;
+        if (Dimitry.currentBrain.IsChasingPlayer || Dimitry.currentBrain.IsPlayerInSight)
+        {
+            Debug.LogWarning("Not triggering endgame.");
+            return;
+        }
 
         try
         {
@@ -141,8 +131,6 @@ public class ParanormalManager : MonoBehaviour
         SetEnemyPosition(endgameElements.endPosition);
         endgameElements.doorToClose.StrongClosing();
         Dimitry.SetNewPhase(new BehaviourTree_Enemy_Halted(Dimitry));
-        //Dimitry.stateMachine.SwitchState<State_Enemy_Halt>();
-        // Play SOUND
     }
 
     private void SetEnemyPosition(Transform newPosition)
@@ -158,9 +146,17 @@ public class ParanormalManager : MonoBehaviour
 
     public void EndgameChase()
     {
-        Dimitry.SetNewPhase(new BehaviourTree_Enemy_SecondPhase(Dimitry));
-        SetDummyPosition(GameManager.Instance.PlayerController.transform);
-        Dimitry.NavMeshAgent.SetDestination(enemyTargetDummy.transform.position);
+        try
+        {
+
+            Dimitry.SetNewPhase(new BehaviourTree_Enemy_SecondPhase(Dimitry));
+            SetDummyPosition(GameManager.Instance.PlayerController.transform);
+            Dimitry.NavMeshAgent.SetDestination(enemyTargetDummy.transform.position);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Didn't trigger endgame chase. {e.Message}");
+        }
     }
 
     public void SetDummyPosition(Transform newPosition)

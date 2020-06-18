@@ -30,7 +30,7 @@ public class Dimitry_AnimatorController : MonoBehaviour
         {
             EnemyController.OnPhaseChange.AddListener(LoadNewPhase);
         }
-        
+
         EnemyController.stateMachine.OnStateChange.AddListener(UpdateAnimation);
     }
 
@@ -38,12 +38,14 @@ public class Dimitry_AnimatorController : MonoBehaviour
     {
         if (EnemyController.currentBehaviourTree is BehaviourTree_Enemy_FirstPhase)
         {
-            enemyAnimator.runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load("Animations/Dimitry_Animator_FirstPhase");
+            enemyAnimator.runtimeAnimatorController =
+                (RuntimeAnimatorController) Resources.Load("Animations/Dimitry_Animator_FirstPhase");
             enemyHammer.SetActive(false);
         }
         else if (EnemyController.currentBehaviourTree is BehaviourTree_Enemy_SecondPhase)
         {
-            enemyAnimator.runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load("Animations/Dimitry_Animator_SecondPhase");
+            enemyAnimator.runtimeAnimatorController =
+                (RuntimeAnimatorController) Resources.Load("Animations/Dimitry_Animator_SecondPhase");
             enemyHammer.SetActive(true);
         }
     }
@@ -54,11 +56,11 @@ public class Dimitry_AnimatorController : MonoBehaviour
     }
 
     private void AnimationVariablesUpdate()
-    {        
+    {
         float enemySpeed = EnemyController.NavMeshAgent.velocity.magnitude;
 
         enemyAnimator.SetFloat("Speed", enemySpeed);
-        
+
         if (enemySpeed > 0.5f)
         {
             enemyAnimator.SetBool("IsMoving", true);
@@ -101,13 +103,21 @@ public class Dimitry_AnimatorController : MonoBehaviour
 
     private void UpdateSecondPhase()
     {
-        
     }
 
     public void EndGame()
     {
         if (GameManager.Instance.GameSettings.isPlayerInvincible) return;
-        
+
         GameManager.Instance.EndGame();
+    }
+
+    public void KickDoorOpen()
+    {
+        if (EnemyController.currentBrain.CurrentBlockage != null)
+        {
+            EnemyController.ResolveBlockage(EnemyController.currentBrain.CurrentBlockage);
+            EnemyController.currentBrain.CurrentBlockage = null;
+        }
     }
 }

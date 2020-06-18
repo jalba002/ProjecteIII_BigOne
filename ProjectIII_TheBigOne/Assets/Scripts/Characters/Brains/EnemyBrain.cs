@@ -24,24 +24,26 @@ public class EnemyBrain : Brain
 
     public StunArea StunSource { get; set; }
 
+    public TraversableBlockage CurrentBlockage { get; set; }
+
     public bool IsPlayerInSight { get; set; }
 
     public bool IsPlayerNearLight { get; set; }
-    
+
     public bool IsChasingPlayer { get; set; }
 
     public bool IsTrackingPlayer { get; set; }
 
     public bool IsHearingPlayer { get; set; }
-    
+
     public bool IsNoticingPlayer { get; set; }
-    
+
     public bool HasFailedToNotice { get; set; }
-    
+
     public bool HasSucceededToNotice { get; set; }
 
     public bool IsOnOffMeshLink { get; set; }
-    
+
     public float DistanceToPlayer { get; set; }
 
     public bool IsPlayerCloseEnoughForDeath { get; set; }
@@ -65,8 +67,6 @@ public class EnemyBrain : Brain
             selfCharacter.characterProperties.maxDetectionRange, selfCharacter.characterProperties.watchableLayers, false);*/
 
         DistanceToPlayer = Vector3.Distance(archnemesis.transform.position, this.gameObject.transform.position);
-
-       
     }
 
     public void SetBrainDead()

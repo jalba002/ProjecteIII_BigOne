@@ -8,6 +8,7 @@ using Properties;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using World.Objects;
 using CharacterController = Characters.Generic.CharacterController;
 
 namespace Enemy
@@ -267,6 +268,33 @@ namespace Enemy
         public void ChillDown()
         {
             currentBehaviourTree = new BehaviourTree_Enemy_Halted(this);
+        }
+        
+        public void ResolveBlockage(TraversableBlockage _currentBlockage)
+        {
+            if (_currentBlockage == null) return;
+            switch (_currentBlockage.attachedDynamicObject.objectType)
+            {
+                case DynamicObject.ObjectType.Door:
+                    // Nothing yet.
+                    //_currentBlockage.attachedDynamicObject.ForceOpen(-2200f);
+                    //_currentBlockage.attachedDynamicObject.SetHandleDirection(_attachedController.gameObject.transform.position);
+                    _currentBlockage.attachedDynamicObject.ResetHandle();
+                    _currentBlockage.attachedDynamicObject.StrongOpening();
+                    //_currentBlockage.attachedDynamicObject.BreakOpening(_attachedController.gameObject.transform.forward, 25f);
+                    _currentBlockage.DisableLink(4f);
+                    break;
+                case DynamicObject.ObjectType.Drawer:
+                    // Can't get blocked by a drawer...?
+                    break;
+                case DynamicObject.ObjectType.Pallet:
+                    _currentBlockage.gameObject.SetActive(false);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            _currentBlockage = null;
         }
     }
 }

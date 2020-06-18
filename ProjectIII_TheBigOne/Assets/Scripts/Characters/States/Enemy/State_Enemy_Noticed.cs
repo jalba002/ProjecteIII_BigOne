@@ -44,8 +44,6 @@ namespace Enemy
                 _attachedController.characterProperties.watchableLayers, false,
                 _attachedController.characterProperties.fieldOfVision);
 
-            Debug.Log("IS SEEING? " + isSeeingPlayer);
-            
             if (isSeeingPlayer)
             {
                 trackTime = _attachedController.characterProperties.timeToChasePlayer;
@@ -96,11 +94,15 @@ namespace Enemy
         protected override void OnStateExit()
         {
             base.OnStateExit();
-            _attachedController.NavMeshAgent.isStopped = false; 
             enemyAnimator.enemyAnimator.SetBool("IsNoticing", false);
-            _attachedController.transform.forward = (_attachedController.currentBrain.archnemesis.transform.position -
-                                                     _attachedController.gameObject.transform.position).normalized;
-            _attachedController.transform.position = _attachedController.transform.TransformPoint(GameObject.Find("Base HumanLPlatform").transform.position);
+            //_attachedController.transform.forward = (_attachedController.currentBrain.archnemesis.transform.position -
+                                                    // _attachedController.gameObject.transform.position).normalized;
+            /*_attachedController.NavMeshAgent.updatePosition = false;
+            _attachedController.NavMeshAgent.Warp(_attachedController.GetComponentInChildren<Animator>().transform
+                                                      .TransformPoint(GameObject.Find("Base HumanLPlatform").transform.localPosition) + new Vector3(0f, 1f, 0f));
+            */
+            //_attachedController.NavMeshAgent.isStopped = false;
+            _attachedController.NavMeshAgent.updatePosition = true;
             _attachedController.NavMeshAgent.updateRotation = true;
         }
     }

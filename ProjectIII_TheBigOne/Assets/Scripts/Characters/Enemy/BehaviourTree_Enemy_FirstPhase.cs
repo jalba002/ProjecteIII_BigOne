@@ -23,10 +23,7 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         if (CheckEnterIdle()) return;
         
         if (CheckEnterTraversing()) return;
-            
-        if (CheckEnterFailedNotice()) return;
-        if (CheckEnterSucceededNotice()) return;
-        
+
         if (CheckEnterNotice()) return;
         
         if (CheckEnterChasing()) return;

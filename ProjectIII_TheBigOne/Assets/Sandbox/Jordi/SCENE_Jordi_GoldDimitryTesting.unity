@@ -262,32 +262,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 0
---- !u!114 &116356964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59306422a2ca4454aabce3daa79c3334, type: 3}
-  m_Name: New Aura Base Settings
-  m_EditorClassIdentifier: 
-  useDensity: 1
-  density: 0.25
-  useScattering: 1
-  scattering: 0.5
-  useAmbientLighting: 1
-  ambientLightingStrength: 1
-  useColor: 0
-  color: {r: 0, g: 0.5, b: 0.5, a: 0.5}
-  colorStrength: 1
-  useTint: 0
-  tint: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  tintStrength: 1
-  useExtinction: 0
-  extinction: 0.75
 --- !u!1001 &193824836
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -298,17 +272,17 @@ PrefabInstance:
     - target: {fileID: 5833178391083226027, guid: 094509d853ee9ae47bddca821e9278d6,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -13.020143
+      value: -13.102642
       objectReference: {fileID: 0}
     - target: {fileID: 5833178391083226027, guid: 094509d853ee9ae47bddca821e9278d6,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -2.059383
+      value: -1.5493829
       objectReference: {fileID: 0}
     - target: {fileID: 5833178391083226027, guid: 094509d853ee9ae47bddca821e9278d6,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -35.979393
+      value: -35.921394
       objectReference: {fileID: 0}
     - target: {fileID: 5952668336155869130, guid: 094509d853ee9ae47bddca821e9278d6,
         type: 3}
@@ -4499,6 +4473,41 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1374054488}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &531625155
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Flashlight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &613161493
 GameObject:
   m_ObjectHideFlags: 0
@@ -4514,7 +4523,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &613161494
 Transform:
   m_ObjectHideFlags: 0
@@ -4614,6 +4623,41 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 632730740}
   m_Mesh: {fileID: -1340374281763123202, guid: 01657b027402b644688d46f85a8d5651, type: 3}
+--- !u!84 &643942156
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'SpotLight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &661423409 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8283181350117776198, guid: fdf54fee5f69869488d164e98364378e,
@@ -4834,41 +4878,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788802646}
   m_Mesh: {fileID: 4537911421221783540, guid: ce486df5ec1d8e644b125a8cf26b2b0e, type: 3}
---- !u!84 &792245671
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'Flashlight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!114 &840408876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5377,41 +5386,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aed71e0537a8e484d85ab724bcaac484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!84 &976695507
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'SpotLight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!114 &985658811 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2553527969660208647, guid: 178d6527a3360844d823f83e48030ff9,
@@ -5620,17 +5594,17 @@ PrefabInstance:
     - target: {fileID: 4449187393536991724, guid: ed196176ce711ba47b1b9ac90f9df0ee,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -23.445
+      value: -23.77641
       objectReference: {fileID: 0}
     - target: {fileID: 4449187393536991724, guid: ed196176ce711ba47b1b9ac90f9df0ee,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -2.2599335
+      value: -2.7405047
       objectReference: {fileID: 0}
     - target: {fileID: 4449187393536991724, guid: ed196176ce711ba47b1b9ac90f9df0ee,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -32.019
+      value: -31.779528
       objectReference: {fileID: 0}
     - target: {fileID: 6232006229910730049, guid: ed196176ce711ba47b1b9ac90f9df0ee,
         type: 3}
@@ -5640,17 +5614,17 @@ PrefabInstance:
     - target: {fileID: 6409924084422098108, guid: ed196176ce711ba47b1b9ac90f9df0ee,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -22.575
+      value: -23.768024
       objectReference: {fileID: 0}
     - target: {fileID: 6409924084422098108, guid: ed196176ce711ba47b1b9ac90f9df0ee,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -2.2599335
+      value: -2.726519
       objectReference: {fileID: 0}
     - target: {fileID: 6409924084422098108, guid: ed196176ce711ba47b1b9ac90f9df0ee,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -32.019
+      value: -32.649376
       objectReference: {fileID: 0}
     - target: {fileID: 6506984897891139594, guid: ed196176ce711ba47b1b9ac90f9df0ee,
         type: 3}
@@ -5745,32 +5719,32 @@ PrefabInstance:
     - target: {fileID: 7752277642829195027, guid: ed196176ce711ba47b1b9ac90f9df0ee,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -19.950142
+      value: -19.892141
       objectReference: {fileID: 0}
     - target: {fileID: 7752277642829195027, guid: ed196176ce711ba47b1b9ac90f9df0ee,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -2.059383
+      value: -1.5493829
       objectReference: {fileID: 0}
     - target: {fileID: 7752277642829195027, guid: ed196176ce711ba47b1b9ac90f9df0ee,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -43.029392
+      value: -42.94689
       objectReference: {fileID: 0}
     - target: {fileID: 7897834426755026278, guid: ed196176ce711ba47b1b9ac90f9df0ee,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -21.04914
+      value: -21.107141
       objectReference: {fileID: 0}
     - target: {fileID: 7897834426755026278, guid: ed196176ce711ba47b1b9ac90f9df0ee,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -2.059383
+      value: -1.5493829
       objectReference: {fileID: 0}
     - target: {fileID: 7897834426755026278, guid: ed196176ce711ba47b1b9ac90f9df0ee,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -31.050392
+      value: -31.132893
       objectReference: {fileID: 0}
     - target: {fileID: 7926325979284323597, guid: ed196176ce711ba47b1b9ac90f9df0ee,
         type: 3}
@@ -6195,6 +6169,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 178d6527a3360844d823f83e48030ff9, type: 3}
+--- !u!114 &1043137970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59306422a2ca4454aabce3daa79c3334, type: 3}
+  m_Name: New Aura Base Settings
+  m_EditorClassIdentifier: 
+  useDensity: 1
+  density: 0.25
+  useScattering: 1
+  scattering: 0.5
+  useAmbientLighting: 1
+  ambientLightingStrength: 1
+  useColor: 0
+  color: {r: 0, g: 0.5, b: 0.5, a: 0.5}
+  colorStrength: 1
+  useTint: 0
+  tint: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  tintStrength: 1
+  useExtinction: 0
+  extinction: 0.75
 --- !u!4 &1061152488 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2056461003587493138, guid: aea984b64a1e60e41937b61e1d2aa283,
@@ -6207,6 +6207,41 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1011276324}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &1135317091
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'SpotLight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1141219487
 GameObject:
   m_ObjectHideFlags: 0
@@ -6700,17 +6735,17 @@ PrefabInstance:
     - target: {fileID: 6707512045752063801, guid: dda1240b04a025047916f44242ceae84,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -12.990142
+      value: -13.071642
       objectReference: {fileID: 0}
     - target: {fileID: 6707512045752063801, guid: dda1240b04a025047916f44242ceae84,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -2.059383
+      value: -1.5493829
       objectReference: {fileID: 0}
     - target: {fileID: 6707512045752063801, guid: dda1240b04a025047916f44242ceae84,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -40.944393
+      value: -40.91339
       objectReference: {fileID: 0}
     - target: {fileID: 6847969237895914788, guid: dda1240b04a025047916f44242ceae84,
         type: 3}
@@ -6988,7 +7023,7 @@ PrefabInstance:
     - target: {fileID: 1456463718276920388, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -19.595
+      value: -20.876
       objectReference: {fileID: 0}
     - target: {fileID: 1456463718276920388, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
@@ -7003,7 +7038,7 @@ PrefabInstance:
     - target: {fileID: 2761535239759430355, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -22.087362
+      value: -23.177832
       objectReference: {fileID: 0}
     - target: {fileID: 2761535239759430355, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
@@ -7013,7 +7048,7 @@ PrefabInstance:
     - target: {fileID: 2761535239759430355, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -26.5802
+      value: -26.540998
       objectReference: {fileID: 0}
     - target: {fileID: 2761535239876262059, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
@@ -7113,7 +7148,7 @@ PrefabInstance:
     - target: {fileID: 4834858332689637251, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -22.087364
+      value: -23.177834
       objectReference: {fileID: 0}
     - target: {fileID: 4834858332689637251, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
@@ -7123,7 +7158,7 @@ PrefabInstance:
     - target: {fileID: 4834858332689637251, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -26.5802
+      value: -26.540997
       objectReference: {fileID: 0}
     - target: {fileID: 4834858332706842107, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
@@ -7148,17 +7183,17 @@ PrefabInstance:
     - target: {fileID: 5343285355833921177, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -25.017141
+      value: -24.93464
       objectReference: {fileID: 0}
     - target: {fileID: 5343285355833921177, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -2.059383
+      value: -1.5493829
       objectReference: {fileID: 0}
     - target: {fileID: 5343285355833921177, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -24.083393
+      value: -24.141392
       objectReference: {fileID: 0}
     - target: {fileID: 5356563896121213238, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
@@ -7178,17 +7213,17 @@ PrefabInstance:
     - target: {fileID: 5656213149092864797, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -13.012142
+      value: -13.094642
       objectReference: {fileID: 0}
     - target: {fileID: 5656213149092864797, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -2.0593553
+      value: -1.5493553
       objectReference: {fileID: 0}
     - target: {fileID: 5656213149092864797, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -22.92139
+      value: -22.863392
       objectReference: {fileID: 0}
     - target: {fileID: 6155987901180405152, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
@@ -7218,7 +7253,7 @@ PrefabInstance:
     - target: {fileID: 8177492018830502164, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -18.725
+      value: -20.006
       objectReference: {fileID: 0}
     - target: {fileID: 8177492018830502164, guid: 50a38f06b742c924c967ecc3a82b458c,
         type: 3}
@@ -7382,41 +7417,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1398174347}
   m_PrefabAsset: {fileID: 0}
---- !u!84 &1447152395
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'SpotLight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!114 &1488988073 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5847641701073346039, guid: 178d6527a3360844d823f83e48030ff9,
@@ -7947,6 +7947,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dc41bf03a0c3924384ae7e4185896a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!84 &1812106219
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'SpotLight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1001 &1818450045
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13647,6 +13682,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 613161494}
     m_Modifications:
+    - target: {fileID: 47042498533038307, guid: aea984b64a1e60e41937b61e1d2aa283,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -37.04264
+      objectReference: {fileID: 0}
+    - target: {fileID: 47042498533038307, guid: aea984b64a1e60e41937b61e1d2aa283,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: -1.5493829
+      objectReference: {fileID: 0}
+    - target: {fileID: 47042498533038307, guid: aea984b64a1e60e41937b61e1d2aa283,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: -43.87339
+      objectReference: {fileID: 0}
     - target: {fileID: 1364262947098633887, guid: aea984b64a1e60e41937b61e1d2aa283,
         type: 3}
       propertyPath: m_BoundingSphereOverride.x
@@ -13720,7 +13770,7 @@ PrefabInstance:
     - target: {fileID: 2056461003587493138, guid: aea984b64a1e60e41937b61e1d2aa283,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2056461003587493138, guid: aea984b64a1e60e41937b61e1d2aa283,
         type: 3}
@@ -14108,6 +14158,41 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1039481686}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &2004438325
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'SpotLight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &2009298419
 GameObject:
   m_ObjectHideFlags: 0
@@ -15203,6 +15288,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5402121857669391137, guid: 3307a31eaf8e4c14483fea22daf1d08d,
+        type: 3}
+      propertyPath: cookieMapRenderTexture
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5402121858547835388, guid: 3307a31eaf8e4c14483fea22daf1d08d,
+        type: 3}
+      propertyPath: cookieMapRenderTexture
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5743200560223361292, guid: 3307a31eaf8e4c14483fea22daf1d08d,
         type: 3}

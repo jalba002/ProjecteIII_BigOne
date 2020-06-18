@@ -70,7 +70,7 @@ public class MainMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UpdateOptions();       
+        UpdateOptions();
     }
 
     private void Awake()
@@ -87,11 +87,9 @@ public class MainMenuManager : MonoBehaviour
         b_exit.SetActive(false);
 
         selectedOption.SetActive(true);
-
-        
     }
 
-   
+
 
     // Update is called once per frame
     void Update()
@@ -105,10 +103,10 @@ public class MainMenuManager : MonoBehaviour
             MoveRight();
         }
 
-       //Camera Movement
+        //Camera Movement
         Vector3 targetDirection = selectedOption.transform.position - camera.transform.position;
-        float singleStep = speed * Time.deltaTime;    
-        Vector3 newDirection = Vector3.RotateTowards(camera.transform.forward, targetDirection, singleStep, 0.0f);      
+        float singleStep = speed * Time.deltaTime;
+        Vector3 newDirection = Vector3.RotateTowards(camera.transform.forward, targetDirection, singleStep, 0.0f);
         camera.transform.rotation = Quaternion.LookRotation(newDirection);
 
         if (selectedOption == optionsmenu)
@@ -152,7 +150,7 @@ public class MainMenuManager : MonoBehaviour
             {
                 ChangeOptions(false);
             }
-            
+
         }
         else
         {
@@ -197,7 +195,7 @@ public class MainMenuManager : MonoBehaviour
                 }
             }
         }
-        
+
     }
 
     public void SelectOptionWithButton(int option)
@@ -233,7 +231,7 @@ public class MainMenuManager : MonoBehaviour
             buttons[2].SetActive(false);
             buttons[1].SetActive(true);
         }
-        else if(selectedOption == buttons[1])
+        else if (selectedOption == buttons[1])
         {
             selectedOption = buttons[0];
             buttons[1].SetActive(false);
@@ -245,7 +243,7 @@ public class MainMenuManager : MonoBehaviour
             buttons[0].SetActive(false);
             buttons[2].SetActive(true);
         }
-        
+
     }
     public void MoveRight()
     {
@@ -270,7 +268,8 @@ public class MainMenuManager : MonoBehaviour
     }
     public void PlayGame()
     {
-        SceneManager.LoadScene(sceneIDToLoad);
+        //SceneManager.LoadScene(sceneIDToLoad);
+        FindObjectOfType<LevelTransitionController>().BlackFadeOut();
     }
     public void ChangeOptions(bool b)
     {
@@ -353,7 +352,7 @@ public class MainMenuManager : MonoBehaviour
 
         masterVolumeInput.text = ((OptionsManager.Instance.masterVolume - OptionsManager.Instance.minVolume) / (OptionsManager.Instance.maxVolume - OptionsManager.Instance.minVolume)).ToString();
 
-        
+
         //masterVolumeInput.text = OptionsManager.Instance.masterVolume.ToString();
     }
     public void SetMasterVolume(string volume)
@@ -432,6 +431,12 @@ public class MainMenuManager : MonoBehaviour
 
         brightnessSlider.value = OptionsManager.Instance.brightness;
     }
-    
-   
+
+    public void Quit()
+    {
+        Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+    }
 }

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using FMOD;
+using UnityEngine;
+using Debug = UnityEngine.Debug;
 using State = Player.State;
 using StateMachine = Characters.Generic.StateMachine;
 
@@ -13,6 +15,8 @@ namespace Enemy
         private Dimitry_AnimatorController enemyAnimator;
 
         private Vector3 playerDirection;
+        
+        public bool isSeeingPlayer { get; private set; }
 
         protected override void OnStateInitialize(StateMachine machine)
         {
@@ -27,21 +31,25 @@ namespace Enemy
 
             // Move target point to closest patrol point, or a point that has not been visited BUT is near the player.
             _attachedController.CheckForPlayerNearLight();
-            _attachedController.CheckForPlayerOnSight();
+            //_attachedController.CheckForPlayerOnSight();
             _attachedController.CheckForEnemyVisibility();
             _attachedController.HearPlayerAround();
             //_attachedController.CheckForMeshLink();
             _attachedController.CheckForPlayerKilling();
 
+            isSeeingPlayer = SensesUtil.IsInSight(_attachedController.dimitryEyes,
+                _attachedController.currentBrain.archnemesis.gameObject,
+                _attachedController.currentBrain.archnemesis.transform,
+                _attachedController.characterProperties.maxDetectionRange,
+                _attachedController.characterProperties.watchableLayers, false,
+                _attachedController.characterProperties.fieldOfVision);
 
-            if (!_attachedController.currentBrain.IsHearingPlayer)
-            {
-                ResolveState();
-            }
-            else if (_attachedController.currentBrain.IsPlayerInSight)
+            Debug.Log("IS SEEING? " + isSeeingPlayer);
+            
+            if (isSeeingPlayer)
             {
                 trackTime = _attachedController.characterProperties.timeToChasePlayer;
-                _attachedController.currentBrain.IsNoticingPlayer = false;
+                //_attachedController.currentBrain.IsNoticingPlayer = false;
                 ResolveState();
             }
         }
@@ -65,12 +73,12 @@ namespace Enemy
             _attachedController.NavMeshAgent.updateRotation = false;
 
             trackTime = 0f;
-            
+
             enemyAnimator.enemyAnimator.SetBool("IsNoticing", true);
 
-            playerDirection =
+            /*playerDirection =
                 (_attachedController.currentBrain.archnemesis.transform.position -
-                 _attachedController.gameObject.transform.position).normalized;
+                 _attachedController.gameObject.transform.position).normalized;*/
         }
 
         private void ResolveState()
@@ -88,9 +96,12 @@ namespace Enemy
         protected override void OnStateExit()
         {
             base.OnStateExit();
-            _attachedController.NavMeshAgent.updateRotation = true;
-            _attachedController.NavMeshAgent.isStopped = false;
+            _attachedController.NavMeshAgent.isStopped = false; 
             enemyAnimator.enemyAnimator.SetBool("IsNoticing", false);
+            _attachedController.transform.forward = (_attachedController.currentBrain.archnemesis.transform.position -
+                                                     _attachedController.gameObject.transform.position).normalized;
+            _attachedController.transform.position = _attachedController.transform.TransformPoint(GameObject.Find("Base HumanLPlatform").transform.position);
+            _attachedController.NavMeshAgent.updateRotation = true;
         }
     }
 }

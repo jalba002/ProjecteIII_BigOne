@@ -27,9 +27,9 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
         if (CheckEnterFailedNotice()) return;
         if (CheckEnterSucceededNotice()) return;
         
-        if (CheckEnterChasing()) return;
-        
         if (CheckEnterNotice()) return;
+        
+        if (CheckEnterChasing()) return;
 
         if (CheckEnterPatrol()) return;
 
@@ -57,10 +57,10 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
 
         //if (attachedCharacter.currentBrain.IsTrackingPlayer) return false;
 
-        if (attachedCharacter.currentBrain.HasSucceededToNotice ||
-            attachedCharacter.currentBrain.HasFailedToNotice) return false;
+        /*if (attachedCharacter.currentBrain.HasSucceededToNotice ||
+            attachedCharacter.currentBrain.HasFailedToNotice) return false;*/
 
-        //if (attachedCharacter.stateMachine.GetCurrentState is State_Enemy_Chasing) return false;
+        if (attachedCharacter.stateMachine.GetCurrentState is State_Enemy_Chasing) return false;
 
         attachedCharacter.stateMachine.SwitchState<State_Enemy_Noticed>();
         return true;
@@ -83,8 +83,8 @@ public class BehaviourTree_Enemy_FirstPhase : BehaviourTree
     private bool CheckEnterSucceededNotice()
     {
         if (!attachedCharacter.currentBrain.HasSucceededToNotice) return false;
-
-        //if (!(attachedCharacter.stateMachine.GetCurrentState is State_Enemy_Noticed)) return false;
+        
+        if (!(attachedCharacter.stateMachine.lastState is State_Enemy_Noticed)) return false;
 
         attachedCharacter.stateMachine.SwitchState<State_Enemy_NoticedSucceeded>();
         return true;

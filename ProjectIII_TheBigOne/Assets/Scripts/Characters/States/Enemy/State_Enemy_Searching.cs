@@ -12,6 +12,7 @@ namespace Enemy
         private float _movementSpeed;
         private Random Alea = new Random();
         private float trackTime;
+        private float lastFOV;
 
         private NavMeshPath forcedPath;
 
@@ -32,7 +33,9 @@ namespace Enemy
             _attachedController.CheckForPlayerOnSight();
             _attachedController.CheckForEnemyVisibility();
             _attachedController.HearPlayerAround();
-            _attachedController.currentBrain.IsNoticingPlayer = _attachedController.currentBrain.IsHearingPlayer;
+            
+            _attachedController.currentBrain.IsNoticingPlayer = _attachedController.currentBrain.IsHearingPlayer && !_attachedController.currentBrain.IsPlayerInSight;
+            
             _attachedController.CheckForMeshLink();
             _attachedController.CheckForPlayerKilling();
 
@@ -75,6 +78,10 @@ namespace Enemy
                                     _attachedController.NavMeshAgent.transform.position);
             _attachedController.NavMeshAgent.SetDestination(_attachedController.targetPositionDummy.transform.position);
             _attachedController.NavMeshAgent.autoRepath = false;
+
+            lastFOV = _attachedController.characterProperties.fieldOfVision;
+            _attachedController.characterProperties.fieldOfVision = 180f;
+
             //forcedPath = _attachedController.NavMeshAgent.path;
         }
 
@@ -87,6 +94,7 @@ namespace Enemy
         protected override void OnStateExit()
         {
             base.OnStateExit();
+            _attachedController.characterProperties.fieldOfVision = lastFOV;
         }
     }
 }

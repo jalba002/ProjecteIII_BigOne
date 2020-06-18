@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Runtime.CompilerServices;
+using FMOD;
+using UnityEngine;
+using Debug = UnityEngine.Debug;
 using State = Player.State;
 using StateMachine = Characters.Generic.StateMachine;
 
@@ -10,11 +14,13 @@ namespace Enemy
         private float _movementSpeed;
 
         private Vector3 playerDirection;
+        private Animator attachedAnimator;
 
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
             _attachedController = (EnemyController) Machine.characterController;
+            attachedAnimator = _attachedController.GetComponentInChildren<Animator>();
         }
 
         public override void OnStateTick(float deltaTime)
@@ -25,7 +31,7 @@ namespace Enemy
             _attachedController.CheckForPlayerNearLight();
             _attachedController.CheckForPlayerOnSight();
             _attachedController.CheckForEnemyVisibility();
-            _attachedController.HearPlayerAround();
+            //_attachedController.HearPlayerAround();
             //_attachedController.CheckForMeshLink();
             _attachedController.CheckForPlayerKilling();
         }
@@ -38,6 +44,20 @@ namespace Enemy
         public override void OnStateCheckTransition()
         {
             base.OnStateCheckTransition();
+            /*
+            try
+            {
+                if (!attachedAnimator.GetCurrentAnimatorStateInfo(0).IsName("Dmitry_ConfirmNotice"))
+                {
+                    _attachedController.currentBrain.HasSucceededToNotice = false;
+                }
+            }
+            catch (NullReferenceException)
+            {
+                Debug.LogError("ATTACHED CONTROLLER NOT ASSIGNED");
+                _attachedController.currentBrain.HasSucceededToNotice = false;
+            }
+            */
         }
 
         protected override void OnStateEnter()
@@ -45,18 +65,22 @@ namespace Enemy
             base.OnStateEnter();
             _attachedController.NavMeshAgent.isStopped = true;
             _attachedController.NavMeshAgent.updateRotation = false;
+            _attachedController.currentBrain.IsNoticingPlayer = false;
 
-            playerDirection =
-                (_attachedController.currentBrain.archnemesis.transform.position -
-                 _attachedController.gameObject.transform.position).normalized;
         }
 
         protected override void OnStateExit()
         {
             base.OnStateExit();
-            _attachedController.NavMeshAgent.updateRotation = true;
+
             _attachedController.currentBrain.IsChasingPlayer = true;
-            _attachedController.transform.forward = playerDirection;
+
+            _attachedController.targetPositionDummy.transform.position =
+                _attachedController.currentBrain.archnemesis.transform.position;
+
+            
+            //_attachedController.NavMeshAgent.updateRotation = true;
+            
             _attachedController.NavMeshAgent.isStopped = false;
         }
     }

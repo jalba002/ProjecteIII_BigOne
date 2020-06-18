@@ -21,6 +21,8 @@ public class Dmitry_EndConfirmation : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemyBrain.HasSucceededToNotice = false;
+        enemyBrain.IsNoticingPlayer = false;
+        enemyBrain.IsPlayerInSight = true;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

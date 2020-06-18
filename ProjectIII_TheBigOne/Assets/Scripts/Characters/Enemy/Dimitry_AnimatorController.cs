@@ -59,7 +59,7 @@ public class Dimitry_AnimatorController : MonoBehaviour
 
         enemyAnimator.SetFloat("Speed", enemySpeed);
         
-        if (enemySpeed > 0f)
+        if (enemySpeed > 0.5f)
         {
             enemyAnimator.SetBool("IsMoving", true);
         }
@@ -89,7 +89,6 @@ public class Dimitry_AnimatorController : MonoBehaviour
         if (EnemyController.stateMachine.GetCurrentState is State_Enemy_DestructionTraversing
             || EnemyController.stateMachine.GetCurrentState is State_Enemy_Traversing)
         {
-            //if(enemyAnimator.)
             enemyAnimator.SetBool("Kicking", true);
         }
         else
@@ -98,11 +97,6 @@ public class Dimitry_AnimatorController : MonoBehaviour
         }
 
         enemyAnimator.SetBool("IsLighted", EnemyController.stateMachine.GetCurrentState is State_Enemy_Lighted);
-
-        /*if (EnemyController.stateMachine.GetCurrentState is State_Enemy_Noticed)
-        {
-            enemyAnimator.SetBool("IsNoticing", true);
-        }*/
     }
 
     private void UpdateSecondPhase()

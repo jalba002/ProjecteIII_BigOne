@@ -2,6 +2,7 @@
 using FMODUnity;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class SoundManager : MonoBehaviour
 {
@@ -53,6 +54,7 @@ public class SoundManager : MonoBehaviour
     void Update()
     {
         // Actualizamos las posiciones de los sonidos 3D
+
         if (positionEvents != null && positionEvents.Count > 0)
         {
             for (int i = 0; i < positionEvents.Count; i++)
@@ -66,7 +68,14 @@ public class SoundManager : MonoBehaviour
                 }
                 else
                 {
-                    eventInst.set3DAttributes(RuntimeUtils.To3DAttributes(positionEvents[i].GetTransform().position));
+                    try
+                    {
+                        eventInst.set3DAttributes(
+                            RuntimeUtils.To3DAttributes(positionEvents[i].GetTransform().position));
+                    }
+                    catch (NullReferenceException)
+                    {
+                    }
                 }
             }
         }
@@ -314,8 +323,8 @@ public class SoundManager : MonoBehaviour
     public void StopMovingSound(SoundManagerMovingSound soundEvent, bool fadeout = false)
     {
         soundEvent.GetEventInstance().clearHandle();
-        
-        if(positionEvents.Remove(soundEvent))
+
+        if (positionEvents.Remove(soundEvent))
         {
             if (fadeout)
                 soundEvent.GetEventInstance().stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
@@ -395,7 +404,7 @@ public class SoundManager : MonoBehaviour
         VCA vca;
         if (RuntimeManager.StudioSystem.getVCA("vca:/" + channel, out vca) != FMOD.RESULT.OK)
             return;
-        
+
         vca.setVolume(OptionsManager.Instance.maxVolume * channelVolume / 100);
     }
 

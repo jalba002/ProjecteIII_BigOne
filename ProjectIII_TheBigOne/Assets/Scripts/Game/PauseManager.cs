@@ -15,10 +15,7 @@ public class PauseManager : MonoBehaviour
     public GameObject mouse;
     public GameObject screen;
 
-    [Header("Sliders")]
-    public Slider masterVolumeSlider;
-    public Slider effectsVolumeSlider;
-    public Slider musicVolumeSlider;
+    [Header("Sliders")]   
     public Slider sensibilitySlider;
     public Toggle invertToogle; 
     public Slider brightnessSlider;
@@ -33,10 +30,7 @@ public class PauseManager : MonoBehaviour
     public Button mouseButton;
     public Button screenButton;
 
-    [Header("Text Inputs")]
-    public InputField masterVolumeInput;
-    public InputField musicVolumeInput;
-    public InputField effectsVolumeInput;
+    [Header("Text Inputs")]    
     public InputField sensibilityInput;
     public InputField brightnessInput;
 
@@ -118,40 +112,7 @@ public class PauseManager : MonoBehaviour
         mouse.SetActive(false);
         screen.SetActive(true);
     }
-
-    public void SetMasterVolume(float volume)
-    {
-        OptionsManager.Instance.SetMasterVolume(volume);
-        masterVolumeInput.text = OptionsManager.Instance.masterVolume.ToString();
-    }
-    public void SetMasterVolume(string volume)
-    {
-        OptionsManager.Instance.SetMasterVolume(volume);
-        masterVolumeSlider.value = OptionsManager.Instance.masterVolume;
-    }
-
-    public void SetMusicVolume(float volume)
-    {
-        OptionsManager.Instance.SetMusicVolume(volume);
-        musicVolumeInput.text = OptionsManager.Instance.musicVolume.ToString();
-    }
-    public void SetMusicVolume(string volume)
-    {
-        OptionsManager.Instance.SetMusicVolume(volume);
-        musicVolumeSlider.value = OptionsManager.Instance.musicVolume;
-    }
-
-    public void SetEffectsVolume(float volume)
-    {
-        OptionsManager.Instance.SetEffectsVolume(volume);
-        effectsVolumeInput.text = OptionsManager.Instance.effectsVolume.ToString();
-    }
-    public void SetEffectsVolume(string volume)
-    {
-        OptionsManager.Instance.SetEffectsVolume(volume);
-        effectsVolumeSlider.value = OptionsManager.Instance.effectsVolume;
-    }
-
+   
     public void SetSensibility(float sensibility)
     {
         OptionsManager.Instance.SetSensibility(sensibility);
@@ -171,6 +132,11 @@ public class PauseManager : MonoBehaviour
         GameManager.Instance.PlayerController.cameraController.invertMouse = OptionsManager.Instance.invertedMouse;
     }
 
+    public void SetHUDHidden(bool hidden)
+    {
+        GameManager.Instance.GameSettings.showHud = !hidden;
+    }
+
     public void SetBrightness(float bright)
     {
         OptionsManager.Instance.SetBrightness(bright);
@@ -182,10 +148,7 @@ public class PauseManager : MonoBehaviour
         brightnessSlider.value = OptionsManager.Instance.brightness;
     }
     public void UpdateOptions()
-    {
-        masterVolumeSlider.value = OptionsManager.Instance.masterVolume;
-        musicVolumeSlider.value = OptionsManager.Instance.musicVolume;
-        effectsVolumeSlider.value = OptionsManager.Instance.effectsVolume;
+    {       
 
         sensibilitySlider.value = OptionsManager.Instance.sensibility;
         invertToogle.isOn = OptionsManager.Instance.invertedMouse;

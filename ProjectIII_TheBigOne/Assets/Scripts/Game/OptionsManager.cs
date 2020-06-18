@@ -192,10 +192,7 @@ public class OptionsManager : MonoBehaviour
     }
 
     public void UpdateOptions()
-    {
-        mainMenuManager.masterVolumeSlider.value = masterVolume;
-        mainMenuManager.musicVolumeSlider.value = musicVolume;
-        mainMenuManager.effectsVolumeSlider.value = effectsVolume;
+    {      
 
         mainMenuManager.sensibilitySlider.value = sensibility;
         mainMenuManager.invertToogle.isOn = invertedMouse;

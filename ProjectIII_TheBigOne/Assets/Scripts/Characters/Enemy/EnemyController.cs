@@ -296,5 +296,28 @@ namespace Enemy
 
             _currentBlockage = null;
         }
+        
+        public void BreakBlockage(TraversableBlockage _currentBlockage)
+        {
+            switch (_currentBlockage.attachedDynamicObject.objectType)
+            {
+                case DynamicObject.ObjectType.Door:
+                    // Nothing yet.
+                    _currentBlockage.attachedDynamicObject.BreakJoint(attachedCollider);
+                    _currentBlockage.attachedDynamicObject.BreakOpening(transform.forward,
+                        5f);
+                    _currentBlockage.DisableLink(4f);
+                    break;
+                case DynamicObject.ObjectType.Drawer:
+                    // Can't get blocked by a drawer...?
+                    break;
+                case DynamicObject.ObjectType.Pallet:
+                    // This should be the wall explosion.
+                    _currentBlockage.gameObject.SetActive(false);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
     }
 }

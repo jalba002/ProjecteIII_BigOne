@@ -35,7 +35,6 @@ namespace Enemy
             }
             else if (breakTime <= 0f)
             {
-                ResolveBlockage();
                 _attachedController.NavMeshAgent.CompleteOffMeshLink();
                 _attachedController.currentBrain.IsOnOffMeshLink = false;
             }
@@ -109,27 +108,6 @@ namespace Enemy
             _attachedController.NavMeshAgent.updateRotation = true;
         }
 
-        private void ResolveBlockage()
-        {
-            switch (_currentBlockage.attachedDynamicObject.objectType)
-            {
-                case DynamicObject.ObjectType.Door:
-                    // Nothing yet.
-                    _currentBlockage.attachedDynamicObject.BreakJoint(_attachedController.attachedCollider);
-                    _currentBlockage.attachedDynamicObject.BreakOpening(Machine.characterController.transform.forward,
-                        5f);
-                    _currentBlockage.DisableLink(4f);
-                    break;
-                case DynamicObject.ObjectType.Drawer:
-                    // Can't get blocked by a drawer...?
-                    break;
-                case DynamicObject.ObjectType.Pallet:
-                    // This should be the wall explosion.
-                    _currentBlockage.gameObject.SetActive(false);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
+        
     }
 }

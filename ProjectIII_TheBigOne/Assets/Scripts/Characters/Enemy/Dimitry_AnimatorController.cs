@@ -103,6 +103,15 @@ public class Dimitry_AnimatorController : MonoBehaviour
 
     private void UpdateSecondPhase()
     {
+        if (EnemyController.stateMachine.GetCurrentState is State_Enemy_DestructionTraversing
+            || EnemyController.stateMachine.GetCurrentState is State_Enemy_Traversing)
+        {
+            enemyAnimator.SetBool("Kicking", true);
+        }
+        else
+        {
+            enemyAnimator.SetBool("Kicking", false);
+        }
     }
 
     public void EndGame()
@@ -117,6 +126,14 @@ public class Dimitry_AnimatorController : MonoBehaviour
         if (EnemyController.currentBrain.CurrentBlockage != null)
         {
             EnemyController.ResolveBlockage(EnemyController.currentBrain.CurrentBlockage);
+            EnemyController.currentBrain.CurrentBlockage = null;
+        }
+    }
+    public void BreakDoorOpen()
+    {
+        if (EnemyController.currentBrain.CurrentBlockage != null)
+        {
+            EnemyController.BreakBlockage(EnemyController.currentBrain.CurrentBlockage);
             EnemyController.currentBrain.CurrentBlockage = null;
         }
     }

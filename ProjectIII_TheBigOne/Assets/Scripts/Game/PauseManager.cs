@@ -11,7 +11,7 @@ public class PauseManager : MonoBehaviour
     [Header("Options")]
     public GameObject options;
     public GameObject controls;
-    public GameObject volume;
+    //public GameObject volume;
     public GameObject mouse;
     public GameObject screen;
 
@@ -65,7 +65,7 @@ public class PauseManager : MonoBehaviour
     {
         options.SetActive(true);
         controls.SetActive(false);
-        volume.SetActive(false);
+        //volume.SetActive(false);
         mouse.SetActive(false);
         screen.SetActive(false);
 
@@ -75,7 +75,7 @@ public class PauseManager : MonoBehaviour
     {
         options.SetActive(false);
         controls.SetActive(false);
-        volume.SetActive(false);
+        //volume.SetActive(false);
         mouse.SetActive(false);
         screen.SetActive(false);
     }
@@ -84,7 +84,7 @@ public class PauseManager : MonoBehaviour
     {
         options.SetActive(true);
         controls.SetActive(true);
-        volume.SetActive(false);
+        //volume.SetActive(false);
         mouse.SetActive(false);
         screen.SetActive(false);
     }
@@ -92,7 +92,7 @@ public class PauseManager : MonoBehaviour
     {
         options.SetActive(true);
         controls.SetActive(false);
-        volume.SetActive(true);
+        //volume.SetActive(true);
         mouse.SetActive(false);
         screen.SetActive(false);
     }
@@ -100,7 +100,7 @@ public class PauseManager : MonoBehaviour
     {
         options.SetActive(true);
         controls.SetActive(false);
-        volume.SetActive(false);
+        //volume.SetActive(false);
         mouse.SetActive(true);
         screen.SetActive(false);
     }
@@ -108,7 +108,7 @@ public class PauseManager : MonoBehaviour
     {
         options.SetActive(true);
         controls.SetActive(false);
-        volume.SetActive(false);
+        //volume.SetActive(false);
         mouse.SetActive(false);
         screen.SetActive(true);
     }
@@ -132,7 +132,7 @@ public class PauseManager : MonoBehaviour
         GameManager.Instance.PlayerController.cameraController.invertMouse = OptionsManager.Instance.invertedMouse;
     }
 
-    public void SetHUDHidden(bool hidden)
+    public void SetHudHidden(bool hidden)
     {
         GameManager.Instance.GameSettings.showHud = !hidden;
     }

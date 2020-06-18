@@ -34,7 +34,7 @@ public class TriggerBreakableWall : MonoBehaviour
 
         foreach (NavMeshObstacle obstacle in obstaclesToDisable)
         {
-            obstacle.carving = false;
+            obstacle.enabled = false;
         }
     }
 

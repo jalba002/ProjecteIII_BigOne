@@ -1,7 +1,4 @@
-﻿using FMOD;
-using UnityEditorInternal;
-using UnityEngine;
-using Debug = UnityEngine.Debug;
+﻿using UnityEngine;
 using State = Player.State;
 using StateMachine = Characters.Generic.StateMachine;
 

@@ -66,6 +66,8 @@ namespace Enemy
             _currentBlockage = _attachedController.NavMeshAgent.currentOffMeshLinkData.offMeshLink.gameObject
                 .GetComponent<TraversableBlockage>();
 
+            _attachedController.currentBrain.CurrentBlockage = _currentBlockage;
+
             _attachedController.NavMeshAgent.isStopped = true;
 
             TeleportToCorrectPosition();
@@ -79,6 +81,7 @@ namespace Enemy
                                                      _attachedController.transform.position).normalized;
 
             breakTime = originalBreakTime = _currentBlockage.removalTime;
+            breakTime *= 0.5f;
         }
 
         private void TeleportToCorrectPosition()
@@ -107,7 +110,5 @@ namespace Enemy
             _attachedController.NavMeshAgent.isStopped = false;
             _attachedController.NavMeshAgent.updateRotation = true;
         }
-
-        
     }
 }

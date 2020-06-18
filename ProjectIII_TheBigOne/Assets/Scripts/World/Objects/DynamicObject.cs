@@ -340,10 +340,12 @@ namespace World.Objects
             Destroy(HingeJoint);
             Destroy(GetComponent<NavMeshObstacle>());
             Rigidbody.drag = 0f;
+            Rigidbody.useGravity = true;
             Rigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
             if (instigator != null)
             {
                 Physics.IgnoreCollision(this.gameObject.GetComponent<Collider>(), instigator, true);
+                Physics.IgnoreCollision(this.gameObject.GetComponent<Collider>(), GameManager.Instance.PlayerController.attachedCollider, true);
             }
 
             this.gameObject.layer = 0;

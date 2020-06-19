@@ -263,8 +263,8 @@ public class MainMenuManager : MonoBehaviour
     }
     public void PlayGame()
     {
-        //SceneManager.LoadScene(sceneIDToLoad);
-        FindObjectOfType<LevelTransitionController>().BlackFadeOut();
+        SceneManager.LoadScene(sceneIDToLoad);
+        //FindObjectOfType<LevelTransitionController>().BlackFadeOut();
     }
     public void ChangeOptions(bool b)
     {

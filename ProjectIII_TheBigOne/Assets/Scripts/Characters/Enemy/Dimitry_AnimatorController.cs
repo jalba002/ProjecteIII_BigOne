@@ -9,6 +9,8 @@ public class Dimitry_AnimatorController : MonoBehaviour
     public Animator enemyAnimator;
     public GameObject enemyHammer;
 
+    [Header("Footstep Path")] public string footstepsPath;
+
     private void Start()
     {
         if (EnemyController == null)
@@ -129,6 +131,7 @@ public class Dimitry_AnimatorController : MonoBehaviour
             EnemyController.currentBrain.CurrentBlockage = null;
         }
     }
+
     public void BreakDoorOpen()
     {
         if (EnemyController.currentBrain.CurrentBlockage != null)
@@ -141,5 +144,13 @@ public class Dimitry_AnimatorController : MonoBehaviour
     public void Footstep()
     {
         // Play sound of footsteps?
+        try
+        {
+            SoundManager.Instance.PlayEvent(footstepsPath, EnemyController.transform, 1f, 10f);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("SOUND OF FOOTSTEPS NOT PLAYING");
+        }
     }
 }

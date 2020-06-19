@@ -92,7 +92,13 @@ public class InteractablePuzzle : InteractableObject, IPuzzle
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         IsInteracting = true;
-        attachedPuzzle.StartGame();
+        try
+        {
+            attachedPuzzle.StartGame();
+        }
+        catch (NullReferenceException)
+        {
+        }
     }
 
     public override void OnInteracting()
@@ -139,7 +145,13 @@ public class InteractablePuzzle : InteractableObject, IPuzzle
         // Set IsInteracting to false.
 
         EndInteractActions();
-        attachedPuzzle.EndGame();
+        try
+        {
+            attachedPuzzle.EndGame();
+        }
+        catch (NullReferenceException)
+        {
+        }
     }
 
     public void EndInteractActions()

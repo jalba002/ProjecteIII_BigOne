@@ -128,18 +128,22 @@ public class GameManager : MonoBehaviour
     {
         try
         {
+            Debug.Log("WINNING");
             //PlayerController.cameraController.attachedCamera.GetComponent<Animation>().Play();
             PlayerController.interactablesManager.enabled = false;
             PlayerController.cameraController.angleLocked = true;
             PlayerController.currentBrain.enabled = false;
             PlayerController.stateMachine.enabled = false;
             HideAllMenus();
+            FindObjectOfType<ElevatorUnlocker>().elevatorAnimation.SetTrigger("Close");
         }
         catch (NullReferenceException)
         {
-            
+            Debug.LogWarning("NOT WINNING");
         }
-        Invoke(nameof(ReturnToMenu), 2f);
+
+        Debug.Log("Winning by death");
+        Invoke(nameof(EndGame), 5f);
     }
 
     private void ReturnToMenu()

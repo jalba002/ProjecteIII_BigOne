@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Enemy;
 using Player;
 using UnityEngine;
@@ -121,6 +122,31 @@ public class GameManager : MonoBehaviour
         CanvasController.blackFade.gameObject.SetActive(true);
 
         PlayerController.Kill();
+    }
+
+    public void WinGame()
+    {
+        try
+        {
+            //PlayerController.cameraController.attachedCamera.GetComponent<Animation>().Play();
+            PlayerController.interactablesManager.enabled = false;
+            PlayerController.cameraController.angleLocked = true;
+            PlayerController.currentBrain.enabled = false;
+            PlayerController.stateMachine.enabled = false;
+            HideAllMenus();
+        }
+        catch (NullReferenceException)
+        {
+            
+        }
+        Invoke(nameof(ReturnToMenu), 2f);
+    }
+
+    private void ReturnToMenu()
+    {
+        SoundManager.Instance.StopAllEvents(true);
+        SoundManager.Instance.StopAllMovingEvents(true);
+        SceneManager.LoadScene(0);
     }
 
     private void HideAllMenus()

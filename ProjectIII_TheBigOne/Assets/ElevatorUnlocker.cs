@@ -1,25 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ElevatorUnlocker : MonoBehaviour
 {
     public EndgamePuzzle hammerPuzzle;
     public EndgamePuzzle sicklePuzzle;
 
-    public Animation elevatorAnimation;
-
-    private bool alreadyUnlocked = false;
-
-    private void Start()
-    {
-        alreadyUnlocked = false;
-    }
+    public Animator elevatorAnimation;
 
     public void CheckForElevatorOpening()
     {
-        if (hammerPuzzle.alreadyCompleted && sicklePuzzle.alreadyCompleted && !alreadyUnlocked)
+        if (hammerPuzzle.alreadyCompleted && sicklePuzzle.alreadyCompleted)
         {
             UnlockElevator();
         }
@@ -27,8 +17,6 @@ public class ElevatorUnlocker : MonoBehaviour
 
     private void UnlockElevator()
     {
-        Debug.Log("Unlocking Elevator");
-        elevatorAnimation.Play();
-        alreadyUnlocked = true;
+        elevatorAnimation.SetTrigger("Activate");
     }
 }

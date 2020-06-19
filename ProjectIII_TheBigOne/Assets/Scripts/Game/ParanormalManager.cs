@@ -100,7 +100,7 @@ public class ParanormalManager : MonoBehaviour
 
         //SetDummyLocalPosition(Vector3.zero);
 
-        PalletsSetDestructible(true);
+        //PalletsSetDestructible(true);
 
         SetDummyPosition(Dimitry.currentBrain.archnemesis.transform);
 

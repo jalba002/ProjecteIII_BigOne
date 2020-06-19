@@ -1,5 +1,5 @@
-﻿using System;
-using System.Runtime.CompilerServices;
+﻿#if UNITY_EDITOR
+using System;
 using Characters.Player;
 using UnityEditor;
 using UnityEngine;
@@ -7,7 +7,6 @@ using World.Objects;
 
 namespace Cheats
 {
-#if UNITY_EDITOR
     public static class EditorCheats
     {
         /*[MenuItem("Cheats/Game/Complete Nearest Puzzle %#C")]
@@ -32,7 +31,47 @@ namespace Cheats
                 Debug.LogWarning("Only in Play Mode!");
             }
         }*/
-        [MenuItem("Cheats/Game/Unlock Door #%Q")]
+        [MenuItem("Cheats/Game/Complete Puzzle")]
+        public static void CompletePuzzle()
+        {
+            if (Application.isPlaying)
+            {
+                try
+                {
+                    Selection.activeGameObject.GetComponent<Puzzle>().SolvePuzzle();
+                }
+                catch (NullReferenceException)
+                {
+                    Debug.LogWarning("Select a puzzle first.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Only in Play Mode!");
+            }
+        }
+
+        [MenuItem("Cheats/Game/Complete Current Puzzle #1")]
+        public static void CompleteCurrentPuzzle()
+        {
+            if (Application.isPlaying)
+            {
+                try
+                {
+                    GameManager.Instance.PlayerController.interactablesManager.GetComponent<Puzzle>().PuzzleWon();
+                }
+                catch (NullReferenceException)
+                {
+                    Debug.LogWarning("Interactable is not a puzzle");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Only in Play Mode!");
+            }
+        }
+
+        [MenuItem("Cheats/Game/Unlock Door #2")]
         public static void UnlockCurrentDoor()
         {
             if (Application.isPlaying)

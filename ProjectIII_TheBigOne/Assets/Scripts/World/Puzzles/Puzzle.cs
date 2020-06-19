@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class Puzzle : MonoBehaviour
 {
-    public UnityEvent OnPuzzleWin;
+    public UnityEvent OnPuzzleWin = new UnityEvent();
     public virtual void StartGame()
     {
 
@@ -17,5 +17,10 @@ public class Puzzle : MonoBehaviour
     public virtual void PuzzleWon()
     {
         //OnPuzzleWin.Invoke();
+    }
+
+    public virtual void SolvePuzzle()
+    {
+        
     }
 }

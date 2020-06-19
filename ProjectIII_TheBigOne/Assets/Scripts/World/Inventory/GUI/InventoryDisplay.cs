@@ -123,7 +123,6 @@ public class InventoryDisplay : MonoBehaviour
     public void AddNewItem(InventoryItem item)
     {
         var index = inventorySlotList.FindIndex(i => i.item == null);
-        Debug.Log(index);
         SetupSlot(index, item);
     }
 

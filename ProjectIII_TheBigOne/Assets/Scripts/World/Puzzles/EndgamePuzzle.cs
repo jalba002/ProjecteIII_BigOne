@@ -30,10 +30,24 @@ public class EndgamePuzzle : Puzzle
         {
             playerInventory.inventoryDisplay.RemoveItem(item);
             playerInventory.characterItems.Remove(item);
-            attachedQuestItem.SetActive(true);
-            this.gameObject.layer = 0;
-            alreadyCompleted = true;
-            OnPuzzleWin.Invoke();
+            SolvePuzzle();
         }
+    }
+
+    public override void SolvePuzzle()
+    {
+        Debug.Log("Solving Puzzle");
+        alreadyCompleted = true;
+        try
+        {
+            attachedQuestItem.SetActive(true);
+        }
+        catch (NullReferenceException)
+        {
+        }
+
+        this.gameObject.layer = 0;
+        
+        OnPuzzleWin.Invoke();
     }
 }

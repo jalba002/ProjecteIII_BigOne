@@ -102,7 +102,6 @@ public class InventoryDisplay : MonoBehaviour
 
     public void SetupSlot(int slot, InventoryItem item)
     {
-        Debug.Log("Slot is " + slot);
         inventorySlotList[slot].Setup(item);
 
         if (item == null)
@@ -130,7 +129,6 @@ public class InventoryDisplay : MonoBehaviour
 
     public void RemoveItem(InventoryItem item)
     {
-        Debug.Log("Removing item");
         if (!item.isStackable)
         {
             var index = inventorySlotList.FindIndex(i => i.item == item);

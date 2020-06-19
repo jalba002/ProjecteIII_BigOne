@@ -452,41 +452,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1206655522}
   m_PrefabAsset: {fileID: 0}
---- !u!84 &75139270
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'SpotLight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &89902384
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,6 +551,98 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 193824836}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &143075911
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 143075912}
+  - component: {fileID: 143075914}
+  - component: {fileID: 143075913}
+  - component: {fileID: 143075915}
+  m_Layer: 0
+  m_Name: Hammer_ItemInStatue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &143075912
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143075911}
+  m_LocalRotation: {x: -0.36026543, y: 0.08351949, z: 0.20982718, w: 0.9051}
+  m_LocalPosition: {x: 0.0143, y: 0.584, z: 0.1075}
+  m_LocalScale: {x: 0.06419347, y: 0.06419347, z: 0.06419347}
+  m_Children: []
+  m_Father: {fileID: 1972367163}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -43.409, y: 0, z: 26.104002}
+--- !u!23 &143075913
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143075911}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e25a971973b4e4749832858b73e4037e, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &143075914
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143075911}
+  m_Mesh: {fileID: -3909790880788671601, guid: 047d9aeca01f524439fc441604ff6d30, type: 3}
+--- !u!114 &143075915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143075911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8c52b7267c6ef8449c42808c807b8fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &151243612
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,19 +693,54 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1972367085}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &174828406
-BoxCollider:
+--- !u!114 &174828403
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 174828402}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.17435062, y: 0.5232024, z: 0.3344877}
-  m_Center: {x: -0.025610989, y: 0.3319322, z: -0.0014345199}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7effcbd914737934eb15cbf06518db53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showLogDebug: 0
+  interactionType: 3
+  displayName: Examine Statue
+  previewImage: {fileID: 21300000, guid: bfa7de3f3b8b1cd4c8cbe62c0c44532a, type: 3}
+  displayImage: {fileID: 21300000, guid: f65c933329825ad41a43d825a2666dea, type: 3}
+  attachedPuzzle: {fileID: 174828404}
+  cameraPosition: {fileID: 2129683261}
+  puzzleCursor: {fileID: 21300000, guid: f65c933329825ad41a43d825a2666dea, type: 3}
+--- !u!114 &174828404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174828402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09a7ae1ca950e6b4099026b247d59836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnPuzzleWin:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1225084835}
+        m_MethodName: CheckForElevatorOpening
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  attachedQuestItem: {fileID: 143075911}
+  requiredItemID: Hammer_Quest
 --- !u!1001 &193824836
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -971,12 +1063,82 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 392094169}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &258024776
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'SpotLight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!64 &272516701 stripped
 MeshCollider:
   m_CorrespondingSourceObject: {fileID: 6278297941004948623, guid: 1c18d9e9586bd3d44807e824d40ed48a,
     type: 3}
   m_PrefabInstance: {fileID: 1972367085}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &293378739
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'SpotLight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &319369885
 GameObject:
   m_ObjectHideFlags: 0
@@ -1760,6 +1922,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1507844893}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &380194024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 380194025}
+  m_Layer: 9
+  m_Name: Sickle_CameraPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &380194025
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380194024}
+  m_LocalRotation: {x: -0.041508276, y: 0.9578909, z: -0.21116073, w: -0.19008742}
+  m_LocalPosition: {x: 0.027133405, y: 0.65012103, z: 0.33254194}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1972367164}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &392094169
 PrefabInstance:
@@ -6747,7 +6939,7 @@ Transform:
   - {fileID: 2009298420}
   - {fileID: 1494889796}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &472484671
 GameObject:
@@ -7008,41 +7200,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95824cf095ce77644b854508ea9661c8, type: 3}
---- !u!84 &495572029
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'SpotLight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &508513152
 GameObject:
   m_ObjectHideFlags: 0
@@ -11856,6 +12013,41 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1374054488}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &531470300
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'SpotLight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!4 &544633695 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9095772312975052243, guid: 4b59ff4d7623b9c42825b93054937a19,
@@ -11868,6 +12060,73 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1972367085}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &558101858
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'SpotLight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+--- !u!1 &568122904 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5523800397262831691, guid: 1c18d9e9586bd3d44807e824d40ed48a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1972367085}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &568122905 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 537869451631228957, guid: 1c18d9e9586bd3d44807e824d40ed48a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1972367085}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &568122906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568122904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7effcbd914737934eb15cbf06518db53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showLogDebug: 0
+  interactionType: 0
+  displayName: Use buttons
+  previewImage: {fileID: 21300000, guid: bfa7de3f3b8b1cd4c8cbe62c0c44532a, type: 3}
+  displayImage: {fileID: 21300000, guid: f65c933329825ad41a43d825a2666dea, type: 3}
+  attachedPuzzle: {fileID: 0}
+  cameraPosition: {fileID: 1946978199}
+  puzzleCursor: {fileID: 21300000, guid: 31a82a7fec8da8a4cbe52985360c4ac6, type: 3}
 --- !u!1 &597442878
 GameObject:
   m_ObjectHideFlags: 0
@@ -12217,7 +12476,7 @@ Transform:
   - {fileID: 2044037662}
   - {fileID: 1061152488}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &625087117 stripped
 MonoBehaviour:
@@ -17250,41 +17509,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!84 &689097740
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'Flashlight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &712410856
 GameObject:
   m_ObjectHideFlags: 0
@@ -17387,41 +17611,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!84 &817356940
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'SpotLight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!4 &823306081 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6124729946258504625, guid: 62e71290d95993c4bbb152cc827f9fe4,
@@ -17476,7 +17665,7 @@ GameObject:
   m_Component:
   - component: {fileID: 865058476}
   m_Layer: 0
-  m_Name: particles
+  m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17498,7 +17687,7 @@ Transform:
   - {fileID: 1051149433}
   - {fileID: 197252408}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &876414293
 GameObject:
@@ -22687,6 +22876,41 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdf54fee5f69869488d164e98364378e, type: 3}
+--- !u!84 &967828598
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'SpotLight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &968969253
 GameObject:
   m_ObjectHideFlags: 0
@@ -22735,7 +22959,13 @@ Transform:
   m_Father: {fileID: 1522503775}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!84 &997003688
+--- !u!4 &1000019868 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5236406536406952226, guid: 36cdb260804325c4ca69ceca0f61c777,
+    type: 3}
+  m_PrefabInstance: {fileID: 5236406537069199038}
+  m_PrefabAsset: {fileID: 0}
+--- !u!84 &1011242662
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -22770,12 +23000,6 @@ RenderTexture:
     m_WrapW: 1
   m_Dimension: 2
   m_VolumeDepth: 1
---- !u!4 &1000019868 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5236406536406952226, guid: 36cdb260804325c4ca69ceca0f61c777,
-    type: 3}
-  m_PrefabInstance: {fileID: 5236406537069199038}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1011276324
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23644,19 +23868,54 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1972367085}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &1017478572
-BoxCollider:
+--- !u!114 &1017478569
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017478568}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.1743506, y: 0.5232024, z: 0.33448768}
-  m_Center: {x: 0.025610985, y: 0.3319322, z: -0.0014345273}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09a7ae1ca950e6b4099026b247d59836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnPuzzleWin:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1225084835}
+        m_MethodName: CheckForElevatorOpening
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  attachedQuestItem: {fileID: 1564329473}
+  requiredItemID: Sickle_Quest
+--- !u!114 &1017478570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017478568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7effcbd914737934eb15cbf06518db53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showLogDebug: 0
+  interactionType: 3
+  displayName: Examine Statue
+  previewImage: {fileID: 21300000, guid: bfa7de3f3b8b1cd4c8cbe62c0c44532a, type: 3}
+  displayImage: {fileID: 21300000, guid: f65c933329825ad41a43d825a2666dea, type: 3}
+  attachedPuzzle: {fileID: 1017478569}
+  cameraPosition: {fileID: 380194025}
+  puzzleCursor: {fileID: 21300000, guid: f65c933329825ad41a43d825a2666dea, type: 3}
 --- !u!4 &1033944796 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3751695148397581803, guid: e92f50438d5dcb8438c5f90185005ebd,
@@ -24859,7 +25118,7 @@ PrefabInstance:
     - target: {fileID: 5011441254541365027, guid: a4dfe036205417946b568de9b9d604e0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5011441254541365027, guid: a4dfe036205417946b568de9b9d604e0,
         type: 3}
@@ -25265,6 +25524,18 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2031410052690668047, guid: 310c655bc510cdc4ea7a4790e96ea657, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 310c655bc510cdc4ea7a4790e96ea657, type: 3}
+--- !u!114 &1225084835 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6710904952567419230, guid: 068af54cec095744385de48203b0f4c0,
+    type: 3}
+  m_PrefabInstance: {fileID: 6710904953490480893}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 007d08b76bcb20442bcfe9bcbfb19c76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1235545409
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25379,41 +25650,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dda1240b04a025047916f44242ceae84, type: 3}
---- !u!84 &1253101969
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'SpotLight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1259438246
 GameObject:
   m_ObjectHideFlags: 0
@@ -25627,6 +25863,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1277963796}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1286362560 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4179990556473839446, guid: 1c18d9e9586bd3d44807e824d40ed48a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1972367085}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1286362564
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286362560}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.38005, y: 2.9245942, z: 0.41835448}
+  m_Center: {x: 0.6900253, y: 1.4622978, z: -0.19941162}
 --- !u!1 &1289619914
 GameObject:
   m_ObjectHideFlags: 0
@@ -30880,41 +31135,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!84 &1392322695
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'SpotLight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1001 &1393740461
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35924,6 +36144,41 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398303001}
   m_Mesh: {fileID: 6826424061348945092, guid: b39cf4a7d92781e498517e29681f1de1, type: 3}
+--- !u!84 &1405861793
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'SpotLight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!4 &1412862976 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5697969776913173994, guid: 7eb636a07aab19c44930e273650942e4,
@@ -36168,6 +36423,25 @@ RenderTexture:
     m_WrapW: 1
   m_Dimension: 2
   m_VolumeDepth: 1
+--- !u!1 &1505010500 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6428362450585223677, guid: 1c18d9e9586bd3d44807e824d40ed48a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1972367085}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1505010504
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505010500}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.3763195, y: 2.9245942, z: 0.4184326}
+  m_Center: {x: -0.68815976, y: 1.4622978, z: -0.19945067}
 --- !u!1001 &1505602364
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36597,7 +36871,7 @@ Transform:
   - {fileID: 1612326786}
   - {fileID: 968969255}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1526219018 stripped
 Transform:
@@ -36605,6 +36879,41 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2974976358142858781}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &1538337776
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'SpotLight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1560697920
 GameObject:
   m_ObjectHideFlags: 0
@@ -41396,6 +41705,98 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b5caa31eab27164ea3a99e4316007b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1564329473
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1564329474}
+  - component: {fileID: 1564329476}
+  - component: {fileID: 1564329475}
+  - component: {fileID: 1564329477}
+  m_Layer: 0
+  m_Name: Sickle_ItemInStatue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1564329474
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564329473}
+  m_LocalRotation: {x: -0.21610907, y: 0.22217695, z: -0.2743557, w: 0.9103095}
+  m_LocalPosition: {x: -0.021899998, y: 0.5903, z: 0.10169983}
+  m_LocalScale: {x: 0.06419347, y: 0.06419347, z: 0.06419348}
+  m_Children: []
+  m_Father: {fileID: 1972367164}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -15.7560005, y: 32.922, z: -38.227}
+--- !u!23 &1564329475
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564329473}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: d4550af44f1c4ce49af88893af72f29e, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &1564329476
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564329473}
+  m_Mesh: {fileID: 7135672705545156094, guid: 5bf6ba1ab0445774c91c3ec1a95704d7, type: 3}
+--- !u!114 &1564329477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564329473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8c52b7267c6ef8449c42808c807b8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1604461428 stripped
@@ -51117,7 +51518,7 @@ PrefabInstance:
     - target: {fileID: 5074917565642713542, guid: cfe0d7a17af93f54e99ee088c4524733,
         type: 3}
       propertyPath: m_Name
-      value: Notes
+      value: Prefab_Notes
       objectReference: {fileID: 0}
     - target: {fileID: 5074917565642713543, guid: cfe0d7a17af93f54e99ee088c4524733,
         type: 3}
@@ -51157,7 +51558,7 @@ PrefabInstance:
     - target: {fileID: 5074917565642713543, guid: cfe0d7a17af93f54e99ee088c4524733,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5074917565642713543, guid: cfe0d7a17af93f54e99ee088c4524733,
         type: 3}
@@ -51384,41 +51785,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!84 &1805108606
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'SpotLight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1808434160 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9136446813092595478, guid: 1c18d9e9586bd3d44807e824d40ed48a,
@@ -52680,41 +53046,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 193824836}
   m_PrefabAsset: {fileID: 0}
---- !u!84 &1935976672
-RenderTexture:
+--- !u!1 &1946978198
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 'SpotLight : Cookie Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthFormat: 0
-  m_ColorFormat: 5
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1946978199}
+  m_Layer: 0
+  m_Name: ButtonPanel_CameraPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1946978199
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946978198}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0758}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 568122905}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1949726394 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6157046293043733866, guid: c7f552ad3bca409438a0c1a753869494,
@@ -53728,6 +54089,16 @@ PrefabInstance:
       propertyPath: m_NavMeshLayer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 805603980749847852, guid: 1c18d9e9586bd3d44807e824d40ed48a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 805603980749847852, guid: 1c18d9e9586bd3d44807e824d40ed48a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 820730288554520433, guid: 1c18d9e9586bd3d44807e824d40ed48a,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -54606,7 +54977,7 @@ PrefabInstance:
     - target: {fileID: 1995310788506126530, guid: 1c18d9e9586bd3d44807e824d40ed48a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1995310788506126530, guid: 1c18d9e9586bd3d44807e824d40ed48a,
         type: 3}
@@ -55583,6 +55954,11 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 3224331658472043877, guid: 1c18d9e9586bd3d44807e824d40ed48a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3229447561423754243, guid: 1c18d9e9586bd3d44807e824d40ed48a,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -56291,7 +56667,7 @@ PrefabInstance:
     - target: {fileID: 4179990556473839446, guid: 1c18d9e9586bd3d44807e824d40ed48a,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4192878054319809506, guid: 1c18d9e9586bd3d44807e824d40ed48a,
         type: 3}
@@ -56488,6 +56864,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: fd6a061f349a8a044a613665084a132c, type: 2}
+    - target: {fileID: 4428530839037071167, guid: 1c18d9e9586bd3d44807e824d40ed48a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 28
+      objectReference: {fileID: 0}
     - target: {fileID: 4430353261776188298, guid: 1c18d9e9586bd3d44807e824d40ed48a,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -56627,6 +57008,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4648694200046730225, guid: 1c18d9e9586bd3d44807e824d40ed48a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4651662770235857473, guid: 1c18d9e9586bd3d44807e824d40ed48a,
         type: 3}
@@ -57703,6 +58089,16 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 5816363909514069518, guid: 1c18d9e9586bd3d44807e824d40ed48a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5816363909514069518, guid: 1c18d9e9586bd3d44807e824d40ed48a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5817149104485636518, guid: 1c18d9e9586bd3d44807e824d40ed48a,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -57867,6 +58263,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977712777432052665, guid: 1c18d9e9586bd3d44807e824d40ed48a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 5979670812858946902, guid: 1c18d9e9586bd3d44807e824d40ed48a,
         type: 3}
@@ -58206,7 +58607,7 @@ PrefabInstance:
     - target: {fileID: 6428362450585223677, guid: 1c18d9e9586bd3d44807e824d40ed48a,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6441564752034315702, guid: 1c18d9e9586bd3d44807e824d40ed48a,
         type: 3}
@@ -58807,6 +59208,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 7416507127510594589, guid: 1c18d9e9586bd3d44807e824d40ed48a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7420697994615884977, guid: 1c18d9e9586bd3d44807e824d40ed48a,
         type: 3}
@@ -60522,6 +60928,34 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1972367085}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1972367163 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4428530839037071167, guid: 1c18d9e9586bd3d44807e824d40ed48a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1972367085}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1972367164 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7416507127510594589, guid: 1c18d9e9586bd3d44807e824d40ed48a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1972367085}
+  m_PrefabAsset: {fileID: 0}
+--- !u!111 &1972367165
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972367162}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: e1d75b1da53923c4784e681b82318b86, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: e1d75b1da53923c4784e681b82318b86, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1972367166 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 652424676312769386, guid: 1c18d9e9586bd3d44807e824d40ed48a,
@@ -61534,19 +61968,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6000012, y: 3, z: 0.54999995}
   m_Center: {x: 0.14999938, y: 0, z: 0.024999991}
---- !u!65 &1972367244
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1972367162}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.349492, y: 6.013765, z: 5.390581}
-  m_Center: {x: 0, y: 0.00000023841858, z: -0.00000035762787}
 --- !u!64 &1972367248
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -61689,6 +62110,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 8778170984828720077, guid: caba100a8fcbbd24f9c89d4cde9caf5a, type: 3}
+--- !u!64 &1972367502
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972367162}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7841631902025130564, guid: 097f6fe1c057dd94cb87d8ad835db4a0, type: 3}
 --- !u!1 &1985931189
 GameObject:
   m_ObjectHideFlags: 0
@@ -61888,6 +62323,41 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 490622602}
   m_PrefabAsset: {fileID: 0}
+--- !u!84 &2070004514
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Flashlight : Cookie Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthFormat: 0
+  m_ColorFormat: 5
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!4 &2078741800 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6899028909299908001, guid: fdf54fee5f69869488d164e98364378e,
@@ -62094,6 +62564,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2122686092}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2129683260
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2129683261}
+  m_Layer: 9
+  m_Name: Hammer_CameraPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2129683261
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129683260}
+  m_LocalRotation: {x: 0.05959418, y: 0.93781453, z: -0.20067681, w: 0.27691367}
+  m_LocalPosition: {x: -0.0061968565, y: 0.65468574, z: 0.33110425}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1972367163}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1392345619172158725
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62895,6 +63395,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1518120879, guid: 0f9fd0501b2ccde4bb61d032f4d8021e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1518120880, guid: 0f9fd0501b2ccde4bb61d032f4d8021e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.451
@@ -63537,7 +64041,7 @@ PrefabInstance:
     - target: {fileID: 6297698624620592767, guid: ff8363fb88d63074f8215db67f5b9c02,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6297698624620592767, guid: ff8363fb88d63074f8215db67f5b9c02,
         type: 3}
@@ -67601,6 +68105,90 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1552363623f93944b5e710d608f3ffd, type: 3}
+--- !u!1001 &6710904953490480893
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6710904952567419230, guid: 068af54cec095744385de48203b0f4c0,
+        type: 3}
+      propertyPath: hammerPuzzle
+      value: 
+      objectReference: {fileID: 174828404}
+    - target: {fileID: 6710904952567419230, guid: 068af54cec095744385de48203b0f4c0,
+        type: 3}
+      propertyPath: sicklePuzzle
+      value: 
+      objectReference: {fileID: 1017478569}
+    - target: {fileID: 6710904952567419230, guid: 068af54cec095744385de48203b0f4c0,
+        type: 3}
+      propertyPath: elevatorAnimation
+      value: 
+      objectReference: {fileID: 1972367165}
+    - target: {fileID: 6710904952783308777, guid: 068af54cec095744385de48203b0f4c0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710904952783308777, guid: 068af54cec095744385de48203b0f4c0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710904952783308777, guid: 068af54cec095744385de48203b0f4c0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710904952783308777, guid: 068af54cec095744385de48203b0f4c0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710904952783308777, guid: 068af54cec095744385de48203b0f4c0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710904952783308777, guid: 068af54cec095744385de48203b0f4c0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710904952783308777, guid: 068af54cec095744385de48203b0f4c0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710904952783308777, guid: 068af54cec095744385de48203b0f4c0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710904952783308777, guid: 068af54cec095744385de48203b0f4c0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710904952783308777, guid: 068af54cec095744385de48203b0f4c0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710904952783308777, guid: 068af54cec095744385de48203b0f4c0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710904952783308782, guid: 068af54cec095744385de48203b0f4c0,
+        type: 3}
+      propertyPath: m_Name
+      value: EndgamePuzzle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 068af54cec095744385de48203b0f4c0, type: 3}
 --- !u!1001 &8338963169564763007
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67646,7 +68234,7 @@ PrefabInstance:
     - target: {fileID: 2342349549326544796, guid: 668026d3a23ec354f9926d724bc2a53b,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2342349549326544796, guid: 668026d3a23ec354f9926d724bc2a53b,
         type: 3}
@@ -67730,7 +68318,7 @@ PrefabInstance:
     - target: {fileID: 332758019255748971, guid: 7196bcbfaa0ebf041aa38e93ad7c1508,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 332758019255748971, guid: 7196bcbfaa0ebf041aa38e93ad7c1508,
         type: 3}

@@ -16,6 +16,6 @@ public class Puzzle : MonoBehaviour
     }
     public virtual void PuzzleWon()
     {
-
+        //OnPuzzleWin.Invoke();
     }
 }

@@ -1,5 +1,127 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!65 &6710904953756638863
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3314650878578624409}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1743506, y: 0.5232024, z: 0.33448768}
+  m_Center: {x: 0.025610985, y: 0.3319322, z: -0.0014345273}
+--- !u!114 &6710904953756638860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3314650878578624409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09a7ae1ca950e6b4099026b247d59836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnPuzzleWin:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6710904952567419230}
+        m_MethodName: CheckForElevatorOpening
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  attachedQuestItem: {fileID: 6710904953171807074}
+  requiredItemID: Sickle_Quest
+--- !u!114 &6710904953756638861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3314650878578624409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7effcbd914737934eb15cbf06518db53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showLogDebug: 0
+  interactionType: 3
+  displayName: Examine Statue
+  previewImage: {fileID: 21300000, guid: bfa7de3f3b8b1cd4c8cbe62c0c44532a, type: 3}
+  displayImage: {fileID: 21300000, guid: f65c933329825ad41a43d825a2666dea, type: 3}
+  attachedPuzzle: {fileID: 6710904953756638860}
+  cameraPosition: {fileID: 6710904953571580003}
+  puzzleCursor: {fileID: 21300000, guid: f65c933329825ad41a43d825a2666dea, type: 3}
+--- !u!65 &6710904953627645891
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3314650879254974157}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.17435062, y: 0.5232024, z: 0.3344877}
+  m_Center: {x: -0.025610989, y: 0.3319322, z: -0.0014345199}
+--- !u!114 &6710904953627645888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3314650879254974157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7effcbd914737934eb15cbf06518db53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showLogDebug: 0
+  interactionType: 3
+  displayName: Examine Statue
+  previewImage: {fileID: 21300000, guid: bfa7de3f3b8b1cd4c8cbe62c0c44532a, type: 3}
+  displayImage: {fileID: 21300000, guid: f65c933329825ad41a43d825a2666dea, type: 3}
+  attachedPuzzle: {fileID: 6710904953627645889}
+  cameraPosition: {fileID: 6710904953269808139}
+  puzzleCursor: {fileID: 21300000, guid: f65c933329825ad41a43d825a2666dea, type: 3}
+--- !u!114 &6710904953627645889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3314650879254974157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09a7ae1ca950e6b4099026b247d59836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnPuzzleWin:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6710904952567419230}
+        m_MethodName: CheckForElevatorOpening
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  attachedQuestItem: {fileID: 6710904952174467850}
+  requiredItemID: Hammer_Quest
 --- !u!1 &6710904952174467850
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,135 +438,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6710904953571580000}
-  m_LocalRotation: {x: -0.041508276, y: 0.9578909, z: -0.21116073, w: -0.19008742}
+  m_LocalRotation: {x: -0.027647693, y: 0.9434536, z: -0.21341835, w: -0.2521577}
   m_LocalPosition: {x: 0.027133405, y: 0.65012103, z: 0.33254194}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1755093998693479818}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6710904953627645891
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3314650879254974157}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.17435062, y: 0.5232024, z: 0.3344877}
-  m_Center: {x: -0.025610989, y: 0.3319322, z: -0.0014345199}
---- !u!114 &6710904953627645888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3314650879254974157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7effcbd914737934eb15cbf06518db53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showLogDebug: 0
-  interactionType: 3
-  displayName: Examine Statue
-  previewImage: {fileID: 21300000, guid: bfa7de3f3b8b1cd4c8cbe62c0c44532a, type: 3}
-  displayImage: {fileID: 21300000, guid: f65c933329825ad41a43d825a2666dea, type: 3}
-  attachedPuzzle: {fileID: 6710904953627645889}
-  cameraPosition: {fileID: 6710904953269808139}
-  puzzleCursor: {fileID: 21300000, guid: f65c933329825ad41a43d825a2666dea, type: 3}
---- !u!114 &6710904953627645889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3314650879254974157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09a7ae1ca950e6b4099026b247d59836, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnPuzzleWin:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6710904952567419230}
-        m_MethodName: CheckForElevatorOpening
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  attachedQuestItem: {fileID: 6710904952174467850}
-  requiredItemID: Hammer_Quest
---- !u!65 &6710904953756638863
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3314650878578624409}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.1743506, y: 0.5232024, z: 0.33448768}
-  m_Center: {x: 0.025610985, y: 0.3319322, z: -0.0014345273}
---- !u!114 &6710904953756638860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3314650878578624409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09a7ae1ca950e6b4099026b247d59836, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnPuzzleWin:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6710904952567419230}
-        m_MethodName: CheckForElevatorOpening
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  attachedQuestItem: {fileID: 6710904953171807074}
-  requiredItemID: Sickle_Quest
---- !u!114 &6710904953756638861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3314650878578624409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7effcbd914737934eb15cbf06518db53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showLogDebug: 0
-  interactionType: 3
-  displayName: Examine Statue
-  previewImage: {fileID: 21300000, guid: bfa7de3f3b8b1cd4c8cbe62c0c44532a, type: 3}
-  displayImage: {fileID: 21300000, guid: f65c933329825ad41a43d825a2666dea, type: 3}
-  attachedPuzzle: {fileID: 6710904953756638860}
-  cameraPosition: {fileID: 6710904953571580003}
-  puzzleCursor: {fileID: 21300000, guid: f65c933329825ad41a43d825a2666dea, type: 3}
 --- !u!1001 &6710904953627645892
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -237,5 +237,5 @@ namespace Cheats
             }
         }
     }
-#endif
 }
+#endif

@@ -182,13 +182,11 @@ public class SimonManager : Puzzle
             if (i == colors[currentAnswer])
             {
                 
-                Debug.Log("Acertaste");
                 currentAnswer++;
                 if (currentAnswer >= colors.Length)
                 {
                     answering = false;
                     bulb.material = _initBulbMat;
-                    Debug.Log("Todo bien, todo correcto, y yo que me alegro.");
                     if (_currentColorCount - startingColorCount >= roundsToSucceed)
                     {
                         StartCoroutine(WaitAndPuzzleWon());
@@ -199,11 +197,7 @@ public class SimonManager : Puzzle
             }
             else
             {
-                Debug.Log("Fallaste");
-
                 GameManager.Instance.CanvasController.ShowHint("YOU MISSED", false);
-
-                AudioManager.PlaySound2D("Sound/Simon/Fail");
                 EndGame();
             }
         }

@@ -1,21 +1,29 @@
 ﻿using System;
 using Enemy;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class Dimitry_AnimatorController : MonoBehaviour
 {
     [Header("Components")] public EnemyController EnemyController;
-
     public Animator enemyAnimator;
     public GameObject enemyHammer;
 
     [Header("Footstep Path")] public string footstepsPath;
+
+    private Dimitry_Damage_Dealer _colliderController;
 
     private void Start()
     {
         if (EnemyController == null)
         {
             EnemyController = FindObjectOfType<EnemyController>();
+        }
+
+        if (_colliderController == null)
+        { 
+            _colliderController = gameObject.GetComponent<Dimitry_Damage_Dealer>();
+            _colliderController.Init();
         }
 
         if (enemyHammer == null)
@@ -43,12 +51,14 @@ public class Dimitry_AnimatorController : MonoBehaviour
             enemyAnimator.runtimeAnimatorController =
                 (RuntimeAnimatorController) Resources.Load("Animations/Dimitry_Animator_FirstPhase");
             enemyHammer.SetActive(false);
+            _colliderController.SetFistPosition();
         }
         else if (EnemyController.currentBehaviourTree is BehaviourTree_Enemy_SecondPhase)
         {
             enemyAnimator.runtimeAnimatorController =
                 (RuntimeAnimatorController) Resources.Load("Animations/Dimitry_Animator_SecondPhase");
             enemyHammer.SetActive(true);
+            _colliderController.SetHammerPosition();
         }
     }
 
@@ -121,6 +131,16 @@ public class Dimitry_AnimatorController : MonoBehaviour
         if (GameManager.Instance.GameSettings.isPlayerInvincible) return;
 
         GameManager.Instance.EndGame();
+    }
+
+    public void EnableDamage()
+    {
+        _colliderController.ToggleCollider(true);
+    }
+
+    public void DisableDamage()
+    {
+        _colliderController.ToggleCollider(false);
     }
 
     public void KickDoorOpen()

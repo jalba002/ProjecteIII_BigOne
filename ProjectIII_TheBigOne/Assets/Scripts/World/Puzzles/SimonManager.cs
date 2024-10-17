@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Tavaris.Objects;
 using UnityEngine;
 
 public class SimonManager : Puzzle

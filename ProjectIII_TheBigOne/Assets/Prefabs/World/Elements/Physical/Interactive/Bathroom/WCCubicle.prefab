@@ -239,8 +239,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1306967537830351753}
-  - component: {fileID: 2840303601738366050}
   - component: {fileID: 2059437625154326506}
+  - component: {fileID: 3655087100396266823}
   - component: {fileID: 790526778002681770}
   - component: {fileID: 7235789755254841078}
   m_Layer: 9
@@ -266,53 +266,6 @@ Transform:
   m_Father: {fileID: 5681909462242426648}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2840303601738366050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8097085661659987888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8e4330ca1cf13545a0976beb5c491f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showLogDebug: 0
-  interactionType: 0
-  displayName: 
-  previewImage: {fileID: 21300000, guid: 8744cef0b8d07824eb45013147cd4cae, type: 3}
-  displayImage: {fileID: 21300000, guid: 56f61fcb5b99ceb499d247f84b14051d, type: 3}
-  objectType: 0
-  lockedMode: 1
-  openState: 0
-  doorConfiguration:
-    maximumAngle: 90
-    minimumAngle: 0
-    friction: 3
-  drawerConfiguration:
-    maximumDistance: 0.25
-    friction: 10
-    maximumForce: 5
-  palletConfiguration:
-    forceToThrow: 100
-    forceScaleApplied: 5
-  HandlePosition: {fileID: 6126672633702740772}
-  applyHandleRotation: 0
-  openForce: 5
-  maxMouseInput: 7
-  UseMouseXAxis: 0
-  InvertInitialization: 0
-  StartupClosePercentage: 1
-  useGravity: 0
-  ignorePlayerCollider: 0
-  ignoredColliders: []
-  OnUnlockEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStartInteracting:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &2059437625154326506
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -326,6 +279,39 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.4096848, y: 2.3448544, z: 0.092231154}
   m_Center: {x: 0.7555422, y: 0.0129519105, z: -0.0016281009}
+--- !u!114 &3655087100396266823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097085661659987888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43fedd835de18c545a061d7e6454fdb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactSettings: {fileID: 11400000, guid: 4d94b5efa1816464d80f18290ea05b4a, type: 2}
+  showLogDebug: 0
+  HandlePosition: {fileID: 6126672633702740772}
+  applyHandleRotation: 1
+  openForce: 5
+  maxMouseInput: 3
+  UseMouseXAxis: 0
+  InvertInitialization: 0
+  StartupClosePercentage: 0.96
+  useGravity: 0
+  ignorePlayerCollider: 0
+  ignoredColliders: []
+  doorConfiguration:
+    maximumAngle: 90
+    minimumAngle: 0
+    minimumLockedAngle: -0.5
+    maximumLockedAngle: 0.5
+    friction: 1
+    bounciness: 0
+    bouncinessMinVelocity: 0
+  _lockState: 1
 --- !u!54 &790526778002681770
 Rigidbody:
   m_ObjectHideFlags: 0

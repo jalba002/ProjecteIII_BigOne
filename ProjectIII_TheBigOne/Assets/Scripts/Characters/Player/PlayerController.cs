@@ -1,25 +1,24 @@
-﻿using System;
-using Characters.Brains;
-using Characters.Generic;
-using Characters.Player;
+﻿using Characters.Brains;
 using Properties;
+using System;
+using Tavaris.Interactable;
+using Tavaris.Manager;
+using Tavaris.States;
 using UnityEngine;
-using CharacterController = Characters.Generic.CharacterController;
 
-namespace Player
+namespace Tavaris.Entities
 {
     [RequireComponent(typeof(Brain))]
     [RequireComponent(typeof(State))]
     [RequireComponent(typeof(StateMachine))]
     [RequireComponent(typeof(Rigidbody))]
-    public class PlayerController : CharacterController
+    public class PlayerController : EntityController
     {
-        [Space(2)] [Header("Components")] public Collider attachedCollider;
+        [Space(2)][Header("Components")] public Collider attachedCollider;
         public CameraController cameraController;
 
         public FlashlightController attachedFlashlight;
 
-        public Inventory playerInventory;
         [Header("Config")] public PlayerProperties characterProperties;
         public new PlayerBrain currentBrain { get; private set; }
 
@@ -33,7 +32,7 @@ namespace Player
 
         public StateMachine stateMachine;
 
-        [Header("Sound settings")] 
+        [Header("Sound settings")]
         public string footstepPath;
         [Range(0, 1)] public float footstepVolume = 1f;
 
@@ -91,15 +90,11 @@ namespace Player
 
             if (attachedCollider == null)
                 attachedCollider = GetComponent<Collider>();
-            
+
 
             if (attachedFlashlight == null)
                 attachedFlashlight = GetComponent<FlashlightController>();
 
-            if (playerInventory == null)
-            {
-                playerInventory = GetComponent<Inventory>();
-            }
 
             objectInspector = GetComponent<ObjectInspector>();
 
@@ -161,8 +156,8 @@ namespace Player
             {
                 if (currentBrain.Interact && interactablesManager.CurrentInteractable != null)
                 {
-                    if (interactablesManager.CurrentInteractable.interactionType ==
-                        InteractableObject.InteractionType.Puzzle)
+                    if (interactablesManager.CurrentInteractable.interactSettings.interactionType ==
+                        InteractSettings.InteractionType.Puzzle)
                     {
                         return puzzleInspector.Interact(interactablesManager.CurrentInteractable);
                     }
@@ -178,8 +173,8 @@ namespace Player
             {
                 if (currentBrain.Interact && interactablesManager.CurrentInteractable != null)
                 {
-                    if (interactablesManager.CurrentInteractable.interactionType ==
-                        InteractableObject.InteractionType.Inspect)
+                    if (interactablesManager.CurrentInteractable.interactSettings.interactionType ==
+                            InteractSettings.InteractionType.Inspect)
                     {
                         if (objectInspector.Activate(interactablesManager.CurrentInteractable))
                         {
@@ -284,28 +279,28 @@ namespace Player
 
         public void ToggleInventory()
         {
-            if (playerInventory && playerInventory.isActiveAndEnabled)
-            {
-                var enabled = playerInventory.ToggleInventory();
-                if (!pauseMenu.activeInHierarchy)
-                {
-                    cameraController.angleLocked = enabled;
-                    cameraController.cursorLock = !enabled;
-                    Cursor.visible = enabled;
+            //if (playerInventory && playerInventory.isActiveAndEnabled)
+            //{
+            //    var enabled = playerInventory.ToggleInventory();
+            //    if (!pauseMenu.activeInHierarchy)
+            //    {
+            //        cameraController.angleLocked = enabled;
+            //        cameraController.cursorLock = !enabled;
+            //        Cursor.visible = enabled;
 
-                    if (enabled)
-                    {
-                        //SHOW CURSOR
-                        Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
-                    }
-                    else
-                    {
-                        //HIDE CURSOR
-                        Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
-                    }
-                }
-                
-            }
+            //        if (enabled)
+            //        {
+            //            //SHOW CURSOR
+            //            Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
+            //        }
+            //        else
+            //        {
+            //            //HIDE CURSOR
+            //            Cursor.SetCursor(null, Vector2.zero, CursorMode.ForceSoftware);
+            //        }
+            //    }
+
+            //}
         }
 
 
@@ -378,7 +373,6 @@ namespace Player
             FailproofEnabling(objectInspector, false);
             FailproofEnabling(dynamicActivator, false);
             FailproofEnabling(attachedFlashlight, false);
-            FailproofEnabling(playerInventory, false);
             FailproofEnabling(cameraController, false);
             return true;
         }
@@ -396,7 +390,6 @@ namespace Player
 
             FailproofEnabling(objectInspector, true);
             FailproofEnabling(dynamicActivator, true);
-            FailproofEnabling(playerInventory, true);
             FailproofEnabling(attachedFlashlight, true);
             FailproofEnabling(puzzleInspector, true);
             FailproofEnabling(cameraController, true);

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Linq;
 using System.Collections;
+using Tavaris.Manager;
 
 public class AnimatedTiledTexture : MonoBehaviour
 {

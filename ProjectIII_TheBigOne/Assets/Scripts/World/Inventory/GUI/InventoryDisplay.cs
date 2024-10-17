@@ -1,249 +1,154 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using TMPro;
-using Characters.Player;
 
-public class InventoryDisplay : MonoBehaviour
-{    
-    
-    public  InventoryDisplay Instance;
-    
-    [Header("Gameobjects")] public  Inventory inventoryRef;
-
-    public GameObject inventoryParent;
-    [Header("Settings")] public  List<InventorySlot> inventorySlotList = new List<InventorySlot>();
-    public GameObject slotPrefab;
-    public Transform slotGrid;
-    public int numberOfSlots = 12;
-
-    public GameObject inventoryWindow;
-    public GameObject combineWindow;
-
-    [Header("Combine Slots")] public InventorySlot combineSlot_1;
-    public InventorySlot combineSlot_2;
-
-
-    public InventoryItem selectedItem;
-    private static InventorySlot _selectedSlot;
-
-    public CanvasController canvas { get; protected set; }
-
-    public InventorySlot selectedSlot
+namespace Tavaris.UI
+{
+    public class InventoryDisplay : MonoBehaviour
     {
-        get { return _selectedSlot; }
-        set
+        public InventoryDisplay Instance;
+
+        [Header("Gameobjects")] public PlayerInventory inventoryRef;
+
+        public GameObject inventoryParent;
+        [Header("Settings")] public List<InventorySlot> inventorySlotList = new List<InventorySlot>();
+        public GameObject slotPrefab;
+        public Transform slotGrid;
+        public int numberOfSlots = 12;
+
+        public GameObject inventoryWindow;
+
+        private InventorySlot _selectedSlot;
+
+        public CanvasController canvas { get; protected set; }
+
+        public InventorySlot selectedSlot
         {
-            _selectedSlot = value;
-            OnSlotSelected.Invoke();
-        }
-    }
-
-    //public Text selectedItemName;
-    public TextMeshProUGUI selectedItemName;
-    public Text selectedItemInfo;
-
-    public static UnityEvent OnSlotSelected = new UnityEvent();
-
-    public GameObject contextMenu;
-
-    void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
-        
-        for (int i = 0; i < numberOfSlots; i++)
-        {
-            GameObject instance = Instantiate(slotPrefab);
-            instance.transform.SetParent(slotGrid);
-            inventorySlotList.Add(instance.GetComponentInChildren<InventorySlot>());
-        }
-
-        inventoryRef = GameObject.FindObjectOfType<Inventory>();
-        OnSlotSelected.AddListener(ConfigureContextMenu);
-
-        canvas = FindObjectOfType<CanvasController>();
-    }
-
-    private void Start()
-    {
-        ToggleInventoryUI();
-    }
-
-    private void ConfigureContextMenu()
-    {
-        if (selectedSlot == null)
-        {
-            contextMenu.SetActive(false);
-            return;
-        }
-        if (!selectedSlot.item.isUnique)
-        {
-            contextMenu.transform.SetParent(selectedSlot.transform);
-            contextMenu.SetActive(true);
-            contextMenu.GetComponent<RectTransform>().anchoredPosition =
-            new Vector3(0 - selectedSlot.gameObject.GetComponent<RectTransform>().rect.size.x, 0, 0);
-        }
-        else
-        {
-            contextMenu.SetActive(false);
-        }
-        
-        
-    }
-
-    public void SetupSlot(int slot, InventoryItem item)
-    {
-        Debug.Log("Slot is " + slot);
-        inventorySlotList[slot].Setup(item);
-
-        if (item == null)
-            RemoveText();
-    }
-    
-    public void CopySlot(InventorySlot origin, InventorySlot copy)
-    {
-        if (origin.item != null)
-        {
-            InventoryItem i = copy.item;
-
-            copy.Setup(origin.item);
-            copy.SelectThisSlot();
-            origin.Setup(i);
-        }
-    }
-
-    public void AddNewItem(InventoryItem item)
-    {
-        var index = inventorySlotList.FindIndex(i => i.item == null);
-        Debug.Log(index);
-        SetupSlot(index, item);
-
-    }
-
-    public void RemoveItem(InventoryItem item)
-    {
-        Debug.Log("Removing item");
-        if (!item.isStackable)
-        {
-            var index = inventorySlotList.FindIndex(i => i.item == item);
-            SetupSlot(index, null);
-        }
-        else
-        {
-            int a = item.GetActualQuantity();
-            if (a == 0)
+            get { return _selectedSlot; }
+            set
             {
-               Debug.Log(inventorySlotList.Count);
-               var index = inventorySlotList.FindIndex(i => i.item == item);
-               SetupSlot(index, null);
-                
-               //Only works on Inventory. BRUH.
-               
-                
+                _selectedSlot = value;
+                OnSlotSelected.Invoke();
+            }
+        }
+
+        //public Text selectedItemName;
+        public TextMeshProUGUI selectedItemName;
+        public Text selectedItemInfo;
+
+        public static UnityEvent OnSlotSelected = new UnityEvent();
+
+        public GameObject contextMenu;
+
+        void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
             }
             else
             {
-                //quantity is changed on the Inventory.cs, it's useless do it here.
+                Destroy(this);
             }
-        }
-    }
 
-    public void ClearFromInventory(InventoryItem item)
-    {
-        var index = inventorySlotList.FindIndex(i => i.item == item);
-        SetupSlot(index, null);
-        selectedSlot = null;
-    }
-
-    public void RemoveButton()
-    {
-        if (selectedSlot != null)
-        {
-            Debug.Log("Removing item is not null.");
-            if (!selectedSlot.item.isUnique)
+            for (int i = 0; i < numberOfSlots; i++)
             {
-                SoundManager.Instance.PlaySound2D("event:/SFX/UI/Inventory/DiscardItem");
-                RemoveItem(selectedSlot.item);
-                inventoryRef.RemoveItem(selectedSlot.item.itemName);
+                GameObject instance = Instantiate(slotPrefab);
+                instance.transform.SetParent(slotGrid);
+                inventorySlotList.Add(instance.GetComponentInChildren<InventorySlot>());
+            }
 
-                selectedItem = null;
-                RemoveText();
-                if(selectedSlot != null)
-                    selectedSlot.background.color = Color.white;
-                selectedSlot = null;
+            OnSlotSelected.AddListener(ConfigureContextMenu);
+
+            canvas = FindObjectOfType<CanvasController>();
+        }
+
+        private void Start()
+        {
+            ToggleInventoryUI();
+        }
+
+        private void ConfigureContextMenu()
+        {
+            if (selectedSlot == null)
+            {
+                contextMenu.SetActive(false);
+                return;
+            }
+            if (!selectedSlot.itemRef.isQuestItem)
+            {
+                contextMenu.transform.SetParent(selectedSlot.transform);
+                contextMenu.SetActive(true);
+                contextMenu.GetComponent<RectTransform>().anchoredPosition =
+                new Vector3(0 - selectedSlot.gameObject.GetComponent<RectTransform>().rect.size.x, 0, 0);
             }
             else
             {
-                Debug.Log("You can't discard this item");
+                contextMenu.SetActive(false);
             }
+
+
         }
-    }
 
-    public void RemoveText()
-    {
-        selectedItemInfo.text = " ";
-        selectedItemName.text = " ";
-    }
-
-    public void UseButton()
-    {
-        Debug.Log("Using button.");
-        if (selectedSlot != null)
+        public void RemoveButton()
         {
-            Debug.Log("Use item is not null.");
-            selectedSlot.item.UseItem();
-            if (selectedSlot.item.destroyOnUse)
+            if (selectedSlot != null)
             {
-                RemoveItem(selectedSlot.item);
-                inventoryRef.RemoveItem(selectedSlot.item.itemName);                  
-                selectedSlot = null;
+                Debug.Log("Removing item is not null.");
+                if (!selectedSlot.itemRef.isQuestItem)
+                {
+                    SoundManager.Instance.PlaySound2D("event:/SFX/UI/Inventory/DiscardItem");
+                    inventoryRef.RemoveItem(selectedSlot.itemRef);
+                    RemoveText();
+                    selectedSlot = null;
+                }
+                else
+                {
+                    Debug.Log("You can't discard this item");
+                }
             }
-            
         }
-    }
 
-    public void SwitchWindow(string window)
-    {
-        switch (window)
+        public void RemoveText()
         {
-            case "Inventory":
-                inventoryWindow.SetActive(true);
-                combineWindow.SetActive(false);
-                break;
-            case "Combine":
-                inventoryWindow.SetActive(false);
-                combineWindow.SetActive(true);
-                break;
-            default:
-                break;
+            selectedItemInfo.text = " ";
+            selectedItemName.text = " ";
         }
-    }
 
-    public bool ToggleInventoryUI()
-    {
-        if(selectedSlot != null)
-            selectedSlot.UnselectThisSlot();
-        //selectedSlot = null;        
-        contextMenu.SetActive(false);
-        if (!inventoryParent.activeSelf)
+        public void UseButton()
         {
-            GameManager.Instance.PlayerController.interactablesManager.ClearInteractable();
+            //Debug.Log("Using button.");
+            //if (selectedSlot != null)
+            //{
+            //    Debug.Log("Use item is not null.");
+            //    selectedSlot.itemRef.UseItem();
+            //    if (selectedSlot.item.destroyOnUse)
+            //    {
+            //        RemoveItem(selectedSlot.item);
+            //        inventoryRef.RemoveItem(selectedSlot.item.itemName);
+            //        selectedSlot = null;
+            //    }
+
+            //}
         }
 
-        GameManager.Instance.PlayerController.interactablesManager.enabled = inventoryParent.activeSelf;
-        
-        inventoryParent.SetActive(!inventoryParent.activeSelf);
-        return inventoryParent.activeSelf;
+        public bool ToggleInventoryUI()
+        {
+            if (selectedSlot != null)
+                selectedSlot.UnselectThisSlot();
+            //selectedSlot = null;        
+            contextMenu.SetActive(false);
+            if (!inventoryParent.activeSelf)
+            {
+                GameManager.Player.interactablesManager.ClearInteractable();
+            }
+
+            GameManager.Player.interactablesManager.enabled = inventoryParent.activeSelf;
+
+            inventoryParent.SetActive(!inventoryParent.activeSelf);
+            return inventoryParent.activeSelf;
+        }
     }
 }

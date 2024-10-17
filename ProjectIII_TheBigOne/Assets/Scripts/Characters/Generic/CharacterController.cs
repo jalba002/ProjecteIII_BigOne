@@ -1,18 +1,18 @@
 ﻿using Characters.Brains;
-using Player;
 using Properties;
+using Tavaris.States;
 using UnityEngine;
 
-namespace Characters.Generic
+namespace Tavaris.Entities
 {
-    public abstract class CharacterController : MonoBehaviour
+    public abstract class EntityController : MonoBehaviour
     {
         //[Header("Required Components")] 
         [System.NonSerialized]
         public Brain currentBrain;
         public StateMachine stateMachine { get; protected set; }
         public Rigidbody rigidbody;
-        
+
         public bool IsDead { get; protected set; }
 
         [System.NonSerialized]

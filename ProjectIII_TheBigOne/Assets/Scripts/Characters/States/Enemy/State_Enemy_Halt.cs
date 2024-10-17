@@ -1,8 +1,6 @@
-﻿using Characters.Generic;
-using Player;
-using UnityEngine;
+﻿using Tavaris.Entities;
 
-namespace Enemy
+namespace Tavaris.States
 {
     public class State_Enemy_Halt : State
     {
@@ -11,7 +9,7 @@ namespace Enemy
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
-            _attachedController = (EnemyController) Machine.characterController;
+            _attachedController = (EnemyController)Machine.characterController;
         }
 
         public override void OnStateTick(float deltaTime)
@@ -32,7 +30,7 @@ namespace Enemy
         protected override void OnStateEnter()
         {
             base.OnStateEnter();
-            
+
             _attachedController.NavMeshAgent.isStopped = true;
             _attachedController.currentBrain.SetBrainDead();
         }

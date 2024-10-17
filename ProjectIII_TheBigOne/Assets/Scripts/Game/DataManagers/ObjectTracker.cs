@@ -1,88 +1,41 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
-using Assets.Scripts.Game;
+using System.Linq;
+using Tavaris.AI;
+using Tavaris.Dynamic;
+using Tavaris.Interactable;
 using UnityEngine;
-using World.Objects;
 
-public class ObjectTracker : MonoBehaviour
+namespace Tavaris.Manager
 {
-    public static List<DynamicObject> doorList = new List<DynamicObject>();
-
-    public static List<DynamicObject> drawerList = new List<DynamicObject>();
-
-    public static List<TraversableBlockage> palletList;
-
-    public static List<InteractableObject> interactablesList;
-
-    public static List<PatrolPoint> PatrolPointsFirstPhase = new List<PatrolPoint>();
-    
-    public static List<PatrolPoint> PatrolPointsSecondPhase = new List<PatrolPoint>();
-    
-    // Start is called before the first frame update
-    void Start()
+    public class ObjectTracker : MonoBehaviour
     {
-        PrepareLists(FindObjectsOfType<DynamicObject>());
-        PrepareObjectList(out palletList, FindObjectsOfType<TraversableBlockage>());
-        PrepareObjectList(out interactablesList);
-        SplitPatrolPoints();
-    }
+        public static List<Door> doorList = new List<Door>();
 
-    private void SplitPatrolPoints()
-    {
-        var patrolPoints = FindObjectsOfType<PatrolPoint>();
-        foreach (PatrolPoint point in patrolPoints)
+        public static List<Drawer> drawerList = new List<Drawer>();
+
+        public static List<TraversableBlockage> palletList = new List<TraversableBlockage>();
+
+        public static List<InteractableObject> interactablesList = new List<InteractableObject>();
+
+        public static List<PatrolPoint> PatrolPointsFirstPhase = new List<PatrolPoint>();
+
+        public static List<PatrolPoint> PatrolPointsSecondPhase = new List<PatrolPoint>();
+
+        // Start is called before the first frame update
+        void Start()
         {
-            if (point.ID == 0)
-            {
-                PatrolPointsFirstPhase.Add(point);
-            }
-            else if(point.ID == 1)
-            {
-                PatrolPointsSecondPhase.Add(point);
-            }
-            else
-            {
-                Debug.LogError(point.gameObject.name + " does not have a valid ID.");
-            }
+            doorList.AddRange(FindObjectsOfType<Door>());
+            drawerList.AddRange(FindObjectsOfType<Drawer>());
+            palletList.AddRange(FindObjectsOfType<TraversableBlockage>());
+            interactablesList.AddRange(FindObjectsOfType<InteractableObject>());
+            SplitPatrolPoints();
         }
-    }
 
-    private void PrepareObjectList(out List<TraversableBlockage> storedList, TraversableBlockage[] givenArray)
-    {
-        storedList = new List<TraversableBlockage>();
-        foreach(TraversableBlockage currentObject in givenArray)
+        private void SplitPatrolPoints()
         {
-            storedList.Add(currentObject);
+            var patrolPoints = FindObjectsOfType<PatrolPoint>().ToList();
+            PatrolPointsFirstPhase.AddRange(patrolPoints.Where(x => x.IsMainPhase));
+            PatrolPointsSecondPhase.AddRange(patrolPoints.Where(x => !x.IsMainPhase));
         }
-    }
-    
-    private void PrepareObjectList(out List<InteractableObject> storedList)
-    {
-        storedList = new List<InteractableObject>();
-        var givenArray = FindObjectsOfType<InteractableObject>();
-
-        foreach(InteractableObject currentObject in givenArray)
-        {
-            storedList.Add(currentObject);
-        }
-    }
-
-    private void PrepareLists(DynamicObject[] dynamicObjects)
-    {
-        foreach (DynamicObject element in dynamicObjects)
-        {
-            if (element == null) return;
-            
-            if (element.objectType == DynamicObject.ObjectType.Door)
-            {
-                doorList.Add(element);
-            }
-            else if (element.objectType == DynamicObject.ObjectType.Drawer)
-            {
-                drawerList.Add(element);
-            }
-            
-        }
-        
     }
 }

@@ -1,9 +1,7 @@
-﻿using System.Diagnostics;
-using Characters.Generic;
+﻿using Tavaris.Manager;
 using UnityEngine;
-using CharacterController = UnityEngine.CharacterController;
 
-namespace Player
+namespace Tavaris.States
 {
     public class State_Player_Inspecting : State
     {
@@ -12,7 +10,7 @@ namespace Player
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
-            _attachedRigidbody = Machine.characterController.rigidbody;
+            _attachedRigidbody = Machine.characterController.GetComponent<Rigidbody>();
         }
 
         public override void OnStateTick(float deltaTime)

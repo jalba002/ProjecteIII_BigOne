@@ -1,9 +1,8 @@
-﻿using System.Diagnostics;
-using Characters.Generic;
+﻿using Tavaris.Entities;
+using Tavaris.Manager;
 using UnityEngine;
-using CharacterController = UnityEngine.CharacterController;
 
-namespace Player
+namespace Tavaris.States
 {
     public class State_Player_Walking : State
     {
@@ -15,7 +14,7 @@ namespace Player
         private float stepTimeRange;
         private float stepTime = 0.0f;
 
-       
+
         /*private float _staminaRechargeDelay;
         private float _maxStamina;
         private float _staminaRechargePerSecond;*/

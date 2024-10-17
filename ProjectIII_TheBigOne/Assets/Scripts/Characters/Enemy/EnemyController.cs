@@ -1,20 +1,20 @@
-﻿using System;
+﻿using Properties;
+using System;
 using System.Collections.Generic;
-using Assets.Scripts.Game;
-using Characters.Generic;
-using Player;
-using Properties;
+using Tavaris.AI;
+using Tavaris.Manager;
+using Tavaris.States;
+using Tavaris.Utils;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
-using CharacterController = Characters.Generic.CharacterController;
 
-namespace Enemy
+namespace Tavaris.Entities
 {
     [RequireComponent(typeof(EnemyBrain))]
     [RequireComponent(typeof(State))]
     [RequireComponent(typeof(StateMachine))]
-    public class EnemyController : CharacterController
+    public class EnemyController : EntityController
     {
         public enum StartingBehaviour
         {
@@ -31,7 +31,7 @@ namespace Enemy
 
         public BehaviourTree currentBehaviourTree { get; set; }
         [Header("Sound")] public string terrorRadiusPath;
-        [Range(0,50)]public float maxRadius = 15f;
+        [Range(0, 50)] public float maxRadius = 15f;
 
         [Header("Enemy Settings")] public new EnemyProperties characterProperties;
 
@@ -66,7 +66,7 @@ namespace Enemy
             if (stateMachine == null)
                 stateMachine = GetComponent<StateMachine>();
 
-            if (rigidbody == null)
+            if (GetComponent<Rigidbody>() == null)
                 rigidbody = GetComponent<Rigidbody>();
 
             if (characterProperties == null)

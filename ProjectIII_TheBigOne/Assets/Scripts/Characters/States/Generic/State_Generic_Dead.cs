@@ -1,9 +1,4 @@
-﻿using System.Diagnostics;
-using Characters.Generic;
-using UnityEngine;
-using CharacterController = UnityEngine.CharacterController;
-
-namespace Player
+﻿namespace Tavaris.States
 {
     public class State_Generic_Dead : State
     {

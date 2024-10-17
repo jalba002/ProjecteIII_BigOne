@@ -19,8 +19,7 @@ public class SoundEmitterCalls : MonoBehaviour
 
     private void Start()
     {
-        SoundManager.Instance.PlayEvent("event:/SFX/Environment/Room/VoidAmbient", GameManager.Instance.PlayerController.transform, 0.3f);
-
+        SoundManager.Instance.PlayEvent("event:/SFX/Environment/Room/VoidAmbient", GameManager.Player.transform, 0.3f);
 
         if(doorPos == null)
         {
@@ -48,13 +47,13 @@ public class SoundEmitterCalls : MonoBehaviour
     }
     public void PlayScarejumpSound()
     {
-        SoundManager.Instance.PlayEvent(scarejumpPath, GameManager.Instance.PlayerController.transform);
-        SoundManager.Instance.PlayOneShotSound(playerBreathingPath, GameManager.Instance.PlayerController.transform);
+        SoundManager.Instance.PlayEvent(scarejumpPath, GameManager.Player.transform);
+        SoundManager.Instance.PlayOneShotSound(playerBreathingPath, GameManager.Player.transform);
     }
     public void PlayPanelLatchSound()
     {
         Debug.Log("Hello team i Go B cyka blyat");
-        SoundManager.Instance.PlayOneShotSound(latchPath, GameManager.Instance.PlayerController.transform);
+        SoundManager.Instance.PlayOneShotSound(latchPath, GameManager.Player.transform);
     }
 
 

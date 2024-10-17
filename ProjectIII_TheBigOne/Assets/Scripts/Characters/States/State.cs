@@ -1,7 +1,7 @@
-﻿using Characters.Generic;
+﻿using Tavaris.AI;
 using UnityEngine;
 
-namespace Player
+namespace Tavaris.States
 {
     public abstract class State : MonoBehaviour
     {

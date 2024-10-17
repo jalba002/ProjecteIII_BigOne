@@ -1,37 +1,32 @@
-﻿using UnityEngine;
-using World.Objects;
+﻿using Tavaris.Dynamic;
+using Tavaris.Interfaces;
+using UnityEngine;
 
-public class ItemRequirements : MonoBehaviour
+namespace Tavaris.Interactables
 {
-    public string requiredItemID;
-    private static Inventory playerInventory;
-    public DynamicObject lockedDoor;
-
-    private void Awake()
+    public class ItemRequirements : MonoBehaviour
     {
-        if (playerInventory == null)
-            playerInventory = GameObject.FindObjectOfType<Inventory>();
+        public string requiredItemID;
+        private Door attachedDoor;
 
-        if (lockedDoor == null)
+        private void Awake()
         {
-            lockedDoor = gameObject.GetComponentInChildren<DynamicObject>();
+            if (attachedDoor == null)
+            {
+                attachedDoor = gameObject.GetComponentInChildren<Door>();
+            }
+
+            attachedDoor.OnStartInteraction += () => { Unlock(attachedDoor); };
         }
 
-        lockedDoor.OnStartInteracting.AddListener(Unlock);
-    }
-
-    public void Unlock()
-    {
-        if (lockedDoor.lockedMode == DynamicObject.LockedMode.Unlocked) return;
-
-        var item = playerInventory.characterItems.Find(x => x.itemID == requiredItemID);
-        bool hasItem = item != null;
-
-        if (hasItem)
+        public void Unlock(ILockable lockable)
         {
-            playerInventory.inventoryDisplay.RemoveItem(item);
-            playerInventory.characterItems.Remove(item);
-            lockedDoor.Unlock();
+            // Ask Game Manager if player has X in its inventory.
+            if (GameManager.Instance.HasPlayerThisItemInInventory(requiredItemID))
+            {
+                lockable.Unlock();
+                GameManager.Instance.RemoveItemFromPlayerInventory(requiredItemID);
+            }
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Enemy;
+﻿using Tavaris.Entities;
 using UnityEngine;
 
 public class Dimitry_Attack_Controller : StateMachineBehaviour

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Tavaris.Interactable;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
@@ -62,7 +63,7 @@ public class InspectableObject : InteractableObject, IInspectable
     {
         CreateInspectInfo();
         _meshRenderer.enabled = false;
-        OnStartInteract();
+        StartInteract();
         return InspectInfo;
     }
 
@@ -80,7 +81,7 @@ public class InspectableObject : InteractableObject, IInspectable
     public bool StopInspect()
     {
         _meshRenderer.enabled = true;
-        OnEndInteract();
+        EndInteract();
         return false;
     }
     
@@ -91,23 +92,18 @@ public class InspectableObject : InteractableObject, IInspectable
         return false;
     }
 
-    public override void OnStartInteract()
+    public override void StartInteract()
     {
-        //
-        base.OnStartInteract();
-        IsInteracting = true;
+        base.StartInteract();
     }
 
-    public override void OnInteracting()
+    public override void Interacting()
     {
-        //
-        base.OnInteracting();
+        base.Interacting();
     }
 
-    public override void OnEndInteract()
+    public override void EndInteract()
     {
-        //
-        base.OnEndInteract();
-        IsInteracting = false;
+        base.EndInteract();
     }
 }

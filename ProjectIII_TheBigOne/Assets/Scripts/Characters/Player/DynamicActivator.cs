@@ -1,23 +1,27 @@
 ﻿using System;
+using Tavaris.Interactable;
 using UnityEngine;
 
-public class DynamicActivator : MonoBehaviour
+namespace Tavaris.Manager
 {
-    public bool Interact(InteractableObject newInteractable, bool enable)
+    public class DynamicActivator : MonoBehaviour
     {
-        try
+        public bool Interact(InteractableObject newInteractable, bool enable)
         {
-            if (newInteractable.interactionType == InteractableObject.InteractionType.Drag ||
-                newInteractable.interactionType == InteractableObject.InteractionType.Pick)
+            try
             {
-                return newInteractable.Interact(enable);
+                if (newInteractable.interactSettings.interactionType == InteractSettings.InteractionType.Drag ||
+                    newInteractable.interactSettings.interactionType == InteractSettings.InteractionType.Pick)
+                {
+                    return newInteractable.Interact(enable);
+                }
             }
-        }
-        catch (NullReferenceException)
-        {
+            catch (NullReferenceException)
+            {
+                return false;
+            }
+
             return false;
         }
-
-        return false;
     }
 }

@@ -1,9 +1,8 @@
-﻿using System.Diagnostics;
-using Characters.Generic;
+﻿using Tavaris.Entities;
+using Tavaris.Manager;
 using UnityEngine;
-using CharacterController = UnityEngine.CharacterController;
 
-namespace Player
+namespace Tavaris.States
 {
     public class State_Player_Interacting : State
     {
@@ -13,7 +12,7 @@ namespace Player
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
-            _attachedRigidbody = Machine.characterController.rigidbody;
+            _attachedRigidbody = Machine.characterController.GetComponent<Rigidbody>();
             _playerController = (PlayerController) Machine.characterController;
         }
 

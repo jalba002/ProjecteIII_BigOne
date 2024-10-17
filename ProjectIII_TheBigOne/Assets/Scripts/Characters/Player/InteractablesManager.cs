@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
-using Player;
+using Tavaris.Entities;
+using Tavaris.Interactable;
 using UnityEngine;
 
-namespace Characters.Player
+namespace Tavaris.Manager
 {
     // Make a raycast.
     // Identify the object type.
@@ -27,8 +28,7 @@ namespace Characters.Player
         public float raycastCooldownPerCheck = 0.1f;
         private float currentRaycastCooldown;
 
-        private List<InteractableObject.InteractionType> interactedTypes =
-            new List<InteractableObject.InteractionType>();
+        //private List<InteractableObject.InteractionType> interactedTypes =            new List<InteractableObject.InteractionType>();
 
         public void Start()
         {
@@ -138,13 +138,11 @@ namespace Characters.Player
 
         private void ShowTuto()
         {
-            if (!interactedTypes.Contains(CurrentInteractable.interactionType))
-            {
-                GameManager.Instance.CanvasController.ShowHint(CurrentInteractable.displayName, true, 4f,
-                    UIFade.FadeOutAfter.Time);
-                if (CurrentInteractable.interactionType != InteractableObject.InteractionType.Pick)
-                    interactedTypes.Add(CurrentInteractable.interactionType);
-            }
+            GameManager.Instance.CanvasController.ShowHint(
+                CurrentInteractable.interactSettings.displayName, 
+                true, 
+                4f,
+                UIFade.FadeOutAfter.Time);
         }
 
         private GameObject DetectElement()
@@ -166,7 +164,7 @@ namespace Characters.Player
         public void ClearInteractable()
         {
             if (CurrentInteractable != null)
-                CurrentInteractable.OnEndInteract();
+                CurrentInteractable.EndInteract();
 
             CurrentInteractable = null;
         }

@@ -448,44 +448,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 2360833333278513182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8e4330ca1cf13545a0976beb5c491f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 43fedd835de18c545a061d7e6454fdb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactSettings: {fileID: 11400000, guid: a5a0dfc01ef18544daf29fcb580304e2, type: 2}
   showLogDebug: 0
-  interactionType: 0
-  displayName: Open wardrobe door
-  previewImage: {fileID: 21300000, guid: 31a82a7fec8da8a4cbe52985360c4ac6, type: 3}
-  displayImage: {fileID: 21300000, guid: c50947eb986193f44952acbdcf6f835d, type: 3}
-  objectType: 0
-  lockedMode: 1
-  openState: 0
-  doorConfiguration:
-    maximumAngle: 100
-    minimumAngle: 0
-    friction: 5
-  drawerConfiguration:
-    maximumDistance: 0.25
-    friction: 10
-    maximumForce: 5
-  palletConfiguration:
-    forceToThrow: 100
-    forceScaleApplied: 5
   HandlePosition: {fileID: 3488012380504485380}
   applyHandleRotation: 0
-  openForce: 0.5
+  openForce: 5
   maxMouseInput: 3
   UseMouseXAxis: 1
   InvertInitialization: 0
   StartupClosePercentage: 0.96
   useGravity: 0
   ignorePlayerCollider: 0
-  ignoredColliders: []
-  OnUnlockEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStartInteracting:
-    m_PersistentCalls:
-      m_Calls: []
+  ignoredColliders:
+  - {fileID: 3916154146709286223}
+  doorConfiguration:
+    maximumAngle: 110
+    minimumAngle: 0
+    minimumLockedAngle: -2
+    maximumLockedAngle: 2
+    friction: 1
+    bounciness: 0
+    bouncinessMinVelocity: 0
+  _lockState: 1
 --- !u!54 &7324226470766221771
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -580,28 +567,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3135612320411875509}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8e4330ca1cf13545a0976beb5c491f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 6feb4519fd1e85840aed2330b92061d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactSettings: {fileID: 11400000, guid: 87d59da76eb22a14b887eded1f429e53, type: 2}
   showLogDebug: 0
-  interactionType: 0
-  displayName: Open wardrobe drawer
-  previewImage: {fileID: 21300000, guid: 31a82a7fec8da8a4cbe52985360c4ac6, type: 3}
-  displayImage: {fileID: 21300000, guid: 96efc1977c2ea4547bb329bd246f7839, type: 3}
-  objectType: 1
-  lockedMode: 1
-  openState: 0
-  doorConfiguration:
-    maximumAngle: 90
-    minimumAngle: 0
-    friction: 1
-  drawerConfiguration:
-    maximumDistance: 0.15
-    friction: 7
-    maximumForce: 5
-  palletConfiguration:
-    forceToThrow: 100
-    forceScaleApplied: 5
   HandlePosition: {fileID: 1430589168212278455}
   applyHandleRotation: 0
   openForce: 5
@@ -613,12 +583,11 @@ MonoBehaviour:
   ignorePlayerCollider: 0
   ignoredColliders:
   - {fileID: 3916154146709286223}
-  OnUnlockEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStartInteracting:
-    m_PersistentCalls:
-      m_Calls: []
+  _lockState: 0
+  drawerConfiguration:
+    maximumDistance: 0.15
+    friction: 10
+    maximumForce: 5
 --- !u!65 &4285841312874505230
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -705,46 +674,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 4673467226257913702}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8e4330ca1cf13545a0976beb5c491f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 6feb4519fd1e85840aed2330b92061d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactSettings: {fileID: 11400000, guid: 87d59da76eb22a14b887eded1f429e53, type: 2}
   showLogDebug: 0
-  interactionType: 0
-  displayName: Open wardrobe drawer
-  previewImage: {fileID: 21300000, guid: 31a82a7fec8da8a4cbe52985360c4ac6, type: 3}
-  displayImage: {fileID: 21300000, guid: 96efc1977c2ea4547bb329bd246f7839, type: 3}
-  objectType: 1
-  lockedMode: 1
-  openState: 0
-  doorConfiguration:
-    maximumAngle: 90
-    minimumAngle: 0
-    friction: 1
-  drawerConfiguration:
-    maximumDistance: 0.15
-    friction: 7
-    maximumForce: 5
-  palletConfiguration:
-    forceToThrow: 100
-    forceScaleApplied: 5
   HandlePosition: {fileID: 1782944547710991880}
   applyHandleRotation: 0
   openForce: 5
   maxMouseInput: 3
   UseMouseXAxis: 0
   InvertInitialization: 1
-  StartupClosePercentage: 0.96
+  StartupClosePercentage: 0.8
   useGravity: 0
   ignorePlayerCollider: 0
   ignoredColliders:
   - {fileID: 3916154146709286223}
-  - {fileID: 4285841312874505230}
-  OnUnlockEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStartInteracting:
-    m_PersistentCalls:
-      m_Calls: []
+  _lockState: 0
+  drawerConfiguration:
+    maximumDistance: 0.15
+    friction: 10
+    maximumForce: 5
 --- !u!65 &5609299468236449932
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -768,7 +718,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8920382412755075211}
   m_Layer: 0
-  m_Name: Wardrove2
+  m_Name: Wardrobe2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -917,44 +867,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 5693718707429301674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8e4330ca1cf13545a0976beb5c491f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 43fedd835de18c545a061d7e6454fdb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactSettings: {fileID: 11400000, guid: a5a0dfc01ef18544daf29fcb580304e2, type: 2}
   showLogDebug: 0
-  interactionType: 0
-  displayName: Open wardrobe door
-  previewImage: {fileID: 21300000, guid: 31a82a7fec8da8a4cbe52985360c4ac6, type: 3}
-  displayImage: {fileID: 21300000, guid: c50947eb986193f44952acbdcf6f835d, type: 3}
-  objectType: 0
-  lockedMode: 1
-  openState: 0
-  doorConfiguration:
-    maximumAngle: -100
-    minimumAngle: 0
-    friction: 5
-  drawerConfiguration:
-    maximumDistance: 0.25
-    friction: 10
-    maximumForce: 5
-  palletConfiguration:
-    forceToThrow: 100
-    forceScaleApplied: 5
   HandlePosition: {fileID: 9156015999505095741}
   applyHandleRotation: 0
-  openForce: 0.5
+  openForce: 5
   maxMouseInput: 3
   UseMouseXAxis: 1
   InvertInitialization: 0
   StartupClosePercentage: 0.96
   useGravity: 0
   ignorePlayerCollider: 0
-  ignoredColliders: []
-  OnUnlockEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStartInteracting:
-    m_PersistentCalls:
-      m_Calls: []
+  ignoredColliders:
+  - {fileID: 3916154146709286223}
+  doorConfiguration:
+    maximumAngle: 0
+    minimumAngle: -110
+    minimumLockedAngle: -2
+    maximumLockedAngle: 2
+    friction: 1
+    bounciness: 0
+    bouncinessMinVelocity: 0
+  _lockState: 1
 --- !u!54 &2900805761578111841
 Rigidbody:
   m_ObjectHideFlags: 0

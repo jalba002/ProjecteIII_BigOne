@@ -1,8 +1,7 @@
-﻿using Characters.Generic;
-using Player;
+﻿using Tavaris.Entities;
 using UnityEngine;
 
-namespace Enemy
+namespace Tavaris.States
 {
     public class State_Enemy_Killing : State
     {
@@ -13,7 +12,7 @@ namespace Enemy
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
-            _attachedController = (EnemyController) Machine.characterController;
+            _attachedController = (EnemyController)Machine.characterController;
             enemyAnimator = _attachedController.GetComponentInChildren<Animator>();
 
         }
@@ -40,7 +39,7 @@ namespace Enemy
         {
             base.OnStateEnter();
             _attachedController.NavMeshAgent.isStopped = true;
-            
+
             // TODO Change to animation kill.
             /*if (!GameManager.Instance.GameSettings.isPlayerInvincible)
             {

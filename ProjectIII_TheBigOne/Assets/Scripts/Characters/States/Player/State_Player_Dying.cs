@@ -1,7 +1,7 @@
-﻿using Characters.Generic;
+﻿using Tavaris.Manager;
 using UnityEngine;
 
-namespace Player
+namespace Tavaris.States
 {
     public class State_Player_Dying : State
     {
@@ -12,7 +12,7 @@ namespace Player
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
-            _attachedRigidbody = Machine.characterController.rigidbody;
+            _attachedRigidbody = Machine.characterController.GetComponent<Rigidbody>();
             originalValue = 3f;
         }
 

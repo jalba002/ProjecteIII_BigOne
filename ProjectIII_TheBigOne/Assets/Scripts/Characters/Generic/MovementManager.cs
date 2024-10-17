@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Characters.Generic
+namespace Tavaris.Manager
 {
     // This class handles all movements. No movement is programmed in states.
     public static class MovementManager

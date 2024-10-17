@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Assets.Scripts.Game;
-using Characters.Generic;
-using Player;
+﻿using Tavaris.AI;
+using Tavaris.Entities;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.Animations;
 using Random = System.Random;
 
-namespace Enemy
+namespace Tavaris.States
 {
     public class State_Enemy_Patrolling : State
     {
@@ -22,7 +17,7 @@ namespace Enemy
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
-            _attachedController = (EnemyController) Machine.characterController;
+            _attachedController = (EnemyController)Machine.characterController;
         }
 
         public override void OnStateTick(float deltaTime)
@@ -96,7 +91,7 @@ namespace Enemy
                 patrolCooldown = 0.1f;
                 return;
             }
-            
+
             lastPatrolPoint = chosenPatrolPoint;
 
             _attachedController.targetPositionDummy.transform.position = chosenPatrolPoint.transform.position;

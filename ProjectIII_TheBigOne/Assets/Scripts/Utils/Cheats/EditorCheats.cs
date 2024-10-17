@@ -1,5 +1,7 @@
 ﻿using System;
-using Characters.Player;
+using Tavaris.AI;
+using Tavaris.Manager;
+using Tavaris.Triggers;
 using UnityEditor;
 using UnityEngine;
 
@@ -64,7 +66,7 @@ namespace Cheats
                 Debug.LogWarning("Only in Play Mode!");
             }
         }
-        
+
         [MenuItem("Cheats/Level/Activate Selected Trigger")]
         public static void ActivateTrigger()
         {

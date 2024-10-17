@@ -1,31 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Enemy;
-using Player;
-using UnityEngine;
+﻿using Tavaris.Entities;
+using Tavaris.States;
 
-
-public abstract class BehaviourTree
+namespace Tavaris.AI
 {
-    protected Characters.Generic.CharacterController attachedCharacter;
-
-    public void Setup(Characters.Generic.CharacterController characterController)
+    public abstract class BehaviourTree
     {
-        this.attachedCharacter = characterController;
-    }
+        protected EntityController attachedCharacter;
 
-    public abstract void CalculateNextState(bool forceExitState);
-
-    /// DEFAULT TRANSITIONS ///
-
-    protected bool CheckDeadState()
-    {
-        if (!attachedCharacter.IsDead)
+        public void Setup(EntityController characterController)
         {
-            return false;
+            this.attachedCharacter = characterController;
         }
 
-        attachedCharacter.stateMachine.SwitchState<State_Generic_Dead>();
-        return true;
+        public abstract void CalculateNextState(bool forceExitState);
+
+        /// DEFAULT TRANSITIONS ///
+
+        protected bool CheckDeadState()
+        {
+            if (!attachedCharacter.IsDead)
+            {
+                return false;
+            }
+
+            attachedCharacter.stateMachine.SwitchState<State_Generic_Dead>();
+            return true;
+        }
     }
 }

@@ -1,13 +1,15 @@
-﻿using Player;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class GameFinisher : MonoBehaviour
+namespace Tavaris.Manager
 {
-    private void OnTriggerEnter(Collider other)
+    public class GameFinisher : MonoBehaviour
     {
-        if (other.GetComponent<PlayerController>() != null)
+        private void OnTriggerEnter(Collider other)
         {
-            GameManager.Instance.EndGame();
+            if (other.gameObject == GameManager.Player)
+            {
+                GameManager.Instance.EndGame();
+            }
         }
     }
 }

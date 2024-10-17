@@ -1,29 +1,31 @@
-﻿using Enemy;
-using UnityEngine;
-using CharacterController = Characters.Generic.CharacterController;
+﻿using Tavaris.Entities;
+using Tavaris.States;
 
-public class BehaviourTree_Enemy_Halted : BehaviourTree
+namespace Tavaris.AI
 {
-    protected new EnemyController attachedCharacter;
-
-    public BehaviourTree_Enemy_Halted(CharacterController characterController)
+    public class BehaviourTree_Enemy_Halted : BehaviourTree
     {
-        base.Setup(characterController);
-        attachedCharacter = (EnemyController) characterController;
-    }
+        protected new EnemyController attachedCharacter;
 
-    public override void CalculateNextState(bool forceExitState)
-    {
-        // Analyze all possible states.
-        if(DoNothing()) return;
-    }
+        public BehaviourTree_Enemy_Halted(EnemyController characterController)
+        {
+            base.Setup(characterController);
+            attachedCharacter = characterController;
+        }
+
+        public override void CalculateNextState(bool forceExitState)
+        {
+            // Analyze all possible states.
+            if (DoNothing()) return;
+        }
 
 
-    /// All states for Enemy first phase listed below.
-    public bool DoNothing()
-    {
-        // Does nothing.
-        attachedCharacter.stateMachine.SwitchState<State_Enemy_Halt>();
-        return true;
+        /// All states for Enemy first phase listed below.
+        public bool DoNothing()
+        {
+            // Does nothing.
+            attachedCharacter.stateMachine.SwitchState<State_Enemy_Halt>();
+            return true;
+        }
     }
 }

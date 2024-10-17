@@ -1,10 +1,8 @@
-﻿using System;
-using Characters.Generic;
-using Player;
+﻿using Tavaris.Entities;
+using Tavaris.Objects;
 using UnityEngine;
-using World.Objects;
 
-namespace Enemy
+namespace Tavaris.States
 {
     public class State_Enemy_Stunned : State
     {
@@ -17,7 +15,7 @@ namespace Enemy
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
-            _attachedController = (EnemyController) Machine.characterController;
+            _attachedController = (EnemyController)Machine.characterController;
         }
 
         public override void OnStateTick(float deltaTime)
@@ -48,9 +46,9 @@ namespace Enemy
             base.OnStateEnter();
             Debug.Log("STUNNED UGH");
             _attachedController.NavMeshAgent.isStopped = true;
-            
+
             // Stun stuff.
-            stunSource = _attachedController.currentBrain.StunSource;
+            //stunSource = _attachedController.currentBrain.StunSource;
             stunTime = stunSource != null ? stunSource.stunDuration : 5f;
             _attachedController.NavMeshAgent.Warp(stunSource.traversableBlockage.attachedLink.startTransform.position);
         }
@@ -60,7 +58,7 @@ namespace Enemy
             base.OnStateExit();
             Debug.Log("BACK IN ACTION");
             _attachedController.NavMeshAgent.isStopped = false;
-            
+
         }
     }
 }

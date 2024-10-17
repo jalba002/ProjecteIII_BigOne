@@ -1,10 +1,9 @@
-﻿using UnityEngine;
+﻿using Tavaris.Entities;
+using UnityEngine;
 using UnityEngine.AI;
 using Random = System.Random;
-using State = Player.State;
-using StateMachine = Characters.Generic.StateMachine;
 
-namespace Enemy
+namespace Tavaris.States
 {
     public class State_Enemy_Searching : State
     {
@@ -20,7 +19,7 @@ namespace Enemy
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
-            _attachedController = (EnemyController) Machine.characterController;
+            _attachedController = (EnemyController)Machine.characterController;
         }
 
         public override void OnStateTick(float deltaTime)

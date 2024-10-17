@@ -1,57 +1,56 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using Enemy;
+﻿using Tavaris.Entities;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PathDrawer : MonoBehaviour
+namespace Tavaris.Manager
 {
-    public LineRenderer lineRenderer;
-
-    public Transform target;
-
-    public NavMeshAgent trackedAgent;
-
-    // Start is called before the first frame update
-    void Start()
+    public class PathDrawer : MonoBehaviour
     {
-        if (trackedAgent == null)
-            trackedAgent = FindObjectOfType<EnemyController>().NavMeshAgent;
-        target = trackedAgent.transform;
-        lineRenderer = GetComponent<LineRenderer>();
-    }
+        public LineRenderer lineRenderer;
 
-    private void Update()
-    {
-        GetPath();
-        DrawPath();
-    }
+        public Transform target;
 
-    void GetPath()
-    {
-        lineRenderer.SetPosition(0, target.position);
-    }
+        public NavMeshAgent trackedAgent;
 
-    void DrawPath()
-    {
-        while (trackedAgent.pathPending)
+        // Start is called before the first frame update
+        void Start()
         {
-            return;
+            if (trackedAgent == null)
+                trackedAgent = FindObjectOfType<EnemyController>().NavMeshAgent;
+            target = trackedAgent.transform;
+            lineRenderer = GetComponent<LineRenderer>();
         }
 
-        if (trackedAgent.path.corners.Length < 2)
+        private void Update()
         {
-            // return
+            GetPath();
+            DrawPath();
         }
-        else
-        {
-            lineRenderer.positionCount = trackedAgent.path.corners.Length;
 
-            for (int i = 0; i < trackedAgent.path.corners.Length; i++)
+        void GetPath()
+        {
+            lineRenderer.SetPosition(0, target.position);
+        }
+
+        void DrawPath()
+        {
+            while (trackedAgent.pathPending)
             {
-                lineRenderer.SetPosition(i, trackedAgent.path.corners[i]);
+                return;
+            }
+
+            if (trackedAgent.path.corners.Length < 2)
+            {
+                // return
+            }
+            else
+            {
+                lineRenderer.positionCount = trackedAgent.path.corners.Length;
+
+                for (int i = 0; i < trackedAgent.path.corners.Length; i++)
+                {
+                    lineRenderer.SetPosition(i, trackedAgent.path.corners[i]);
+                }
             }
         }
     }

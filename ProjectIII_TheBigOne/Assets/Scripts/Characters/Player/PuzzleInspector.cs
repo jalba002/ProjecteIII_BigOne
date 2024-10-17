@@ -1,29 +1,26 @@
 ﻿using System;
+using Tavaris.Interactable;
 using UnityEngine;
 
-public class PuzzleInspector : MonoBehaviour
+namespace Tavaris.Manager
 {
-    private InteractableObject _currentInteractable;
-
-    public bool Interact(InteractableObject newInteractable)
+    public class PuzzleInspector : MonoBehaviour
     {
-        try
+        private InteractableObject _currentInteractable;
+
+        public bool Interact(InteractableObject newInteractable)
         {
-            if (newInteractable.interactionType != InteractableObject.InteractionType.Puzzle) return false;
-        }
-        catch (NullReferenceException)
-        {
+            if (newInteractable.interactSettings.interactionType != InteractSettings.InteractionType.Puzzle) return false;
+
+            _currentInteractable = newInteractable;
+
+            if (_currentInteractable != null)
+            {
+                _currentInteractable.Interact(!_currentInteractable.IsInteracting);
+                return _currentInteractable.IsInteracting;
+            }
+
             return false;
         }
-
-        _currentInteractable = newInteractable;
-
-        if (_currentInteractable != null)
-        {
-            _currentInteractable.Interact(!_currentInteractable.IsInteracting);
-            return _currentInteractable.IsInteracting;
-        }
-
-        return false;
     }
 }

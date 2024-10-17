@@ -22,7 +22,7 @@ public class LockManager_Dice : MonoBehaviour
     public void RotateRight()
     {
         //Debug.Log("Rotando");
-        SoundManager.Instance.PlayOneShotSound("event:/SFX/Environment/Room/TerminalBeep", GameManager.Instance.PlayerController.transform.position);
+        SoundManager.Instance.PlayOneShotSound("event:/SFX/Environment/Room/TerminalBeep", GameManager.Player.transform.position);
         actualNumber += 1;
         if (actualNumber > 9)
         {

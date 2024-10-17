@@ -1,8 +1,8 @@
-﻿using Enemy;
-using Unity.Collections.LowLevel.Unsafe;
+﻿using Tavaris.Dynamic;
+using Tavaris.Entities;
 using UnityEngine;
 
-namespace World.Objects
+namespace Tavaris.Objects
 {
     public class StunArea : MonoBehaviour
     {
@@ -40,78 +40,5 @@ namespace World.Objects
             }
             traversableBlockage = GetComponent<TraversableBlockage>();
         }
-
-        public void Update()
-        {
-            if (attachedDynamicObject.enabled)
-            {
-                //var value = attachedDynamicObject.HingeJoint.gameObject.transform.rotation.x * Mathf.Rad2Deg;
-                //Debug.Log(value);
-                
-                if ( attachedDynamicObject.HingeJoint.angle > 25f)
-                {
-                    ActivateStun();
-                    /*var newValue = attachedDynamicObject.HingeJoint.angle - 1f * Time.deltaTime;
-                    newValue = Mathf.Clamp(newValue, 0f, 87f);
-                    var oldMax = attachedDynamicObject.HingeJoint.limits.max;
-                    attachedDynamicObject.HingeJoint.limits = new JointLimits()
-                    {
-                        min = newValue,
-                        max = oldMax
-                    };*/
-                }
-            }
-
-           /* if (attachedDynamicObject.HingeJoint.angle >= 87f)
-            {
-               
-                // Destroy(this.gameObject);
-            }*/
-        }
-
-        public bool ActivateStun()
-        {
-            if (IsEnemyInsideArea && !AlreadyActivated)
-            {
-                ForceStun();
-                AlreadyActivated = true;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private void ForceStun()
-        {
-            enemyController.currentBrain.Stun(this);
-        }
-
-        public bool RestartArea()
-        {
-            return false;
-        }
-
-        /*void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject == enemyController.gameObject)
-            {
-                if (TrappedArea)
-                {
-                    ActivateStun();
-                }
-
-                IsEnemyInsideArea = true;
-            }
-        }
-
-        void OnTriggerExit(Collider other)
-        {
-            if (other.gameObject == enemyController.gameObject)
-            {
-                IsEnemyInsideArea = false;
-            }
-        }*/
     }
 }

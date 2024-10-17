@@ -1,10 +1,8 @@
 ﻿using System;
+using Tavaris.Entities;
 using UnityEngine;
-using World.Objects;
-using State = Player.State;
-using StateMachine = Characters.Generic.StateMachine;
 
-namespace Enemy
+namespace Tavaris.States
 {
     public class State_Enemy_Traversing : State
     {
@@ -18,7 +16,7 @@ namespace Enemy
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
-            _attachedController = (EnemyController) Machine.characterController;
+            _attachedController = (EnemyController)Machine.characterController;
         }
 
         public override void OnStateTick(float deltaTime)
@@ -33,9 +31,9 @@ namespace Enemy
             {
                 breakTime -= deltaTime;
             }
-            
+
             if (breakTime <= originalBreakTime * 0.25f && _currentBlockage != null)
-            {            
+            {
                 ResolveBlockage();
             }
             else if (breakTime <= 0f)
@@ -72,14 +70,14 @@ namespace Enemy
                 .GetComponent<TraversableBlockage>();
 
             _attachedController.NavMeshAgent.isStopped = true;
-            
-           TeleportToCorrectPosition();
+
+            TeleportToCorrectPosition();
 
             _attachedController.NavMeshAgent.updateRotation = false;
 
             Vector3 alteredPos = _currentBlockage.attachedDynamicObject.transform.position;
             alteredPos.y = _attachedController.transform.position.y;
-            
+
             _attachedController.transform.forward = (alteredPos -
                                                      _attachedController.transform.position).normalized;
 
@@ -117,27 +115,9 @@ namespace Enemy
         private void ResolveBlockage()
         {
             if (_currentBlockage == null) return;
-            switch (_currentBlockage.attachedDynamicObject.objectType)
-            {
-                case DynamicObject.ObjectType.Door:
-                    // Nothing yet.
-                    //_currentBlockage.attachedDynamicObject.ForceOpen(-2200f);
-                    //_currentBlockage.attachedDynamicObject.SetHandleDirection(_attachedController.gameObject.transform.position);
-                    _currentBlockage.attachedDynamicObject.ResetHandle();
-                    _currentBlockage.attachedDynamicObject.StrongOpening();
-                    //_currentBlockage.attachedDynamicObject.BreakOpening(_attachedController.gameObject.transform.forward, 25f);
-                    _currentBlockage.DisableLink(4f);
-                    break;
-                case DynamicObject.ObjectType.Drawer:
-                    // Can't get blocked by a drawer...?
-                    break;
-                case DynamicObject.ObjectType.Pallet:
-                    _currentBlockage.gameObject.SetActive(false);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
+            _currentBlockage.attachedDynamicObject.ResetHandle();
+            _currentBlockage.attachedDynamicObject.StrongOpening();
+            _currentBlockage.DisableLink(4f);
             _currentBlockage = null;
         }
     }

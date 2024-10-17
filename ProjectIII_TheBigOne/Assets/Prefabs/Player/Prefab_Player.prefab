@@ -57,7 +57,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 100
   field of view: 60
   orthographic: 0
@@ -287,7 +287,6 @@ GameObject:
   - component: {fileID: 4287271706014648179}
   - component: {fileID: 4287271705462774198}
   - component: {fileID: 6592646240077006143}
-  - component: {fileID: 4041253382631071211}
   - component: {fileID: 2031410052690668047}
   - component: {fileID: 5598959312946074347}
   - component: {fileID: 8660583207281345042}
@@ -388,11 +387,10 @@ MonoBehaviour:
   attachedCollider: {fileID: 4287271706014648175}
   cameraController: {fileID: 2999368691099895388}
   attachedFlashlight: {fileID: 6592646240077006143}
-  playerInventory: {fileID: 4041253382631071211}
   characterProperties: {fileID: 11400000, guid: 7e571a240adc2994192319d07f6fd24d,
     type: 2}
   interactablesManager: {fileID: 0}
-  stateMachine: {fileID: 0}
+  stateMachine: {fileID: 4287271706014648177}
   footstepPath: event:/SFX/Player/Concrete
   footstepVolume: 1
   playerDeathPath: event:/SFX/Player/Die
@@ -402,6 +400,7 @@ MonoBehaviour:
     type: 2}
   playerStoppedMaterial: {fileID: 13400000, guid: ecfe8242e3cfab24496b4a4737959687,
     type: 2}
+  pauseMenu: {fileID: 0}
 --- !u!114 &4287271706014648179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,21 +452,6 @@ MonoBehaviour:
   minimumIntensity: 0.33
   toggleFlashlightPath: 
   replaceBatteryPath: 
---- !u!114 &4041253382631071211
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4287271706014648174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b433d2a4f82cc84890d2c7113227f2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterItems: []
-  database: {fileID: 11400000, guid: 1b8c232879a17a74b89be2a9328dd0a8, type: 2}
-  inventoryDisplay: {fileID: 0}
 --- !u!82 &2031410052690668047
 AudioSource:
   m_ObjectHideFlags: 0
@@ -585,7 +569,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 513
   attachedPlayer: {fileID: 4287271706014648176}
-  textDebug: {fileID: 0}
   aimedObject: {fileID: 0}
   CanInteract: 0
   raycastCooldownPerCheck: 0.1

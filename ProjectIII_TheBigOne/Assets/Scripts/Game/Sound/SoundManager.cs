@@ -197,11 +197,11 @@ public class SoundManager : MonoBehaviour
         EventInstance soundEvent = RuntimeManager.CreateInstance(path);
         if (!soundEvent.Equals(null))
         {
-            soundEvent.set3DAttributes(RuntimeUtils.To3DAttributes(GameManager.Instance.PlayerController.transform.position));
+            soundEvent.set3DAttributes(RuntimeUtils.To3DAttributes(GameManager.Player.transform.position));
             soundEvent.start();
             soundEvent.setProperty(EVENT_PROPERTY.MINIMUM_DISTANCE, 0);
             soundEvent.setProperty(EVENT_PROPERTY.MAXIMUM_DISTANCE, 25);
-            SoundManagerMovingSound movingSound = new SoundManagerMovingSound(GameManager.Instance.PlayerController.transform, soundEvent);
+            SoundManagerMovingSound movingSound = new SoundManagerMovingSound(GameManager.Player.transform, soundEvent);
             positionEvents.Add(movingSound);
             soundEvent.release();
         }
@@ -222,9 +222,9 @@ public class SoundManager : MonoBehaviour
         EventInstance soundEvent = RuntimeManager.CreateInstance(path);
         if (!soundEvent.Equals(null))
         {
-            soundEvent.set3DAttributes(RuntimeUtils.To3DAttributes(GameManager.Instance.PlayerController.transform.position));
+            soundEvent.set3DAttributes(RuntimeUtils.To3DAttributes(GameManager.Player.transform.position));
             soundEvent.start();
-            SoundManagerMovingSound movingSound = new SoundManagerMovingSound(GameManager.Instance.PlayerController.transform, soundEvent);
+            SoundManagerMovingSound movingSound = new SoundManagerMovingSound(GameManager.Player.transform, soundEvent);
             positionEvents.Add(movingSound);
             soundEvent.release();
         }

@@ -1,9 +1,8 @@
 ﻿using System;
-using Characters.Generic;
-using Player;
-using UnityEngine;
+using Tavaris.Entities;
+using Tavaris.Utils;
 
-namespace Enemy
+namespace Tavaris.States
 {
     public class State_Enemy_Moving : State
     {
@@ -13,7 +12,7 @@ namespace Enemy
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
-            _attachedController = (EnemyController) Machine.characterController;
+            _attachedController = (EnemyController)Machine.characterController;
         }
 
         public override void OnStateTick(float deltaTime)

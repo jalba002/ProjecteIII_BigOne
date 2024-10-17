@@ -40,7 +40,6 @@ GameObject:
   m_Component:
   - component: {fileID: 720319417316128067}
   - component: {fileID: 720319417316128069}
-  - component: {fileID: 720319417316128065}
   - component: {fileID: 720319417316128078}
   - component: {fileID: 1135270371}
   m_Layer: 2
@@ -80,22 +79,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.6, y: 2.4, z: 2.3}
   m_Center: {x: 0.9, y: 0, z: 0}
---- !u!114 &720319417316128065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 720319417316128079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 849d8ac257444a54e80f842b4920c587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  removalTime: 3
-  doCheck: 0
-  attachedLink: {fileID: 720319417316128078}
-  attachedDynamicObject: {fileID: 720319417249948214}
 --- !u!191 &720319417316128078
 OffMeshLink:
   m_ObjectHideFlags: 0
@@ -276,44 +259,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 8853790614483341352}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8e4330ca1cf13545a0976beb5c491f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a65e770feb012a4b9ca2b854a1f0153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   showLogDebug: 0
   interactionType: 0
-  displayName: Throw
-  previewImage: {fileID: 21300000, guid: 8744cef0b8d07824eb45013147cd4cae, type: 3}
-  displayImage: {fileID: 21300000, guid: c50947eb986193f44952acbdcf6f835d, type: 3}
-  objectType: 2
-  lockedMode: 1
-  openState: 1
-  doorConfiguration:
-    maximumAngle: 90
-    minimumAngle: 0
-    friction: 1
-  drawerConfiguration:
-    maximumDistance: 0.25
-    friction: 10
-    maximumForce: 5
+  displayName: 
+  previewImage: {fileID: 0}
+  displayImage: {fileID: 0}
+  HandlePosition: {fileID: 720319418987774260}
+  applyHandleRotation: 0
+  openForce: 5
+  maxMouseInput: 3
+  UseMouseXAxis: 0
+  InvertInitialization: 0
+  StartupClosePercentage: 0.96
+  useGravity: 0
+  ignorePlayerCollider: 0
+  ignoredColliders: []
   palletConfiguration:
     forceToThrow: 100
     forceScaleApplied: 5
-  HandlePosition: {fileID: 720319418987774260}
-  applyHandleRotation: 0
-  openForce: 125
-  maxMouseInput: 6
-  UseMouseXAxis: 1
-  InvertInitialization: 0
-  StartupClosePercentage: 0.96
-  useGravity: 1
-  ignorePlayerCollider: 0
-  ignoredColliders: []
-  OnUnlockEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStartInteracting:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &720319418725878049
 PrefabInstance:
   m_ObjectHideFlags: 0

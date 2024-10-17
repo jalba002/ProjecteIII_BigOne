@@ -5,7 +5,7 @@ using Debug = UnityEngine.Debug;
 public class FlashlightController : MonoBehaviour
 {
     [Header("Cheats")] public bool infiniteCharge = false;
-    [Header("Configuration")] public float maxCharge = 120f;
+    [Header("Configuration")] public float maxCharge = 300f;
     private float _currentCharge;
 
     public float currentCharge
@@ -21,8 +21,8 @@ public class FlashlightController : MonoBehaviour
     private bool _isfeedbackVisualNotNull;
     private bool _isattachedLightNull;
 
-    [Range(0f, 1f)] public float lightFlickerThreshold = 0.2f;
-    [Range(0f, 1f)] public float minimumIntensity = 0.33f;
+    [Range(0f, 1f)] public float lightFlickerThreshold = 0.1f;
+    [Range(0f, 1f)] public float minimumIntensity = 0.6f;
     private float _initLightIntensity;
     private float _currentLightIntensity;
     private float _initLightRange;
@@ -105,15 +105,7 @@ public class FlashlightController : MonoBehaviour
 
     public bool Recharge(float amount)
     {
-        try
-        {
-            SoundManager.Instance.PlaySound2D(replaceBatteryPath);
-        }
-        catch (Exception e)
-        {
-            Debug.LogWarning(e.Message, this);
-        }
-
+        SoundManager.Instance.PlaySound2D(replaceBatteryPath);
         if (currentCharge < maxCharge)
         {
             currentCharge += amount;

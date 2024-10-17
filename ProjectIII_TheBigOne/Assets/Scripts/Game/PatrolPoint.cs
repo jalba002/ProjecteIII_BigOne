@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.Game
+namespace Tavaris.AI
 {
     public class PatrolPoint : MonoBehaviour
     {
-        [Range(0,1)] public int ID = 0;
+        public bool IsMainPhase = true;
     }
 }

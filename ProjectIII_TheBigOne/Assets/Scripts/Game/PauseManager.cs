@@ -150,20 +150,20 @@ public class PauseManager : MonoBehaviour
     public void SetSensibility(float sensibility)
     {
         OptionsManager.Instance.SetSensibility(sensibility);
-        GameManager.Instance.PlayerController.cameraController.m_Sensitivity = OptionsManager.Instance.sensibility;
+        GameManager.Player.cameraController.m_Sensitivity = OptionsManager.Instance.sensibility;
         sensibilityInput.text = OptionsManager.Instance.sensibility.ToString();
     }
     public void SetSensibility(string sensibility)
     {
         OptionsManager.Instance.SetSensibility(sensibility);
-        GameManager.Instance.PlayerController.cameraController.m_Sensitivity = OptionsManager.Instance.sensibility;
+        GameManager.Player.cameraController.m_Sensitivity = OptionsManager.Instance.sensibility;
         sensibilitySlider.value = OptionsManager.Instance.sensibility;
     }
 
     public void SetInvertMouse(bool invert)
     {
         OptionsManager.Instance.SetInvertMouse(invert);
-        GameManager.Instance.PlayerController.cameraController.invertMouse = OptionsManager.Instance.invertedMouse;
+        GameManager.Player.cameraController.invertMouse = OptionsManager.Instance.invertedMouse;
     }
 
     public void SetBrightness(float bright)

@@ -1,16 +1,17 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using Tavaris.Dynamic;
 using UnityEngine;
 using UnityEngine.AI;
-using World.Objects;
 
+[RequireComponent(typeof(OffMeshLink))]
+[RequireComponent(typeof(Door))]
 public class TraversableBlockage : MonoBehaviour
 {
-    [Header("Settings")] public float removalTime;
-    public bool doCheck = false;
-
-    [Space(10)] [Header("Components")] public OffMeshLink attachedLink;
-    public DynamicObject attachedDynamicObject;
+    [Header("Settings")] 
+    public float removalTime;
+ 
+    [Space(10)][Header("Components")] public OffMeshLink attachedLink;
+    public Door attachedDynamicObject;
 
     private Coroutine coroutineHolder;
 
@@ -19,13 +20,14 @@ public class TraversableBlockage : MonoBehaviour
         if (attachedLink == null)
             attachedLink = GetComponent<OffMeshLink>();
         if (attachedDynamicObject == null)
-            attachedDynamicObject = GetComponent<DynamicObject>();
+            attachedDynamicObject = GetComponent<Door>();
+
+        attachedDynamicObject.OnStartInteraction += UpdateLink;
     }
 
-    void Update()
+    private void UpdateLink()
     {
-        if (doCheck)
-            attachedLink.activated = attachedDynamicObject.HingeJoint.angle > 15f;
+        attachedLink.activated = attachedDynamicObject.HingeJoint.angle > 15f;
     }
 
     public void DisableLink(float disableTime = 0.5f)

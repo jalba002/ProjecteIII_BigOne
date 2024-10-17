@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Player;
+using Tavaris.Entities;
 using UnityEngine;
 
-namespace Characters.Generic
+namespace Tavaris.States
 {
     public class StateMachine : MonoBehaviour
     {
@@ -14,12 +14,12 @@ namespace Characters.Generic
 
         public State lastState { get; private set; }
 
-        public CharacterController characterController;
+        public EntityController characterController;
         [Header("Debug Options")] public bool enableDebug = false;
 
         private void Awake()
         {
-            characterController = GetComponent<CharacterController>();
+            characterController = GetComponent<EntityController>();
         }
 
         public void UpdateTick(float deltaTime)

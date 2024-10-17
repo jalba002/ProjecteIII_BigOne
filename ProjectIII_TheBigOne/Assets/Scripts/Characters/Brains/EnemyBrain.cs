@@ -1,88 +1,77 @@
-﻿using System;
-using Characters.Brains;
-using Enemy;
-using Player;
-using TMPro;
+﻿using Characters.Brains;
+using Tavaris.Entities;
 using UnityEngine;
-using UnityEngine.AI;
-using World.Objects;
 
-public class EnemyBrain : Brain
+namespace Tavaris.AI
 {
-    public EnemyController selfCharacter { get; protected set; }
-    public PlayerController archnemesis { get; protected set; }
-
-    // All sensing variables should be changed from the states.
-    // So every moment they can be overwritten by whatever we want.
-
-    // Cheat or debug variable.
-    //public bool DetectPlayer { get; set; } 
-
-    public bool IsVisible { get; set; }
-
-    public bool IsStunned { get; set; }
-
-    public StunArea StunSource { get; set; }
-
-    public bool IsBeingRendered { get; set; }
-
-    public bool IsPlayerInSight { get; set; }
-
-    public bool IsPlayerNearLight { get; set; }
-
-    public bool IsChasingPlayer { get; set; }
-
-    public bool IsTrackingPlayer { get; set; }
-
-    public bool IsHearingPlayer { get; set; }
-    
-    public bool IsNoticingPlayer { get; set; }
-
-    public bool IsOnOffMeshLink { get; set; }
-
-    public bool IsCurrentlyBreaking { get; set; }
-
-    public bool UpdateRotation { get; set; }
-
-    public float DistanceToPlayer { get; set; }
-
-    public bool IsPlayerCloseEnoughForDeath { get; set; }
-
-    private void Awake()
+    public class EnemyBrain : Brain
     {
-        IsVisible = true;
-        selfCharacter = this.gameObject.GetComponent<EnemyController>();
-        archnemesis = FindObjectOfType<PlayerController>();
-    }
+        public EnemyController selfCharacter { get; protected set; }
+        public PlayerController archnemesis { get; protected set; }
 
-    // This method is updated every frame. 
-    // It is mostly used to debug functions with shortcuts.
-    public override void GetActions()
-    {
-        /*IsVisible = selfCharacter.meshRenderer.isVisible;
-        
-        IsPlayerNearLight = SensesUtil.HasFlashlightEnabled(archnemesis);
+        // All sensing variables should be changed from the states.
+        // So every moment they can be overwritten by whatever we want.
 
-        IsPlayerInSight = SensesUtil.IsInSight(selfCharacter.gameObject, archnemesis.gameObject,
-            selfCharacter.characterProperties.maxDetectionRange, selfCharacter.characterProperties.watchableLayers, false);*/
+        // Cheat or debug variable.
+        //public bool DetectPlayer { get; set; } 
 
-        DistanceToPlayer = Vector3.Distance(archnemesis.transform.position, this.gameObject.transform.position);
+        public bool IsVisible { get; set; }
 
-       
-    }
+        public bool IsStunned { get; set; }
 
-    public void SetBrainDead()
-    {
-        IsVisible = true;
-        IsPlayerNearLight = false;
-        IsPlayerInSight = false;
-        IsChasingPlayer = false;
-    }
+        public bool IsBeingRendered { get; set; }
 
-    public void Stun(StunArea stunArea)
-    {
-        Debug.Log("CALLED BRAIN STUN");
-        IsStunned = true;
-        StunSource = stunArea;
+        public bool IsPlayerInSight { get; set; }
+
+        public bool IsPlayerNearLight { get; set; }
+
+        public bool IsChasingPlayer { get; set; }
+
+        public bool IsTrackingPlayer { get; set; }
+
+        public bool IsHearingPlayer { get; set; }
+
+        public bool IsNoticingPlayer { get; set; }
+
+        public bool IsOnOffMeshLink { get; set; }
+
+        public bool IsCurrentlyBreaking { get; set; }
+
+        public bool UpdateRotation { get; set; }
+
+        public float DistanceToPlayer { get; set; }
+
+        public bool IsPlayerCloseEnoughForDeath { get; set; }
+
+        private void Awake()
+        {
+            IsVisible = true;
+            selfCharacter = this.gameObject.GetComponent<EnemyController>();
+            archnemesis = FindObjectOfType<PlayerController>();
+        }
+
+        // This method is updated every frame. 
+        // It is mostly used to debug functions with shortcuts.
+        public override void GetActions()
+        {
+            /*IsVisible = selfCharacter.meshRenderer.isVisible;
+
+            IsPlayerNearLight = SensesUtil.HasFlashlightEnabled(archnemesis);
+
+            IsPlayerInSight = SensesUtil.IsInSight(selfCharacter.gameObject, archnemesis.gameObject,
+                selfCharacter.characterProperties.maxDetectionRange, selfCharacter.characterProperties.watchableLayers, false);*/
+
+            DistanceToPlayer = Vector3.Distance(archnemesis.transform.position, this.gameObject.transform.position);
+
+
+        }
+
+        public void SetBrainDead()
+        {
+            IsVisible = true;
+            IsPlayerNearLight = false;
+            IsPlayerInSight = false;
+            IsChasingPlayer = false;
+        }
     }
 }

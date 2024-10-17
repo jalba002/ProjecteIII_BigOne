@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Enemy;
-using Player;
+using Tavaris.Entities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 
 public class GameManager : MonoBehaviour
 {
@@ -17,7 +13,7 @@ public class GameManager : MonoBehaviour
         {
             if (m_Instance == null)
             {
-                m_Instance = (GameManager) FindObjectOfType(typeof(GameManager));
+                m_Instance = (GameManager)FindObjectOfType(typeof(GameManager));
                 if (m_Instance == null)
                 {
                     m_Instance = (new GameObject("GameManager")).AddComponent<GameManager>();
@@ -32,8 +28,9 @@ public class GameManager : MonoBehaviour
     }
 
     public GameSettings GameSettings;
-    public PlayerController PlayerController;
+    public static PlayerController Player { get; private set; }
     public CanvasController CanvasController;
+    public PlayerInventory PlayerInventory { get; private set; } = new PlayerInventory();
 
     public string voidAmbientPath;
 
@@ -47,10 +44,10 @@ public class GameManager : MonoBehaviour
         {
             GameSettings = Instantiate(GameSettings);
         }
-     
-        if (PlayerController == null)
+
+        if (Player == null)
         {
-            PlayerController = FindObjectOfType<PlayerController>();
+            Player = FindObjectOfType<PlayerController>();
         }
 
         if (CanvasController == null)
@@ -75,7 +72,7 @@ public class GameManager : MonoBehaviour
         HideAllMenus();
         CanvasController.blackFade.gameObject.SetActive(false);
 
-        PlayerController.Resurrect();
+        Player.Resurrect();
     }
 
     public void EndGame()
@@ -86,7 +83,7 @@ public class GameManager : MonoBehaviour
         HideAllMenus();
         CanvasController.blackFade.gameObject.SetActive(true);
 
-        PlayerController.Kill();
+        Player.Kill();
     }
 
     private void HideAllMenus()
@@ -105,4 +102,18 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+    #region Inventory
+    public void RemoveItemFromPlayerInventory(string id)
+    {
+        PlayerInventory.RemoveItem(id);
+    }
+    public bool HasPlayerThisItemInInventory(string id)
+    {
+        return PlayerInventory.HasItem(id);
+    }
+    public bool GiveItemToPlayer(string itemID)
+    {
+        return PlayerInventory.GiveItem(itemID);
+    }
+    #endregion
 }

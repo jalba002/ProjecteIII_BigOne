@@ -1,78 +1,71 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.UI;
-
-public class InteractableObject : MonoBehaviour
+namespace Tavaris.Interactable
 {
-    [System.Serializable]
-    public enum InteractionType
+    public class InteractableObject : MonoBehaviour
     {
-        Drag,
-        Pick,
-        Inspect,
-        Puzzle
-    }
+        public InteractSettings interactSettings;
 
-    [Header("Debug")] public bool showLogDebug = false;
+        [Header("Debug")] public bool showLogDebug = false;
 
-    [Header("Interactable Settings")] public InteractionType interactionType;
+        [Header("Events")]
+        public Action OnStartInteraction;
+        public Action OnEndInteraction;
 
-    public string displayName;
+        public bool IsInteracting { get; protected set; } = false;
 
-    public Sprite previewImage;
-    public Sprite displayImage;
-
-    public bool IsInteracting { get; protected set; }
-
-    public virtual void UpdateInteractable()
-    {
-        if (showLogDebug)
-            Debug.Log("Updating " + this.gameObject.name, this);
-        GameManager.Instance.CanvasController.ChangeCursor(previewImage,
-            new Vector3(.6f, .6f, 1f));
-    }
-
-    public virtual bool Interact(bool enableInteraction)
-    {
-        if (showLogDebug)
-            Debug.Log("Interacting with " + this.gameObject.name, this);
-        return false;
-    }
-
-    public virtual void OnStartInteract()
-    {
-        if (showLogDebug)
-            Debug.Log("Started interacting with " + this.gameObject.name, this);
-        IsInteracting = true;
-    }
-
-    public virtual void OnInteracting()
-    {
-        if (showLogDebug)
-            Debug.Log("Interacting with " + this.gameObject.name, this);
-        try
+        public virtual void UpdateInteractable()
         {
-            GameManager.Instance.CanvasController.ChangeCursor(displayImage, new Vector3(1f, 1f, 1f));
-        }
-        catch (NullReferenceException)
-        {
-        }
-    }
-
-    public virtual void OnEndInteract()
-    {
-        if (showLogDebug)
-            Debug.Log("Ending interaction with " + this.gameObject.name, this);
-        try
-        {
-            GameManager.Instance.CanvasController.ChangeCursor(
-                GameManager.Instance.CanvasController.CrosshairController.defaultCrosshair,
-                new Vector3(0.1f, 0.1f, 1f));
-        }
-        catch (NullReferenceException)
-        {
+            if (showLogDebug)
+                Debug.Log("Updating " + this.gameObject.name, this);
+            GameManager.Instance.CanvasController.ChangeCursor(interactSettings.previewImage,
+                Vector3.one * 0.6f);
         }
 
-        IsInteracting = false;
+        public virtual bool Interact(bool enableInteraction)
+        {
+            if (showLogDebug)
+                Debug.Log("Interacting with " + this.gameObject.name, this);
+            return false;
+        }
+
+        public virtual void StartInteract()
+        {
+            if (showLogDebug)
+                Debug.Log("Started interacting with " + this.gameObject.name, this);
+            IsInteracting = true;
+        }
+
+        public virtual void Interacting()
+        {
+            if (showLogDebug)
+                Debug.Log("Interacting with " + this.gameObject.name, this);
+            try
+            {
+                GameManager.Instance.CanvasController.ChangeCursor(interactSettings.displayImage, Vector3.one);
+            }
+            catch (NullReferenceException)
+            {
+            }
+        }
+
+        public virtual void EndInteract()
+        {
+            if (showLogDebug)
+                Debug.Log("Ending interaction with " + this.gameObject.name, this);
+            try
+            {
+                GameManager.Instance.CanvasController.ChangeCursor(
+                    GameManager.Instance.CanvasController.CrosshairController.defaultCrosshair,
+                    new Vector3(0.1f, 0.1f, 1f));
+            }
+            catch (NullReferenceException)
+            {
+            }
+            finally
+            {
+                IsInteracting = false;
+            }
+        }
     }
 }

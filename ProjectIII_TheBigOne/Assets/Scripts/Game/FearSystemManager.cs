@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Concurrent;
-using Aura2API;
+﻿using System.Collections;
+using Tavaris.AI;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
@@ -70,7 +68,7 @@ public class FearSystemManager : MonoBehaviour
     private void Update()
     {
         if (_isenemyBrainNull) return;
-        
+
         if (enemyBrain.IsHearingPlayer || enemyBrain.IsChasingPlayer || enemyBrain.IsPlayerCloseEnoughForDeath)
         {
             UpdateVisuals();
@@ -85,9 +83,9 @@ public class FearSystemManager : MonoBehaviour
     {
         chromaticAberration.intensity.value -=
             chromaticSettings.chromaticVariationPerSecond * Time.deltaTime;
-        
+
         Vignette.intensity.value -= vignetteSettings.vignetteVariationPerSecond * Time.deltaTime;
-        
+
         chromaticAberration.intensity.value = Mathf.Max(0f, chromaticAberration.intensity.value);
         Vignette.intensity.value = Mathf.Max(0f, Vignette.intensity.value);
     }
@@ -117,7 +115,7 @@ public class FearSystemManager : MonoBehaviour
     {
         chromaticAberration.intensity.value = currentAberrationMaxValue;
         Vignette.intensity.value += vignetteSettings.vignetteVariationPerSecond * Time.deltaTime;
-        
+
         chromaticAberration.intensity.value = Mathf.Max(0f, chromaticAberration.intensity.value);
         Vignette.intensity.value = Mathf.Clamp(Vignette.intensity.value, Vignette.intensity.value >= vignetteSettings.minimumVignette ? 0f : vignetteSettings.minimumVignette, vignetteSettings.maximumVignette);
     }

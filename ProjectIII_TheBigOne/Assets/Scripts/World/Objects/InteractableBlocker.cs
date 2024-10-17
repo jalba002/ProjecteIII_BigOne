@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Characters.Player;
+using Tavaris.Dynamic;
+using Tavaris.Manager;
 using UnityEngine;
-using World.Objects;
 
 public class InteractableBlocker : MonoBehaviour
 {
-    public DynamicObject attachedInteractable;
+    public Pallet attachedInteractable;
 
     public List<GameObject> nearbyCharacters = new List<GameObject>();
 
@@ -16,7 +16,7 @@ public class InteractableBlocker : MonoBehaviour
     void Start()
     {
         if (attachedInteractable == null)
-            attachedInteractable = GetComponentInChildren<DynamicObject>();
+            attachedInteractable = GetComponentInChildren<Pallet>();
         if (playerInteractableManager == null)
             playerInteractableManager = FindObjectOfType<InteractablesManager>();
     }
@@ -24,7 +24,7 @@ public class InteractableBlocker : MonoBehaviour
     public void Block()
     {
         attachedInteractable.gameObject.layer = 2;
-        attachedInteractable.OnEndInteract();
+        attachedInteractable.EndInteract();
         try
         {
             if (playerInteractableManager.CurrentInteractable.gameObject == attachedInteractable.gameObject)

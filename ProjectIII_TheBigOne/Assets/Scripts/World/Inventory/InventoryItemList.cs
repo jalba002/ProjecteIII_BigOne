@@ -1,19 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ItemList", menuName = "New Item List", order = 1)]
 public class InventoryItemList : ScriptableObject
 {
-    public List<InventoryItem> itemList;
+    public List<ItemData> itemList;
 
-    public InventoryItem GetItem(string itemName)
+    public bool Contains(string id)
     {
-        return itemList.Find(x => x.itemID == itemName);
+        return GetItem(id) != null;
     }
 
-    public InventoryItem GetItem(int itemIndex)
+    public ItemData GetItem(string id)
     {
-        return itemList[itemIndex];
+        return itemList.Find(x => x.itemID == id);
     }
 }

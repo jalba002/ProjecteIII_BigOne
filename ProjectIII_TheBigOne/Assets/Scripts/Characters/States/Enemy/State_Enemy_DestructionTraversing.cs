@@ -1,10 +1,9 @@
 ﻿using System;
+using Tavaris.Dynamic;
+using Tavaris.Entities;
 using UnityEngine;
-using World.Objects;
-using State = Player.State;
-using StateMachine = Characters.Generic.StateMachine;
 
-namespace Enemy
+namespace Tavaris.States
 {
     public class State_Enemy_DestructionTraversing : State
     {
@@ -18,7 +17,7 @@ namespace Enemy
         protected override void OnStateInitialize(StateMachine machine)
         {
             base.OnStateInitialize(machine);
-            _attachedController = (EnemyController) Machine.characterController;
+            _attachedController = (EnemyController)Machine.characterController;
         }
 
         public override void OnStateTick(float deltaTime)
@@ -111,25 +110,10 @@ namespace Enemy
 
         private void ResolveBlockage()
         {
-            switch (_currentBlockage.attachedDynamicObject.objectType)
-            {
-                case DynamicObject.ObjectType.Door:
-                    // Nothing yet.
-                    _currentBlockage.attachedDynamicObject.BreakJoint();
-                    _currentBlockage.attachedDynamicObject.BreakOpening(Machine.characterController.transform.forward,
-                        5f);
-                    _currentBlockage.DisableLink(4f);
-                    break;
-                case DynamicObject.ObjectType.Drawer:
-                    // Can't get blocked by a drawer...?
-                    break;
-                case DynamicObject.ObjectType.Pallet:
-                    // This should be the wall explosion.
-                    _currentBlockage.gameObject.SetActive(false);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            _currentBlockage.attachedDynamicObject.BreakJoint();
+            _currentBlockage.attachedDynamicObject.BreakOpening(Machine.characterController.transform.forward,
+                5f);
+            _currentBlockage.DisableLink(4f);
         }
     }
 }

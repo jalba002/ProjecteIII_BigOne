@@ -1,7 +1,7 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using Tavaris.Entities;
+using Tavaris.States;
 using UnityEngine;
-using System.Collections.Generic;
-using Player;
 using UnityEngine.UI;
 
 public class CanvasController : MonoBehaviour
@@ -25,7 +25,7 @@ public class CanvasController : MonoBehaviour
     [Header("Sliders")]
     public Image lightBulb;
     public Slider runningSlider;
-    
+
     [Header("Components")] public CrosshairController CrosshairController;
     public Image blackFade;
 
@@ -39,7 +39,7 @@ public class CanvasController : MonoBehaviour
     private void Start()
     {
         _islightBulbNotNull = lightBulb != null;
-        _playerController = GameManager.Instance.PlayerController;
+        _playerController = GameManager.Player;
 
         if (CrosshairController == null)
             CrosshairController = FindObjectOfType<CrosshairController>();
@@ -62,11 +62,12 @@ public class CanvasController : MonoBehaviour
         else
             runningSlider.gameObject.SetActive(true);
 
-        if (Input.GetKeyDown(KeyCode.Escape) && _playerController.playerInventory.inventoryDisplay.gameObject.transform
-                .parent.gameObject.activeSelf)
-        {
-            _playerController.ToggleInventory();
-        }
+        // TODO ENABLE INVENTORY
+        //if (Input.GetKeyDown(KeyCode.Escape) && _playerController.playerInventory.inventoryDisplay.gameObject.transform
+        //        .parent.gameObject.activeSelf)
+        //{
+        //    _playerController.ToggleInventory();
+        //}
 
         /*if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -105,6 +106,7 @@ public class CanvasController : MonoBehaviour
 
     public void TooglePauseMenu(bool forceEnable)
     {
+        if (pauseManager == null || pauseMenu == null) return;
         if (forceEnable)
         {
             _playerController.stateMachine.enabled = false;

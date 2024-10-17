@@ -1,11 +1,12 @@
-﻿using Enemy;
-using CharacterController = Characters.Generic.CharacterController;
+﻿using Tavaris.AI;
+using Tavaris.Entities;
+using Tavaris.States;
 
 public class BehaviourTree_Enemy_SecondPhase : BehaviourTree
 {
     protected new EnemyController attachedCharacter;
 
-    public BehaviourTree_Enemy_SecondPhase(CharacterController characterController)
+    public BehaviourTree_Enemy_SecondPhase(EntityController characterController)
     {
         base.Setup(characterController);
         attachedCharacter = (EnemyController) characterController;

@@ -139,7 +139,7 @@ namespace Tavaris.Manager
         private void ShowTuto()
         {
             GameManager.Instance.CanvasController.ShowHint(
-                CurrentInteractable.interactSettings.displayName, 
+                CurrentInteractable.interactSettings.InteractDisplay, 
                 true, 
                 4f,
                 UIFade.FadeOutAfter.Time);

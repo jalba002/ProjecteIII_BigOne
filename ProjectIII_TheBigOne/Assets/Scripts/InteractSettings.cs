@@ -14,7 +14,8 @@ public class InteractSettings : ScriptableObject
 
     public InteractionType interactionType;
 
-    public string displayName;
+    public string objectName;
+    public string InteractDisplay => interactionType.ToString() + " " + objectName;
 
     public Sprite previewImage;
     public Sprite displayImage;

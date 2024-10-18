@@ -1,34 +1,45 @@
-﻿using System;
-using Tavaris.Interfaces;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Tavaris.Dynamic
 {
-    public class Drawer : LockableObject
+    public class Window : LockableObject
     {
         #region Custom Config
         public ConfigurableJoint ConfigJoint { get; set; }
 
         [Header("Drawer Settings")]
-        [Range(0f, 1f)] public float startClosePercentage = 0.96f;
+        [Range(-1f, 1f)] public float startClosePercentage = 0.96f;
         public bool InvertInitialization = false;
 
         #endregion
 
         #region Drawer
         [System.Serializable]
-        public struct DrawerHingeConfiguration
+        public struct WindowHingeConfiguration
         {
             public float maximumDistance;
             [Range(0f, 100f)] public float friction;
             public float maximumForce;
         }
 
-        public DrawerHingeConfiguration drawerConfiguration = new DrawerHingeConfiguration()
+        [System.Serializable]
+        public struct WindowLimitsConfiguration
+        {
+            public bool xMovement;
+            public bool yMovement;
+            public bool zMovement;
+        }
+
+        public WindowHingeConfiguration windowHingeConfig = new WindowHingeConfiguration()
         {
             friction = 10f,
             maximumDistance = 0.25f,
             maximumForce = 5f
+        };
+
+        public WindowLimitsConfiguration windowLimitsConfig = new WindowLimitsConfiguration()
+        {
+
         };
         #endregion
 
@@ -42,8 +53,8 @@ namespace Tavaris.Dynamic
             Vector3 newStartingPosition = this.gameObject.transform.localPosition;
             Vector3 forward =
                 HandlePosition.transform.InverseTransformDirection(HandlePosition.transform.forward);
-            newStartingPosition += (InvertInitialization ? -forward : forward) *
-                                   (drawerConfiguration.maximumDistance * startClosePercentage);
+            newStartingPosition += (InvertInitialization ? -HandlePosition.transform.forward : HandlePosition.transform.forward) *
+                                   (windowHingeConfig.maximumDistance * startClosePercentage);
             this.gameObject.transform.localPosition = newStartingPosition;
         }
 
@@ -55,16 +66,21 @@ namespace Tavaris.Dynamic
                 ConfigJoint = gameObject.AddComponent<ConfigurableJoint>();
             }
         }
+
         protected override void ConfigureJoint()
         {
             // This is the default joint setting for every object.
             // This allows to have different objects with different behaviours
             // for example, a window will behave differently than a drawer.
             // maybe we can extrapolate this configuration?
+            ConfigJoint.zDrive = new JointDrive()
+            {
+                maximumForce = windowHingeConfig.maximumForce,
+            };
 
-            ConfigJoint.xMotion = ConfigurableJointMotion.Locked;
-            ConfigJoint.yMotion = ConfigurableJointMotion.Locked;
-            ConfigJoint.zMotion = ConfigurableJointMotion.Limited;
+            ConfigJoint.xMotion = windowLimitsConfig.xMovement ? ConfigurableJointMotion.Limited : ConfigurableJointMotion.Locked;
+            ConfigJoint.yMotion = windowLimitsConfig.yMovement ? ConfigurableJointMotion.Limited : ConfigurableJointMotion.Locked;
+            ConfigJoint.zMotion = windowLimitsConfig.zMovement ? ConfigurableJointMotion.Limited : ConfigurableJointMotion.Locked;
             ConfigJoint.angularXMotion = ConfigurableJointMotion.Locked;
             ConfigJoint.angularYMotion = ConfigurableJointMotion.Locked;
             ConfigJoint.angularZMotion = ConfigurableJointMotion.Locked;
@@ -72,38 +88,29 @@ namespace Tavaris.Dynamic
 
         public override void ChangeLockLimits()
         {
-            switch (CurrentLockState)
+            switch (IsLocked)
             {
-                case LockState.Locked:
-
-
-                    break;
-                case LockState.Unlocked:
-                    if (ConfigJoint == null) return;
+                case true:
                     ConfigJoint.linearLimit = new SoftJointLimit()
                     {
-                        limit = drawerConfiguration.maximumDistance,
+                        limit = 0,
                         contactDistance = 1000f
                     };
-                    /*ConfgJoint.linearLimitSpring = new SoftJointLimitSpring()
+                    break;
+                case false:
+                    ConfigJoint.linearLimit = new SoftJointLimit()
                     {
-                        damper = DrawerJointConfiguration.friction
-                    };*/
-                    ConfigJoint.zDrive = new JointDrive()
-                    {
-                        maximumForce = drawerConfiguration.maximumForce,
-                        //positionDamper = DrawerJointConfiguration.friction
+                        limit = windowHingeConfig.maximumDistance,
+                        contactDistance = 1000f
                     };
                     break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
 
         protected override void ConfigureRigidbody(Rigidbody rb)
         {
             base.ConfigureRigidbody(rb);
-            rb.drag = drawerConfiguration.friction;
+            rb.drag = windowHingeConfig.friction;
         }
     }
 }

@@ -1,11 +1,8 @@
-﻿using System;
-using Tavaris.Interfaces;
-using UnityEngine;
-using static TMPro.Examples.TMP_ExampleScript_01;
+﻿using UnityEngine;
 
 namespace Tavaris.Dynamic
 {
-    public class Door : DynamicObject, ILockable
+    public class Door : LockableObject
     {
         #region Door
         [System.Serializable]
@@ -34,22 +31,7 @@ namespace Tavaris.Dynamic
             bounciness = 0f,
             bouncinessMinVelocity = 0f,
         };
-        #endregion
-
-        #region Door Variables
-        //[Header($"{nameof(Door)} configuration.")]
         public HingeJoint HingeJoint { get; private set; }
-
-        [SerializeField]
-        private LockState _lockState = LockState.Unlocked;
-        public LockState CurrentLockState { get => _lockState; set => _lockState = value; }
-        // Expose the property to edit in the editor?
-
-        public bool IsLocked => _lockState == LockState.Locked;
-
-        public Action OnLock { get; set; }
-        public Action OnUnlock { get; set; }
-
         #endregion
 
         public override void Awake()
@@ -71,27 +53,27 @@ namespace Tavaris.Dynamic
         #endregion
 
         #region Joints
-        protected override void GetJoints()
+        protected override void GetJoint()
         {
             HingeJoint = gameObject.GetComponent<HingeJoint>();
             if (HingeJoint == null)
             {
                 HingeJoint = gameObject.AddComponent<HingeJoint>();
-                ConfigureNewJoint(HingeJoint);
             }
         }
 
-        protected override void SetInitialPositions()
+        protected override void ConfigureJoint()
         {
-
+            // Does not work well with pre-configured anchors or hinges.
+            // Its better left untouched for doors.
+            //HingeJoint.anchor = new Vector3(.5f, .5f, .5f);
+            //HingeJoint.axis = new Vector3(0f, 1f, 0f);
+            //HingeJoint.useLimits = true;
+            //HingeJoint.useSpring = true;
+            //HingeJoint.autoConfigureConnectedAnchor = true;
         }
 
-        protected override void CheckObjectOpening()
-        {
-
-        }
-
-        protected override void SetJointsLimit()
+        public override void ChangeLockLimits()
         {
             switch (IsLocked)
             {
@@ -101,7 +83,7 @@ namespace Tavaris.Dynamic
                         max = doorConfiguration.maximumLockedAngle,
                         min = doorConfiguration.minimumLockedAngle,
                         bounciness = doorConfiguration.bounciness,
-                        bounceMinVelocity = doorConfiguration.bouncinessMinVelocity                        
+                        bounceMinVelocity = doorConfiguration.bouncinessMinVelocity
                     };
                     break;
                 case false:
@@ -115,17 +97,10 @@ namespace Tavaris.Dynamic
                     break;
             }
         }
+        #endregion
 
-        public void Unlock()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Lock()
-        {
-            throw new NotImplementedException();
-        }
-
+        #region Lockable
+        
         #endregion
     }
 }

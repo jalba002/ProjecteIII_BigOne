@@ -28,29 +28,23 @@ namespace Tavaris.Dynamic
             //Nothing atm. Others configure drag.
         }
 
-        protected override void GetJoints()
+        #region Joints
+        protected override void GetJoint()
         {
             HingeJoint = gameObject.GetComponent<HingeJoint>();
             if (HingeJoint == null)
             {
                 HingeJoint = gameObject.AddComponent<HingeJoint>();
-                ConfigureNewJoint(HingeJoint);
             }
         }
-
-        protected override void SetInitialPositions()
+        protected override void ConfigureJoint()
         {
-
+            HingeJoint.anchor = new Vector3(.5f, .5f, .5f);
+            HingeJoint.axis = new Vector3(0f, 1f, 0f);
+            HingeJoint.useLimits = true;
+            HingeJoint.useSpring = true;
+            HingeJoint.autoConfigureConnectedAnchor = true;
         }
-
-        protected override void CheckObjectOpening()
-        {
-
-        }
-
-        protected override void SetJointsLimit()
-        {
-
-        }
+        #endregion
     }
 }

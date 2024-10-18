@@ -243,6 +243,7 @@ GameObject:
   - component: {fileID: 3655087100396266823}
   - component: {fileID: 790526778002681770}
   - component: {fileID: 7235789755254841078}
+  - component: {fileID: 732357252518704177}
   m_Layer: 9
   m_Name: Door_Locker
   m_TagString: Untagged
@@ -298,11 +299,11 @@ MonoBehaviour:
   openForce: 5
   maxMouseInput: 3
   UseMouseXAxis: 0
-  InvertInitialization: 0
-  StartupClosePercentage: 0.96
   useGravity: 0
   ignorePlayerCollider: 0
   ignoredColliders: []
+  lockableSettings: {fileID: 11400000, guid: a2cb55771d76c7241983b90506563f16, type: 2}
+  _lockState: 1
   doorConfiguration:
     maximumAngle: 90
     minimumAngle: 0
@@ -311,7 +312,6 @@ MonoBehaviour:
     friction: 1
     bounciness: 0
     bouncinessMinVelocity: 0
-  _lockState: 1
 --- !u!54 &790526778002681770
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -363,6 +363,18 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &732357252518704177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097085661659987888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4f8ccac8cd7b79499872f199914492f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8683339572206439691
 GameObject:
   m_ObjectHideFlags: 0

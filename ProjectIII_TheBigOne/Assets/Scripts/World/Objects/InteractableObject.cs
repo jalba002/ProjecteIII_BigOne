@@ -33,6 +33,7 @@ namespace Tavaris.Interactable
         {
             if (showLogDebug)
                 Debug.Log("Started interacting with " + this.gameObject.name, this);
+            OnStartInteraction?.Invoke();
             IsInteracting = true;
         }
 
@@ -64,6 +65,7 @@ namespace Tavaris.Interactable
             }
             finally
             {
+                OnEndInteraction?.Invoke();
                 IsInteracting = false;
             }
         }

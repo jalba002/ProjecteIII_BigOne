@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Tavaris.Interactable;
 using UnityEngine;
 using UnityEngine.AI;
@@ -30,14 +31,12 @@ namespace Tavaris.Dynamic
 
         #endregion
 
-        [Header("Hinge Settings", order = 1)] public GameObject HandlePosition;
+        [Header("Hinge Settings", order = 1)] 
+        public GameObject HandlePosition;
         public bool applyHandleRotation = false;
         public float openForce = 5f;
-        private Quaternion originalHandleRotation;
         [Range(1f, 15f)] public float maxMouseInput = 3f;
         public bool UseMouseXAxis = false;
-        public bool InvertInitialization = false;
-        [Range(0f, 1f)] public float StartupClosePercentage = 0.96f;
 
         [Header("Rigidbody Settings")]
         public bool useGravity = false;
@@ -47,7 +46,9 @@ namespace Tavaris.Dynamic
         public bool ignorePlayerCollider = false;
 
         public List<Collider> ignoredColliders;
+
         private Collider selfCollider;
+        private Quaternion originalHandleRotation;
 
         private Rigidbody rb;
         public Rigidbody rigidbody
@@ -68,24 +69,26 @@ namespace Tavaris.Dynamic
         {
             selfCollider = gameObject.GetComponent<Collider>();
 
-            GetJoints();
+            GetJoint();
 
-            GenerateIgnoredColliders(selfCollider);
             if (HandlePosition == null)
             {
-                throw new NullReferenceException($"Missing Handle in {this.gameObject.name}");
+                HandlePosition = GetComponentsInChildren<GameObject>().ToList().Find(x => x.name.ToLower().Contains("handle"));
             }
         }
 
         public virtual void Start()
         {
             IgnoreColliders();
-            SetJointsLimit();
+            ConfigureJoint();
             SetInitialPositions();
             originalHandleRotation = HandlePosition.transform.rotation;
         }
 
-        protected abstract void SetInitialPositions();
+        protected virtual void SetInitialPositions()
+        {
+
+        }
 
         private void GetRigidbody()
         {
@@ -104,70 +107,17 @@ namespace Tavaris.Dynamic
 
         #region Joints
 
-        protected abstract void GetJoints();
-        protected abstract void SetJointsLimit();
-        protected abstract void CheckObjectOpening();
-
-        protected void ConfigureNewJoint(ConfigurableJoint joint)
-        {
-            joint.xMotion = ConfigurableJointMotion.Locked;
-            joint.yMotion = ConfigurableJointMotion.Locked;
-            joint.zMotion = ConfigurableJointMotion.Limited;
-            joint.angularXMotion = ConfigurableJointMotion.Locked;
-            joint.angularYMotion = ConfigurableJointMotion.Locked;
-            joint.angularZMotion = ConfigurableJointMotion.Locked;
-        }
-
-        protected void ConfigureNewJoint(HingeJoint joint)
-        {
-            joint.anchor = new Vector3(.5f, .5f, .5f);
-            joint.axis = new Vector3(0f, 1f, 0f);
-            joint.useLimits = true;
-            joint.useSpring = true;
-            joint.autoConfigureConnectedAnchor = true;
-            //joint.anchor = new Vector3(0f, -0.5f, 0f);
-        }
+        protected abstract void GetJoint();
+        protected abstract void ConfigureJoint();
 
         #endregion
 
         #region IgnoreColliders
 
-        private bool GenerateIgnoredColliders(Collider selfCollider)
-        {
-            try
-            {
-                /* Collider[] collectedColliders = gameObject.GetComponentsInChildren<Collider>();
-                 foreach (Collider collider in collectedColliders)
-                 {
-                     if (collider != selfCollider)
-                     {
-                         ignoredColliders.Add(collider);
-                     }
-                 }*/
-
-                if (ignorePlayerCollider)
-                {
-                    if (showLogDebug)
-                        Debug.Log("Ignoring Player Collider.");
-                    if (GameManager.Player != null)
-                    {
-                        if (showLogDebug)
-                            Debug.Log("Player Collider Not Null.");
-                        ignoredColliders.Add(GameManager.Player.attachedCollider);
-                    }
-                }
-            }
-            catch (NullReferenceException)
-            {
-                Debug.LogWarning("Ignored colliders generated wrongly in ", this.gameObject);
-                return false;
-            }
-
-            return true;
-        }
-
         private void IgnoreColliders()
         {
+            if (ignorePlayerCollider) ignoredColliders.Add(GameManager.Player.attachedCollider);
+
             foreach (Collider currentCollider in ignoredColliders)
             {
                 if (currentCollider == null) break;
@@ -226,7 +176,6 @@ namespace Tavaris.Dynamic
         public override void StartInteract()
         {
             base.StartInteract();
-            OnStartInteraction?.Invoke();
             GetRigidbody();
             SetHandleDirection(GameManager.Player.transform.position);
         }
@@ -244,11 +193,12 @@ namespace Tavaris.Dynamic
 
         #endregion
 
-        public void SetHandleDirection(Vector3 position)
+        protected virtual void SetHandleDirection(Vector3 position)
         {
             if (!applyHandleRotation) return;
 
-            Transform objectTransform = gameObject.transform;
+            // Maybe do this with the handle transform?
+            Transform objectTransform = this.transform;
             Vector3 forwardVector = objectTransform.forward;
             Plane directionPlane = new Plane(forwardVector, objectTransform.position);
             bool playerOnSide = directionPlane.GetSide(position);

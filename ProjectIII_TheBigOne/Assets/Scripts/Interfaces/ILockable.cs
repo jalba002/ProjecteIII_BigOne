@@ -14,6 +14,7 @@ namespace Tavaris.Interfaces
         bool IsLocked { get; }
         Action OnLock { get; set; }
         Action OnUnlock { get; set; }
+        void ChangeLockLimits();
         void Unlock();
         void Lock();
     }
